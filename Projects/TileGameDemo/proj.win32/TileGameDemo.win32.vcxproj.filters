@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="resource">
+      <UniqueIdentifier>{fda9d6a2-675d-4240-a4f0-eeadc4daf1d6}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;jpg;jpeg;jpe;png;manifest</Extensions>
+    </Filter>
+    <Filter Include="Sprites">
+      <UniqueIdentifier>{8c14d31e-7e23-4ecb-974f-5349da562972}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="App">
+      <UniqueIdentifier>{f46d4bc2-77bb-4ab0-b0c0-45892ec4593b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Helper">
+      <UniqueIdentifier>{9345da82-dc53-4541-9bb3-766110e5be58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Model">
+      <UniqueIdentifier>{360dbf41-87ea-4345-86e3-093160cb01c5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\TileGameDemo.ico">
+      <Filter>resource</Filter>
+    </Image>
+    <Image Include="..\Resources\CloseNormal.png">
+      <Filter>resource</Filter>
+    </Image>
+    <Image Include="..\Resources\CloseSelected.png">
+      <Filter>resource</Filter>
+    </Image>
+    <Image Include="..\Resources\HelloWorld.png">
+      <Filter>resource</Filter>
+    </Image>
+    <Image Include="..\Resources\map_960_720.png">
+      <Filter>resource</Filter>
+    </Image>
+    <Image Include="..\Resources\meta_tiles.png">
+      <Filter>resource</Filter>
+    </Image>
+    <Image Include="..\Resources\meta_tiles_960.png">
+      <Filter>resource</Filter>
+    </Image>
+    <Image Include="..\Resources\Player.png">
+      <Filter>resource</Filter>
+    </Image>
+    <Image Include="..\Resources\sprite_level15_2-ipadhd.png">
+      <Filter>resource</Filter>
+    </Image>
+    <Image Include="..\Resources\tmw_desert_spacing.png">
+      <Filter>resource</Filter>
+    </Image>
+    <Image Include="..\Resources\bombs_0002.png">
+      <Filter>resource</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="TileGameDemo.rc">
+      <Filter>resource</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Classes\Sprites\Enemy.h">
+      <Filter>Sprites</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\App\AppDelegate.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\App\HelloWorldScene.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="main.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="..\Classes\Sprites\Bullet.h">
+      <Filter>Sprites</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Helper\CommonHelpers.h">
+      <Filter>Helper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Helper\SpriteHelpers.h">
+      <Filter>Helper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Model\InfoData.h">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Model\Enumeration.h">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Sprites\Tower.h">
+      <Filter>Sprites</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Model\TowerInformation.h">
+      <Filter>Model</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Classes\Sprites\Enemy.cpp">
+      <Filter>Sprites</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\App\AppDelegate.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\App\HelloWorldScene.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="..\Classes\Sprites\Bullet.cpp">
+      <Filter>Sprites</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Model\InfoData.cpp">
+      <Filter>Model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Sprites\Tower.cpp">
+      <Filter>Sprites</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Model\TowerInformation.cpp">
+      <Filter>Model</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Resources\hit.caf">
+      <Filter>resource</Filter>
+    </None>
+    <None Include="..\Resources\KingdomRush.tmx">
+      <Filter>resource</Filter>
+    </None>
+    <None Include="..\Resources\KingdomRush_960_720.tmx">
+      <Filter>resource</Filter>
+    </None>
+    <None Include="..\Resources\KingdomRushTest.tmx">
+      <Filter>resource</Filter>
+    </None>
+    <None Include="..\Resources\move.caf">
+      <Filter>resource</Filter>
+    </None>
+    <None Include="..\Resources\pickup.caf">
+      <Filter>resource</Filter>
+    </None>
+    <None Include="..\Resources\TileMap.caf">
+      <Filter>resource</Filter>
+    </None>
+    <None Include="..\Resources\TileMap.tmx">
+      <Filter>resource</Filter>
+    </None>
+    <None Include="..\Resources\TileMap.tmx.bak">
+      <Filter>resource</Filter>
+    </None>
+  </ItemGroup>
+</Project>

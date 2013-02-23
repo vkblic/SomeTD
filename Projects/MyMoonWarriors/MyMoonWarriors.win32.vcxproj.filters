@@ -1,0 +1,199 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="resource">
+      <UniqueIdentifier>{b54c3d3c-0045-4d74-91b9-409c15678e7b}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;jpg;jpeg;jpe;png;manifest</Extensions>
+    </Filter>
+    <Filter Include="Sprite">
+      <UniqueIdentifier>{51f9aa81-15ca-45a8-932a-8aa0131af0e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Model">
+      <UniqueIdentifier>{b9eaa3d0-18a5-4f61-af0b-ea362ea6c6cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager">
+      <UniqueIdentifier>{b337fba1-5175-435b-aaf5-bab252f9ef62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pool">
+      <UniqueIdentifier>{879e55f5-7f27-4b25-87bc-c1a1d86abfec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{7be33d59-b759-4f76-814e-dc3665636541}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Apps">
+      <UniqueIdentifier>{2cc17a41-d784-47fa-bcbe-c24deac351f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{76923dd1-aa4e-4839-9300-5026a30ea8cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\About">
+      <UniqueIdentifier>{e8d78188-4a40-44ba-9075-0ac0efcdad61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\GamePlay">
+      <UniqueIdentifier>{cb0e5053-1708-42d4-a846-ac7204d6bf58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\MainMenu">
+      <UniqueIdentifier>{b2b45e46-c65e-4701-bd08-d4b026e5b8f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\Setting">
+      <UniqueIdentifier>{b1af0fc5-91c3-4607-877b-b8776e6c82f5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\MyMoonWarriors.ico">
+      <Filter>resource</Filter>
+    </Image>
+    <Image Include="Resources\b01.png">
+      <Filter>resource</Filter>
+    </Image>
+    <Image Include="Resources\bg01.jpg">
+      <Filter>resource</Filter>
+    </Image>
+    <Image Include="Resources\bullet.png">
+      <Filter>resource</Filter>
+    </Image>
+    <Image Include="Resources\CloseNormal.png">
+      <Filter>resource</Filter>
+    </Image>
+    <Image Include="Resources\CloseSelected.png">
+      <Filter>resource</Filter>
+    </Image>
+    <Image Include="Resources\Default.png">
+      <Filter>resource</Filter>
+    </Image>
+    <Image Include="Resources\HelloWorld.png">
+      <Filter>resource</Filter>
+    </Image>
+    <Image Include="Resources\Icon%402x.png">
+      <Filter>resource</Filter>
+    </Image>
+    <Image Include="Resources\Icon-72.png">
+      <Filter>resource</Filter>
+    </Image>
+    <Image Include="Resources\Icon-Small%402x.png">
+      <Filter>resource</Filter>
+    </Image>
+    <Image Include="Resources\Icon-Small-50.png">
+      <Filter>resource</Filter>
+    </Image>
+    <Image Include="Resources\Icon-Small.png">
+      <Filter>resource</Filter>
+    </Image>
+    <Image Include="Resources\Icon.png">
+      <Filter>resource</Filter>
+    </Image>
+    <Image Include="Resources\loading.png">
+      <Filter>resource</Filter>
+    </Image>
+    <Image Include="Resources\logo.png">
+      <Filter>resource</Filter>
+    </Image>
+    <Image Include="Resources\menu.png">
+      <Filter>resource</Filter>
+    </Image>
+    <Image Include="Resources\ship.png">
+      <Filter>resource</Filter>
+    </Image>
+    <Image Include="Resources\ship01.png">
+      <Filter>resource</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="MyMoonWarriors.rc">
+      <Filter>resource</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="main.h">
+      <Filter>Apps</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Apps</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprite\Bullet.h">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprite\EnemySprite.h">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Model\Weapon.h">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Model\ShipBody.h">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Sprite\ShipSprite.h">
+      <Filter>Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\UI\MainMenu\MainMenu.h">
+      <Filter>UI\MainMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Model\InfoData.h">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\UI\Gameplay\GameLayer.h">
+      <Filter>UI\GamePlay</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Model\Engine.h">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Model\Enumeration.h">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\sprite\AbstractGameCharacter.h">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\AppDelegate.h">
+      <Filter>Apps</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Apps</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Sprite\Bullet.cpp">
+      <Filter>Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Sprite\EnemySprite.cpp">
+      <Filter>Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Model\Engine.cpp">
+      <Filter>Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Model\Weapon.cpp">
+      <Filter>Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Model\ShipBody.cpp">
+      <Filter>Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Sprite\ShipSprite.cpp">
+      <Filter>Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\UI\MainMenu\MainMenu.cpp">
+      <Filter>UI\MainMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Model\InfoData.cpp">
+      <Filter>Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\UI\Gameplay\GameLayer.cpp">
+      <Filter>UI\GamePlay</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\AppDelegate.cpp">
+      <Filter>Apps</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bullet.plist">
+      <Filter>Model</Filter>
+    </None>
+    <None Include="Resources\level01.tmx">
+      <Filter>resource</Filter>
+    </None>
+    <None Include="Resources\Info.plist">
+      <Filter>resource</Filter>
+    </None>
+    <None Include="Resources\iTunesArtwork">
+      <Filter>resource</Filter>
+    </None>
+  </ItemGroup>
+</Project>
