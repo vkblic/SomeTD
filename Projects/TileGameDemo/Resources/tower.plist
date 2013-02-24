@@ -7,7 +7,7 @@
             <key>arcane_shooter_0001.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{494,288},{16,22}}</string>
+                <string>{{808,520},{16,22}}</string>
                 <key>offset</key>
                 <string>{-1,0}</string>
                 <key>rotated</key>
@@ -20,7 +20,7 @@
             <key>arcane_shooter_0002.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{494,264},{16,22}}</string>
+                <string>{{808,496},{16,22}}</string>
                 <key>offset</key>
                 <string>{-1,0}</string>
                 <key>rotated</key>
@@ -33,7 +33,7 @@
             <key>arcane_shooter_0003.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{328,820},{20,22}}</string>
+                <string>{{826,502},{20,22}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -46,7 +46,7 @@
             <key>arcane_shooter_0005.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{394,796},{20,22}}</string>
+                <string>{{826,478},{20,22}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -59,7 +59,7 @@
             <key>arcane_shooter_0037.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{494,240},{16,22}}</string>
+                <string>{{808,472},{16,22}}</string>
                 <key>offset</key>
                 <string>{-1,0}</string>
                 <key>rotated</key>
@@ -72,7 +72,7 @@
             <key>arcane_shooter_0039.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{372,796},{20,22}}</string>
+                <string>{{826,454},{20,22}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -85,7 +85,7 @@
             <key>arcane_tower_0001.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{372,492},{104,90}}</string>
+                <string>{{674,186},{104,90}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -98,7 +98,7 @@
             <key>arcane_tower_0002.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,560},{104,90}}</string>
+                <string>{{890,94},{104,90}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -111,7 +111,7 @@
             <key>arcane_tower_0004.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{108,474},{104,90}}</string>
+                <string>{{784,94},{104,90}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -124,7 +124,7 @@
             <key>arcane_tower_0006.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{214,464},{104,90}}</string>
+                <string>{{2,376},{104,90}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -137,7 +137,7 @@
             <key>arcane_tower_0008.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{376,400},{104,90}}</string>
+                <string>{{108,290},{104,90}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -150,7 +150,7 @@
             <key>arcane_tower_0010.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,468},{104,90}}</string>
+                <string>{{304,194},{104,90}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -163,7 +163,7 @@
             <key>arcane_tower_0012.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{108,382},{104,90}}</string>
+                <string>{{412,180},{104,90}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -176,7 +176,7 @@
             <key>arcane_tower_0014.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{214,372},{104,90}}</string>
+                <string>{{568,96},{104,90}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -189,7 +189,7 @@
             <key>arcane_tower_0016.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{376,308},{104,90}}</string>
+                <string>{{678,94},{104,90}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -202,7 +202,7 @@
             <key>arcane_tower_0017.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,376},{104,90}}</string>
+                <string>{{890,2},{104,90}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -215,7 +215,7 @@
             <key>arcane_tower_0019.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,190},{104,92}}</string>
+                <string>{{572,2},{104,92}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -228,7 +228,7 @@
             <key>arcane_tower_0021.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{116,104},{104,92}}</string>
+                <string>{{2,190},{104,92}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -241,7 +241,7 @@
             <key>arcane_tower_0035.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{404,122},{104,92}}</string>
+                <string>{{116,104},{104,92}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -254,7 +254,7 @@
             <key>arcane_tower_0037.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{108,290},{104,90}}</string>
+                <string>{{784,2},{104,90}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -267,7 +267,7 @@
             <key>arcane_tower_0041.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{214,280},{104,90}}</string>
+                <string>{{678,2},{104,90}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -280,7 +280,7 @@
             <key>arcane_tower_0043.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{388,216},{104,90}}</string>
+                <string>{{2,284},{104,90}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -293,7 +293,7 @@
             <key>arcane_tower_0045.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,284},{104,90}}</string>
+                <string>{{108,198},{104,90}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -306,7 +306,7 @@
             <key>arcane_tower_0047.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{108,198},{104,90}}</string>
+                <string>{{306,102},{104,90}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -319,7 +319,7 @@
             <key>arcane_tower_0049.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{222,188},{104,90}}</string>
+                <string>{{420,88},{104,90}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -332,7 +332,7 @@
             <key>arcanehit_0001.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{298,716},{22,22}}</string>
+                <string>{{328,474},{22,22}}</string>
                 <key>offset</key>
                 <string>{0,1}</string>
                 <key>rotated</key>
@@ -345,7 +345,7 @@
             <key>arcanehit_0002.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{298,692},{22,22}}</string>
+                <string>{{354,472},{22,22}}</string>
                 <key>offset</key>
                 <string>{0,1}</string>
                 <key>rotated</key>
@@ -358,7 +358,7 @@
             <key>arcanehit_0003.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{478,558},{24,22}}</string>
+                <string>{{280,424},{24,22}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -371,7 +371,7 @@
             <key>arcanehit_0004.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{478,534},{24,22}}</string>
+                <string>{{28,494},{24,22}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -384,7 +384,7 @@
             <key>arcanehit_0005.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{300,668},{22,22}}</string>
+                <string>{{304,472},{22,22}}</string>
                 <key>offset</key>
                 <string>{0,1}</string>
                 <key>rotated</key>
@@ -397,7 +397,7 @@
             <key>arcanehit_0006.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{478,510},{24,22}}</string>
+                <string>{{2,494},{24,22}}</string>
                 <key>offset</key>
                 <string>{0,1}</string>
                 <key>rotated</key>
@@ -410,7 +410,7 @@
             <key>arcanehit_0007.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{346,540},{24,22}}</string>
+                <string>{{80,492},{24,22}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -423,7 +423,7 @@
             <key>arcanehit_0008.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{478,582},{24,20}}</string>
+                <string>{{306,424},{24,20}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -436,7 +436,7 @@
             <key>arcanehit_0009.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{320,536},{24,22}}</string>
+                <string>{{54,492},{24,22}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -449,7 +449,7 @@
             <key>arcanehit_0010.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{482,460},{24,24}}</string>
+                <string>{{28,468},{24,24}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -462,7 +462,7 @@
             <key>arcanehit_0011.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{482,434},{24,24}}</string>
+                <string>{{2,468},{24,24}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -475,7 +475,7 @@
             <key>arcanehit_0012.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{482,408},{24,24}}</string>
+                <string>{{610,486},{24,24}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -485,10 +485,49 @@
                 <key>sourceSize</key>
                 <string>{24,24}</string>
             </dict>
+            <key>build_terrain_0001.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{876,238},{94,50}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{2,0},{94,50}}</string>
+                <key>sourceSize</key>
+                <string>{98,50}</string>
+            </dict>
+            <key>build_terrain_0002.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{876,186},{94,50}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{2,0},{94,50}}</string>
+                <key>sourceSize</key>
+                <string>{98,50}</string>
+            </dict>
+            <key>build_terrain_0003.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{646,420},{90,50}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{4,0},{90,50}}</string>
+                <key>sourceSize</key>
+                <string>{98,50}</string>
+            </dict>
             <key>mage_lvl1_0001.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{190,758},{92,62}}</string>
+                <string>{{754,366},{92,62}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -501,7 +540,7 @@
             <key>mage_lvl1_0003.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,792},{92,62}}</string>
+                <string>{{862,334},{92,62}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -514,7 +553,7 @@
             <key>mage_lvl1_0005.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{96,758},{92,62}}</string>
+                <string>{{398,410},{92,62}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -527,7 +566,7 @@
             <key>mage_lvl1_0007.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,728},{92,62}}</string>
+                <string>{{524,390},{92,62}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -540,7 +579,7 @@
             <key>mage_lvl1_0011.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{96,692},{92,64}}</string>
+                <string>{{660,354},{92,64}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -553,7 +592,7 @@
             <key>mage_lvl2_0001.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{108,630},{94,60}}</string>
+                <string>{{780,186},{94,60}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -566,7 +605,7 @@
             <key>mage_lvl2_0003.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{204,620},{94,62}}</string>
+                <string>{{304,286},{94,62}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -579,7 +618,7 @@
             <key>mage_lvl2_0005.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{358,584},{94,62}}</string>
+                <string>{{410,272},{94,62}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -592,7 +631,7 @@
             <key>mage_lvl2_0007.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{108,566},{94,62}}</string>
+                <string>{{548,252},{94,62}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -605,7 +644,7 @@
             <key>mage_lvl2_0011.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{214,556},{94,62}}</string>
+                <string>{{556,188},{94,62}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -618,7 +657,7 @@
             <key>mage_lvl3_0001.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{416,758},{92,72}}</string>
+                <string>{{768,292},{92,72}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -631,7 +670,7 @@
             <key>mage_lvl3_0003.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{322,722},{92,72}}</string>
+                <string>{{108,382},{92,72}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -644,7 +683,7 @@
             <key>mage_lvl3_0005.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{204,684},{92,72}}</string>
+                <string>{{304,350},{92,72}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -657,7 +696,7 @@
             <key>mage_lvl3_0007.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,652},{92,74}}</string>
+                <string>{{674,278},{92,74}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -670,7 +709,7 @@
             <key>mage_lvl3_0011.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{418,684},{92,72}}</string>
+                <string>{{400,336},{92,72}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -683,7 +722,7 @@
             <key>mage_shooter_0001.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{326,844},{18,24}}</string>
+                <string>{{378,472},{18,24}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -696,7 +735,7 @@
             <key>mage_shooter_0002.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{350,820},{18,24}}</string>
+                <string>{{826,552},{18,24}}</string>
                 <key>offset</key>
                 <string>{-1,0}</string>
                 <key>rotated</key>
@@ -709,7 +748,7 @@
             <key>mage_shooter_0003.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{350,796},{20,22}}</string>
+                <string>{{826,430},{20,22}}</string>
                 <key>offset</key>
                 <string>{-1,0}</string>
                 <key>rotated</key>
@@ -722,7 +761,7 @@
             <key>mage_shooter_0004.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{300,644},{22,22}}</string>
+                <string>{{330,450},{22,22}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -735,7 +774,7 @@
             <key>mage_shooter_0006.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{346,458},{24,30}}</string>
+                <string>{{618,428},{24,30}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -748,7 +787,7 @@
             <key>mage_shooter_0007.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{320,450},{24,30}}</string>
+                <string>{{956,386},{24,30}}</string>
                 <key>offset</key>
                 <string>{-1,0}</string>
                 <key>rotated</key>
@@ -761,7 +800,7 @@
             <key>mage_shooter_0008.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{320,386},{26,30}}</string>
+                <string>{{618,396},{26,30}}</string>
                 <key>offset</key>
                 <string>{-1,0}</string>
                 <key>rotated</key>
@@ -774,7 +813,7 @@
             <key>mage_shooter_0010.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{320,320},{26,32}}</string>
+                <string>{{996,172},{26,32}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -787,7 +826,7 @@
             <key>mage_shooter_0012.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{334,594},{22,28}}</string>
+                <string>{{972,246},{22,28}}</string>
                 <key>offset</key>
                 <string>{-1,0}</string>
                 <key>rotated</key>
@@ -800,7 +839,7 @@
             <key>mage_shooter_0014.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{284,814},{20,24}}</string>
+                <string>{{652,214},{20,24}}</string>
                 <key>offset</key>
                 <string>{-1,0}</string>
                 <key>rotated</key>
@@ -813,7 +852,7 @@
             <key>mage_shooter_0017.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{306,822},{18,24}}</string>
+                <string>{{826,526},{18,24}}</string>
                 <key>offset</key>
                 <string>{-1,0}</string>
                 <key>rotated</key>
@@ -826,7 +865,7 @@
             <key>mage_shooter_0018.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{328,796},{20,22}}</string>
+                <string>{{652,240},{20,22}}</string>
                 <key>offset</key>
                 <string>{-1,0}</string>
                 <key>rotated</key>
@@ -839,7 +878,7 @@
             <key>mage_shooter_0019.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{346,516},{24,22}}</string>
+                <string>{{80,468},{24,22}}</string>
                 <key>offset</key>
                 <string>{-1,0}</string>
                 <key>rotated</key>
@@ -852,7 +891,7 @@
             <key>mage_shooter_0021.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{346,426},{24,30}}</string>
+                <string>{{984,380},{24,30}}</string>
                 <key>offset</key>
                 <string>{-1,0}</string>
                 <key>rotated</key>
@@ -865,7 +904,7 @@
             <key>mage_shooter_0022.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{320,418},{24,30}}</string>
+                <string>{{280,100},{24,30}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -878,7 +917,7 @@
             <key>mage_shooter_0023.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{348,354},{26,30}}</string>
+                <string>{{492,426},{26,30}}</string>
                 <key>offset</key>
                 <string>{-1,0}</string>
                 <key>rotated</key>
@@ -891,7 +930,7 @@
             <key>mage_shooter_0025.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{348,288},{26,32}}</string>
+                <string>{{996,138},{26,32}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -904,7 +943,7 @@
             <key>mage_shooter_0027.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{454,612},{22,26}}</string>
+                <string>{{972,332},{22,26}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -917,7 +956,7 @@
             <key>mage_shooter_0029.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{306,796},{20,24}}</string>
+                <string>{{652,188},{20,24}}</string>
                 <key>offset</key>
                 <string>{-1,0}</string>
                 <key>rotated</key>
@@ -930,7 +969,7 @@
             <key>magebolt_0001.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{418,666},{20,12}}</string>
+                <string>{{938,422},{20,12}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -943,7 +982,7 @@
             <key>magebolt_0002.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{348,412},{26,12}}</string>
+                <string>{{984,366},{26,12}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -956,7 +995,7 @@
             <key>magebolt_0003.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{478,658},{22,24}}</string>
+                <string>{{280,448},{22,24}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -969,7 +1008,7 @@
             <key>magebolt_0006.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{454,640},{22,24}}</string>
+                <string>{{306,446},{22,24}}</string>
                 <key>offset</key>
                 <string>{-1,1}</string>
                 <key>rotated</key>
@@ -982,7 +1021,7 @@
             <key>magebolt_0008.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{478,632},{22,24}}</string>
+                <string>{{332,424},{22,24}}</string>
                 <key>offset</key>
                 <string>{0,1}</string>
                 <key>rotated</key>
@@ -995,7 +1034,7 @@
             <key>magebolt_0010.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{290,54},{14,14}}</string>
+                <string>{{956,334},{14,14}}</string>
                 <key>offset</key>
                 <string>{-1,1}</string>
                 <key>rotated</key>
@@ -1047,7 +1086,7 @@
             <key>sorcerer_shooter_0001.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{494,216},{16,22}}</string>
+                <string>{{938,398},{16,22}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -1060,7 +1099,7 @@
             <key>sorcerer_shooter_0002.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{346,846},{16,20}}</string>
+                <string>{{380,424},{16,20}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -1073,7 +1112,7 @@
             <key>sorcerer_shooter_0003.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{284,788},{20,24}}</string>
+                <string>{{284,44},{20,24}}</string>
                 <key>offset</key>
                 <string>{-1,0}</string>
                 <key>rotated</key>
@@ -1086,7 +1125,7 @@
             <key>sorcerer_shooter_0004.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{284,762},{20,24}}</string>
+                <string>{{284,18},{20,24}}</string>
                 <key>offset</key>
                 <string>{-1,0}</string>
                 <key>rotated</key>
@@ -1099,7 +1138,7 @@
             <key>sorcerer_shooter_0005.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{310,590},{22,28}}</string>
+                <string>{{972,216},{22,28}}</string>
                 <key>offset</key>
                 <string>{-1,0}</string>
                 <key>rotated</key>
@@ -1112,7 +1151,7 @@
             <key>sorcerer_shooter_0006.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{334,564},{22,28}}</string>
+                <string>{{972,186},{22,28}}</string>
                 <key>offset</key>
                 <string>{-1,0}</string>
                 <key>rotated</key>
@@ -1125,7 +1164,7 @@
             <key>sorcerer_shooter_0007.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{310,560},{22,28}}</string>
+                <string>{{282,70},{22,28}}</string>
                 <key>offset</key>
                 <string>{-1,0}</string>
                 <key>rotated</key>
@@ -1138,7 +1177,7 @@
             <key>sorcerer_shooter_0008.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{320,354},{26,30}}</string>
+                <string>{{996,334},{26,30}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -1151,7 +1190,7 @@
             <key>sorcerer_shooter_0009.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{320,286},{26,32}}</string>
+                <string>{{996,104},{26,32}}</string>
                 <key>offset</key>
                 <string>{-1,0}</string>
                 <key>rotated</key>
@@ -1164,7 +1203,7 @@
             <key>sorcerer_shooter_0010.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{356,254},{26,32}}</string>
+                <string>{{996,70},{26,32}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -1177,7 +1216,7 @@
             <key>sorcerer_shooter_0011.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{328,252},{26,32}}</string>
+                <string>{{996,36},{26,32}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -1190,7 +1229,7 @@
             <key>sorcerer_shooter_0012.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{222,154},{28,32}}</string>
+                <string>{{506,328},{28,32}}</string>
                 <key>offset</key>
                 <string>{-1,0}</string>
                 <key>rotated</key>
@@ -1203,7 +1242,7 @@
             <key>sorcerer_shooter_0013.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{262,18},{28,34}}</string>
+                <string>{{526,156},{28,34}}</string>
                 <key>offset</key>
                 <string>{-1,0}</string>
                 <key>rotated</key>
@@ -1216,7 +1255,7 @@
             <key>sorcerer_shooter_0014.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{252,122},{28,32}}</string>
+                <string>{{644,298},{28,32}}</string>
                 <key>offset</key>
                 <string>{-1,0}</string>
                 <key>rotated</key>
@@ -1229,7 +1268,7 @@
             <key>sorcerer_shooter_0015.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{358,220},{26,32}}</string>
+                <string>{{996,2},{26,32}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -1242,7 +1281,7 @@
             <key>sorcerer_shooter_0016.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{482,376},{26,30}}</string>
+                <string>{{996,302},{26,30}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -1255,7 +1294,7 @@
             <key>sorcerer_shooter_0017.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{370,844},{18,22}}</string>
+                <string>{{458,474},{18,22}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -1268,7 +1307,7 @@
             <key>sorcerer_shooter_0018.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{478,604},{22,26}}</string>
+                <string>{{972,304},{22,26}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -1281,7 +1320,7 @@
             <key>sorcerer_shooter_0019.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{482,344},{26,30}}</string>
+                <string>{{996,270},{26,30}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -1294,7 +1333,7 @@
             <key>sorcerer_shooter_0020.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{482,312},{26,30}}</string>
+                <string>{{996,238},{26,30}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -1307,7 +1346,7 @@
             <key>sorcerer_shooter_0021.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{222,120},{28,32}}</string>
+                <string>{{506,294},{28,32}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -1320,7 +1359,7 @@
             <key>sorcerer_shooter_0022.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{328,220},{28,30}}</string>
+                <string>{{494,394},{28,30}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -1333,7 +1372,7 @@
             <key>sorcerer_shooter_0023.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{230,18},{30,32}}</string>
+                <string>{{526,122},{30,32}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -1359,7 +1398,7 @@
             <key>sorcerer_shooter_0025.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{410,832},{18,22}}</string>
+                <string>{{438,474},{18,22}}</string>
                 <key>offset</key>
                 <string>{-1,0}</string>
                 <key>rotated</key>
@@ -1372,7 +1411,7 @@
             <key>sorcerer_shooter_0026.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{260,88},{28,32}}</string>
+                <string>{{518,260},{28,32}}</string>
                 <key>offset</key>
                 <string>{-1,0}</string>
                 <key>rotated</key>
@@ -1385,7 +1424,7 @@
             <key>sorcerer_shooter_0027.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{320,482},{24,26}}</string>
+                <string>{{492,458},{24,26}}</string>
                 <key>offset</key>
                 <string>{-1,0}</string>
                 <key>rotated</key>
@@ -1398,7 +1437,7 @@
             <key>sorcerer_shooter_0028.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{454,584},{22,26}}</string>
+                <string>{{972,276},{22,26}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -1411,7 +1450,7 @@
             <key>sorcerer_shooter_0029.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{358,188},{28,30}}</string>
+                <string>{{630,364},{28,30}}</string>
                 <key>offset</key>
                 <string>{-1,0}</string>
                 <key>rotated</key>
@@ -1424,7 +1463,7 @@
             <key>sorcerer_shooter_0030.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{348,322},{26,30}}</string>
+                <string>{{996,206},{26,30}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -1437,7 +1476,7 @@
             <key>sorcerer_shooter_0031.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{230,86},{28,32}}</string>
+                <string>{{644,264},{28,32}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -1450,7 +1489,7 @@
             <key>sorcerer_shooter_0032.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{328,188},{28,30}}</string>
+                <string>{{630,332},{28,30}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -1463,7 +1502,7 @@
             <key>sorcerer_shooter_0033.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{420,88},{30,32}}</string>
+                <string>{{526,88},{30,32}}</string>
                 <key>offset</key>
                 <string>{-1,0}</string>
                 <key>rotated</key>
@@ -1489,7 +1528,7 @@
             <key>sorcerer_shooter_0035.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{260,54},{28,32}}</string>
+                <string>{{518,226},{28,32}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -1502,7 +1541,7 @@
             <key>sorcerer_shooter_0036.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{230,52},{28,32}}</string>
+                <string>{{518,192},{28,32}}</string>
                 <key>offset</key>
                 <string>{-1,0}</string>
                 <key>rotated</key>
@@ -1515,7 +1554,7 @@
             <key>sorcerer_shooter_0037.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{252,156},{28,30}}</string>
+                <string>{{494,362},{28,30}}</string>
                 <key>offset</key>
                 <string>{-1,0}</string>
                 <key>rotated</key>
@@ -1528,7 +1567,7 @@
             <key>sorcerer_shooter_0038.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{390,820},{18,22}}</string>
+                <string>{{418,474},{18,22}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -1541,7 +1580,7 @@
             <key>sorcerer_shooter_0046.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{370,820},{18,22}}</string>
+                <string>{{398,474},{18,22}}</string>
                 <key>offset</key>
                 <string>{-1,0}</string>
                 <key>rotated</key>
@@ -1554,7 +1593,7 @@
             <key>sorcerer_shooter_0048.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{482,486},{24,22}}</string>
+                <string>{{54,468},{24,22}}</string>
                 <key>offset</key>
                 <string>{-1,0}</string>
                 <key>rotated</key>
@@ -1567,7 +1606,7 @@
             <key>sorcerer_shooter_0050.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{320,510},{24,24}}</string>
+                <string>{{982,412},{24,24}}</string>
                 <key>offset</key>
                 <string>{-1,0}</string>
                 <key>rotated</key>
@@ -1580,7 +1619,7 @@
             <key>sorcerer_shooter_0071.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{390,844},{16,20}}</string>
+                <string>{{808,544},{16,20}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -1593,7 +1632,7 @@
             <key>sorcerer_shooter_0073.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{324,624},{22,22}}</string>
+                <string>{{356,448},{22,22}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -1606,7 +1645,7 @@
             <key>sorcerer_shooter_0075.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{300,620},{22,22}}</string>
+                <string>{{356,424},{22,22}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -1632,7 +1671,7 @@
             <key>sorcerer_tower_0005.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{290,102},{112,84}}</string>
+                <string>{{116,18},{112,84}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -1645,7 +1684,7 @@
             <key>sorcerer_tower_0007.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{116,18},{112,84}}</string>
+                <string>{{2,18},{112,84}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -1658,7 +1697,7 @@
             <key>sorcerer_tower_0009.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,18},{112,84}}</string>
+                <string>{{306,16},{112,84}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -1671,7 +1710,7 @@
             <key>sorcerer_tower_0011.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{306,16},{112,84}}</string>
+                <string>{{458,2},{112,84}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -1684,7 +1723,7 @@
             <key>sorcererbolt_0001.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{452,92},{48,28}}</string>
+                <string>{{222,108},{48,28}}</string>
                 <key>offset</key>
                 <string>{-1,0}</string>
                 <key>rotated</key>
@@ -1697,7 +1736,7 @@
             <key>sorcererbolt_0003.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{452,62},{48,28}}</string>
+                <string>{{230,78},{48,28}}</string>
                 <key>offset</key>
                 <string>{-1,0}</string>
                 <key>rotated</key>
@@ -1710,7 +1749,7 @@
             <key>sorcererbolt_0005.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{452,32},{50,28}}</string>
+                <string>{{230,48},{50,28}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -1723,7 +1762,7 @@
             <key>sorcererbolt_0007.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{458,2},{52,28}}</string>
+                <string>{{230,18},{52,28}}</string>
                 <key>offset</key>
                 <string>{-1,0}</string>
                 <key>rotated</key>
@@ -1736,7 +1775,7 @@
             <key>sorcererbolt_0009.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{502,62},{8,8}}</string>
+                <string>{{558,88},{8,8}}</string>
                 <key>offset</key>
                 <string>{0,1}</string>
                 <key>rotated</key>
@@ -1749,7 +1788,7 @@
             <key>sorcererbolt_0011.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{298,740},{22,20}}</string>
+                <string>{{352,496},{22,20}}</string>
                 <key>offset</key>
                 <string>{-1,1}</string>
                 <key>rotated</key>
@@ -1762,7 +1801,7 @@
             <key>sorcererbolt_0013.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{346,490},{24,24}}</string>
+                <string>{{610,460},{24,24}}</string>
                 <key>offset</key>
                 <string>{0,1}</string>
                 <key>rotated</key>
@@ -1775,7 +1814,7 @@
             <key>sorcererbolt_0015.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{348,386},{26,24}}</string>
+                <string>{{956,360},{26,24}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -1785,10 +1824,322 @@
                 <key>sourceSize</key>
                 <string>{74,28}</string>
             </dict>
+            <key>terrain_archer_0001.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{848,484},{80,42}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{80,42}}</string>
+                <key>sourceSize</key>
+                <string>{80,42}</string>
+            </dict>
+            <key>terrain_archer_0002.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{222,184},{80,42}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{80,42}}</string>
+                <key>sourceSize</key>
+                <string>{80,42}</string>
+            </dict>
+            <key>terrain_archer_0003.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{108,456},{76,42}}</string>
+                <key>offset</key>
+                <string>{-1,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{1,0},{76,42}}</string>
+                <key>sourceSize</key>
+                <string>{80,42}</string>
+            </dict>
+            <key>terrain_archer_musketeer_0001.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{214,328},{88,48}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,1},{88,48}}</string>
+                <key>sourceSize</key>
+                <string>{88,50}</string>
+            </dict>
+            <key>terrain_archer_musketeer_0002.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{214,278},{88,48}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,1},{88,48}}</string>
+                <key>sourceSize</key>
+                <string>{88,50}</string>
+            </dict>
+            <key>terrain_archer_musketeer_0003.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{214,228},{88,48}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,1},{88,48}}</string>
+                <key>sourceSize</key>
+                <string>{88,50}</string>
+            </dict>
+            <key>terrain_archer_ranger_0001.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{636,472},{84,42}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,1},{84,42}}</string>
+                <key>sourceSize</key>
+                <string>{84,44}</string>
+            </dict>
+            <key>terrain_archer_ranger_0002.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{936,482},{84,42}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,1},{84,42}}</string>
+                <key>sourceSize</key>
+                <string>{84,44}</string>
+            </dict>
+            <key>terrain_archer_ranger_0003.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{222,138},{82,44}}</string>
+                <key>offset</key>
+                <string>{-1,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{82,44}}</string>
+                <key>sourceSize</key>
+                <string>{84,44}</string>
+            </dict>
+            <key>terrain_artillery_0001.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{722,514},{84,40}}</string>
+                <key>offset</key>
+                <string>{0,1}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{84,40}}</string>
+                <key>sourceSize</key>
+                <string>{84,42}</string>
+            </dict>
+            <key>terrain_artillery_0002.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{722,472},{84,40}}</string>
+                <key>offset</key>
+                <string>{0,1}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{84,40}}</string>
+                <key>sourceSize</key>
+                <string>{84,42}</string>
+            </dict>
+            <key>terrain_artillery_0003.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{846,566},{78,42}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{3,0},{78,42}}</string>
+                <key>sourceSize</key>
+                <string>{84,42}</string>
+            </dict>
+            <key>terrain_artillery_bfg_0001.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{876,290},{94,42}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{94,42}}</string>
+                <key>sourceSize</key>
+                <string>{94,42}</string>
+            </dict>
+            <key>terrain_artillery_bfg_0002.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{780,248},{94,42}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{94,42}}</string>
+                <key>sourceSize</key>
+                <string>{94,42}</string>
+            </dict>
+            <key>terrain_artillery_bfg_0003.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{848,398},{88,42}}</string>
+                <key>offset</key>
+                <string>{-1,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{2,0},{88,42}}</string>
+                <key>sourceSize</key>
+                <string>{94,42}</string>
+            </dict>
+            <key>terrain_artillery_tesla_0001.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{848,442},{86,40}}</string>
+                <key>offset</key>
+                <string>{0,1}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,1},{86,40}}</string>
+                <key>sourceSize</key>
+                <string>{86,44}</string>
+            </dict>
+            <key>terrain_artillery_tesla_0002.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{738,430},{86,40}}</string>
+                <key>offset</key>
+                <string>{0,1}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,1},{86,40}}</string>
+                <key>sourceSize</key>
+                <string>{86,44}</string>
+            </dict>
+            <key>terrain_artillery_tesla_0003.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{938,438},{84,42}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{1,1},{84,42}}</string>
+                <key>sourceSize</key>
+                <string>{86,44}</string>
+            </dict>
+            <key>terrain_barrack_0001.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{846,528},{80,36}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,4},{80,36}}</string>
+                <key>sourceSize</key>
+                <string>{80,44}</string>
+            </dict>
+            <key>terrain_barrack_0002.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{930,526},{80,36}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,4},{80,36}}</string>
+                <key>sourceSize</key>
+                <string>{80,44}</string>
+            </dict>
+            <key>terrain_barrack_0003.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{202,424},{76,44}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{2,0},{76,44}}</string>
+                <key>sourceSize</key>
+                <string>{80,44}</string>
+            </dict>
+            <key>terrain_mage_0001.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{520,454},{88,44}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{88,44}}</string>
+                <key>sourceSize</key>
+                <string>{88,44}</string>
+            </dict>
+            <key>terrain_mage_0002.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{214,378},{88,44}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{88,44}}</string>
+                <key>sourceSize</key>
+                <string>{88,44}</string>
+            </dict>
+            <key>terrain_mage_0003.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{928,564},{78,44}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{5,0},{78,44}}</string>
+                <key>sourceSize</key>
+                <string>{88,44}</string>
+            </dict>
             <key>tower_preview_mage.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{324,648},{92,72}}</string>
+                <string>{{536,316},{92,72}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -1806,9 +2157,9 @@
             <key>realTextureFileName</key>
             <string>tower.png</string>
             <key>size</key>
-            <string>{512,1024}</string>
+            <string>{1024,1024}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:c35708f89805b8f860de1c631a142f8e$</string>
+            <string>$TexturePacker:SmartUpdate:c3e53503b55fa1b591626d2baa06a787$</string>
             <key>textureFileName</key>
             <string>tower.png</string>
         </dict>

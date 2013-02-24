@@ -24,7 +24,7 @@ static CCAnimation* addAnimationWithFramesToCache(const char* textureFileName, c
 
 	CCAnimation* animation = CCAnimation::createWithSpriteFrames(framesArray);
 	animation->setLoops(loopCount);
-	animation->setRestoreOriginalFrame(true);
+	animation->setRestoreOriginalFrame(restoreOriginalFrame);
 	animation->setDelayPerUnit(delay);
 
 	auto animationCache = CCAnimationCache::sharedAnimationCache();

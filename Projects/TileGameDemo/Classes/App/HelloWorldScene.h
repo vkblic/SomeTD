@@ -8,7 +8,7 @@
 #include "SimpleAudioEngine.h"
 
 #include "./tilemap_parallax_nodes/CCTMXTiledMap.h"
-
+#include "../Sprites/Tower.h"
 using namespace cocos2d;
 
 typedef struct WayPoint
@@ -67,6 +67,7 @@ private:
 	int _wayPointIndex;
 	int _wayPointCount;
 	bool canFire;
+	Tower* mTower;
 //Events
 public:	 
 	void FollowPath(CCNode* sender);

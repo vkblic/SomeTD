@@ -32,5 +32,6 @@
   <object name="WayPoint13" x="657" y="635"/>
   <object name="WayPoint14" x="638" y="708"/>
   <object name="WayPoint12" x="680" y="608"/>
+  <object name="Tower1" x="535" y="422"/>
  </objectgroup>
 </map>

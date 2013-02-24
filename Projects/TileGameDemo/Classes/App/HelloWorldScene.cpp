@@ -1,5 +1,4 @@
 #include "HelloWorldScene.h"
-#include "../Sprites/Bullet.h"
 #include "../Helper/SpriteHelpers.h"
 #include "../Helper/CommonHelpers.h"
 #include "../Model/InfoData.h"
@@ -66,6 +65,8 @@ bool HelloWorld::init()
 		int x = spawnPoint->valueForKey("x")->intValue();
 		int y = spawnPoint->valueForKey("y")->intValue();
 
+
+
 		//WayPoints
 		this->_wayPoints = new std::vector<WayPoint>();
 		this->_wayPointIndex = 0;
@@ -86,6 +87,14 @@ bool HelloWorld::init()
 		TowerInformation::GetInstance()->LoadConfig(cache);
 
 
+		// Tower
+		CCDictionary* tower1 = objects->objectNamed("Tower1");
+		int towerX = tower1->valueForKey("x")->intValue();
+		int towerY = tower1->valueForKey("y")->intValue();
+
+		this->mTower = Tower::create();
+		this->mTower->setPosition(CCPoint(towerX, towerY));
+		this->addChild(this->mTower);
 
 		// add animation
 		//½ÅÉ«¶¯»­
@@ -269,13 +278,16 @@ void HelloWorld::ccTouchEnded(CCTouch *pTouch, CCEvent *pEvent)
 	//bullet
 	if(this->canFire)
 	{
-		Bullet *bullet = Bullet::create(100, this->_player, "magebolt_0002.png");
+// 		Bullet *bullet = Bullet::create(100, this->_player, "magebolt_0002.png");
+// 		
+// 		bullet->setPosition(touchLocation);
+// 		//bullet->setScale(0.25);
+// 		this->addChild(bullet);
+// 		bullet->reuse();
 		
-		bullet->setPosition(touchLocation);
-		//bullet->setScale(0.25);
-		this->addChild(bullet);
-		bullet->reuse();
+		this->mTower->fire(this->_player);
 		return ;
+
 	}
 
 
