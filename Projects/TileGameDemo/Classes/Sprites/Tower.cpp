@@ -76,7 +76,7 @@ void Tower::myInit()
 
 	this->addChild(this->mTerrain, -1);
 	this->addChild(this->mShooter, 1);
-	this->mShooter->setPosition(CCPoint(44, 68));
+	this->mShooter->setPosition(CCPoint(48, 64));
 	CCSize towerSize = this->getContentSize();
 	CCSize terrainSize = this->getContentSize();
 	this->mTerrain->setPosition(CCPoint(94/2, 30));

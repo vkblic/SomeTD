@@ -80,7 +80,9 @@ bool HelloWorld::init()
 
 		CCSpriteFrameCache* cache = CCSpriteFrameCache::sharedSpriteFrameCache(); 
 		cache->addSpriteFramesWithFile("yeti.plist");
-		cache->addSpriteFramesWithFile("tower.plist");
+		//cache->addSpriteFramesWithFile("tower.plist");
+		cache->addSpriteFramesWithFile("towers.plist");
+		cache->addSpriteFramesWithFile("towers_arcane.plist");
 		
 		
 		//Tower information

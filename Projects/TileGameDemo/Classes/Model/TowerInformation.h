@@ -91,7 +91,7 @@ public:
 			addAnimationWithFramesToCache("mage_shooter", "Shooter_Mage_LV_1To3_Up_Part2", 25, 29, SECOND_PER_FRAME * 2, false, 1);
 
 		auto animationShooterLv1_3Down = 
-			addAnimationWithFramesToCache("mage_shooter", "Shooter_Mage_LV_1To3_Down", 3, 14, SECOND_PER_FRAME * 2, false, 1);
+			addAnimationWithFramesToCache("mage_shooter", "Shooter_Mage_LV_1To3_Down", 3, 14, SECOND_PER_FRAME * 2, true, 1);
 		auto animationShooterLv1_3DownPart2 = 
 			addAnimationWithFramesToCache("mage_shooter", "Shooter_Mage_LV_1To3_Down_Part2", 12, 14, SECOND_PER_FRAME * 2, false, 1);
 
