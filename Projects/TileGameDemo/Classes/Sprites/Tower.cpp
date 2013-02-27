@@ -81,59 +81,84 @@ void Tower::myInit()
 	CCSize terrainSize = this->getContentSize();
 	this->mTerrain->setPosition(CCPoint(94/2, 30));
 
-	// animation sequence
-// 	this->mShooterAnimationSequence = CCSequence::create(
-// 		CCAnimate::create(TowerInformation::GetInstance()->GetShooterAnimation(TOWER_SHOOTER_TYPE::Shooter_Mage_LV_1To3_Down)),
-// 		CCCallFuncN::create(this, callfuncN_selector(Tower::onShoot)),
-// 		//CCAnimate::create(TowerInformation::GetInstance()->GetShooterAnimation(TOWER_SHOOTER_TYPE::Shooter_Mage_LV_1To3_Down_Part2)),
-// 		NULL);
-// 	this->mTowerAnimationSequence = CCSequence::create(
-// 		CCAnimate::create(TowerInformation::GetInstance()->GetTowerAnimation(TOWER_TYPE::Tower_Mage_LV1)),
-// 		NULL
-// 		);
+	//Create Menu
+	// 1.1. GameSetting button 
+	// 
+	do 
+	{
+		CCSprite* archerTowerMenuNormal = CCSprite::createWithSpriteFrameName("main_icons_0001.png");
+		CCSprite* archerTowerMenuOff = CCSprite::createWithSpriteFrameName("main_icons_disabled_0001.png");
+		CCSprite* archerTowerMenuDisabled = CCSprite::createWithSpriteFrameName("main_icons_off_0001.png");
 
+		CCMenuItemSprite * archerTowerBtn = CCMenuItemSprite::create(
+			archerTowerMenuNormal,
+			archerTowerMenuOff,
+			archerTowerMenuDisabled,
+			this,
+			menu_selector(Tower::onTowerBuild)
+			);
+		if(! archerTowerBtn)
+			break;
+		archerTowerBtn->
+			this->_winSize = CCDirector::sharedDirector()->getWinSize();
+
+	} while ();
+	// animation sequence
+	// 	this->mShooterAnimationSequence = CCSequence::create(
+	// 		CCAnimate::create(TowerInformation::GetInstance()->GetShooterAnimation(TOWER_SHOOTER_TYPE::Shooter_Mage_LV_1To3_Down)),
+	// 		CCCallFuncN::create(this, callfuncN_selector(Tower::onShoot)),
+	// 		//CCAnimate::create(TowerInformation::GetInstance()->GetShooterAnimation(TOWER_SHOOTER_TYPE::Shooter_Mage_LV_1To3_Down_Part2)),
+	// 		NULL);
+	// 	this->mTowerAnimationSequence = CCSequence::create(
+	// 		CCAnimate::create(TowerInformation::GetInstance()->GetTowerAnimation(TOWER_TYPE::Tower_Mage_LV1)),
+	// 		NULL
+	// 		);
+
+
+}
+void Tower::onTowerBuild(CCObject* pSender)
+{
 
 }
 
 
-
 void Tower::update(float dt)
 {
-// 	CCPoint pos = this->getPosition();
-// 	//pos.y -= this->mBulletInfo->BulletSpeed * dt;
-// 	this->setPositionY(pos.y);
-// 	if(this->isHit())
-// 	{
-// 		this->unscheduleUpdate();
-// 		//this->destory();
-// 		
-// 		CCSequence* sequence = CCSequence::createWithTwoActions(
-// 			CCAnimate::create(CCAnimationCache::sharedAnimationCache()->animationByName("magebolt_boom")),
-// 			CCCallFunc::create(this, callfunc_selector(Tower::destory))
-// 		);
-// 		this->runAction(sequence);
-// 	}
-// 	else
-// 	{
-// 		CCPoint pos = this->getPosition();
-// 		CCPoint targetPosNew = this->_target->getPosition();
-// 		//ccVertex2F toOldTarget = vertex2( this->_targetLastPosition.x - pos.x, this->_targetLastPosition.y - pos.y );
-// 
-// 		ccVertex2F toNewTarget = vertex2( targetPosNew.x - pos.x, targetPosNew.y - pos.y);
-// 		//ccVertex2F toNewPos = vertex2FAdd(toOldTarget, toNewTarget);
-// 		ccVertex2F toNewPos = vertex2FMul(&vertex2FNormalization(toNewTarget), dt * this->_speed * 5);
-// 		
-// 		//sprintf_s(temp,255, "%-08.4f",dt);
-// 		//CCLog(temp);
-// 		CCPoint newPos = CCPoint(pos.x + toNewPos.x, pos.y + toNewPos.y);
-// 		this->setPosition(newPos);
-// 
-// 		float angleRadians = atanf((float)toNewPos.y / (float)toNewPos.x);
-// 		float angleDegrees = CC_RADIANS_TO_DEGREES(angleRadians);
-// 		float cocosAngle = -1 * angleDegrees + 180;
-// 		this->setRotation(cocosAngle);
-// 
-// 	}
+	// 	CCPoint pos = this->getPosition();
+	// 	//pos.y -= this->mBulletInfo->BulletSpeed * dt;
+	// 	this->setPositionY(pos.y);
+	// 	if(this->isHit())
+	// 	{
+	// 		this->unscheduleUpdate();
+	// 		//this->destory();
+	// 		
+	// 		CCSequence* sequence = CCSequence::createWithTwoActions(
+	// 			CCAnimate::create(CCAnimationCache::sharedAnimationCache()->animationByName("magebolt_boom")),
+	// 			CCCallFunc::create(this, callfunc_selector(Tower::destory))
+	// 		);
+	// 		this->runAction(sequence);
+	// 	}
+	// 	else
+	// 	{
+	// 		CCPoint pos = this->getPosition();
+	// 		CCPoint targetPosNew = this->_target->getPosition();
+	// 		//ccVertex2F toOldTarget = vertex2( this->_targetLastPosition.x - pos.x, this->_targetLastPosition.y - pos.y );
+	// 
+	// 		ccVertex2F toNewTarget = vertex2( targetPosNew.x - pos.x, targetPosNew.y - pos.y);
+	// 		//ccVertex2F toNewPos = vertex2FAdd(toOldTarget, toNewTarget);
+	// 		ccVertex2F toNewPos = vertex2FMul(&vertex2FNormalization(toNewTarget), dt * this->_speed * 5);
+	// 		
+	// 		//sprintf_s(temp,255, "%-08.4f",dt);
+	// 		//CCLog(temp);
+	// 		CCPoint newPos = CCPoint(pos.x + toNewPos.x, pos.y + toNewPos.y);
+	// 		this->setPosition(newPos);
+	// 
+	// 		float angleRadians = atanf((float)toNewPos.y / (float)toNewPos.x);
+	// 		float angleDegrees = CC_RADIANS_TO_DEGREES(angleRadians);
+	// 		float cocosAngle = -1 * angleDegrees + 180;
+	// 		this->setRotation(cocosAngle);
+	// 
+	// 	}
 	//CCSpriteFrameCache.addSpriteFrame()
 	// this->setPosition(ccpAdd(this->getPosition(), ccpMult(mVelocity, dt)));
 }

@@ -83,7 +83,8 @@ bool HelloWorld::init()
 		//cache->addSpriteFramesWithFile("tower.plist");
 		cache->addSpriteFramesWithFile("towers.plist");
 		cache->addSpriteFramesWithFile("towers_arcane.plist");
-		
+		cache->addSpriteFramesWithFile("ingame_gui.plist");
+		cache->addSpriteFramesWithFile("common_spritesheet_16_a_2.plist");
 		
 		//Tower information
 		TowerInformation::GetInstance()->LoadConfig(cache);

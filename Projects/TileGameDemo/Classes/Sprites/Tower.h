@@ -35,6 +35,11 @@ public:
 	void destory();
 	void fire(CCSprite* target);
 	void onShoot(CCNode* shooter);
+
+public:
+	//Menu
+	void onTowerBuild(CCObject* pSender);
+	void onTowerUpgrade(CCObject* pSender);
 private:
 	int mTowerType ;
 	int mShooterTypeUp;
@@ -43,12 +48,20 @@ private:
 	int mShooterTypeDownPart2;
 	int mTerrainType;
 	
-	CCSequence* mShooterAnimationSequence;
-	CCSequence* mTowerAnimationSequence;
-
+	//CCSequence* mShooterAnimationSequence;
+	//CCSequence* mTowerAnimationSequence;
+private:
+	/*
+	 相关的精灵对象
+	 */
 	CCSprite* mShooter;
 	CCSprite* mTerrain;
 	CCSprite* mTarget;
+	CCSprite* mMenu;
+	/*
+	 *
+	 */
+
 	float _speed;
 	CCPoint _targetLastPosition;
 	CCSprite* _target;
