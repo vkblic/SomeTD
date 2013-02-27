@@ -15,6 +15,8 @@ namespace ImageClip
 		public Form1()
 		{
 			InitializeComponent();
+			this.textBoxSrcPath.Text = @"E:\Developer\[GameProgramming]\[SomeTD]\Resouce\Kingdom Rush.app\";
+			this.textBoxOutput.Text = @"E:\Developer\[GameProgramming]\[SomeTD]\Resouce\Kingdom Rush.app\temp\ingame_gui\";
 		}
 
 		private void btnGenerate_Click(object sender, EventArgs e)
@@ -22,6 +24,7 @@ namespace ImageClip
 			var temp = PListReader.Read(this.textBoxSrcPath.Text + "\\" + this.textBoxFileName.Text + ".plist");
 			ImageClip.Clip(temp, this.textBoxSrcPath.Text + "\\" + this.textBoxFileName.Text + ".png", this.textBoxOutput.Text);
 			//ImageClip.Clip(temp, @"E:\Developer\[GameProgramming]\[SomeTD]\Resouce\Kingdom Rush.app\enemies_snow.png", @"E:\Developer\[GameProgramming]\[SomeTD]\Resouce\Kingdom Rush.app\Temp\enemies_snow\");
+			MessageBox.Show("Done！");
 			
 		}
 	}
