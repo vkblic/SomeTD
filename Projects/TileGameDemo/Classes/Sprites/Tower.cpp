@@ -100,7 +100,7 @@ void Tower::myInit()
 		if(! archerTowerBtn)
 			break;
 		archerTowerBtn->
-			this->_winSize = CCDirector::sharedDirector()->getWinSize();
+		//	this->_winSize = CCDirector::sharedDirector()->getWinSize();
 
 	} while ();
 	// animation sequence
