@@ -146,9 +146,10 @@
     <ClInclude Include="..\Classes\Model\InfoData.h" />
     <ClInclude Include="..\Classes\Model\TowerInformation.h" />
     <ClInclude Include="..\Classes\Sprites\Bullet.h" />
-    <ClInclude Include="..\Classes\Sprites\CCMenuItemMoreFrame.h" />
+    <ClInclude Include="..\Classes\Sprites\KCCMenuItemMoreFrame.h" />
     <ClInclude Include="..\Classes\Sprites\Enemy.h" />
     <ClInclude Include="..\Classes\Sprites\Tower.h" />
+    <ClInclude Include="..\Classes\Sprites\TowerMenu.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
@@ -158,9 +159,10 @@
     <ClCompile Include="..\Classes\Model\InfoData.cpp" />
     <ClCompile Include="..\Classes\Model\TowerInformation.cpp" />
     <ClCompile Include="..\Classes\Sprites\Bullet.cpp" />
-    <ClCompile Include="..\Classes\Sprites\CCMenuItemMoreFrame.cpp" />
+    <ClCompile Include="..\Classes\Sprites\KCCMenuItemMoreFrame.cpp" />
     <ClCompile Include="..\Classes\Sprites\Enemy.cpp" />
     <ClCompile Include="..\Classes\Sprites\Tower.cpp" />
+    <ClCompile Include="..\Classes\Sprites\TowerMenu.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>

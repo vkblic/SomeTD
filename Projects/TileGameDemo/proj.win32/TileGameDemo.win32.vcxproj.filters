@@ -91,7 +91,10 @@
     <ClInclude Include="..\Classes\Model\TowerInformation.h">
       <Filter>Model</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Sprites\CCMenuItemMoreFrame.h">
+    <ClInclude Include="..\Classes\Sprites\KCCMenuItemMoreFrame.h">
+      <Filter>Sprites</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Sprites\TowerMenu.h">
       <Filter>Sprites</Filter>
     </ClInclude>
   </ItemGroup>
@@ -118,7 +121,10 @@
     <ClCompile Include="..\Classes\Model\TowerInformation.cpp">
       <Filter>Model</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Sprites\CCMenuItemMoreFrame.cpp">
+    <ClCompile Include="..\Classes\Sprites\KCCMenuItemMoreFrame.cpp">
+      <Filter>Sprites</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Sprites\TowerMenu.cpp">
       <Filter>Sprites</Filter>
     </ClCompile>
   </ItemGroup>

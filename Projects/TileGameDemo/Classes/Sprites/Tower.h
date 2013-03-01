@@ -3,7 +3,7 @@
 #define _TOWER_H_
 
 #include "cocos2d.h"
-
+#include "TowerMenu.h"
 using namespace cocos2d;
 
 //Tower class
@@ -57,7 +57,7 @@ private:
 	CCSprite* mShooter;
 	CCSprite* mTerrain;
 	CCSprite* mTarget;
-	CCSprite* mMenu;
+	TowerMenu* mMenu;
 	/*
 	 *
 	 */
