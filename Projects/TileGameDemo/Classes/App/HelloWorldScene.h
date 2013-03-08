@@ -47,6 +47,7 @@ public:
 
 	void setPlayerPosition(cocos2d::CCPoint pos);
 
+
 	//void update(float dt); // execute every frame
 
 	void virtual ccTouchEnded(cocos2d::CCTouch *pTouch, cocos2d::CCEvent *pEvent);

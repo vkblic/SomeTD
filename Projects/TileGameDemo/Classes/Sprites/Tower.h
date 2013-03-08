@@ -3,7 +3,6 @@
 #define _TOWER_H_
 
 #include "cocos2d.h"
-#include "TowerMenu.h"
 using namespace cocos2d;
 
 //Tower class
@@ -25,7 +24,7 @@ public:
 	//重写触屏相关函数----
 	virtual void onEnter();
 	virtual void onExit();
-	//virtual bool ccTouchBegan(CCTouch* touch, CCEvent* event){}
+	virtual bool ccTouchBegan(CCTouch* touch, CCEvent* event);
 	virtual void ccTouchMoved(CCTouch* touch, CCEvent* event);
 	virtual void ccTouchEnded(CCTouch* touch, CCEvent* event);
 
@@ -57,10 +56,7 @@ private:
 	CCSprite* mShooter;
 	CCSprite* mTerrain;
 	CCSprite* mTarget;
-	TowerMenu* mMenu;
-	/*
-	 *
-	 */
+private:
 
 	float _speed;
 	CCPoint _targetLastPosition;

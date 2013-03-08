@@ -3,7 +3,7 @@
 #define _TOWER_MENU_
 
 #include "cocos2d.h"
-
+#include "Tower.h"
 using namespace cocos2d;
 
 class TowerMenu : public CCSprite , public CCTouchDelegate
@@ -28,6 +28,8 @@ public:
 		ArtilleryDisabled,
 		ComfirmNormal,
 		ConfirmDisabled,
+		RangeCircle,
+		RallyCircle,
 		MainFrameMax
 	};
 	enum MenuItemSprite
@@ -35,15 +37,25 @@ public:
 		Archer,
 		Barrack,
 		Mage,
-		Atillery,
+		Artillery,
 		Upgrade,
 		Sale,
 		MenuItemSpriteMax
 	};
+
+	enum MenuLevel
+	{
+		Lv0,
+		Lv1,
+		Lv2,
+		Lv3,
+		LvS1,
+		LvS2
+	};
 public:
 	// 静态初始化方法
 	//static Bullet* create(BulletInfoModel* pBulletTag);
-	static TowerMenu* create();//静态创建（内存自动释放）
+	static TowerMenu* sharedTowerMenu();//静态创建（内存自动释放）
 	// 带偏转角度的静态初始化方法
 	//static Bullet* createWithRotation(BulletInfoModel* pBulletTag, float pRotation);
 
@@ -51,7 +63,6 @@ public:
 public:
 	void myInit();//自定义初始化函数
 	virtual ~TowerMenu(){}
-
 	//重写触屏相关函数----
 	virtual void onEnter();
 	virtual void onExit();
@@ -65,8 +76,13 @@ public:
 	void onBuild(); //when bullet hit target
 	void onUpgrade();
 	void destory();
-	
+	void showMenu(CCPoint pos, Tower* tower, MenuLevel lv );
+
 	CCRect getCollisionRect();
+private:
+	void resetFrame();
+	void hideMenu();
+
 private:
 
 	std::vector<CCSpriteFrame*> mMainMenuFrame;
@@ -75,6 +91,10 @@ private:
 	CCPoint _targetLastPosition;
 	CCSprite* _target;
 	char temp[256];
+protected:
+	static TowerMenu* mInstance;
+	int mCurLevel;
+	Tower* mCurTower;
 };
 
 #endif

@@ -3,7 +3,6 @@
 
 #include "Enumeration.h"
 #include "cocos2d.h"
-#include "../Sprites/Bullet.h"
 #include "../Helper/SpriteHelpers.h"
 #include "../Helper/CommonHelpers.h"
 

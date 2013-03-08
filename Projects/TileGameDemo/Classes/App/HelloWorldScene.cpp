@@ -1,4 +1,5 @@
 #include "HelloWorldScene.h"
+#include "../Sprites/TowerMenu.h"
 #include "../Helper/SpriteHelpers.h"
 #include "../Helper/CommonHelpers.h"
 #include "../Model/InfoData.h"
@@ -85,6 +86,7 @@ bool HelloWorld::init()
 		cache->addSpriteFramesWithFile("towers_arcane.plist");
 		cache->addSpriteFramesWithFile("ingame_gui.plist");
 		cache->addSpriteFramesWithFile("common_spritesheet_16_a_2.plist");
+		cache->addSpriteFramesWithFile("gui_menu_sprite_3.plist");
 		
 		//Tower information
 		TowerInformation::GetInstance()->LoadConfig(cache);
@@ -98,6 +100,9 @@ bool HelloWorld::init()
 		this->mTower = Tower::create();
 		this->mTower->setPosition(CCPoint(towerX, towerY));
 		this->addChild(this->mTower);
+
+		this->addChild(TowerMenu::sharedTowerMenu());
+		TowerMenu::sharedTowerMenu()->setVisible(false);
 
 		// add animation
 		//½ÅÉ«¶¯»­
@@ -277,18 +282,18 @@ void HelloWorld::ccTouchEnded(CCTouch *pTouch, CCEvent *pEvent)
 	//in OpenGl coordinates, (0, 0) is left-bottom point not like screen of dx coordinates is left-top point
 	touchLocation = CCDirector::sharedDirector()->convertToGL(touchLocation);
 	touchLocation = this->convertToNodeSpace(touchLocation);
-
+	CCLog("Background UI coor, x: %f, y: %f", touchLocation.x, touchLocation.y);
 	//bullet
 	if(this->canFire)
 	{
-// 		Bullet *bullet = Bullet::create(100, this->_player, "magebolt_0002.png");
-// 		
-// 		bullet->setPosition(touchLocation);
-// 		//bullet->setScale(0.25);
-// 		this->addChild(bullet);
-// 		bullet->reuse();
+// 		 		Bullet *bullet = Bullet::create(100, this->_player, "magebolt_0002.png");
+// 				
+// 					bullet->setPosition(touchLocation);
+// 		 		//bullet->setScale(0.25);
+// 			 		this->addChild(bullet);
+//  		bullet->reuse();
 		
-		this->mTower->fire(this->_player);
+		//this->mTower->fire(this->_player);
 		return ;
 
 	}

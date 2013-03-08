@@ -6,6 +6,7 @@
 //
 
 #include "Tower.h"
+#include "TowerMenu.h"
 #include "../Helper/CommonHelpers.h"
 #include "../Model/TowerInformation.h"
 #include "Bullet.h"
@@ -26,6 +27,32 @@ Tower* Tower::create()
 	return NULL;
 
 }
+
+
+bool Tower::ccTouchBegan(CCTouch* touch, CCEvent* event)
+{
+
+// 	CCPoint touchPointUI = touch->getLocationInView();
+// 
+// 	CCLog("UI location, x: %f, y: %f", touchPointUI.x, touchPointUI.y);
+// 
+// 	CCPoint touchPointGL = touch->getLocation();
+// 	CCLog("GL location, x: %f, y: %f", touchPointGL.x, touchPointGL.y);
+// 
+// 
+// 	CCPoint touchPointInNodeSpace = this->convertTouchToNodeSpace(touch);
+// 	CCLog("touchPointInNodeSpace, x: %f, y: %f", touchPointInNodeSpace.x, touchPointInNodeSpace.y);
+// 
+// 
+// 	//bool isTouched = GetTouchableRect(this).containsPoint(touchPointGL);
+// 	CCSize size = this->getContentSize();
+// 	CCRect rect = CCRect(0, 0, size.width, size.height);
+	bool isTouched = isSpriteTouched(this, touch);
+// 	if (!isTouched)
+// 		TowerMenu::sharedTowerMenu()->setVisible(false);
+	return isTouched;
+}
+
 void Tower::ccTouchMoved(CCTouch* touch, CCEvent* event)
 {
 
@@ -41,6 +68,13 @@ void Tower::ccTouchMoved(CCTouch* touch, CCEvent* event)
 
 void Tower::ccTouchEnded(CCTouch* touch, CCEvent* event)
 {
+	if (!isSpriteTouched(this, touch))
+		return;
+	TowerMenu *menu = TowerMenu::sharedTowerMenu();
+	//this->mMenu->setPosition(CCPoint(this->getContentSize().width / 2, this->getContentSize().height / 2));
+	menu->sharedTowerMenu()->showMenu(this->getPosition(), this, TowerMenu::Lv0);
+	
+
 	//CCLog("%s","¾«Áé33~~~ccTouchEnded");
 } 
 
@@ -85,92 +119,88 @@ void Tower::myInit()
 	//Create Menu
 	// 1.1. GameSetting button 
 	// 
-	do 
-	{
+	//do 
+	//{
 
 		// Archer tower
-		CCSprite* archerTowerMenuNormal = CCSprite::createWithSpriteFrameName("main_icons_0001.png");
-		CCSprite* archerTowerMenuOff = CCSprite::createWithSpriteFrameName("main_icons_disabled_0001.png");
-		CCSprite* archerTowerMenuDisabled = CCSprite::createWithSpriteFrameName("main_icons_off_0001.png");
+// 		CCSprite* archerTowerMenuNormal = CCSprite::createWithSpriteFrameName("main_icons_0001.png");
+// 		CCSprite* archerTowerMenuOff = CCSprite::createWithSpriteFrameName("main_icons_disabled_0001.png");
+// 		CCSprite* archerTowerMenuDisabled = CCSprite::createWithSpriteFrameName("main_icons_off_0001.png");
+// 
+// 		KCCMenuItemMoreFrame * archerTowerBtn = KCCMenuItemMoreFrame::create(
+// 			archerTowerMenuNormal,
+// 			archerTowerMenuOff,
+// 			archerTowerMenuDisabled,
+// 			this,
+// 			menu_selector(Tower::onTowerBuild)
+// 			);
+// 		if(! archerTowerBtn)
+// 			break;
+// 		archerTowerBtn->setTag(1);
+// 		archerTowerBtn->setPosition(-49 + 74, 56 + 74);
+// 		// Barrack Tower
+// 		CCSprite* barrackTowerMenuNormal = CCSprite::createWithSpriteFrameName("main_icons_0002.png");
+// 		CCSprite* barrackTowerMenuOff = CCSprite::createWithSpriteFrameName("main_icons_disabled_0002.png");
+// 		CCSprite* barrackTowerMenuDisabled = CCSprite::createWithSpriteFrameName("main_icons_off_0002.png");
+// 
+// 		KCCMenuItemMoreFrame * barrackTowerBtn = KCCMenuItemMoreFrame::create(
+// 			barrackTowerMenuNormal,
+// 			barrackTowerMenuOff,
+// 			barrackTowerMenuDisabled,
+// 			this,
+// 			menu_selector(Tower::onTowerBuild)
+// 			);
+// 		if(! barrackTowerBtn)
+// 			break;
+// 		barrackTowerBtn->setTag(2);
+// 		barrackTowerBtn->setPosition(49 + 74, 56 + 74);
+// 
+// 
+// 		//Mage Tower
+// 		CCSprite* mageTowerMenuNormal = CCSprite::createWithSpriteFrameName("main_icons_0003.png");
+// 		CCSprite* mageTowerMenuOff = CCSprite::createWithSpriteFrameName("main_icons_disabled_0003.png");
+// 		CCSprite* mageTowerMenuDisabled = CCSprite::createWithSpriteFrameName("main_icons_off_0003.png");
+// 
+// 		KCCMenuItemMoreFrame * mageTowerBtn = KCCMenuItemMoreFrame::create(
+// 			mageTowerMenuNormal,
+// 			mageTowerMenuOff,
+// 			mageTowerMenuDisabled,
+// 			this,
+// 			menu_selector(Tower::onTowerBuild)
+// 			);
+// 		if(! mageTowerBtn)
+// 			break;
+// 		mageTowerBtn->setTag(3);
+// 		mageTowerBtn->setPosition(-49 + 74, -56 + 74);
+// 
+// 
+// 		// Artillery Tower
+// 		CCSprite* artilleryTowerMenuNormal = CCSprite::createWithSpriteFrameName("main_icons_0003.png");
+// 		CCSprite* artilleryTowerMenuOff = CCSprite::createWithSpriteFrameName("main_icons_disabled_0003.png");
+// 		CCSprite* artilleryTowerMenuDisabled = CCSprite::createWithSpriteFrameName("main_icons_off_0003.png");
+// 
+// 		KCCMenuItemMoreFrame * artilleryTowerBtn = KCCMenuItemMoreFrame::create(
+// 			artilleryTowerMenuNormal,
+// 			artilleryTowerMenuOff,
+// 			artilleryTowerMenuDisabled,
+// 			this,
+// 			menu_selector(Tower::onTowerBuild)
+// 			);
+// 		if(! artilleryTowerBtn)
+// 			break;
+// 		artilleryTowerBtn->setTag(4);
+// 		artilleryTowerBtn->setPosition(49 + 74, -56 + 74);
+// 
 
-		KCCMenuItemMoreFrame * archerTowerBtn = KCCMenuItemMoreFrame::create(
-			archerTowerMenuNormal,
-			archerTowerMenuOff,
-			archerTowerMenuDisabled,
-			this,
-			menu_selector(Tower::onTowerBuild)
-			);
-		if(! archerTowerBtn)
-			break;
-		archerTowerBtn->setTag(1);
-		archerTowerBtn->setPosition(-49 + 74, 56 + 74);
-		// Barrack Tower
-		CCSprite* barrackTowerMenuNormal = CCSprite::createWithSpriteFrameName("main_icons_0002.png");
-		CCSprite* barrackTowerMenuOff = CCSprite::createWithSpriteFrameName("main_icons_disabled_0002.png");
-		CCSprite* barrackTowerMenuDisabled = CCSprite::createWithSpriteFrameName("main_icons_off_0002.png");
-
-		KCCMenuItemMoreFrame * barrackTowerBtn = KCCMenuItemMoreFrame::create(
-			barrackTowerMenuNormal,
-			barrackTowerMenuOff,
-			barrackTowerMenuDisabled,
-			this,
-			menu_selector(Tower::onTowerBuild)
-			);
-		if(! barrackTowerBtn)
-			break;
-		barrackTowerBtn->setTag(2);
-		barrackTowerBtn->setPosition(49 + 74, 56 + 74);
+		
 
 
-		//Mage Tower
-		CCSprite* mageTowerMenuNormal = CCSprite::createWithSpriteFrameName("main_icons_0003.png");
-		CCSprite* mageTowerMenuOff = CCSprite::createWithSpriteFrameName("main_icons_disabled_0003.png");
-		CCSprite* mageTowerMenuDisabled = CCSprite::createWithSpriteFrameName("main_icons_off_0003.png");
-
-		KCCMenuItemMoreFrame * mageTowerBtn = KCCMenuItemMoreFrame::create(
-			mageTowerMenuNormal,
-			mageTowerMenuOff,
-			mageTowerMenuDisabled,
-			this,
-			menu_selector(Tower::onTowerBuild)
-			);
-		if(! mageTowerBtn)
-			break;
-		mageTowerBtn->setTag(3);
-		mageTowerBtn->setPosition(-49 + 74, -56 + 74);
-
-
-		// Artillery Tower
-		CCSprite* artilleryTowerMenuNormal = CCSprite::createWithSpriteFrameName("main_icons_0003.png");
-		CCSprite* artilleryTowerMenuOff = CCSprite::createWithSpriteFrameName("main_icons_disabled_0003.png");
-		CCSprite* artilleryTowerMenuDisabled = CCSprite::createWithSpriteFrameName("main_icons_off_0003.png");
-
-		KCCMenuItemMoreFrame * artilleryTowerBtn = KCCMenuItemMoreFrame::create(
-			artilleryTowerMenuNormal,
-			artilleryTowerMenuOff,
-			artilleryTowerMenuDisabled,
-			this,
-			menu_selector(Tower::onTowerBuild)
-			);
-		if(! artilleryTowerBtn)
-			break;
-		artilleryTowerBtn->setTag(4);
-		artilleryTowerBtn->setPosition(49 + 74, -56 + 74);
-
-
-		this->mMenu = TowerMenu::create();
-		this->mMenu->setPosition(CCPoint(this->getContentSize().width / 2, this->getContentSize().height / 2));
-		if (! this->mMenu)
-		{
-			break;
-		}
-		this->mMenu->setVisible(true);
-		this->addChild(this->mMenu);
+		//this->getParent()->addChild(this->mMenu);
 
 
 		//	this->_winSize = CCDirector::sharedDirector()->getWinSize();
 
-	} while (false);
+	//} while (false);
 	// animation sequence
 	// 	this->mShooterAnimationSequence = CCSequence::create(
 	// 		CCAnimate::create(TowerInformation::GetInstance()->GetShooterAnimation(TOWER_SHOOTER_TYPE::Shooter_Mage_LV_1To3_Down)),

@@ -33,4 +33,22 @@ static CCAnimation* addAnimationWithFramesToCache(const char* textureFileName, c
 	return animation;
 }  
 
+static CCRect GetTouchableRect(CCNode* node)
+{
+	CCSize size = node->getContentSize();
+	CCPoint pos = node->getPosition();
+
+	CCRect rect = CCRect(pos.x - size.width / 2, pos.y - size.height / 2, size.width, size.height);
+	return rect;
+}
+
+
+static bool isSpriteTouched(cocos2d::CCSprite* sprite, cocos2d::CCTouch* touch)
+{
+	CCPoint touchPointInNodeSpace = sprite->convertTouchToNodeSpace(touch);
+	CCSize size = sprite->getContentSize();
+	CCRect rect = CCRect(0, 0, size.width, size.height);
+	bool isTouched = rect.containsPoint(touchPointInNodeSpace);
+	return isTouched;
+}
 #endif
