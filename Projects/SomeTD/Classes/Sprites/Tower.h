@@ -3,9 +3,13 @@
 #define _TOWER_H_
 
 #include "cocos2d.h"
+#include "Bullet.h"
+#include "../Model/Enumeration.h"
 using namespace cocos2d;
 
 //Tower class
+
+
 class Tower : public CCSprite , public CCTouchDelegate
 {
 
@@ -18,7 +22,6 @@ public:
 
 public:
 public:
-	void myInit();//自定义初始化函数
 	virtual ~Tower(){}
 
 	//重写触屏相关函数----
@@ -37,15 +40,23 @@ public:
 
 public:
 	//Menu
-	void onTowerBuild(CCObject* pSender);
-	void onTowerUpgrade(CCObject* pSender);
+	void onMenuSelected(int type);
+	void loadResource(eTower_Terrain terrain);//自定义初始化函数
+
 private:
-	int mTowerType ;
-	int mShooterTypeUp;
-	int mShooterTypeUpPart2;
-	int mShooterTypeDown;
-	int mShooterTypeDownPart2;
-	int mTerrainType;
+
+	void BuildTower();
+	void showPreivew(bool isShow);
+	void showRange(bool isShow);
+
+private:
+	eTower mTowerType ;
+	eTower_Shooter mShooterTypeUp;
+	eTower_Shooter mShooterTypeUpPart2;
+	eTower_Shooter mShooterTypeDown;
+	eTower_Shooter mShooterTypeDownPart2;
+	eTower_Terrain mTerrainType;
+	eTower_Preview mPreviewType;
 	
 	//CCSequence* mShooterAnimationSequence;
 	//CCSequence* mTowerAnimationSequence;
@@ -62,6 +73,15 @@ private:
 	CCPoint _targetLastPosition;
 	CCSprite* _target;
 	char temp[256];
+	Bullet* testBullet;
+	bool canFire;
 };
+
+
+
+typedef void (Tower::*SEL_MenuTouchedFunc)(int);
+
+#define towerMenuCallFunc(func) (SEL_MenuTouchedFunc)(&func)
+
 
 #endif

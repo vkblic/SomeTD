@@ -89,7 +89,7 @@ bool HelloWorld::init()
 		cache->addSpriteFramesWithFile("gui_menu_sprite_3.plist");
 		
 		//Tower information
-		TowerInformation::GetInstance()->LoadConfig(cache);
+		TowerInformation::getInstance()->LoadConfig(cache);
 
 
 		// Tower
@@ -98,6 +98,7 @@ bool HelloWorld::init()
 		int towerY = tower1->valueForKey("y")->intValue();
 
 		this->mTower = Tower::create();
+		this->mTower->loadResource(eTower_Terrain::Terrain_Build_DarkGray);
 		this->mTower->setPosition(CCPoint(towerX, towerY));
 		this->addChild(this->mTower);
 

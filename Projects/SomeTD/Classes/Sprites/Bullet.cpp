@@ -16,7 +16,7 @@ Bullet* Bullet::create(float speed, CCSprite* target, const char* spName)
 	{
 		bullte->myInit(speed, target);
 		bullte->autorelease();
-
+		CCLog("Bullte: %d", bullte->retainCount());
 		return bullte;
 	}
 	CC_SAFE_DELETE(bullte);
@@ -69,6 +69,7 @@ void Bullet::reuse()
 {
 	this->scheduleUpdate();
 	this->setVisible(true);
+	this->setDisplayFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("magebolt_0002.png"));
 }
 
 

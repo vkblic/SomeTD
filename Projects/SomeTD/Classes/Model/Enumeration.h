@@ -1,4 +1,4 @@
-﻿// 
+// 
 //  Enumeration.h
 //  MyMoonWarriors
 //
@@ -40,7 +40,7 @@ enum ATTACK_MODE
 };
 
 //Tower
-enum TOWER_TYPE
+enum eTower
 {
 	Tower_Mage_LV1,
 	Tower_Mage_LV2,
@@ -48,10 +48,32 @@ enum TOWER_TYPE
 	Tower_Mage_LV4_Arcane,
 	Tower_Mage_LV4_Sorcerer,
 	Tower_ArcherTower,
-	TOWER_Max,
+	Tower_Max,
 	Tower_None
 };
-enum TOWER_SHOOTER_TYPE
+
+enum eTower_Preview
+{
+	Tower_Preview_Archer,
+	Tower_Preview_Barrack,
+	Tower_Preview_Mage,
+	Tower_Preview_Artillery,
+	Tower_Preview_Max,
+	Tower_Preview_None
+};
+
+enum eTower_Constructing
+{
+	Tower_Constructing_Archer,
+	Tower_Constructing_Barrack,
+	Tower_Constructing_Mage,
+	Tower_Constructing_Artillery,
+	Tower_Constructing_Max,
+	Tower_Constructing_None
+};
+
+
+enum eTower_Shooter
 {
 	Shooter_Mage_LV_1To3_Up,			
 	Shooter_Mage_LV_1To3_Up_Part2,
@@ -69,11 +91,11 @@ enum TOWER_SHOOTER_TYPE
 	Shooter_Mage_LV4_Sorcerer_Magic_Up_Part2,
 	Shooter_Mage_LV4_Sorcerer_Magic_Down,
 	Shooter_Mage_LV4_Sorcerer_Magic_Down_Part2,
-	SHOOTER_Max,
-	SHOOTER_NONE
+	Shooter_Max,
+	Shooter_None
 };
 
-enum TOWER_TERRAIN_TYPE
+enum eTower_Terrain
 {
 	Terrain_Build_Yellow,
 	Terrain_Build_Gray,

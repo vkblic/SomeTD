@@ -12,7 +12,7 @@ static inline ccVertex2F vertex2FAdd(const ccVertex2F& v1, const ccVertex2F& v2)
 	return v;
 }
 
-static inline ccVertex2F vertex2FMul(ccVertex2F v1, float m)
+static inline ccVertex2F vertex2FMul(ccVertex2F& v1, float m)
 {
 	ccVertex2F v = { (v1).x * m, (v1).y = (v1).y * m };
 	return v;
