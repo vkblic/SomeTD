@@ -13,7 +13,7 @@ static CCAnimation* addAnimationWithFramesToCache(const char* textureFileName, c
 	CCSpriteFrame* preFrame;
 	for(int i = startIndex; i <= count; i++)  
 	{
-		sprintf_s(buffer, bufferLen, "%s_%.4d.png", textureFileName, i);
+		sprintf(buffer, "%s_%.4d.png", textureFileName, i);
 		CCSpriteFrame* frame = cache->spriteFrameByName(buffer); 
 		if(frame == NULL)
 			frame = preFrame;
