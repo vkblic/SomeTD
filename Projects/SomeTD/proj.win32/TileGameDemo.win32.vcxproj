@@ -52,7 +52,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>.;..\Classes;$(SolutionDir)Cocos2dx\cocos2dx;$(SolutionDir)Cocos2dx\cocos2dx\include;$(SolutionDir)Cocos2dx\cocos2dx\kazmath\include;$(SolutionDir)Cocos2dx\cocos2dx\platform\win32;$(SolutionDir)Cocos2dx\cocos2dx\platform\third_party\win32;$(SolutionDir)Cocos2dx\cocos2dx\platform\third_party\win32\OGLES;$(SolutionDir)Cocos2dx\external;$(SolutionDir)Cocos2dx\CocosDenshion\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..\Classes;$(SolutionDir)libs\cocos2dx;$(SolutionDir)libs\cocos2dx\include;$(SolutionDir)libs\cocos2dx\kazmath\include;$(SolutionDir)libs\cocos2dx\platform\win32;$(SolutionDir)libs\cocos2dx\platform\third_party\win32;$(SolutionDir)libs\cocos2dx\platform\third_party\win32\OGLES;$(SolutionDir)libs\external;$(SolutionDir)libs\CocosDenshion\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader />
       <WarningLevel>Level3</WarningLevel>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -175,16 +175,16 @@
     <None Include="..\Resources\TileMap.tmx.bak" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\cocos2dx\cocos2dx\proj.win32\cocos2d.vcxproj">
+    <ProjectReference Include="..\..\..\libs\cocos2dx\proj.win32\cocos2d.vcxproj">
       <Project>{98a51ba8-fc3a-415b-ac8f-8c7bd464e93e}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\cocos2dx\CocosDenshion\proj.win32\CocosDenshion.vcxproj">
+    <ProjectReference Include="..\..\..\libs\CocosDenshion\proj.win32\CocosDenshion.vcxproj">
       <Project>{f8edd7fa-9a51-4e80-baeb-860825d2eac6}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Cocos2dx\extensions\proj.win32\libExtensions.vcxproj">
+    <ProjectReference Include="..\..\..\libs\extensions\proj.win32\libExtensions.vcxproj">
       <Project>{21b2c324-891f-48ea-ad1a-5ae13de12e28}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Cocos2dx\external\Box2D\proj.win32\Box2D.vcxproj">
+    <ProjectReference Include="..\..\..\libs\external\Box2D\proj.win32\Box2D.vcxproj">
       <Project>{929480e7-23c0-4df6-8456-096d71547116}</Project>
     </ProjectReference>
   </ItemGroup>
