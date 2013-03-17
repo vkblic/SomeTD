@@ -48,3 +48,10 @@
 /libs/scripting/lua/proj.win32/Debug.win32
 
 /SomeTD.v11.suo
+
+/*.opensdf
+
+/Projects/KGUI/proj.win32/Debug.win32/*.tlog
+
+/Projects/KGUI/proj.win32/Debug.win32
+/Projects/KGUI/proj.win32/*.user
