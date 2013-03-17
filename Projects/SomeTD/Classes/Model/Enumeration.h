@@ -8,37 +8,6 @@
 #ifndef ENUMERATION_h
 #define ENUMERATION_h
 
-
-enum BULLET_TYPE
-{
-	TYPE1,
-	TYPE2
-};
-
-
-//enemy show time
-enum ENEMY_SHOW_COUNT
-{
-	Repeate, //
-	Once,	//just one time
-	Twice
-};
-
-//enemy action type
-enum ENEMY_ACTION_TYPE
-{
-	ATTACK,		//stay on the top of the screen with attack
-	VERTICAL,	//No attack
-	HORIZONTAL,	//No attack
-	OVERLAP	
-};
-
-enum ATTACK_MODE
-{
-	NORMAL,
-	TSUIHIKIDAN
-};
-
 //Tower
 enum eTower
 {

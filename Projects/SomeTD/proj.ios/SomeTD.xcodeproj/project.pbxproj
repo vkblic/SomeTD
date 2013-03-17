@@ -51,7 +51,6 @@
 		AC12B54D16F0D23B0024EAC6 /* yeti.png in Resources */ = {isa = PBXBuildFile; fileRef = AC12B52E16F0D23B0024EAC6 /* yeti.png */; };
 		AC12C57A16F0D33D0024EAC6 /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC12C56416F0D33D0024EAC6 /* AppDelegate.cpp */; };
 		AC12C57B16F0D33D0024EAC6 /* HelloWorldScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC12C56616F0D33D0024EAC6 /* HelloWorldScene.cpp */; };
-		AC12C57C16F0D33D0024EAC6 /* InfoData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC12C56D16F0D33D0024EAC6 /* InfoData.cpp */; };
 		AC12C57D16F0D33D0024EAC6 /* TowerInformation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC12C56F16F0D33D0024EAC6 /* TowerInformation.cpp */; };
 		AC12C57E16F0D33D0024EAC6 /* Bullet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC12C57216F0D33D0024EAC6 /* Bullet.cpp */; };
 		AC12C57F16F0D33D0024EAC6 /* Enemy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC12C57416F0D33D0024EAC6 /* Enemy.cpp */; };
@@ -303,8 +302,6 @@
 		AC12C56916F0D33D0024EAC6 /* CommonHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonHelpers.h; sourceTree = "<group>"; };
 		AC12C56A16F0D33D0024EAC6 /* SpriteHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpriteHelpers.h; sourceTree = "<group>"; };
 		AC12C56C16F0D33D0024EAC6 /* Enumeration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = Enumeration.h; sourceTree = "<group>"; };
-		AC12C56D16F0D33D0024EAC6 /* InfoData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InfoData.cpp; sourceTree = "<group>"; };
-		AC12C56E16F0D33D0024EAC6 /* InfoData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = InfoData.h; sourceTree = "<group>"; };
 		AC12C56F16F0D33D0024EAC6 /* TowerInformation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TowerInformation.cpp; sourceTree = "<group>"; };
 		AC12C57016F0D33D0024EAC6 /* TowerInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TowerInformation.h; sourceTree = "<group>"; };
 		AC12C57216F0D33D0024EAC6 /* Bullet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Bullet.cpp; sourceTree = "<group>"; };
@@ -894,8 +891,6 @@
 			isa = PBXGroup;
 			children = (
 				AC12C56C16F0D33D0024EAC6 /* Enumeration.h */,
-				AC12C56D16F0D33D0024EAC6 /* InfoData.cpp */,
-				AC12C56E16F0D33D0024EAC6 /* InfoData.h */,
 				AC12C56F16F0D33D0024EAC6 /* TowerInformation.cpp */,
 				AC12C57016F0D33D0024EAC6 /* TowerInformation.h */,
 			);
@@ -1875,7 +1870,6 @@
 				AC12B50D16F0D0580024EAC6 /* RootViewController.mm in Sources */,
 				AC12C57A16F0D33D0024EAC6 /* AppDelegate.cpp in Sources */,
 				AC12C57B16F0D33D0024EAC6 /* HelloWorldScene.cpp in Sources */,
-				AC12C57C16F0D33D0024EAC6 /* InfoData.cpp in Sources */,
 				AC12C57D16F0D33D0024EAC6 /* TowerInformation.cpp in Sources */,
 				AC12C57E16F0D33D0024EAC6 /* Bullet.cpp in Sources */,
 				AC12C57F16F0D33D0024EAC6 /* Enemy.cpp in Sources */,

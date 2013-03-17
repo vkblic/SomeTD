@@ -2,7 +2,6 @@
 #include "../Sprites/TowerMenu.h"
 #include "../Helper/SpriteHelpers.h"
 #include "../Helper/CommonHelpers.h"
-#include "../Model/InfoData.h"
 #include "../Model/TowerInformation.h"
 using namespace cocos2d;
 
