@@ -79,9 +79,6 @@
     <ClInclude Include="..\Classes\Helper\SpriteHelpers.h">
       <Filter>Helper</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Model\InfoData.h">
-      <Filter>Model</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\Model\Enumeration.h">
       <Filter>Model</Filter>
     </ClInclude>
@@ -108,9 +105,6 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="..\Classes\Sprites\Bullet.cpp">
       <Filter>Sprites</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Model\InfoData.cpp">
-      <Filter>Model</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Sprites\Tower.cpp">
       <Filter>Sprites</Filter>

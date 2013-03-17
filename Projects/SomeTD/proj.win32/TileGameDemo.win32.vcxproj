@@ -143,7 +143,6 @@
     <ClInclude Include="..\Classes\Helper\CommonHelpers.h" />
     <ClInclude Include="..\Classes\Helper\SpriteHelpers.h" />
     <ClInclude Include="..\Classes\Model\Enumeration.h" />
-    <ClInclude Include="..\Classes\Model\InfoData.h" />
     <ClInclude Include="..\Classes\Model\TowerInformation.h" />
     <ClInclude Include="..\Classes\Sprites\Bullet.h" />
     <ClInclude Include="..\Classes\Sprites\Enemy.h" />
@@ -155,7 +154,6 @@
   <ItemGroup>
     <ClCompile Include="..\Classes\App\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\App\HelloWorldScene.cpp" />
-    <ClCompile Include="..\Classes\Model\InfoData.cpp" />
     <ClCompile Include="..\Classes\Model\TowerInformation.cpp" />
     <ClCompile Include="..\Classes\Sprites\Bullet.cpp" />
     <ClCompile Include="..\Classes\Sprites\Enemy.cpp" />
