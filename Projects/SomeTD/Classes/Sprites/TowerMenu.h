@@ -11,21 +11,10 @@ class TowerMenu : public CCSprite , public CCTouchDelegate
 public:	 
 	enum eMenu_Frame
 	{
+		//common item
 		Lock_Normal,
 		Lock_Off,
 		Lock_Disabled,
-		Archer_Normal,
-		Archer_Off,
-		Archer_Disabled,
-		Barrack_Normal,
-		Barrack_Off,
-		Barrack_Disabled,
-		Mage_Normal,
-		Mage_Off,
-		Mage_Disabled,
-		Artillery_Normal,
-		Artillery_Off,
-		Artillery_Disabled,
 		Comfirm_Normal,
 		Confirm_Disabled,
 		Upgrade_Normal,
@@ -34,9 +23,57 @@ public:
 		Sale_Normal,
 		Sale_Off,
 		Sale_Confirm,
-
 		Range_Circle,
 		Rally_Circle,
+
+
+
+		// archer tower
+		Archer_Normal,
+		Archer_Off,
+		Archer_Disabled,
+		Archer_Lv4_Left_Normal,
+		Archer_Lv4_Left_Off,
+		Archer_Lv4_Left_Confirm,
+		Archer_Lv4_Rightr_Normal,
+		Archer_Lv4_Rightr_Off,
+		Archer_Lv4_Rightr_Confirm,
+
+		// barrack tower
+		Barrack_Normal,
+		Barrack_Off,
+		Barrack_Disabled,
+		Barrack_Lv4_Left_Normal,
+		Barrack_Lv4_Left_Off,
+		Barrack_Lv4_Left_Confirm,
+		Barrack_Lv4_Rightr_Normal,
+		Barrack_Lv4_Rightr_Off,
+		Barrack_Lv4_Rightr_Confirm,
+
+		// mage tower
+		Mage_Normal,
+		Mage_Off,
+		Mage_Disabled,
+		Mage_Lv4_Arcane_Normal,
+		Mage_Lv4_Arcane_Off,
+		Mage_Lv4_Arcane_Confirm,
+		Mage_Lv4_Sorcerer_Normal,
+		Mage_Lv4_Sorcerer_Off,
+		Mage_Lv4_Sorcerer_Confirm,
+
+		// artillery tower
+		Artillery_Normal,
+		Artillery_Off,
+		Artillery_Disabled,
+		Artillery_Lv4_Left_Normal,
+		Artillery_Lv4_Left_Off,
+		Artillery_Lv4_Left_Confirm,
+		Artillery_Lv4_Rightr_Normal,
+		Artillery_Lv4_Rightr_Off,
+		Artillery_Lv4_Rightr_Confirm,
+
+
+		
 		Menu_Frame_Max
 	};
 	enum eMenu_Sprite
@@ -93,6 +130,11 @@ public:
 		UpgradeConfirmed		= UpgradeChecked << 16,
 		SpecialLeftConfirmed	= SpecialLeftChecked << 16,
 		SpecialRightConfirmed	= SpecialRightChecked << 16,
+
+
+		//
+		Checker = 0xFFFF0000
+
 	};
 
 
@@ -128,7 +170,7 @@ public:
 private:
 	void resetFrame();
 	void hideMenu();
-	
+	void onMenuHided();
 	//return current touched item, if non-touch, return NULL.
 	CCSprite* getTouchedItem(CCTouch* touch ) ;
 

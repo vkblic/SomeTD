@@ -83,4 +83,9 @@ void TowerInformation::LoadConfig(CCSpriteFrameCache* spriteFrameCache)
 	this->mTerrainFrame[eTower_Terrain::Terrain_MageLv1_3_Yellow] = spriteFrameCache->spriteFrameByName("terrain_mage_0001.png");
 	this->mTerrainFrame[eTower_Terrain::Terrain_MageLv1_3_Gray] = spriteFrameCache->spriteFrameByName("terrain_mage_0002.png");
 	this->mTerrainFrame[eTower_Terrain::Terrain_MageLv1_3_DarkGray] = spriteFrameCache->spriteFrameByName("terrain_mage_0003.png");
+
+
+	//Range
+	mRangeFrame = spriteFrameCache->spriteFrameByName("range_circle.png");
+
 }

@@ -126,6 +126,7 @@
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h" />
     <ClInclude Include="..\Classes\HelloWorldScene.h" />
+    <ClInclude Include="..\Classes\KUIControls\CCGrid.h" />
     <ClInclude Include="..\Classes\libs\tinyxml2.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="resource.h" />
@@ -133,6 +134,7 @@
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
+    <ClCompile Include="..\Classes\KUIControls\CCGrid.cpp" />
     <ClCompile Include="..\Classes\libs\tinyxml2.cpp" />
     <ClCompile Include="..\Classes\libs\xmltest.cpp" />
     <ClCompile Include="main.cpp" />

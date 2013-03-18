@@ -32,10 +32,12 @@ public:
 	{
 		return mTowerFrame[type];
 	}
+
 	CCSpriteFrame* getShooterFrame(eTower_Shooter type)
 	{
 		return mShooterFrame[type];
 	}
+
 	CCSpriteFrame* getTerrainFrame(eTower_Terrain type)
 	{
 		return mTerrainFrame[type];
@@ -52,12 +54,16 @@ public:
 		return mTowerConstructingFrame[type];
 	}
 
-
+	CCSpriteFrame* getTowerRange()
+	{
+		return mRangeFrame;
+	}
 
 	CCAnimation* getTowerAnimation(eTower type)
 	{
 		return mTowerAnimation[type];
 	}
+
 	CCAnimation* getShooterAnimation(eTower_Shooter type)
 	{
 		return mShooterAnimation[type];
@@ -77,6 +83,7 @@ private:
 	std::vector<CCSpriteFrame*> mTerrainFrame;
 	std::vector<CCSpriteFrame*> mTowerPreviewFrame;
 	std::vector<CCSpriteFrame*> mTowerConstructingFrame;
+	CCSpriteFrame* mRangeFrame;
 	eTower towerType;
 };
 

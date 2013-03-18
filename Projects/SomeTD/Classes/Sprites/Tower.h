@@ -46,8 +46,10 @@ public:
 private:
 
 	void BuildTower();
-	void showPreivew(bool isShow);
+	void upgradeTower();
+	void showPreivew(bool isShow, eTower_Preview towerType);
 	void showRange(bool isShow);
+	//void getNextLv(eTower)
 
 private:
 	eTower mTowerType ;
@@ -56,7 +58,7 @@ private:
 	eTower_Shooter mShooterTypeDown;
 	eTower_Shooter mShooterTypeDownPart2;
 	eTower_Terrain mTerrainType;
-	eTower_Preview mPreviewType;
+	//eTower_Preview mPreviewType;
 	
 	//CCSequence* mShooterAnimationSequence;
 	//CCSequence* mTowerAnimationSequence;
@@ -67,6 +69,7 @@ private:
 	CCSprite* mShooter;
 	CCSprite* mTerrain;
 	CCSprite* mTarget;
+	CCSprite* mRange;
 private:
 
 	float _speed;

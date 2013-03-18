@@ -31,7 +31,7 @@ Tower* Tower::create()
 bool Tower::ccTouchBegan(CCTouch* touch, CCEvent* event)
 {
 
-	CCLog("Tower::ccTouchBegan(CCTouch* touch, CCEvent* event)");
+	//CCLog("Tower::ccTouchBegan(CCTouch* touch, CCEvent* event)");
 	// 	CCPoint touchPointUI = touch->getLocationInView();
 	// 
 	// 	CCLog("UI location, x: %f, y: %f", touchPointUI.x, touchPointUI.y);
@@ -154,6 +154,12 @@ void Tower::loadResource(eTower_Terrain terrain)
 	this->mTerrain->setPosition(CCPoint(94/2, 30));
 	this->setOpacity(0);
 
+	//Range Sprite
+	this->mRange = CCSprite::createWithSpriteFrame(towerInfo->getTowerRange());
+	this->addChild(this->mRange);
+	this->mRange->setPosition(CCPoint(towerSize.width / 2, towerSize.height /2));
+	this->mRange->setVisible(false);
+
 
 	//test bullet
 
@@ -263,41 +269,45 @@ void Tower::onMenuSelected(int type)
 	{
 	case TowerMenu::NonTouched:
 		{
-			this->showPreivew(false);
+			CCLog("TowerMenu::NonTouched");
+			this->showPreivew(false, Tower_Preview_None);
 			this->showRange(false);
 		}
 		break;
 	case TowerMenu::ArcherChecked:
 		{
-			this->mPreviewType = Tower_Preview_Archer;
-			this->showPreivew(true);
+			CCLog("TowerMenu::ArcherChecked");
+			this->showPreivew(true, Tower_Preview_Archer);
 			this->showRange(true);
 		}
 		break;
 	case TowerMenu::ArcherConfirmed:
 		{
-
+			CCLog("TowerMenu::ArcherConfirmed");
 		}
 		break;
 	case TowerMenu::BarrackChecked:
 		{
-			this->mPreviewType = Tower_Preview_Barrack;
-			this->showPreivew(true);
+			CCLog("TowerMenu::BarrackChecked");
+			this->showPreivew(true, Tower_Preview_Barrack);
 			this->showRange(true);
 		}
 		break;
 	case TowerMenu::BarrackComfirmed:
-		CCLog("BarrackComfirmed");
+		{
+			CCLog("TowerMenu::BarrackComfirmed");
+		}
 		break;
 	case TowerMenu::MageChecked:
 		{
-			this->mPreviewType = Tower_Preview_Mage;
-			this->showPreivew(true);
+			CCLog("TowerMenu::MageChecked");
+			this->showPreivew(true, Tower_Preview_Mage);
 			this->showRange(true);
 		}
 		break;
 	case TowerMenu::MageConfirmed:
 		{
+			CCLog("TowerMenu::MageConfirmed");
 			this->mTowerType = eTower::Tower_Mage_LV1;
 			this->mShooterTypeUp = eTower_Shooter::Shooter_Mage_LV_1To3_Up;
 			this->mShooterTypeUpPart2 = eTower_Shooter::Shooter_Mage_LV_1To3_Up_Part2;
@@ -308,19 +318,27 @@ void Tower::onMenuSelected(int type)
 		break;
 	case TowerMenu::ArtilleryChecked:
 		{
-			this->mPreviewType = Tower_Preview_Artillery;
-			this->showPreivew(true);
+			CCLog("TowerMenu::ArtilleryChecked");
+			this->showPreivew(true, Tower_Preview_Artillery);
 			this->showRange(true);
 		}
 		break;
 	case TowerMenu::ArtilleryConfirmed:
-		CCLog("ArtilleryChecked");
+		{
+			CCLog("TowerMenu::ArtilleryConfirmed");
+		}
 		break;
 	case TowerMenu::UpgradeChecked:
-		CCLog("UpgradeChecked");
+		{
+			CCLog("TowerMenu::UpgradeChecked");
+			this->showRange(true);
+		}
 		break;
 	case TowerMenu::UpgradeConfirmed:
-		CCLog("UpgradeConfirmed");
+		{
+			CCLog("TowerMenu::UpgradeConfirmed");
+			this->upgradeTower();
+		}
 		break;
 	case TowerMenu::SpecialLeftChecked:
 		CCLog("SpecialLeftChecked");
@@ -343,9 +361,8 @@ void Tower::onMenuSelected(int type)
 void Tower::BuildTower()
 {
 	TowerInformation* tInfo = TowerInformation::getInstance();
-	this->setDisplayFrame(tInfo->getTowerFrame((eTower)this->mTowerType));
+	this->setDisplayFrame(tInfo->getTowerFrame(this->mTowerType));
 	this->setOpacity(255);
-	this->mPreviewType = eTower_Preview::Tower_Preview_None;
 	if(this->mShooter)
 	{
 		this->mShooter->release();
@@ -357,22 +374,75 @@ void Tower::BuildTower()
 	this->canFire = true;
 }
 
-void Tower::showPreivew(bool isShow)
+
+void Tower::upgradeTower()
 {
-	if(!isShow )
+
+	switch (this->mTowerType)
 	{
-		if(this->mPreviewType != eTower_Preview::Tower_Preview_None)
+	case eTower::Tower_Mage_LV1:
+		{
+			this->mTowerType = eTower::Tower_Mage_LV2;
+		}
+		break;
+	case eTower::Tower_Mage_LV2:
+		{
+			this->mTowerType = eTower::Tower_Mage_LV3;
+		}
+		break;	
+	case eTower::Tower_Mage_LV3:
+		{
+			this->mTowerType = eTower::Tower_Mage_LV1;
+		}
+		break;
+	default:
+		break;
+	}
+
+
+
+
+	TowerInformation* tInfo = TowerInformation::getInstance();
+	this->setDisplayFrame(tInfo->getTowerFrame(this->mTowerType));
+	this->setOpacity(255);
+
+	// special tower with 
+	if( this->mTowerType & 0xFFFF0000)
+	{
+		if(this->mShooter)
+		{
+			this->mShooter->release();
+		}
+
+		this->mShooter = CCSprite::createWithSpriteFrame(tInfo->getShooterFrame((eTower_Shooter)this->mShooterTypeDown));
+		this->addChild(this->mShooter, 1);
+		this->mShooter->setPosition(CCPoint(48, 64));
+		this->canFire = true;
+	}
+
+}
+void Tower::showPreivew(bool isShow, eTower_Preview towerType)
+{
+	if(!isShow)
+	{
+		if(this->mTowerType)
+		{
+			TowerInformation* towerInfo = TowerInformation::getInstance();
+			this->setDisplayFrame(towerInfo->getTowerFrame(this->mTowerType));
+			this->setOpacity(255);
+		}
+		else
 			this->setOpacity(0);
 		return;
 	}
 	TowerInformation* towerInfo = TowerInformation::getInstance();
-	this->setDisplayFrame(towerInfo->getTowerPreviewFrame((eTower_Preview)this->mPreviewType));
+	this->setDisplayFrame(towerInfo->getTowerPreviewFrame(towerType));
 	this->setOpacity(180);
 }
 
 void Tower::showRange(bool isShow)
 {
-
+	this->mRange->setVisible(isShow);
 }
 
 

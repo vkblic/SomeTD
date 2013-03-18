@@ -1,14 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="source">
-      <UniqueIdentifier>{7232d7cc-58c4-4c5f-9fe9-e673e8384b5f}</UniqueIdentifier>
-      <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm</Extensions>
-    </Filter>
-    <Filter Include="include">
-      <UniqueIdentifier>{7061eddd-c9b6-4d2f-bb39-0053db87a75a}</UniqueIdentifier>
-      <Extensions>h;hpp;hxx;hm;inl;inc</Extensions>
-    </Filter>
     <Filter Include="resource">
       <UniqueIdentifier>{235a9452-f273-43be-a283-2e458875c76b}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;jpg;jpeg;jpe;png;manifest</Extensions>
@@ -16,6 +8,53 @@
     <Filter Include="libs">
       <UniqueIdentifier>{939bb536-63cc-4b4e-832d-9c33c0c119bf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="App">
+      <UniqueIdentifier>{7061eddd-c9b6-4d2f-bb39-0053db87a75a}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc</Extensions>
+    </Filter>
+    <Filter Include="KUIControls">
+      <UniqueIdentifier>{4f6df25d-91f6-4dd4-b221-7356a126512c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="resource.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="main.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\AppDelegate.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\HelloWorldScene.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\libs\tinyxml2.h">
+      <Filter>libs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\KUIControls\CCGrid.h">
+      <Filter>KUIControls</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Classes\libs\tinyxml2.cpp">
+      <Filter>libs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\libs\xmltest.cpp">
+      <Filter>libs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\AppDelegate.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\HelloWorldScene.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\KUIControls\CCGrid.cpp">
+      <Filter>KUIControls</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\KGUI.ico">
@@ -26,39 +65,5 @@
     <ResourceCompile Include="KGUI.rc">
       <Filter>resource</Filter>
     </ResourceCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="resource.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="main.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\AppDelegate.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\HelloWorldScene.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\libs\tinyxml2.h">
-      <Filter>libs</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\AppDelegate.cpp">
-      <Filter>source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\HelloWorldScene.cpp">
-      <Filter>source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\libs\tinyxml2.cpp">
-      <Filter>libs</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\libs\xmltest.cpp">
-      <Filter>libs</Filter>
-    </ClCompile>
   </ItemGroup>
 </Project>

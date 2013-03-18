@@ -11,14 +11,19 @@
 //Tower
 enum eTower
 {
-	Tower_Mage_LV1,
-	Tower_Mage_LV2,
-	Tower_Mage_LV3,
-	Tower_Mage_LV4_Arcane,
-	Tower_Mage_LV4_Sorcerer,
-	Tower_ArcherTower,
+	Tower_None = 0x0,
+
+	// low 16bit
+	Tower_Mage_LV1 = 0x0001,
+	Tower_Mage_LV2 = 0x0002,
+	Tower_Mage_LV3 = 0x0004,
+
+	// high 16bit
+	Tower_Mage_LV4_Arcane = 0x00010000,
+	Tower_Mage_LV4_Sorcerer = 0x00020000,
+
 	Tower_Max,
-	Tower_None
+	
 };
 
 enum eTower_Preview
