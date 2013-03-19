@@ -9,6 +9,7 @@
 #include "TowerMenu.h"
 #include "../Helper/CommonHelpers.h"
 #include "../Model/TowerInformation.h"
+#include "../Managers/EnemyManager.h"
 #include "Bullet.h"
 using namespace cocos2d;
 Tower* Tower::create()
@@ -129,8 +130,10 @@ void Tower::onExit()
 	CCSprite::onExit();
 }
 
-void Tower::loadResource(eTower_Terrain terrain)
+void Tower::myInit(eTower_Terrain terrain)
 {
+	this->mTarget = NULL;
+
 	this->mTowerType = eTower::Tower_None;
 	this->mShooterTypeUp = eTower_Shooter::Shooter_None;
 	this->mShooterTypeUpPart2 = eTower_Shooter::Shooter_None;
@@ -160,104 +163,10 @@ void Tower::loadResource(eTower_Terrain terrain)
 	this->mRange->setPosition(CCPoint(towerSize.width / 2, towerSize.height /2));
 	this->mRange->setVisible(false);
 
-
-	//test bullet
-
-	//Create Menu
-	// 1.1. GameSetting button 
-	// 
-	//do 
-	//{
-
-	// Archer tower
-	// 		CCSprite* archerTowerMenuNormal = CCSprite::createWithSpriteFrameName("main_icons_0001.png");
-	// 		CCSprite* archerTowerMenuOff = CCSprite::createWithSpriteFrameName("main_icons_disabled_0001.png");
-	// 		CCSprite* archerTowerMenuDisabled = CCSprite::createWithSpriteFrameName("main_icons_off_0001.png");
-	// 
-	// 		KCCMenuItemMoreFrame * archerTowerBtn = KCCMenuItemMoreFrame::create(
-	// 			archerTowerMenuNormal,
-	// 			archerTowerMenuOff,
-	// 			archerTowerMenuDisabled,
-	// 			this,
-	// 			menu_selector(Tower::onTowerBuild)
-	// 			);
-	// 		if(! archerTowerBtn)
-	// 			break;
-	// 		archerTowerBtn->setTag(1);
-	// 		archerTowerBtn->setPosition(-49 + 74, 56 + 74);
-	// 		// Barrack Tower
-	// 		CCSprite* barrackTowerMenuNormal = CCSprite::createWithSpriteFrameName("main_icons_0002.png");
-	// 		CCSprite* barrackTowerMenuOff = CCSprite::createWithSpriteFrameName("main_icons_disabled_0002.png");
-	// 		CCSprite* barrackTowerMenuDisabled = CCSprite::createWithSpriteFrameName("main_icons_off_0002.png");
-	// 
-	// 		KCCMenuItemMoreFrame * barrackTowerBtn = KCCMenuItemMoreFrame::create(
-	// 			barrackTowerMenuNormal,
-	// 			barrackTowerMenuOff,
-	// 			barrackTowerMenuDisabled,
-	// 			this,
-	// 			menu_selector(Tower::onTowerBuild)
-	// 			);
-	// 		if(! barrackTowerBtn)
-	// 			break;
-	// 		barrackTowerBtn->setTag(2);
-	// 		barrackTowerBtn->setPosition(49 + 74, 56 + 74);
-	// 
-	// 
-	// 		//Mage Tower
-	// 		CCSprite* mageTowerMenuNormal = CCSprite::createWithSpriteFrameName("main_icons_0003.png");
-	// 		CCSprite* mageTowerMenuOff = CCSprite::createWithSpriteFrameName("main_icons_disabled_0003.png");
-	// 		CCSprite* mageTowerMenuDisabled = CCSprite::createWithSpriteFrameName("main_icons_off_0003.png");
-	// 
-	// 		KCCMenuItemMoreFrame * mageTowerBtn = KCCMenuItemMoreFrame::create(
-	// 			mageTowerMenuNormal,
-	// 			mageTowerMenuOff,
-	// 			mageTowerMenuDisabled,
-	// 			this,
-	// 			menu_selector(Tower::onTowerBuild)
-	// 			);
-	// 		if(! mageTowerBtn)
-	// 			break;
-	// 		mageTowerBtn->setTag(3);
-	// 		mageTowerBtn->setPosition(-49 + 74, -56 + 74);
-	// 
-	// 
-	// 		// Artillery Tower
-	// 		CCSprite* artilleryTowerMenuNormal = CCSprite::createWithSpriteFrameName("main_icons_0003.png");
-	// 		CCSprite* artilleryTowerMenuOff = CCSprite::createWithSpriteFrameName("main_icons_disabled_0003.png");
-	// 		CCSprite* artilleryTowerMenuDisabled = CCSprite::createWithSpriteFrameName("main_icons_off_0003.png");
-	// 
-	// 		KCCMenuItemMoreFrame * artilleryTowerBtn = KCCMenuItemMoreFrame::create(
-	// 			artilleryTowerMenuNormal,
-	// 			artilleryTowerMenuOff,
-	// 			artilleryTowerMenuDisabled,
-	// 			this,
-	// 			menu_selector(Tower::onTowerBuild)
-	// 			);
-	// 		if(! artilleryTowerBtn)
-	// 			break;
-	// 		artilleryTowerBtn->setTag(4);
-	// 		artilleryTowerBtn->setPosition(49 + 74, -56 + 74);
-	// 
+	float scale = 200 / (this->mRange->getContentSize().width / 2);
+	this->mRange->setScale(scale);
 
 
-
-
-	//this->getParent()->addChild(this->mMenu);
-
-
-	//	this->_winSize = CCDirector::sharedDirector()->getWinSize();
-
-	//} while (false);
-	// animation sequence
-	// 	this->mShooterAnimationSequence = CCSequence::create(
-	// 		CCAnimate::create(TowerInformation::GetInstance()->GetShooterAnimation(TOWER_SHOOTER_TYPE::Shooter_Mage_LV_1To3_Down)),
-	// 		CCCallFuncN::create(this, callfuncN_selector(Tower::onShoot)),
-	// 		//CCAnimate::create(TowerInformation::GetInstance()->GetShooterAnimation(TOWER_SHOOTER_TYPE::Shooter_Mage_LV_1To3_Down_Part2)),
-	// 		NULL);
-	// 	this->mTowerAnimationSequence = CCSequence::create(
-	// 		CCAnimate::create(TowerInformation::GetInstance()->GetTowerAnimation(TOWER_TYPE::Tower_Mage_LV1)),
-	// 		NULL
-	// 		);
 
 
 }
@@ -372,6 +281,7 @@ void Tower::BuildTower()
 	this->addChild(this->mShooter, 1);
 	this->mShooter->setPosition(CCPoint(48, 64));
 	this->canFire = true;
+	this->scheduleUpdate();
 }
 
 
@@ -442,12 +352,60 @@ void Tower::showPreivew(bool isShow, eTower_Preview towerType)
 
 void Tower::showRange(bool isShow)
 {
-	this->mRange->setVisible(isShow);
+	this->mRange->setVisible(isShow ? true : true);
 }
 
 
 void Tower::update(float dt)
 {
+	static float dtMin = 0;
+	static float total = 0;
+	total += dt;
+// 	if (total > 20)
+// 		return ;
+	if (dtMin > 0.1)
+	{
+		//CCLog("Tower::update");
+		dtMin = 0 ;
+	}
+	else
+	{
+		dtMin += dt;
+		//return;
+	}
+	if(this->canFire)
+	{
+		if (this->mTarget == NULL)
+		{
+			auto pos = this->getPosition();
+			auto target = EnemyManager::sharedEnemyManager()->getEnemyInRange(pos, 100);
+			if (target == NULL)
+				return ;
+
+			CCLog("tower get new target");
+			this->mTarget = target;
+		}
+		this->fire();
+	}
+	else
+	{
+		if (this->mTarget == NULL)
+		{
+			return ;
+			CCLog("no target!");
+		}
+		auto pos = this->getPosition();
+		if (!EnemyManager::sharedEnemyManager()->isEnemyInRange(pos, 100, this->mTarget))
+		{
+			CCLog("target out of range!");
+			this->mTarget = NULL;
+		}
+		else
+		{
+			//CCLog("target still in range!");
+		}
+	}
+
 	// 	CCPoint pos = this->getPosition();
 	// 	//pos.y -= this->mBulletInfo->BulletSpeed * dt;
 	// 	this->setPositionY(pos.y);
@@ -488,19 +446,29 @@ void Tower::update(float dt)
 }
 
 
-void Tower::fire(CCSprite* target)
+void Tower::fire()
 {
-	this->mTarget = target;
+	CCLog("Tower::fire()");
+	this->canFire = false;
 	//this->mShooter->runAction(CCAnimate::create(TowerInformation::GetInstance()->GetShooterAnimation(TOWER_SHOOTER_TYPE::Shooter_Mage_LV_1To3_Down_Part2)));
 	TowerInformation* tInfo = TowerInformation::getInstance();
-	CCSequence* a = CCSequence::createWithTwoActions(
+	CCSequence* firecallback = CCSequence::create(
 		CCDelayTime::create(SECOND_PER_FRAME * 8 * 2),
-		CCCallFuncN::create(this, callfuncN_selector(Tower::onShoot)));
-
+		CCCallFuncN::create(this, callfuncN_selector(Tower::onShoot)),
+		CCDelayTime::create(0.5),
+		CCCallFunc::create(this, callfunc_selector(Tower::onFired)),
+		NULL
+	);
+	CCSequence* towerAnimCallback = CCSequence::create(
+		CCAnimate::create(tInfo->getTowerAnimation(this->mTowerType)),
+		NULL
+	);
 
 	CCSpawn* spawn = CCSpawn::create(
 		CCAnimate::create(tInfo->getShooterAnimation(eTower_Shooter::Shooter_Mage_LV_1To3_Down)),
-		a, NULL
+		firecallback, 
+		//towerAnimCallback,
+		NULL
 		);
 
 	this->mShooter->runAction(
@@ -514,6 +482,8 @@ void Tower::fire(CCSprite* target)
 
 void Tower::onShoot(CCNode* shooter)
 {
+
+	CCLog("Tower::onShoot()");
 	static bool first = true;
 
 	if(first)
@@ -543,8 +513,8 @@ void Tower::onShoot(CCNode* shooter)
 	this->testBullet->reuse();
 }
 
-void Tower::destory()
+void Tower::onFired()
 {
-
-	this->setVisible(false);
+	CCLog("Tower::onFired()");
+	this->canFire = true;
 }

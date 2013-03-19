@@ -3,6 +3,8 @@
 #include "../Helper/SpriteHelpers.h"
 #include "../Helper/CommonHelpers.h"
 #include "../Model/TowerInformation.h"
+#include "../Managers/EnemyManager.h"
+#include "../Sprites/Enemy.h"
 using namespace cocos2d;
 
 float HelloWorld::_scale = 1.0f;
@@ -67,10 +69,6 @@ bool HelloWorld::init()
 
 
 
-		//WayPoints
-		this->_wayPoints = new std::vector<WayPoint>();
-		this->_wayPointIndex = 0;
-
 		// other things
 		this->canFire = false;
 
@@ -97,7 +95,7 @@ bool HelloWorld::init()
 		int towerY = tower1->valueForKey("y")->intValue();
 
 		this->mTower = Tower::create();
-		this->mTower->loadResource(eTower_Terrain::Terrain_Build_DarkGray);
+		this->mTower->myInit(eTower_Terrain::Terrain_Build_DarkGray);
 		this->mTower->setPosition(CCPoint(towerX, towerY));
 		this->addChild(this->mTower);
 
@@ -113,38 +111,27 @@ bool HelloWorld::init()
 
 
 
-		int index = 0;
-		char name[] = "WayPoint00";
-		while (true)
+		//enemise
+
+
+		auto enemyManager = EnemyManager::sharedEnemyManager();
+		//WayPoints
+		enemyManager->readWayPoints(objects);
+
+		enemyManager->setEnemyLayer(this);
+		for (int i = 0; i < 1; ++i)
 		{
-			index++;
-			if(index < 10)
-			{
-				name[9] = (char)(index + 48);
-			}
-			else
-			{
-				name[8] = (char) (index / 10);
-				name[9] = (char) (index % 10);
-			}
-			CCDictionary *temp = objects->objectNamed(name);
-			if (temp == NULL) 
-				break;
-			int x = temp->valueForKey("x")->intValue();
-			int y = temp->valueForKey("y")->intValue();
-			this->_wayPoints->push_back(IDS_Create_WayPoint(x, y));
+			auto enemy = Enemy::create("yeti_0001.png");
 
+			enemy->setPosition(CCPoint(x, y));
+			enemyManager->addEnemy(enemy);
 		}
-
-
-		CCSprite *player = CCSprite::createWithSpriteFrameName("yeti_0001.png");
-		this->_player = player;
-		player->setPosition(CCPoint(x, y));
-		this->addChild(player);
+		
 
 
 
-		this->setViewPointCenter(player->getPosition());
+		//this->setViewPointCenter(player->getPosition());
+
 
 		this->setTouchEnabled(true);
 		//////////////////////////////////////////////////////////////////////////
@@ -242,7 +229,7 @@ void HelloWorld::setViewPointCenter(CCPoint pos)
 }
 void HelloWorld::setPlayerPosition(cocos2d::CCPoint pos)
 {
-	this->_player->setPosition(pos);
+	//this->_player->setPosition(pos);
 
 }
 bool HelloWorld::ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent)
@@ -250,31 +237,6 @@ bool HelloWorld::ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent)
 	return true;
 }
 
-void HelloWorld::FollowPath(CCNode* sender)
-{
-	HelloWorld* temp = (HelloWorld*)sender;
-	static int offset = 1;
-	int count = this->_wayPoints->size();
-	if (this->_wayPointIndex >= count)
-	{
-		offset = -1;
-		this->_wayPointIndex -= 2;
-	}
-	if(this->_wayPointIndex < 0)
-	{
-		this->_wayPointIndex += 2;
-		offset= 1;
-	}
-	CCSequence *sequence = CCSequence::create(
-		CCMoveTo::create(1, this->_wayPoints->at(this->_wayPointIndex).pos),
-		CCCallFuncN::create(this, callfuncN_selector(HelloWorld::FollowPath)),
-		NULL
-		);
-	this->_wayPointIndex += offset;
-	//this->_player->stopAllActions();
-	this->_player->runAction(sequence);
-
-}
 
 void HelloWorld::ccTouchEnded(CCTouch *pTouch, CCEvent *pEvent)
 {
@@ -298,72 +260,61 @@ void HelloWorld::ccTouchEnded(CCTouch *pTouch, CCEvent *pEvent)
 
 	}
 
-
+	EnemyManager::sharedEnemyManager()->runEnemiseOneByOne(1000);
 	//start player moving
 	// animation
 	// 
-	
-	
-	this->_player->runAction(CCAnimate::create(CCAnimationCache::sharedAnimationCache()->animationByName("yeti_move")));
-
-	CCSequence *sequence = CCSequence::create(
-		CCMoveTo::create(1, this->_wayPoints->at(this->_wayPointIndex++).pos),
-		CCCallFuncN::create(this, callfuncN_selector(HelloWorld::FollowPath)), 
-		NULL
-		);
-
-	this->_player->runAction(sequence);
 
 	this->canFire = true;
 
 	//动作, 暂时不用
 	return ;
-	do
-	{
-		//this->_player->runAction(CCMoveTo::create(1 ,touchLocation));
-		ccBezierConfig bezierCfg;
-		bezierCfg.endPosition = touchLocation;
-
-		CCPoint playerPos = _player->getPosition();
-		CCPoint diff = ccpSub(touchLocation, playerPos);
-
-		CCPoint centerPoint = ccpMidpoint(playerPos, touchLocation);
-
-
-		//bezierCfg.controlPoint_1 = ccpSub(centerPoint, ccpMult(diff, 0.3));
-		//bezierCfg.controlPoint_2 = ccpAdd(centerPoint, ccpMult(diff, 0.3));
-		bezierCfg.controlPoint_1 = playerPos;
-
-		//bezierCfg.controlPoint_1.x -= 100;
-		bezierCfg.controlPoint_2 = centerPoint;
-		bezierCfg.controlPoint_2.x -= 200;
-
-
-
-		//bezierCfg.controlPoint_1.x -= 50;
-		//bezierCfg.controlPoint_2.x -= 50;
-
-
-		// 	CCSprite *player = CCSprite::create("Player.png");
-		// 	player->setPosition(centerPoint);
-		// 	this->addChild(player);
-
-		CCSprite *player = CCSprite::create("Player.png");
-		player->setPosition(bezierCfg.controlPoint_1);
-		this->addChild(player);
-
-		player = CCSprite::create("Player.png");
-		player->setPosition(bezierCfg.controlPoint_2);
-		this->addChild(player);
-
-		player = CCSprite::create("Player.png");
-		player->setPosition(touchLocation);
-		this->addChild(player);
-
-
-		this->_player->runAction(CCBezierTo::create(1,bezierCfg));
-
-	}while (false);
+// 	do
+// 	{
+// 		//this->_player->runAction(CCMoveTo::create(1 ,touchLocation));
+// 		ccBezierConfig bezierCfg;
+// 		bezierCfg.endPosition = touchLocation;
+// 
+// 		CCPoint playerPos = _player->getPosition();
+// 		CCPoint diff = ccpSub(touchLocation, playerPos);
+// 
+// 		CCPoint centerPoint = ccpMidpoint(playerPos, touchLocation);
+// 
+// 
+// 		//bezierCfg.controlPoint_1 = ccpSub(centerPoint, ccpMult(diff, 0.3));
+// 		//bezierCfg.controlPoint_2 = ccpAdd(centerPoint, ccpMult(diff, 0.3));
+// 		bezierCfg.controlPoint_1 = playerPos;
+// 
+// 		//bezierCfg.controlPoint_1.x -= 100;
+// 		bezierCfg.controlPoint_2 = centerPoint;
+// 		bezierCfg.controlPoint_2.x -= 200;
+// 
+// 
+// 
+// 		//bezierCfg.controlPoint_1.x -= 50;
+// 		//bezierCfg.controlPoint_2.x -= 50;
+// 
+// 
+// 		// 	CCSprite *player = CCSprite::create("Player.png");
+// 		// 	player->setPosition(centerPoint);
+// 		// 	this->addChild(player);
+// 
+// 		CCSprite *player = CCSprite::create("Player.png");
+// 		player->setPosition(bezierCfg.controlPoint_1);
+// 		this->addChild(player);
+// 
+// 		player = CCSprite::create("Player.png");
+// 		player->setPosition(bezierCfg.controlPoint_2);
+// 		this->addChild(player);
+// 
+// 		player = CCSprite::create("Player.png");
+// 		player->setPosition(touchLocation);
+// 		this->addChild(player);
+// 
+// 
+// 		this->_player->runAction(CCBezierTo::create(1,bezierCfg));
+// 
+// 	}while (false);
 	//CCBezierBy
 
 

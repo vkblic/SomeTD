@@ -84,6 +84,7 @@ private:
 	std::vector<CCSpriteFrame*> mTowerPreviewFrame;
 	std::vector<CCSpriteFrame*> mTowerConstructingFrame;
 	CCSpriteFrame* mRangeFrame;
+	std::vector<int> mAttackRange;
 	eTower towerType;
 };
 

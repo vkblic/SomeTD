@@ -512,11 +512,3 @@ void TowerMenu::destory()
 	this->setVisible(false);
 }
 
-CCRect TowerMenu::getCollisionRect()
-{
-	CCPoint pos = this->getPosition();
-	return CCRect(pos.x - 3, pos.y -3, 6, 6);
-}
-
-
-

@@ -7,6 +7,24 @@
 
 #ifndef ENUMERATION_h
 #define ENUMERATION_h
+#include "cocos2d.h"
+using namespace cocos2d;
+const int TileWidth = 16;
+const int TileHeight = 16;
+
+typedef struct WayPoint
+{
+	WayPoint(int x, int y)
+	{
+		this->pos.x = x;
+		this->pos.y = y;
+	}
+	CCPoint pos;
+}*pWayPoint;
+inline WayPoint IDS_Create_WayPoint(float x, float y)
+{
+	return WayPoint(x, y);
+}
 
 //Tower
 enum eTower

@@ -139,11 +139,7 @@ public:
 
 
 public:
-	// 静态初始化方法
-	//static Bullet* create(BulletInfoModel* pBulletTag);
-	static TowerMenu* sharedTowerMenu();//静态创建（内存自动释放）
-	// 带偏转角度的静态初始化方法
-	//static Bullet* createWithRotation(BulletInfoModel* pBulletTag, float pRotation);
+	static TowerMenu* sharedTowerMenu();
 
 public:
 public:
@@ -166,7 +162,6 @@ public:
 	void destory();
 	void showMenu(CCPoint pos, eMenu_Level lv, Tower* tower, SEL_MenuTouchedFunc callback);
 
-	CCRect getCollisionRect();
 private:
 	void resetFrame();
 	void hideMenu();

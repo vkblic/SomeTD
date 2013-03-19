@@ -85,7 +85,17 @@ void TowerInformation::LoadConfig(CCSpriteFrameCache* spriteFrameCache)
 	this->mTerrainFrame[eTower_Terrain::Terrain_MageLv1_3_DarkGray] = spriteFrameCache->spriteFrameByName("terrain_mage_0003.png");
 
 
-	//Range
-	mRangeFrame = spriteFrameCache->spriteFrameByName("range_circle.png");
+	//Range Frame
+	this->mRangeFrame = spriteFrameCache->spriteFrameByName("range_circle.png");
+
+	//Range num
+	this->mAttackRange.resize(eTower::Tower_Max);
+
+	this->mAttackRange[Tower_Mage_LV1] = 10;
+	this->mAttackRange[Tower_Mage_LV2] = 11;
+	this->mAttackRange[Tower_Mage_LV3] = 12;
+	this->mAttackRange[Tower_Mage_LV4_Arcane] = 13;
+	this->mAttackRange[Tower_Mage_LV4_Sorcerer] = 13;
+
 
 }

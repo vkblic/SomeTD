@@ -5,6 +5,7 @@
 #include "cocos2d.h"
 #include "Bullet.h"
 #include "../Model/Enumeration.h"
+#include "../Sprites/Enemy.h"
 using namespace cocos2d;
 
 //Tower class
@@ -14,11 +15,7 @@ class Tower : public CCSprite , public CCTouchDelegate
 {
 
 public:
-	// 静态初始化方法
-	//static Bullet* create(BulletInfoModel* pBulletTag);
-	static Tower* create();//静态创建（内存自动释放）
-	// 带偏转角度的静态初始化方法
-	//static Bullet* createWithRotation(BulletInfoModel* pBulletTag, float pRotation);
+	static Tower* create();
 
 public:
 public:
@@ -34,14 +31,14 @@ public:
 
 public:
 	void update(float dt); // execute every frame
-	void destory();
-	void fire(CCSprite* target);
+	void onFired();
+	void fire();
 	void onShoot(CCNode* shooter);
 
 public:
 	//Menu
 	void onMenuSelected(int type);
-	void loadResource(eTower_Terrain terrain);//自定义初始化函数
+	void myInit(eTower_Terrain terrain);//自定义初始化函数
 
 private:
 
@@ -68,14 +65,10 @@ private:
 	 */
 	CCSprite* mShooter;
 	CCSprite* mTerrain;
-	CCSprite* mTarget;
+	Enemy* mTarget;
 	CCSprite* mRange;
 private:
 
-	float _speed;
-	CCPoint _targetLastPosition;
-	CCSprite* _target;
-	char temp[256];
 	Bullet* testBullet;
 	bool canFire;
 };

@@ -51,4 +51,26 @@ static bool isSpriteTouched(cocos2d::CCSprite* sprite, cocos2d::CCTouch* touch)
 	bool isTouched = rect.containsPoint(touchPointInNodeSpace);
 	return isTouched;
 }
+
+static bool isRectAndCircleCollided(CCPoint& circleCentre, float radius, CCRect& rect)
+{
+	
+	float distanceX = abs(circleCentre.x - rect.origin.x);
+	float distanceY = abs(circleCentre.y - rect.origin.y);
+	float halfW = rect.size.width / 2;
+	float halfH = rect.size.height / 2;
+
+
+	if (distanceX > (halfW + radius)) { return false; }
+	if (distanceY > (halfH + radius)) { return false; }
+
+	if (distanceX <= halfW) { return true; }
+	if (distanceY <= halfH) { return true; }
+
+	float distance = (distanceX - halfW)*(distanceX - halfW) + (distanceY-halfH)*(distanceY-halfH);
+
+	return (distance <= radius * radius);
+}
+
+
 #endif

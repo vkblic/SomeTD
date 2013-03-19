@@ -9,21 +9,9 @@
 
 #include "./tilemap_parallax_nodes/CCTMXTiledMap.h"
 #include "../Sprites/Tower.h"
-using namespace cocos2d;
 
-typedef struct WayPoint
-{
-	WayPoint(int x, int y)
-	{
-		this->pos.x = x;
-		this->pos.y = y;
-	}
-	CCPoint pos;
-}*pWayPoint;
-inline WayPoint IDS_Create_WayPoint(float x, float y)
-{
-	return WayPoint(x, y);
-}
+#include "../Model/Enumeration.h"
+using namespace cocos2d;
 
 
 class HelloWorld : public cocos2d::CCLayer
@@ -58,20 +46,16 @@ public:
 
 	static float _scale ;
 
-	cocos2d::CCSprite *_player;
+	//cocos2d::CCSprite *_player;
 private:
 	cocos2d::CCTMXTiledMap* _tileMap;
 	cocos2d::CCTMXLayer*	_background;
-	std::vector<WayPoint>* _wayPoints;
 	std::queue<CCSprite*>* _bulletsInUse;
 	std::queue<CCSprite*>* _bulletsCanUse;
-	int _wayPointIndex;
-	int _wayPointCount;
 	bool canFire;
 	Tower* mTower;
 //Events
 public:	 
-	void FollowPath(CCNode* sender);
 };
 
 #endif  // __HELLOWORLD_SCENE_H__
