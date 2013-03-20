@@ -39,6 +39,8 @@ public:
 
 	void run(std::vector<WayPoint>& wayPoints);
 
+	void run(std::vector<WayPoint>& wayPoints, float duration, float tension);
+
 public:
 	void loadResource(eTower_Terrain terrain);//自定义初始化函数
 

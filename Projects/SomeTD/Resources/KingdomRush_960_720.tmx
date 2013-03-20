@@ -17,21 +17,33 @@
   </data>
  </layer>
  <objectgroup name="Objects" width="60" height="45">
-  <object name="Player" x="402" y="26"/>
-  <object name="WayPoint01" x="282" y="95"/>
-  <object name="WayPoint02" x="250" y="161"/>
-  <object name="WayPoint03" x="305" y="223"/>
-  <object name="WayPoint04" x="402" y="218"/>
-  <object name="WayPoint05" x="485" y="239"/>
-  <object name="WayPoint06" x="486" y="313"/>
-  <object name="WayPoint07" x="416" y="402"/>
-  <object name="WayPoint09" x="498" y="519"/>
-  <object name="WayPoint08" x="428" y="484"/>
-  <object name="WayPoint10" x="596" y="519"/>
-  <object name="WayPoint11" x="658" y="563"/>
-  <object name="WayPoint13" x="657" y="635"/>
-  <object name="WayPoint14" x="638" y="708"/>
-  <object name="WayPoint12" x="680" y="608"/>
-  <object name="Tower1" x="535" y="422"/>
+  <object name="Player" x="444" y="11"/>
+  <object name="WayPoint01" x="388" y="58"/>
+  <object name="WayPoint02" x="324" y="99"/>
+  <object name="WayPoint03" x="292" y="127"/>
+  <object name="WayPoint04" x="295" y="162"/>
+  <object name="WayPoint05" x="323" y="189"/>
+  <object name="WayPoint06" x="371" y="192"/>
+  <object name="WayPoint07" x="413" y="188"/>
+  <object name="WayPoint09" x="497" y="225"/>
+  <object name="WayPoint08" x="463" y="199"/>
+  <object name="WayPoint10" x="511" y="262"/>
+  <object name="WayPoint11" x="515" y="301"/>
+  <object name="WayPoint13" x="476" y="367"/>
+  <object name="WayPoint14" x="451" y="394"/>
+  <object name="WayPoint12" x="505" y="345"/>
+  <object name="Tower1" x="538" y="426"/>
+  <object name="WayPoint15" x="435" y="433"/>
+  <object name="WayPoint16" x="446" y="473"/>
+  <object name="WayPoint17" x="481" y="490"/>
+  <object name="WayPoint18" x="519" y="499"/>
+  <object name="WayPoint19" x="558" y="505"/>
+  <object name="WayPoint20" x="599" y="512"/>
+  <object name="WayPoint21" x="636" y="532"/>
+  <object name="WayPoint24" x="680" y="632"/>
+  <object name="WayPoint26" x="664" y="706"/>
+  <object name="WayPoint25" x="672" y="668"/>
+  <object name="WayPoint22" x="663" y="560"/>
+  <object name="WayPoint23" x="678" y="592"/>
  </objectgroup>
 </map>

@@ -55,3 +55,5 @@
 
 /Projects/KGUI/proj.win32/Debug.win32
 /Projects/KGUI/proj.win32/*.user
+
+/cocos2d-x_SomeTD.xcworkspace/xcuserdata/kelyad.xcuserdatad/*.xcuserstate

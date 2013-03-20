@@ -136,7 +136,7 @@ void Bullet::destory()
 CCRect Bullet::getCollisionRect()
 {
 	CCPoint pos = this->getPosition();
-	return CCRect(pos.x - 3, pos.y -3, 6, 6);
+	return CCRect(pos.x, pos.y, 6, 6);
 }
 
 

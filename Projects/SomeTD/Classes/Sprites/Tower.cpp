@@ -163,11 +163,8 @@ void Tower::myInit(eTower_Terrain terrain)
 	this->mRange->setPosition(CCPoint(towerSize.width / 2, towerSize.height /2));
 	this->mRange->setVisible(false);
 
-	float scale = 200 / (this->mRange->getContentSize().width / 2);
+	float scale = 100 / (this->mRange->getContentSize().width / 2);
 	this->mRange->setScale(scale);
-
-
-
 
 }
 
@@ -382,7 +379,7 @@ void Tower::update(float dt)
 			if (target == NULL)
 				return ;
 
-			CCLog("tower get new target");
+			//CCLog("tower get new target");
 			this->mTarget = target;
 		}
 		this->fire();
@@ -392,12 +389,12 @@ void Tower::update(float dt)
 		if (this->mTarget == NULL)
 		{
 			return ;
-			CCLog("no target!");
+			//CCLog("no target!");
 		}
 		auto pos = this->getPosition();
 		if (!EnemyManager::sharedEnemyManager()->isEnemyInRange(pos, 100, this->mTarget))
 		{
-			CCLog("target out of range!");
+			//CCLog("target out of range!");
 			this->mTarget = NULL;
 		}
 		else

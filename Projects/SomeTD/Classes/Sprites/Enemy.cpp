@@ -88,7 +88,7 @@ CCRect Enemy::getCollisionRect()
 {
 	CCPoint pos = this->getPosition();
 	auto size = this->getContentSize();
-	return CCRect(pos.x - size.width / 2, pos.y - size.height / 2, size.width, size.height);
+	return CCRect(pos.x, pos.y, size.width * 0.8, size.height * 0.8);
 }
 
 void Enemy::FollowPath(CCNode* sender)
@@ -130,11 +130,27 @@ void Enemy::run(std::vector<WayPoint>& wayPoints)
 
 	this->runAction(CCAnimate::create(CCAnimationCache::sharedAnimationCache()->animationByName("yeti_move")));
 
-	CCSequence *sequence = CCSequence::create(
+	CCSequence *sequence = CCSequence::create( 
 		CCMoveTo::create(1, this->mWayPoints.at(this->_wayPointIndex++).pos),
 		CCCallFuncN::create(this, callfuncN_selector(Enemy::FollowPath)), 
 		NULL
 		);
 
 	this->runAction(sequence);
+}
+void Enemy::run(std::vector<WayPoint>& wayPoints, float duration, float tension) 
+{   
+	// not like vector<T>, 
+	// capacity of CCPointArray::create() is no use for now
+	auto pointArray = CCPointArray::create(wayPoints.size());
+
+	for(auto it = wayPoints.begin(); it != wayPoints.end(); ++it)
+	{
+		CCPoint temp = (*it).pos;
+		//temp.x = temp.x + (float)rand() / 1000;
+		//temp.y = temp.y + (float)rand() / 500;
+		pointArray->addControlPoint(temp);
+	}
+	this->runAction(CCAnimate::create(CCAnimationCache::sharedAnimationCache()->animationByName("yeti_move")));
+	this->runAction(CCCardinalSplineTo::create(duration, pointArray, tension));
 }
