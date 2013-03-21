@@ -34,7 +34,7 @@ bool AppDelegate::applicationDidFinishLaunching()
 
 	CCEGLView* pEGLView = CCEGLView::sharedOpenGLView();
 	// set the design resolution screen size, if you want to use Design Resoulution scaled to current screen, please uncomment next line.
-	pEGLView->setDesignResolutionSize(960, 640, kResolutionNoBorder);
+	pEGLView->setDesignResolutionSize(960, 720, kResolutionNoBorder);
 
     // run
     pDirector->runWithScene(pScene);

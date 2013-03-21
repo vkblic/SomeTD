@@ -17,22 +17,24 @@
   </data>
  </layer>
  <objectgroup name="Objects" width="60" height="45">
-  <object name="Player" x="444" y="11"/>
-  <object name="WayPoint01" x="388" y="58"/>
-  <object name="WayPoint02" x="324" y="99"/>
-  <object name="WayPoint03" x="292" y="127"/>
-  <object name="WayPoint04" x="295" y="162"/>
-  <object name="WayPoint05" x="323" y="189"/>
-  <object name="WayPoint06" x="371" y="192"/>
+  <object name="Entry01" x="694" y="219"/>
+  <object name="Entry02" x="616" y="706"/>
+  <object name="Entry03" x="440" y="-18"/>
+  <object name="WayPoint00" x="440" y="-18"/>
+  <object name="WayPoint01" x="414" y="38"/>
+  <object name="WayPoint02" x="353" y="73"/>
+  <object name="WayPoint03" x="301" y="112"/>
+  <object name="WayPoint04" x="286" y="149"/>
+  <object name="WayPoint05" x="306" y="183"/>
+  <object name="WayPoint06" x="356" y="195"/>
   <object name="WayPoint07" x="413" y="188"/>
   <object name="WayPoint09" x="497" y="225"/>
   <object name="WayPoint08" x="463" y="199"/>
   <object name="WayPoint10" x="511" y="262"/>
   <object name="WayPoint11" x="515" y="301"/>
+  <object name="WayPoint12" x="505" y="345"/>
   <object name="WayPoint13" x="476" y="367"/>
   <object name="WayPoint14" x="451" y="394"/>
-  <object name="WayPoint12" x="505" y="345"/>
-  <object name="Tower1" x="538" y="426"/>
   <object name="WayPoint15" x="435" y="433"/>
   <object name="WayPoint16" x="446" y="473"/>
   <object name="WayPoint17" x="481" y="490"/>
@@ -40,10 +42,28 @@
   <object name="WayPoint19" x="558" y="505"/>
   <object name="WayPoint20" x="599" y="512"/>
   <object name="WayPoint21" x="636" y="532"/>
-  <object name="WayPoint24" x="680" y="632"/>
-  <object name="WayPoint26" x="664" y="706"/>
-  <object name="WayPoint25" x="672" y="668"/>
   <object name="WayPoint22" x="663" y="560"/>
   <object name="WayPoint23" x="678" y="592"/>
+  <object name="WayPoint24" x="680" y="632"/>
+  <object name="WayPoint25" x="672" y="668"/>
+  <object name="WayPoint26" x="664" y="706"/>
+  <object name="Tower1" x="624" y="432"/>
+  <object name="Tower2" x="576" y="368"/>
+  <object name="Tower3" x="576" y="256"/>
+  <object name="Tower4" x="560" y="176"/>
+  <object name="Tower5" x="420" y="135"/>
+  <object name="Tower6" x="352" y="144"/>
+  <object name="Tower7" x="808" y="323"/>
+  <object name="Tower8" x="767" y="257"/>
+  <object name="Tower9" x="746" y="569"/>
+  <object name="Tower10" x="799" y="479"/>
+  <object name="Tower11" x="313" y="528"/>
+  <object name="Tower12" x="547" y="598"/>
+  <object name="Tower13" x="298" y="357"/>
+  <object name="Tower14" x="309" y="296"/>
+  <object name="Tower15" x="394" y="295"/>
+  <object name="Tower16" x="217" y="388"/>
+  <object name="Tower17" x="510" y="434"/>
+  <object name="WayPoint27" x="655" y="757"/>
  </objectgroup>
 </map>

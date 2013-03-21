@@ -14,11 +14,11 @@ class Enemy : public CCSprite , public CCTouchDelegate
 {
 
 public:
-	static Enemy* create(const char* pszSpriteFrameName);
+	static Enemy* create(const char* pszSpriteFrameName, CCSpriteBatchNode* hpBatchNode);
 
 public:
 public:
-	virtual ~Enemy(){}
+	virtual ~Enemy();
 
 	//重写触屏相关函数----
 	virtual void onEnter();
@@ -41,11 +41,35 @@ public:
 
 	void run(std::vector<WayPoint>& wayPoints, float duration, float tension);
 
+	void setID(int id){ this->mID = id; }
+	unsigned long getID() { return this->mID; }
 public:
-	void loadResource(eTower_Terrain terrain);//自定义初始化函数
+	void myInit();//自定义初始化函数
+
+
+	/*
+	 *
+	 *
+	 *
+	 **/
+	void underAttack(int damage);
+
+	void onDestoryed();
 
 private:
 	//void getNextLv(eTower)
+
+	/*
+	 *Set hp sprite position in enemy layer coordinate
+	 *
+	 **/
+
+	void setHpSpritePosition();
+
+
+	
+	void updateHpSpriteSize();
+
 
 private:
 	int _wayPointIndex;
@@ -60,7 +84,7 @@ private:
 	 相关的精灵对象
 	 */
 	CCSprite* mShooter;
-	CCSprite* mTerrain;
+	CCSprite* mHp;
 	CCSprite* mTarget;
 	CCSprite* mRange;
 private:
@@ -71,6 +95,13 @@ private:
 	char temp[256];
 	Bullet* testBullet;
 	bool canFire;
+
+	CCSpriteBatchNode* mBatchNode;
+	CCSpriteBatchNode* mHpBatchNode;
+
+	int mMaxHP;
+	int mCurHP;
+	unsigned long mID;
 };
 
 

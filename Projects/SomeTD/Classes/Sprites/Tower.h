@@ -65,7 +65,7 @@ private:
 	 */
 	CCSprite* mShooter;
 	CCSprite* mTerrain;
-	Enemy* mTarget;
+	unsigned long mTargetID;
 	CCSprite* mRange;
 private:
 

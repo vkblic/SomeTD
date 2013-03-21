@@ -6,26 +6,48 @@
 //
 
 #include "Enemy.h"
+#include "../Managers/EnemyManager.h"
 #include "../Helper/CommonHelpers.h"
 #include "../Model/TowerInformation.h"
 using namespace cocos2d;
-Enemy* Enemy::create(const char* pszSpriteFrameName)
+Enemy* Enemy::create(const char* pszSpriteFrameName, CCSpriteBatchNode* hpBatchNode)
 {
 	
 	CCSpriteFrame *pFrame = CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(pszSpriteFrameName);
 	Enemy *enemy = new Enemy();
 	if (enemy && enemy->initWithSpriteFrame(pFrame))//±¸×¢1
 	{
+		enemy->mHpBatchNode = hpBatchNode;
+		enemy->myInit();
 		//tower->loadResource();
 		enemy->autorelease();
-		CCLog("Enemy: %d", enemy->retainCount());
+		//CCLog("Enemy node retainCount:  %d", enemy->retainCount());
 		return enemy;
 	}
 	CC_SAFE_DELETE(enemy);
 	return NULL;
-
+}
+Enemy::~Enemy()
+{
+	this->mHpBatchNode->removeChild(this->mHp, true);
 }
 
+void Enemy::myInit()
+{
+
+	this->mHp = CCSprite::create("hp.png");
+	this->mHp->setAnchorPoint(CCPoint(0,0));
+
+	this->mMaxHP = 100;
+	this->mCurHP = 100;
+	
+	this->mHpBatchNode->addChild(this->mHp);
+	this->updateHpSpriteSize();
+	this->setHpSpritePosition();
+
+	//this->addChild(hpC);
+
+}
 
 bool Enemy::ccTouchBegan(CCTouch* touch, CCEvent* event)
 {
@@ -62,16 +84,12 @@ void Enemy::onExit()
 	CCSprite::onExit();
 }
 
-void Enemy::loadResource(eTower_Terrain terrain)
-{
-	
-}
-
-
 void Enemy::update(float dt)
 {
-	
+	this->setHpSpritePosition();
 }
+
+
 
 
 void Enemy::fire(CCSprite* target)
@@ -90,6 +108,50 @@ CCRect Enemy::getCollisionRect()
 	auto size = this->getContentSize();
 	return CCRect(pos.x, pos.y, size.width * 0.8, size.height * 0.8);
 }
+
+void Enemy::setHpSpritePosition()
+{
+	CCSize enemySize = this->getContentSize();
+	CCPoint pos = this->getPosition();
+	
+	auto newPos = CCPoint(pos.x - enemySize.width / 2, pos.y + enemySize.height / 2 );
+	this->mHp->setPosition(newPos);
+
+}
+void Enemy::updateHpSpriteSize()
+{
+	//CCAssert(hp >= 0 && hp <= this->mMaxHP, "hp percent value of enemy node is not allow!");
+	//this->mCurHP = hp;
+	if (this->mCurHP < 0)
+	{
+		this->mHp->setVisible(false);
+	}
+	float precentOfHp = (float)this->mCurHP / (float)this->mMaxHP;
+
+	CCSize enemySize = this->getContentSize();
+	CCSize sizeHp =  this->mHp->getContentSize();
+	float scaleX = enemySize.width / sizeHp.width * precentOfHp;
+	CCLog("scaleX%f",scaleX);
+	//CCLog("Enemy hp: scaleX: %f, scaleY: %f", scaleX, scaleY);
+	this->mHp->setScaleX(scaleX);
+}
+
+void Enemy::underAttack(int damage)
+{
+	this->mCurHP -= damage;
+	this->updateHpSpriteSize();
+	if(this->mCurHP < 0)
+	{
+		this->onDestoryed();
+		return;
+	}
+}
+
+void Enemy::onDestoryed()
+{
+	EnemyManager::sharedEnemyManager()->removeEnemy(this->mID);
+}
+
 
 void Enemy::FollowPath(CCNode* sender)
 {
@@ -137,6 +199,7 @@ void Enemy::run(std::vector<WayPoint>& wayPoints)
 		);
 
 	this->runAction(sequence);
+	this->scheduleUpdate();
 }
 void Enemy::run(std::vector<WayPoint>& wayPoints, float duration, float tension) 
 {   
@@ -153,4 +216,5 @@ void Enemy::run(std::vector<WayPoint>& wayPoints, float duration, float tension)
 	}
 	this->runAction(CCAnimate::create(CCAnimationCache::sharedAnimationCache()->animationByName("yeti_move")));
 	this->runAction(CCCardinalSplineTo::create(duration, pointArray, tension));
+	this->scheduleUpdate();
 }

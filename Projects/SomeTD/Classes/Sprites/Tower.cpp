@@ -132,7 +132,7 @@ void Tower::onExit()
 
 void Tower::myInit(eTower_Terrain terrain)
 {
-	this->mTarget = NULL;
+	this->mTargetID = -1;
 
 	this->mTowerType = eTower::Tower_None;
 	this->mShooterTypeUp = eTower_Shooter::Shooter_None;
@@ -372,30 +372,30 @@ void Tower::update(float dt)
 	}
 	if(this->canFire)
 	{
-		if (this->mTarget == NULL)
+		if (this->mTargetID == -1)
 		{
 			auto pos = this->getPosition();
-			auto target = EnemyManager::sharedEnemyManager()->getEnemyInRange(pos, 100);
-			if (target == NULL)
+			unsigned long target = EnemyManager::sharedEnemyManager()->getEnemyInRange(pos, 200);
+			if (target == -1)
 				return ;
 
 			//CCLog("tower get new target");
-			this->mTarget = target;
+			this->mTargetID = target;
 		}
 		this->fire();
 	}
 	else
 	{
-		if (this->mTarget == NULL)
+		if (this->mTargetID == -1)
 		{
 			return ;
 			//CCLog("no target!");
 		}
 		auto pos = this->getPosition();
-		if (!EnemyManager::sharedEnemyManager()->isEnemyInRange(pos, 100, this->mTarget))
+		if (!EnemyManager::sharedEnemyManager()->isEnemyInRange(pos, 200, this->mTargetID))
 		{
 			//CCLog("target out of range!");
-			this->mTarget = NULL;
+			this->mTargetID = -1;
 		}
 		else
 		{
@@ -485,7 +485,7 @@ void Tower::onShoot(CCNode* shooter)
 
 	if(first)
 	{
-		this->testBullet = Bullet::create(100, this->mTarget, "magebolt_0002.png");
+		this->testBullet = Bullet::create(100, this->mTargetID, "magebolt_0002.png");
 		this->getParent()->addChild(this->testBullet);
 		first = false;
 	}

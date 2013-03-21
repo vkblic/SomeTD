@@ -13,17 +13,20 @@ class EnemyManager
 public:
 	~EnemyManager();
 	static EnemyManager* sharedEnemyManager();
+private:
+	EnemyManager();
+	static EnemyManager* mInstance;
+
 public:
 	/*
 	 *get the nearness enemy unit in range 
 	 *
 	 *@param	pos: the centre point to calculate range.
 	 *			rangeRadius: radius of the calculation range.
-	 *@return	a valid sprite pointer to a valid sprite object, 
-	 *@			if there has a enemy in range, if not, the value 
-	 *@			is NULL
+	 *@return	a valid enemy id if there has a enemy in range, 
+	 *@			if not, the value is -1
 	 */
-	Enemy* getEnemyInRange(CCPoint& pos, int rangeRadius);
+	unsigned long getEnemyInRange(CCPoint& pos, int rangeRadius);
 
 	/*
 	 *add a enemy node to manager, manager have responsibility to 
@@ -31,24 +34,42 @@ public:
 	 *
 	 *@param	enemy: enemy node pointer
 	 */
-	void addEnemy(Enemy* enemy);
+	void addEnemy(const char* plFrameName);
+
+	void removeEnemy(unsigned long enemyID);
+
+	void update(float dt);
 
 	void setEnemyLayer(CCNode* layer);
 
-	bool isEnemyInRange(CCPoint& pos, int rangeRadius, Enemy* enemy);
+	bool isEnemyInRange(CCPoint& pos, int rangeRadius, unsigned long enemyID);
+
+	/*
+	 *get the nearness enemy unit in range 
+	 *
+	 *@param	pos: the centre point to calculate range.
+	 *			rangeRadius: radius of the calculation range.
+	 *@return	a valid enemy object pointer, if it's available
+	 *@			if not(destroyed of out of screen), the value NULL
+	 */
+	Enemy* getEnemy(unsigned long enemyID);
 
 	void runEnemiseOneByOne(float dt);
 
 	void readWayPoints(CCTMXObjectGroup* objects);
 private:
-	EnemyManager();
-	static EnemyManager* mInstance;
-
+	void clearUnusedEnemise();
 private:
-	std::vector<Enemy*> mEnemies;
+	std::map<unsigned long, Enemy*> mEnemies;
+	std::vector<Enemy*> mUnusedEnemy;
 	std::vector<WayPoint> mWayPoints;
 	CCNode* mEnemyLayer;
+	
 	CCSpriteBatchNode* mBatch;
+
+	CCSpriteBatchNode* mHpBatchNode;
+
+	unsigned long mIDSeed;
 };
 
 #endif

@@ -63,9 +63,9 @@ bool HelloWorld::init()
 		this->addChild(this->_tileMap, -1);
 
 		CCTMXObjectGroup *objects = this->_tileMap->objectGroupNamed("Objects");
-		CCDictionary *spawnPoint = objects->objectNamed("Player");
-		int x = spawnPoint->valueForKey("x")->intValue();
-		int y = spawnPoint->valueForKey("y")->intValue();
+		//CCDictionary *spawnPoint = objects->objectNamed("Player");
+		//int x = spawnPoint->valueForKey("x")->intValue();
+		//int y = spawnPoint->valueForKey("y")->intValue();
 
 
 
@@ -121,10 +121,9 @@ bool HelloWorld::init()
 		enemyManager->setEnemyLayer(this);
 		for (int i = 0; i < 1; ++i)
 		{
-			auto enemy = Enemy::create("yeti_0001.png");
 
-			enemy->setPosition(CCPoint(x, y));
-			enemyManager->addEnemy(enemy);
+			//enemy->setPosition(CCPoint(x, y));
+			enemyManager->addEnemy("yeti_0001.png");
 		}
 		
 
@@ -134,6 +133,7 @@ bool HelloWorld::init()
 
 
 		this->setTouchEnabled(true);
+		this->scheduleUpdate();
 		//////////////////////////////////////////////////////////////////////////
 		// add your codes below...
 		//////////////////////////////////////////////////////////////////////////
@@ -353,4 +353,11 @@ void HelloWorld::ccTouchEnded(CCTouch *pTouch, CCEvent *pEvent)
 	// 	}
 	// 
 	// 	this->setViewPointCenter(this->_player->getPosition());
+}
+
+
+void HelloWorld::update(float dt)
+{
+
+	EnemyManager::sharedEnemyManager()->update(dt);
 }
