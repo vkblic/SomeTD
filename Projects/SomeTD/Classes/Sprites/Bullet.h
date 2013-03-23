@@ -3,7 +3,7 @@
 #define _BULLET_H_
 
 #include "cocos2d.h"
-
+#include "Enemy.h"
 using namespace cocos2d;
 
 class Bullet : public CCSprite , public CCTouchDelegate
@@ -17,17 +17,18 @@ public:
 	//static Bullet* createWithRotation(BulletInfoModel* pBulletTag, float pRotation);
 
 public:
-public:
-	void myInit(float speed, unsigned long target);//自定义初始化函数
 	virtual ~Bullet(){}
 
 
 
 public:
 	void update(float dt); // execute every frame
-	bool isHit(); //when bullet hit target
+	bool hitChecker(); //when bullet hit target
+	//bool isGetPostion();
+	void playHitAnimation();
+	void onMove(CCPoint pos, CCPoint targetPos, float dt);
 	void destory();
-	void reuse(float speed, unsigned long targetID, CCSpriteFrame* frame);
+	void reuse(float speed, Enemy* target, CCSpriteFrame* frame);
 	CCRect getCollisionRect();
 private:
 	float mSpeed;

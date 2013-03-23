@@ -3,7 +3,6 @@
 #define _ENEMY_
 
 #include "cocos2d.h"
-#include "Bullet.h"
 #include "../Model/Enumeration.h"
 using namespace cocos2d;
 
@@ -80,21 +79,9 @@ private:
 	//CCSequence* mShooterAnimationSequence;
 	//CCSequence* mTowerAnimationSequence;
 private:
-	/*
-	 相关的精灵对象
-	 */
-	CCSprite* mShooter;
 	CCSprite* mHp;
-	CCSprite* mTarget;
-	CCSprite* mRange;
 private:
 
-	float _speed;
-	CCPoint _targetLastPosition;
-	CCSprite* _target;
-	char temp[256];
-	Bullet* testBullet;
-	bool canFire;
 
 	CCSpriteBatchNode* mBatchNode;
 	CCSpriteBatchNode* mHpBatchNode;

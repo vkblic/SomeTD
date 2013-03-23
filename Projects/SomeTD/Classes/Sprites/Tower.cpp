@@ -387,7 +387,7 @@ void Tower::update(float dt)
 		// if no target, we get one 
 		if (this->mTargetID == -1)
 		{
-			unsigned long target = EnemyManager::sharedEnemyManager()->getEnemyInRange(this->getPosition(), 200);
+			unsigned long target = EnemyManager::sharedEnemyManager()->getEnemyInRange(this->getPosition(), 300);
 			if(target != -1)
 				CCLog("tower get new target: %d", target);
 			this->mTargetID = target;
@@ -395,9 +395,9 @@ void Tower::update(float dt)
 		else
 		{
 			// if there's a target, available check 
-			if(!EnemyManager::sharedEnemyManager()->isEnemyInRange(this->getPosition(), 200, this->mTargetID))
+			if(!EnemyManager::sharedEnemyManager()->isEnemyInRange(this->getPosition(), 300, this->mTargetID))
 			{
-				unsigned long target = EnemyManager::sharedEnemyManager()->getEnemyInRange(this->getPosition(), 200);
+				unsigned long target = EnemyManager::sharedEnemyManager()->getEnemyInRange(this->getPosition(), 300);
 				CCLog("tower get new target: %d", target);
 				this->mTargetID = target;
 			}
@@ -524,14 +524,14 @@ void Tower::onShoot()
 	//this->getParent()->addChild(this->testBullet);
 	// 
 	// check if target is still available, if not, get one.
-	if(!EnemyManager::sharedEnemyManager()->isEnemyInRange(this->getPosition(), 200, this->mTargetID))
+	if(!EnemyManager::sharedEnemyManager()->isEnemyInRange(this->getPosition(), 300, this->mTargetID))
 	{
-		unsigned long target = EnemyManager::sharedEnemyManager()->getEnemyInRange(this->getPosition(), 200);
+		unsigned long target = EnemyManager::sharedEnemyManager()->getEnemyInRange(this->getPosition(), 300);
 		CCLog("tower get new target: %d when shooting", target);
 		this->mTargetID = target;
 	}
 	if (this->mTargetID != -1)
-		this->testBullet->reuse(100, this->mTargetID, CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("magebolt_0002.png"));
+		this->testBullet->reuse(100, EnemyManager::sharedEnemyManager()->getAvailableEnemy(this->mTargetID), CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("magebolt_0002.png"));
 	else
 		CCLog("no target in range when shooting, fire cancle!");
 }

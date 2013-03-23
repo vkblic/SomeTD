@@ -15,7 +15,6 @@ Bullet* Bullet::create()
 
 	if (bullte && bullte->init())//±¸×¢1
 	{
-		//bullte->myInit(speed, targetID);
 		bullte->autorelease();
 		//CCLog("Bullet::create: %d", bullte->retainCount());
 		return bullte;
@@ -25,104 +24,112 @@ Bullet* Bullet::create()
 
 }
 
-void Bullet::myInit(float speed, unsigned long targetID)
-{
-// 	this->mSpeed = speed;
-// 	this->mTargetID = targetID;
-// 	Enemy* target = EnemyManager::sharedEnemyManager()->getAvailableEnemy(targetID);
-// 	
-// 	if(target == NULL)
-// 	{
-// 		this->mTargetID = -1;
-// 		return;
-// 	}
-// 	CCLog("Bullet::myInit() new target: %d", this->mTargetID);
-}
 
-void Bullet::reuse(float speed,unsigned long targetID, CCSpriteFrame* frame)
+
+void Bullet::reuse(float speed, Enemy* target, CCSpriteFrame* frame)
 {
 	this->mSpeed = speed;
-	this->mTargetID = targetID;
+	this->mTargetID = target->getID();
+	this->mTargetPos = target->getPosition();
+	this->mTargetCollisionRect = target->getCollisionRect();
 	//this->mTargetPos
 	this->scheduleUpdate();
 	this->setVisible(true);
 	this->setDisplayFrame(frame);
 }
 
+void Bullet::playHitAnimation()
+{
+	this->unscheduleUpdate();
+	//this->destory();
+	CCLog("Bullet::update() hit", this->mTargetID);
 
+	CCSequence* sequence = CCSequence::createWithTwoActions(
+		CCAnimate::create(CCAnimationCache::sharedAnimationCache()->animationByName("magebolt_boom")),
+		CCCallFunc::create(this, callfunc_selector(Bullet::destory))
+		);
+	this->runAction(sequence);
+}
+void Bullet::onMove(CCPoint pos, CCPoint targetPos, float dt)
+{
+	ccVertex2F toNewTarget = vertex2( targetPos.x - pos.x, targetPos.y - pos.y);
+	ccVertex2F temp = vertex2FNormalization(toNewTarget);
+	ccVertex2F toNewPos = vertex2FMul(temp, dt * this->mSpeed * 5);
 
+	CCPoint newPos = CCPoint(pos.x + toNewPos.x, pos.y + toNewPos.y);
+	this->setPosition(newPos);
+
+	float angleRadians = atanf((float)toNewPos.y / (float)toNewPos.x);
+	float angleDegrees = CC_RADIANS_TO_DEGREES(angleRadians);
+	float cocosAngle = -1 * angleDegrees + 180;
+	this->setRotation(cocosAngle);
+}
 void Bullet::update(float dt)
 {
-	//if ()
-	//{
-	//	this->unscheduleUpdate();
-	//	this->release();
-	//}
-	//CCPoint pos = this->getPosition();
-	//pos.y -= this->mBulletInfo->BulletSpeed * dt;
-	//this->setPositionY(pos.y);
-	if(this->mTargetID == -1 || this->isHit())
-	{
-		this->unscheduleUpdate();
-		//this->destory();
-		CCLog("Bullet::update() hit", this->mTargetID);
 
-		CCSequence* sequence = CCSequence::createWithTwoActions(
-			CCAnimate::create(CCAnimationCache::sharedAnimationCache()->animationByName("magebolt_boom")),
-			CCCallFunc::create(this, callfunc_selector(Bullet::destory))
-			);
-		this->runAction(sequence);
+
+
+	if(this->mTargetID == -1)
+	{
+		if(this->hitChecker())
+		{
+			this->playHitAnimation();
+		}
+		else
+		{
+			this->onMove(this->getPosition(), this->mTargetPos,  dt);
+		}
 	}
 	else
 	{
-		//CCLog("Bullet::update() moving!", this->_target);
 		Enemy* target = EnemyManager::sharedEnemyManager()->getAvailableEnemy(this->mTargetID);
 		if(target == NULL)
 		{
 			this->mTargetID = -1;
-			return;
+			if(this->hitChecker())
+			{
+				this->playHitAnimation();
+			}
+			else
+			{
+				this->onMove(this->getPosition(), this->mTargetPos,  dt);
+			}
 		}
-
-
-		CCPoint pos = this->getPosition();
-		CCPoint targetPosNew = target->getPosition();
-		//ccVertex2F toOldTarget = vertex2( this->_targetLastPosition.x - pos.x, this->_targetLastPosition.y - pos.y );
-
-		ccVertex2F toNewTarget = vertex2( targetPosNew.x - pos.x, targetPosNew.y - pos.y);
-		ccVertex2F temp = vertex2FNormalization(toNewTarget);
-		ccVertex2F toNewPos = vertex2FMul(temp, dt * this->mSpeed * 5);
-
-		//sprintf_s(temp,255, "%-08.4f",dt);
-		//CCLog(temp);
-		CCPoint newPos = CCPoint(pos.x + toNewPos.x, pos.y + toNewPos.y);
-		this->setPosition(newPos);
-
-		float angleRadians = atanf((float)toNewPos.y / (float)toNewPos.x);
-		float angleDegrees = CC_RADIANS_TO_DEGREES(angleRadians);
-		float cocosAngle = -1 * angleDegrees + 180;
-		this->setRotation(cocosAngle);
-
+		else
+		{
+			this->mTargetCollisionRect = target->getCollisionRect();
+			this->mTargetPos = target->getPosition();
+			if(this->hitChecker())
+			{
+				target->underAttack(10);
+				this->playHitAnimation();
+			}
+			else
+			{
+				this->onMove(this->getPosition(), this->mTargetPos,  dt);
+			}
+		}
 	}
+
 	//CCSpriteFrameCache.addSpriteFrame()
 	// this->setPosition(ccpAdd(this->getPosition(), ccpMult(mVelocity, dt)));
 }
-bool Bullet::isHit()
+bool Bullet::hitChecker()
 {
-	Enemy* target = EnemyManager::sharedEnemyManager()->getAvailableEnemy(this->mTargetID);
-	if(target == NULL)
-	{
-		CCLog("Bullet::isHit() target non detected! targetID: %d", this->mTargetID);
-		this->mTargetID = -1;
-		return true;
-	}
-	CCPoint targetPos = target->getPosition();
-	CCRect targetCollisionRect = CCRect(targetPos.x - 3, targetPos.y -3, 6, 6);
+	//Enemy* target = EnemyManager::sharedEnemyManager()->getAvailableEnemy(this->mTargetID);
+	//if(target == NULL)
+	//{
+	//	CCLog("Bullet::isHit() target non detected! targetID: %d", this->mTargetID);
+	//	this->mTargetID = -1;
+	//	return true;
+	//}
+	
+	CCRect targetCollisionRect = CCRect(this->mTargetPos.x - 3, mTargetPos.y -3, 6, 6);
 
 	CCPoint pos = this->getPosition();
-	CCRect collisionRect  = CCRect(pos.x - 3, pos.y - 3, 6, 6);
+	CCRect collisionRect  = CCRect(pos.x - 10, pos.y - 10, 20, 20);
 	if(!targetCollisionRect.intersectsRect(collisionRect))
 		return false;
-	target->underAttack(10);
 
 	CCLog("Bullet::isHit() hit target !", this->mTargetID);
 	return true;
