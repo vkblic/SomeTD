@@ -244,7 +244,7 @@ void HelloWorld::ccTouchEnded(CCTouch *pTouch, CCEvent *pEvent)
 	//in OpenGl coordinates, (0, 0) is left-bottom point not like screen of dx coordinates is left-top point
 	touchLocation = CCDirector::sharedDirector()->convertToGL(touchLocation);
 	touchLocation = this->convertToNodeSpace(touchLocation);
-	CCLog("Background UI coor, x: %f, y: %f", touchLocation.x, touchLocation.y);
+	//CCLog("Background UI coor, x: %f, y: %f", touchLocation.x, touchLocation.y);
 	//bullet
 	if(this->canFire)
 	{
@@ -260,7 +260,7 @@ void HelloWorld::ccTouchEnded(CCTouch *pTouch, CCEvent *pEvent)
 
 	}
 
-	EnemyManager::sharedEnemyManager()->runEnemiseOneByOne(1000);
+	//EnemyManager::sharedEnemyManager()->runEnemiseOneByOne(1000);
 	//start player moving
 	// animation
 	// 

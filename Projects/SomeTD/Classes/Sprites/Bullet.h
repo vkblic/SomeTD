@@ -12,7 +12,7 @@ class Bullet : public CCSprite , public CCTouchDelegate
 public:
 	// 静态初始化方法
 	//static Bullet* create(BulletInfoModel* pBulletTag);
-	static Bullet* create(float speed, unsigned long targetID, const char* spName);//静态创建（内存自动释放）
+	static Bullet* create();//静态创建（内存自动释放）
 	// 带偏转角度的静态初始化方法
 	//static Bullet* createWithRotation(BulletInfoModel* pBulletTag, float pRotation);
 
@@ -27,12 +27,14 @@ public:
 	void update(float dt); // execute every frame
 	bool isHit(); //when bullet hit target
 	void destory();
-	void reuse();
+	void reuse(float speed, unsigned long targetID, CCSpriteFrame* frame);
 	CCRect getCollisionRect();
 private:
-	float _speed;
-	CCPoint _targetLastPosition;
-	unsigned long _target;
+	float mSpeed;
+	CCPoint mTargetPos;
+	CCRect mTargetCollisionRect;
+	unsigned long mTargetID;
+
 	char temp[256];
 };
 

@@ -29,7 +29,6 @@ Enemy* Enemy::create(const char* pszSpriteFrameName, CCSpriteBatchNode* hpBatchN
 }
 Enemy::~Enemy()
 {
-	this->mHpBatchNode->removeChild(this->mHp, true);
 }
 
 void Enemy::myInit()
@@ -122,7 +121,7 @@ void Enemy::updateHpSpriteSize()
 {
 	//CCAssert(hp >= 0 && hp <= this->mMaxHP, "hp percent value of enemy node is not allow!");
 	//this->mCurHP = hp;
-	if (this->mCurHP < 0)
+	if (this->mCurHP <= 0)
 	{
 		this->mHp->setVisible(false);
 	}
@@ -131,7 +130,7 @@ void Enemy::updateHpSpriteSize()
 	CCSize enemySize = this->getContentSize();
 	CCSize sizeHp =  this->mHp->getContentSize();
 	float scaleX = enemySize.width / sizeHp.width * precentOfHp;
-	CCLog("scaleX%f",scaleX);
+	//CCLog("scaleX%f",scaleX);
 	//CCLog("Enemy hp: scaleX: %f, scaleY: %f", scaleX, scaleY);
 	this->mHp->setScaleX(scaleX);
 }
@@ -140,7 +139,7 @@ void Enemy::underAttack(int damage)
 {
 	this->mCurHP -= damage;
 	this->updateHpSpriteSize();
-	if(this->mCurHP < 0)
+	if(this->mCurHP <= 0)
 	{
 		this->onDestoryed();
 		return;
@@ -149,7 +148,12 @@ void Enemy::underAttack(int damage)
 
 void Enemy::onDestoryed()
 {
+	// add to EnemyManager's remove queue
 	EnemyManager::sharedEnemyManager()->removeEnemy(this->mID);
+
+	// remove hp sprite
+	//this->mHp->release();
+	this->mHpBatchNode->removeChild(this->mHp, true);
 }
 
 

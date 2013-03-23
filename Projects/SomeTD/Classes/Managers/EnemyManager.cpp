@@ -22,6 +22,8 @@ EnemyManager::~EnemyManager()
 	for(auto it = this->mEnemies.begin(); it != this->mEnemies.end(); ++it)
 	{
 		it->second->release();
+		this->mBatch->removeChild(it->second, true);
+		CCLog("EnemyManager::clearUnusedEnemise: retainCount: %d", it->second->retainCount());
 	}
 	this->mEnemies.clear();
 	this->mEnemyLayer->release();
@@ -36,15 +38,13 @@ EnemyManager* EnemyManager::sharedEnemyManager()
 		EnemyManager::mInstance = new EnemyManager();
 	return EnemyManager::mInstance;
 }
-void EnemyManager::update(float dt)
-{
-	this->clearUnusedEnemise();
-}
 
 void EnemyManager::setEnemyLayer(CCNode* layer)
 {
 	this->mEnemyLayer = layer;
 }
+
+#pragma region Range checker
 
 unsigned long EnemyManager::getEnemyInRange(CCPoint& pos, int rangeRadius)
 {
@@ -70,7 +70,7 @@ bool EnemyManager::isEnemyInRange(CCPoint& pos, int rangeRadius, unsigned long e
 	auto it = this->mEnemies.find(enemyID);
 	if (it == this->mEnemies.end())
 		return false;
-	
+
 	if (isRectAndCircleCollided(pos, rangeRadius, it->second->getCollisionRect()))
 		return true;
 	CCPoint targetPos = it->second->getPosition();
@@ -82,9 +82,12 @@ bool EnemyManager::isEnemyInRange(CCPoint& pos, int rangeRadius, unsigned long e
 	return false;
 }
 
+#pragma endregion
 
 
-void EnemyManager::addEnemy(const char* plFrameName)
+#pragma region enemy node
+
+unsigned long EnemyManager::addEnemy(const char* plFrameName)
 {
 	if(this->mBatch == NULL)
 	{
@@ -102,8 +105,8 @@ void EnemyManager::addEnemy(const char* plFrameName)
 	auto pair = std::pair<unsigned long, Enemy*>(this->mIDSeed, enemy);
 	enemy->setID(this->mIDSeed++);
 	this->mEnemies.insert(pair);
+	return enemy->getID();
 }
-
 
 void EnemyManager::removeEnemy(unsigned long enemyID)
 {
@@ -120,18 +123,21 @@ void EnemyManager::clearUnusedEnemise()
 	{
 		auto node = (*it);
 		node->release();
-		CCLog("EnemyManager::clearUnusedEnemise: retainCount: %d", node->retainCount());
+		//CCLog("EnemyManager::clearUnusedEnemise: retainCount: %d", node->retainCount());
 		this->mBatch->removeChild(node, true);
 	}
 	this->mUnusedEnemy.clear();
 }
-Enemy* EnemyManager::getEnemy(unsigned long enemyID)
+
+Enemy* EnemyManager::getAvailableEnemy(unsigned long enemyID)
 {
 	auto it = this->mEnemies.find(enemyID);
 	if (it == this->mEnemies.end())
 		return NULL;
 	return it->second;
 }
+
+#pragma endregion enemy node
 
 
 
@@ -173,4 +179,21 @@ void EnemyManager::readWayPoints(CCTMXObjectGroup* objects)
 		index++;
 	}
 
+}
+
+void EnemyManager::update(float dt)
+{
+	static float timeCounter = 0;
+	if(timeCounter >= 5)
+	{
+		auto id = this->addEnemy("yeti_0001.png");
+		auto it = this->mEnemies.find(id);
+		(*it).second->run(this->mWayPoints, 15, 0);
+		timeCounter = 0;
+	}
+	else
+	{
+		timeCounter += dt;
+	}
+	this->clearUnusedEnemise();
 }

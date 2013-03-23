@@ -41,7 +41,7 @@ void TowerInformation::LoadConfig(CCSpriteFrameCache* spriteFrameCache)
 
 
 	// animation tower
-	auto animationTowerLv1 = addAnimationWithFramesToCache("mage_lvl1", "Tower_Mage_Lv1", 3, 7, SECOND_PER_FRAME * 2, true, 1);
+	auto animationTowerLv1 = addAnimationWithFramesToCache("mage_lvl1", "Tower_Mage_Lv1", 1, 11, SECOND_PER_FRAME * 2, true, 1);
 	auto animationTowerLv2 = addAnimationWithFramesToCache("mage_lvl2", "Tower_Mage_Lv2", 1, 11, SECOND_PER_FRAME, true, 1);
 	auto animationTowerLv3 = addAnimationWithFramesToCache("mage_lvl3", "Tower_Mage_Lv3", 1, 11, SECOND_PER_FRAME, true, 1);
 	auto animationTowerLv4_Arcane = addAnimationWithFramesToCache("arcane_tower", "Tower_Mage_LV4_Arcane", 1, 49, SECOND_PER_FRAME, true, 1);

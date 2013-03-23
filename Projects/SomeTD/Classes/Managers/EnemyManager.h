@@ -33,8 +33,9 @@ public:
 	 *retain or release it 
 	 *
 	 *@param	enemy: enemy node pointer
+	 *@return	a valid enemyID
 	 */
-	void addEnemy(const char* plFrameName);
+	unsigned long addEnemy(const char* plFrameName);
 
 	void removeEnemy(unsigned long enemyID);
 
@@ -52,7 +53,7 @@ public:
 	 *@return	a valid enemy object pointer, if it's available
 	 *@			if not(destroyed of out of screen), the value NULL
 	 */
-	Enemy* getEnemy(unsigned long enemyID);
+	Enemy* getAvailableEnemy(unsigned long enemyID);
 
 	void runEnemiseOneByOne(float dt);
 

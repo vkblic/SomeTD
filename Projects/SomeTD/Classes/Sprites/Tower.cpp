@@ -379,7 +379,7 @@ void Tower::update(float dt)
 			if (target == -1)
 				return ;
 
-			//CCLog("tower get new target");
+			CCLog("tower get new target: %d", target);
 			this->mTargetID = target;
 		}
 		this->fire();
@@ -485,7 +485,7 @@ void Tower::onShoot(CCNode* shooter)
 
 	if(first)
 	{
-		this->testBullet = Bullet::create(100, this->mTargetID, "magebolt_0002.png");
+		this->testBullet = Bullet::create();
 		this->getParent()->addChild(this->testBullet);
 		first = false;
 	}
@@ -507,7 +507,7 @@ void Tower::onShoot(CCNode* shooter)
 	//bullet->setScale(0.25);
 	//this->getParent()->addChild(this->testBullet);
 
-	this->testBullet->reuse();
+	this->testBullet->reuse(100, this->mTargetID, CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("magebolt_0002.png"));
 }
 
 void Tower::onFired()
