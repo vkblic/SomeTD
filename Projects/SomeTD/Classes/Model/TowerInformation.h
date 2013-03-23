@@ -59,12 +59,12 @@ public:
 		return mRangeFrame;
 	}
 
-	CCAnimation* getTowerAnimation(eTower type)
+	std::vector<CCSpriteFrame*>* getTowerAnimation(eTower type)
 	{
 		return mTowerAnimation[type];
 	}
 
-	CCAnimation* getShooterAnimation(eTower_Shooter type)
+	std::vector<CCSpriteFrame*>* getShooterAnimation(eTower_Shooter type)
 	{
 		return mShooterAnimation[type];
 	}
@@ -78,8 +78,8 @@ public:
 private:
 	std::vector<CCSpriteFrame*> mTowerFrame; //there's only two texture for now
 	std::vector<CCSpriteFrame*>  mShooterFrame;
-	std::vector<CCAnimation*> mTowerAnimation;
-	std::vector<CCAnimation*> mShooterAnimation;
+	std::vector<std::vector<CCSpriteFrame*>*> mTowerAnimation;
+	std::vector<std::vector<CCSpriteFrame*>*> mShooterAnimation;
 	std::vector<CCSpriteFrame*> mTerrainFrame;
 	std::vector<CCSpriteFrame*> mTowerPreviewFrame;
 	std::vector<CCSpriteFrame*> mTowerConstructingFrame;

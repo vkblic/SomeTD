@@ -46,7 +46,7 @@ void EnemyManager::setEnemyLayer(CCNode* layer)
 
 #pragma region Range checker
 
-unsigned long EnemyManager::getEnemyInRange(CCPoint& pos, int rangeRadius)
+unsigned long EnemyManager::getEnemyInRange(CCPoint pos, int rangeRadius)
 {
 
 	for(auto it = this->mEnemies.begin();it != this->mEnemies.end(); ++it)
@@ -65,9 +65,11 @@ unsigned long EnemyManager::getEnemyInRange(CCPoint& pos, int rangeRadius)
 	return -1;
 }
 
-bool EnemyManager::isEnemyInRange(CCPoint& pos, int rangeRadius, unsigned long enemyID)
+bool EnemyManager::isEnemyInRange(CCPoint pos, int rangeRadius, unsigned long enemyID)
 {
 	auto it = this->mEnemies.find(enemyID);
+
+	// enemy already dead
 	if (it == this->mEnemies.end())
 		return false;
 
@@ -78,7 +80,6 @@ bool EnemyManager::isEnemyInRange(CCPoint& pos, int rangeRadius, unsigned long e
 	CCLog("\ntarget out of range.");
 	CCLog("target: pos(%f, %f), width: %f, height: %f", targetPos.x, targetPos.y, targetSize.width, targetSize.height);
 	CCLog("tower: pos(%f, %f)", pos.x, pos.y );
-	isRectAndCircleCollided(pos, rangeRadius, it->second->getCollisionRect());
 	return false;
 }
 

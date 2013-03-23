@@ -26,7 +26,7 @@ public:
 	 *@return	a valid enemy id if there has a enemy in range, 
 	 *@			if not, the value is -1
 	 */
-	unsigned long getEnemyInRange(CCPoint& pos, int rangeRadius);
+	unsigned long getEnemyInRange(CCPoint pos, int rangeRadius);
 
 	/*
 	 *add a enemy node to manager, manager have responsibility to 
@@ -43,7 +43,7 @@ public:
 
 	void setEnemyLayer(CCNode* layer);
 
-	bool isEnemyInRange(CCPoint& pos, int rangeRadius, unsigned long enemyID);
+	bool isEnemyInRange(CCPoint pos, int rangeRadius, unsigned long enemyID);
 
 	/*
 	 *get the nearness enemy unit in range 

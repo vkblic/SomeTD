@@ -31,14 +31,11 @@ public:
 
 public:
 	void update(float dt); // execute every frame
-	void onFired();
-	void fire();
-	void onShoot(CCNode* shooter);
 
 public:
 	//Menu
 	void onMenuSelected(int type);
-	void myInit(eTower_Terrain terrain);//自定义初始化函数
+	void myInit(eTower_Terrain terrain);
 
 private:
 
@@ -46,6 +43,9 @@ private:
 	void upgradeTower();
 	void showPreivew(bool isShow, eTower_Preview towerType);
 	void showRange(bool isShow);
+	void fire();
+	void firing();
+	void onShoot();
 	//void getNextLv(eTower)
 
 private:
@@ -54,6 +54,40 @@ private:
 	eTower_Shooter mShooterTypeUpPart2;
 	eTower_Shooter mShooterTypeDown;
 	eTower_Shooter mShooterTypeDownPart2;
+
+	int mCurAnimationIndex;
+	int mCurPassedFrames;
+
+
+	/*
+	 *shoot when animation frame index equal this value.
+	 *@range [0, frameCount - 1]
+	 */
+	int mShootWhen;
+
+	/*
+	 *change display frame every x frame
+	 *@default: 1
+	 *@must >= 1
+	 */
+	int mFramesInterval;
+
+	/*
+	 *time use for reload, or we can see fire interval time.
+	 *@unit: second
+	 *@range [0, max)
+	 */
+	float mReloadTime;
+
+
+	/*
+	 *time already use for reload.
+	 *@unit: second
+	 *@range [0, mFireInterval)
+	 */
+	float mReloadElapsed;
+
+
 	eTower_Terrain mTerrainType;
 	//eTower_Preview mPreviewType;
 	

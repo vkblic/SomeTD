@@ -3,15 +3,15 @@
 #define _SPRITE_HELPERS_H_
 #include "cocos2d.h"
 using namespace cocos2d;
-static CCAnimation* addAnimationWithFramesToCache(const char* textureFileName, const char* aniamtionName, int startIndex, int count, float delay, bool restoreOriginalFrame, int loopCount = -1)  
+static CCAnimation* addAnimationWithFramesToCache(const char* textureFileName, const char* aniamtionName, int startIndex, int endIndex, float delay, bool restoreOriginalFrame, int loopCount = -1)  
 {  
 	CCSpriteFrameCache* cache = CCSpriteFrameCache::sharedSpriteFrameCache();  
 
-	CCArray* framesArray = CCArray::createWithCapacity(count);  
+	CCArray* framesArray = CCArray::createWithCapacity(endIndex);  
 	int bufferLen = strlen(textureFileName) + 10;
 	char *buffer = new char[bufferLen];
 	CCSpriteFrame* preFrame;
-	for(int i = startIndex; i <= count; i++)  
+	for(int i = startIndex; i <= endIndex; i++)  
 	{
 		sprintf(buffer, "%s_%.4d.png", textureFileName, i);
 		CCSpriteFrame* frame = cache->spriteFrameByName(buffer); 
@@ -32,6 +32,23 @@ static CCAnimation* addAnimationWithFramesToCache(const char* textureFileName, c
 	delete buffer;
 	return animation;
 }  
+
+static void buildAnimationFrameArray(std::vector<CCSpriteFrame*>** arr, const char* textureFileName, int startIndex, int endIndex)
+{
+	CCSpriteFrameCache* cache = CCSpriteFrameCache::sharedSpriteFrameCache();  
+	std::vector<CCSpriteFrame*>* tempArray = new std::vector<CCSpriteFrame*>();
+	char buffer[256];
+	for(int i = startIndex; i <= endIndex; i++)  
+	{
+		sprintf(buffer, "%s_%.4d.png", textureFileName, i);
+		CCSpriteFrame* frame = cache->spriteFrameByName(buffer); 
+		if(frame == NULL)
+			frame = nullptr;
+		tempArray->push_back(frame);
+	}  
+	(*arr) = tempArray;
+}
+
 
 static CCRect GetTouchableRect(CCNode* node)
 {

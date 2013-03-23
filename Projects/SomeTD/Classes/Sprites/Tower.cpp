@@ -141,6 +141,12 @@ void Tower::myInit(eTower_Terrain terrain)
 	this->mShooterTypeDownPart2 = eTower_Shooter::Shooter_None;
 	this->mTerrainType = terrain;
 	this->canFire = false;
+	this->mCurAnimationIndex = 0;
+	this->mCurPassedFrames = 0;
+	this->mFramesInterval = 1;
+	this->mShootWhen = 8;
+	this->mReloadTime = 0.8f;
+	this->mReloadElapsed = 0.0f;
 	TowerInformation* towerInfo = TowerInformation::getInstance();
 
 	//this->mShooter = CCSprite::createWithSpriteFrame(towerInfo->GetShooterFrame(TOWER_SHOOTER_TYPE::Shooter_Mage_LV_1To3_Down));
@@ -276,7 +282,7 @@ void Tower::BuildTower()
 
 	this->mShooter = CCSprite::createWithSpriteFrame(tInfo->getShooterFrame((eTower_Shooter)this->mShooterTypeDown));
 	this->addChild(this->mShooter, 1);
-	this->mShooter->setPosition(CCPoint(48, 64));
+	this->mShooter->setPosition(CCPoint(47, 67));
 	this->canFire = true;
 	this->scheduleUpdate();
 }
@@ -328,6 +334,7 @@ void Tower::upgradeTower()
 	}
 
 }
+
 void Tower::showPreivew(bool isShow, eTower_Preview towerType)
 {
 	if(!isShow)
@@ -372,123 +379,132 @@ void Tower::update(float dt)
 	}
 	if(this->canFire)
 	{
+		if(this->mReloadElapsed < this->mReloadTime)
+		{
+			this->mReloadElapsed += dt;
+			return;
+		}
+		// if no target, we get one 
 		if (this->mTargetID == -1)
 		{
-			auto pos = this->getPosition();
-			unsigned long target = EnemyManager::sharedEnemyManager()->getEnemyInRange(pos, 200);
-			if (target == -1)
-				return ;
-
-			CCLog("tower get new target: %d", target);
+			unsigned long target = EnemyManager::sharedEnemyManager()->getEnemyInRange(this->getPosition(), 200);
+			if(target != -1)
+				CCLog("tower get new target: %d", target);
 			this->mTargetID = target;
-		}
-		this->fire();
-	}
-	else
-	{
-		if (this->mTargetID == -1)
-		{
-			return ;
-			//CCLog("no target!");
-		}
-		auto pos = this->getPosition();
-		if (!EnemyManager::sharedEnemyManager()->isEnemyInRange(pos, 200, this->mTargetID))
-		{
-			//CCLog("target out of range!");
-			this->mTargetID = -1;
 		}
 		else
 		{
-			//CCLog("target still in range!");
+			// if there's a target, available check 
+			if(!EnemyManager::sharedEnemyManager()->isEnemyInRange(this->getPosition(), 200, this->mTargetID))
+			{
+				unsigned long target = EnemyManager::sharedEnemyManager()->getEnemyInRange(this->getPosition(), 200);
+				CCLog("tower get new target: %d", target);
+				this->mTargetID = target;
+			}
 		}
+		if(this->mTargetID != -1)
+			this->fire();
+	}
+	else
+	{
+		this->firing();
 	}
 
-	// 	CCPoint pos = this->getPosition();
-	// 	//pos.y -= this->mBulletInfo->BulletSpeed * dt;
-	// 	this->setPositionY(pos.y);
-	// 	if(this->isHit())
-	// 	{
-	// 		this->unscheduleUpdate();
-	// 		//this->destory();
-	// 		
-	// 		CCSequence* sequence = CCSequence::createWithTwoActions(
-	// 			CCAnimate::create(CCAnimationCache::sharedAnimationCache()->animationByName("magebolt_boom")),
-	// 			CCCallFunc::create(this, callfunc_selector(Tower::destory))
-	// 		);
-	// 		this->runAction(sequence);
-	// 	}
-	// 	else
-	// 	{
-	// 		CCPoint pos = this->getPosition();
-	// 		CCPoint targetPosNew = this->_target->getPosition();
-	// 		//ccVertex2F toOldTarget = vertex2( this->_targetLastPosition.x - pos.x, this->_targetLastPosition.y - pos.y );
-	// 
-	// 		ccVertex2F toNewTarget = vertex2( targetPosNew.x - pos.x, targetPosNew.y - pos.y);
-	// 		//ccVertex2F toNewPos = vertex2FAdd(toOldTarget, toNewTarget);
-	// 		ccVertex2F toNewPos = vertex2FMul(&vertex2FNormalization(toNewTarget), dt * this->_speed * 5);
-	// 		
-	// 		//sprintf_s(temp,255, "%-08.4f",dt);
-	// 		//CCLog(temp);
-	// 		CCPoint newPos = CCPoint(pos.x + toNewPos.x, pos.y + toNewPos.y);
-	// 		this->setPosition(newPos);
-	// 
-	// 		float angleRadians = atanf((float)toNewPos.y / (float)toNewPos.x);
-	// 		float angleDegrees = CC_RADIANS_TO_DEGREES(angleRadians);
-	// 		float cocosAngle = -1 * angleDegrees + 180;
-	// 		this->setRotation(cocosAngle);
-	// 
-	// 	}
-	//CCSpriteFrameCache.addSpriteFrame()
-	// this->setPosition(ccpAdd(this->getPosition(), ccpMult(mVelocity, dt)));
+	
 }
+void Tower::firing()
+{
+	auto tInfo = TowerInformation::getInstance();
 
+	std::vector<CCSpriteFrame*>* shooterFrames = tInfo->getShooterAnimation(this->mShooterTypeDown);
+	std::vector<CCSpriteFrame*>* towerFrames = tInfo->getTowerAnimation(this->mTowerType);
+	int framesCount = towerFrames->size();
+
+	
+
+	if(this->mCurAnimationIndex > framesCount)
+	{
+		this->canFire = true;
+		this->mReloadElapsed = 0;
+		// restore frame
+		this->mShooter->setDisplayFrame(tInfo->getShooterFrame(this->mShooterTypeDown));
+		this->setDisplayFrame(tInfo->getTowerFrame(this->mTowerType));
+		return;
+	}
+	// deal with frame interval 
+	if (this->mCurPassedFrames % this->mFramesInterval == 0)
+	{
+		if(this->mCurAnimationIndex < framesCount)
+		{
+			CCSpriteFrame* frame = shooterFrames->at(this->mCurAnimationIndex);
+			if(frame != nullptr)
+				this->mShooter->setDisplayFrame(frame);
+			frame = towerFrames->at(this->mCurAnimationIndex);
+			if(frame != nullptr)
+				this->setDisplayFrame(frame);
+
+			// deal with shoot frame
+			if (this->mCurAnimationIndex == this->mShootWhen)
+				this->onShoot();
+		}
+		++this->mCurAnimationIndex;
+	}
+	++this->mCurPassedFrames;
+
+
+}
 
 void Tower::fire()
 {
-	CCLog("Tower::fire()");
 	this->canFire = false;
-	//this->mShooter->runAction(CCAnimate::create(TowerInformation::GetInstance()->GetShooterAnimation(TOWER_SHOOTER_TYPE::Shooter_Mage_LV_1To3_Down_Part2)));
-	TowerInformation* tInfo = TowerInformation::getInstance();
-	CCSequence* firecallback = CCSequence::create(
-		CCDelayTime::create(SECOND_PER_FRAME * 8 * 2),
-		CCCallFuncN::create(this, callfuncN_selector(Tower::onShoot)),
-		CCDelayTime::create(0.5),
-		CCCallFunc::create(this, callfunc_selector(Tower::onFired)),
-		NULL
-	);
-	CCSequence* towerAnimCallback = CCSequence::create(
-		CCAnimate::create(tInfo->getTowerAnimation(this->mTowerType)),
-		NULL
-	);
-
-	CCSpawn* spawn = CCSpawn::create(
-		CCAnimate::create(tInfo->getShooterAnimation(eTower_Shooter::Shooter_Mage_LV_1To3_Down)),
-		firecallback, 
-		//towerAnimCallback,
-		NULL
-		);
-
-	this->mShooter->runAction(
-		spawn
-		);
-
-	CCAnimation* aa = tInfo->getTowerAnimation(this->mTowerType);
-
-	this->runAction(CCAnimate::create(aa));
+	this->mCurAnimationIndex = 0;
+	this->mCurPassedFrames = 0;
+	this->mFramesInterval = 2;
+	this->mShootWhen = 8;
+	//CCLog("Tower::fire()");
+	//this->canFire = false;
+	////this->mShooter->runAction(CCAnimate::create(TowerInformation::GetInstance()->GetShooterAnimation(TOWER_SHOOTER_TYPE::Shooter_Mage_LV_1To3_Down_Part2)));
+	//TowerInformation* tInfo = TowerInformation::getInstance();
+	//CCSequence* firecallback = CCSequence::create(
+	//	CCDelayTime::create(SECOND_PER_FRAME * 8 * 2),
+	//	CCCallFuncN::create(this, callfuncN_selector(Tower::onShoot)),
+	//	CCDelayTime::create(0.5),
+	//	CCCallFunc::create(this, callfunc_selector(Tower::onFired)),
+	//	NULL
+	//);
+	//CCSequence* towerAnimCallback = CCSequence::create(
+	//	CCAnimate::create(tInfo->getTowerAnimation(this->mTowerType)),
+	//	NULL
+	//);
+	//
+	//CCSpawn* spawn = CCSpawn::create(
+	//	CCAnimate::create(tInfo->getShooterAnimation(eTower_Shooter::Shooter_Mage_LV_1To3_Down)),
+	//	firecallback, 
+	//	//towerAnimCallback,
+	//	NULL
+	//	);
+	//
+	//this->mShooter->runAction(
+	//	spawn
+	//	);
+	//
+	//CCAnimation* aa = tInfo->getTowerAnimation(this->mTowerType);
+	//
+	//this->runAction(CCAnimate::create(aa));
 }
 
-void Tower::onShoot(CCNode* shooter)
+void Tower::onShoot()
 {
 
 	CCLog("Tower::onShoot()");
 	static bool first = true;
 
-	if(first)
-	{
+	//if(first)
+	//{
 		this->testBullet = Bullet::create();
 		this->getParent()->addChild(this->testBullet);
-		first = false;
-	}
+	//	first = false;
+	//}
 
 
 
@@ -506,12 +522,17 @@ void Tower::onShoot(CCNode* shooter)
 	this->testBullet->setPosition(bulletPos);
 	//bullet->setScale(0.25);
 	//this->getParent()->addChild(this->testBullet);
-
-	this->testBullet->reuse(100, this->mTargetID, CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("magebolt_0002.png"));
+	// 
+	// check if target is still available, if not, get one.
+	if(!EnemyManager::sharedEnemyManager()->isEnemyInRange(this->getPosition(), 200, this->mTargetID))
+	{
+		unsigned long target = EnemyManager::sharedEnemyManager()->getEnemyInRange(this->getPosition(), 200);
+		CCLog("tower get new target: %d when shooting", target);
+		this->mTargetID = target;
+	}
+	if (this->mTargetID != -1)
+		this->testBullet->reuse(100, this->mTargetID, CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("magebolt_0002.png"));
+	else
+		CCLog("no target in range when shooting, fire cancle!");
 }
 
-void Tower::onFired()
-{
-	CCLog("Tower::onFired()");
-	this->canFire = true;
-}
