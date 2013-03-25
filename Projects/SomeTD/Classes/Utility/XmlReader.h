@@ -4,9 +4,10 @@
 
 #include "cocos2d.h"
 #include "../Model/Models.h"
-class EnemyInfoReader
+class XmlReader
 {
 public:
 	static bool readAllEnemyInfo(std::map<std::string, EnemyModel>& enemyInfoMap, const char* fileName);
+	static bool readAllLevelInfo(std::map<std::string, LevelModel>& levelInfoMap, const char* fileName);
 };
 #endif

@@ -36,9 +36,9 @@ public:
 
 	void FollowPath(CCNode* sender);
 
-	void run(std::vector<WayPoint>& wayPoints);
+	void run(std::vector<WayPointEx>& wayPoints);
 
-	void run(std::vector<WayPoint>& wayPoints, float duration, float tension);
+	void run(std::vector<WayPointEx>& wayPoints, float duration, float tension);
 
 	void setID(int id){ this->mID = id; }
 	unsigned long getID() { return this->mID; }
@@ -77,7 +77,7 @@ private:
 private:
 	int _wayPointIndex;
 	int _wayPointCount;
-	std::vector<WayPoint> mWayPoints;
+	std::vector<WayPointEx> mWayPoints;
 	//eTower_Preview mPreviewType;
 	
 	//CCSequence* mShooterAnimationSequence;

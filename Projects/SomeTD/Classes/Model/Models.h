@@ -57,7 +57,65 @@ typedef struct EnemyModel
 }*pEnemyModel;
 
 
+#pragma region Level
+
+typedef struct WaveEnemyModel
+{
+	char enemyName[128];
+	float delay;
+	int wayID;
+	int entryID;
+}*pWaveEnemyModel;
+
+typedef struct WaveModel
+{
+	int id;
+	std::vector<WaveEnemyModel> enemise;
+}*pWaveModel;
+
+typedef struct WayPointEx
+{
+	WayPointEx(int x, int y, int id)
+	{
+		this->pos.x = x;
+		this->pos.y = y;
+		this->wayPointID = id;
+	}
+	CCPoint pos;
+	int wayPointID;
+}*pWayPointEx;
+
+typedef struct Entry 
+{
+	CCPoint pos;
+	int id;
+	std::vector<std::vector<WayPointEx>> ways;
+}*pEntry;
 
 
 
+typedef struct LevelModel
+{
+	LevelModel()
+	{
+		this->name[0] = '\0';
+		this->mapFile[0] = '\0';
+	}
+
+	char name[64];
+	char mapFile[64];
+	int waveCount;
+	float waveInterval;
+	int entryCount;
+	int	waysEveryEntry;
+	std::vector<WaveModel> waves;
+	std::vector<Entry> entrise;
+}*pLevelModel;
+
+
+
+
+
+
+#pragma endregion
 #endif

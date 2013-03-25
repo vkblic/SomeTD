@@ -11,42 +11,38 @@
    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
   </data>
  </layer>
- <layer name="Col" width="60" height="45">
-  <data encoding="base64" compression="zlib">
-   eJzt0SEOACEMRUE0h98zkwrMBoWAhD+T1Pe1rcG+r9/e4IzqnPMyne9J6SxJrSWptST2JjYnSf3xf5Ks+lNvAAAAAAAAANwxACMeFDE=
-  </data>
- </layer>
  <objectgroup name="Objects" width="60" height="45">
-  <object name="Entry01" x="694" y="219"/>
-  <object name="Entry02" x="616" y="706"/>
-  <object name="Entry03" x="440" y="-18"/>
-  <object name="WayPoint00" x="440" y="-18"/>
-  <object name="WayPoint01" x="414" y="38"/>
-  <object name="WayPoint02" x="353" y="73"/>
-  <object name="WayPoint03" x="301" y="112"/>
-  <object name="WayPoint04" x="286" y="149"/>
-  <object name="WayPoint05" x="306" y="183"/>
-  <object name="WayPoint06" x="356" y="195"/>
-  <object name="WayPoint07" x="413" y="188"/>
-  <object name="WayPoint09" x="497" y="225"/>
-  <object name="WayPoint08" x="463" y="199"/>
-  <object name="WayPoint10" x="511" y="262"/>
-  <object name="WayPoint11" x="515" y="301"/>
-  <object name="WayPoint12" x="505" y="345"/>
-  <object name="WayPoint13" x="476" y="367"/>
-  <object name="WayPoint14" x="451" y="394"/>
-  <object name="WayPoint15" x="435" y="433"/>
-  <object name="WayPoint16" x="446" y="473"/>
-  <object name="WayPoint17" x="481" y="490"/>
-  <object name="WayPoint18" x="519" y="499"/>
-  <object name="WayPoint19" x="558" y="505"/>
-  <object name="WayPoint20" x="599" y="512"/>
-  <object name="WayPoint21" x="636" y="532"/>
-  <object name="WayPoint22" x="663" y="560"/>
-  <object name="WayPoint23" x="678" y="592"/>
-  <object name="WayPoint24" x="680" y="632"/>
-  <object name="WayPoint25" x="672" y="668"/>
-  <object name="WayPoint26" x="664" y="706"/>
+  <object name="Entry_0" x="457" y="-150"/>
+  <object name="WayPoint_0_0_0" x="457" y="-100"/>
+  <object name="WayPoint_0_0_1" x="439" y="16"/>
+  <object name="WayPoint_0_0_2" x="411" y="44"/>
+  <object name="WayPoint_0_0_3" x="371" y="62"/>
+  <object name="WayPoint_0_0_4" x="333" y="83"/>
+  <object name="WayPoint_0_0_5" x="301" y="112"/>
+  <object name="WayPoint_0_0_6" x="286" y="149"/>
+  <object name="WayPoint_0_0_7" x="306" y="183"/>
+  <object name="WayPoint_0_0_8" x="356" y="195"/>
+  <object name="WayPoint_0_0_9" x="413" y="188"/>
+  <object name="WayPoint_0_0_11" x="497" y="225"/>
+  <object name="WayPoint_0_0_10" x="463" y="199"/>
+  <object name="WayPoint_0_0_12" x="511" y="262"/>
+  <object name="WayPoint_0_0_13" x="515" y="301"/>
+  <object name="WayPoint_0_0_14" x="505" y="345"/>
+  <object name="WayPoint_0_0_15" x="476" y="367"/>
+  <object name="WayPoint_0_0_16" x="451" y="394"/>
+  <object name="WayPoint_0_0_17" x="435" y="433"/>
+  <object name="WayPoint_0_0_18" x="446" y="473"/>
+  <object name="WayPoint_0_0_19" x="481" y="490"/>
+  <object name="WayPoint_0_0_20" x="519" y="499"/>
+  <object name="WayPoint_0_0_21" x="558" y="505"/>
+  <object name="WayPoint_0_0_22" x="599" y="512"/>
+  <object name="WayPoint_0_0_23" x="636" y="532"/>
+  <object name="WayPoint_0_0_24" x="663" y="560"/>
+  <object name="WayPoint_0_0_25" x="678" y="592"/>
+  <object name="WayPoint_0_0_26" x="680" y="632"/>
+  <object name="WayPoint_0_0_27" x="672" y="668"/>
+  <object name="WayPoint_0_0_28" x="664" y="706"/>
+  <object name="WayPoint_0_0_29" x="655" y="757"/>
   <object name="Tower1" x="624" y="432"/>
   <object name="Tower2" x="576" y="368"/>
   <object name="Tower3" x="576" y="256"/>
@@ -64,6 +60,5 @@
   <object name="Tower15" x="394" y="295"/>
   <object name="Tower16" x="217" y="388"/>
   <object name="Tower17" x="510" y="434"/>
-  <object name="WayPoint27" x="655" y="757"/>
  </objectgroup>
 </map>

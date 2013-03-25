@@ -8,7 +8,7 @@
 #include "EnemyManager.h"
 #include "../Helper/CommonHelpers.h"
 #include "../Helper/SpriteHelpers.h"
-#include "Utility/EnemyInfoReader.h"
+#include "Utility/XmlReader.h"
 using namespace cocos2d;
 
 EnemyManager::EnemyManager()
@@ -55,7 +55,7 @@ void EnemyManager::setEnemyLayer(CCNode* layer)
 
 void EnemyManager::readEnemyInfo(const char* fileName)
 {
-	EnemyInfoReader::readAllEnemyInfo(this->mEnemyInfo, fileName);
+	XmlReader::readAllEnemyInfo(this->mEnemyInfo, fileName);
 }
 
 
@@ -108,7 +108,7 @@ bool EnemyManager::isEnemyInRange(CCPoint pos, int rangeRadius, unsigned long en
 
 #pragma region enemy node
 
-unsigned long EnemyManager::addEnemy(const char* enemyName)
+Enemy* EnemyManager::addEnemy(const char* enemyName)
 {
 
 	auto enemyInfo = this->mEnemyInfo.find(enemyName);
@@ -154,7 +154,7 @@ unsigned long EnemyManager::addEnemy(const char* enemyName)
 	this->mEnemies.insert(std::pair<unsigned long, Enemy*>(this->mIDSeed, enemy));
 	batch->addChild(enemy);
 	enemy->setID(this->mIDSeed++);
-	return enemy->getID();
+	return enemy;
 }
 
 void EnemyManager::removeEnemy(unsigned long enemyID)
@@ -205,59 +205,7 @@ Enemy* EnemyManager::getAvailableEnemy(unsigned long enemyID)
 
 
 
-void EnemyManager::runEnemiseOneByOne(float dt)
-{
-	for(auto it = this->mEnemies.begin();it != this->mEnemies.end(); ++it)
-	{
-		it->second->run(this->mWayPoints, 30, 0);
-	}
-}
-
-void EnemyManager::readWayPoints(CCTMXObjectGroup* objects)
-{
-
-
-	//WayPoints
-	//this->_wayPoints = new std::vector<WayPoint>();
-	//this->_wayPointIndex = 0;
-	int index = 0;
-	char name[] = "WayPoint00";
-	while (true)
-	{
-		
-		if(index < 10)
-		{
-			name[9] = (char)(index + 48);
-		}
-		else
-		{
-			name[8] = (char) (index / 10) + 48;
-			name[9] = (char) (index % 10) + 48;
-		}
-		CCDictionary *temp = objects->objectNamed(name);
-		if (temp == NULL) 
-			break;
-		int x = temp->valueForKey("x")->intValue();
-		int y = temp->valueForKey("y")->intValue();
-		this->mWayPoints.push_back(IDS_Create_WayPoint(x, y));
-		index++;
-	}
-
-}
-
 void EnemyManager::update(float dt)
 {
-	static float timeCounter = 0;
-	if(timeCounter >= 3)
-	{
-		auto id = this->addEnemy("yeti");
-		auto it = this->mEnemies.find(id);
-		(*it).second->run(this->mWayPoints, 15, 0);
-		timeCounter = 0;
-	}
-	else
-	{
-		timeCounter += dt;
-	}
 	this->clearUnusedEnemise();
 }

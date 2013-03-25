@@ -33,10 +33,9 @@ public:
 	 *add a enemy node to manager, manager have responsibility to 
 	 *retain or release it 
 	 *
-	 *@param	enemy: enemy node pointer
-	 *@return	a valid enemyID
-	 */
-	unsigned long addEnemy(const char* plFrameName);
+	 *@param	plFrameName: enemy node pointer
+	 *@return	a valid enemy node pointer	 */
+	Enemy* addEnemy(const char* name);
 
 	/*
 	 *remove a enemy node from enemy map, add it to removed map for
@@ -69,10 +68,6 @@ public:
 	 *@			if not(destroyed of out of screen), the value NULL
 	 */
 	Enemy* getAvailableEnemy(unsigned long enemyID);
-
-	void runEnemiseOneByOne(float dt);
-
-	void readWayPoints(CCTMXObjectGroup* objects);
 
 	void readEnemyInfo(const char* fileName);
 

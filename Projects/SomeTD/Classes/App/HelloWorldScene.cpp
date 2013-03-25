@@ -4,8 +4,10 @@
 #include "../Helper/CommonHelpers.h"
 #include "../Model/TowerInformation.h"
 #include "../Managers/EnemyManager.h"
+#include "../Managers/LevelsManager.h"
 #include "../Sprites/Enemy.h"
-#include "../Utility/EnemyInfoReader.h"
+#include "../Utility/XmlReader.h"
+
 using namespace cocos2d;
 
 float HelloWorld::_scale = 1.0f;
@@ -72,14 +74,11 @@ bool HelloWorld::init()
 		//int x = spawnPoint->valueForKey("x")->intValue();
 		//int y = spawnPoint->valueForKey("y")->intValue();
 
+		//levels
+		auto levelsManager = LevelsManager::sharedLevelsManager();
+		levelsManager->readLevaInfo("LevelsInfo.xml", objects);
 
 
-		// other things
-		this->canFire = false;
-
-		// bulletpool
-		_bulletsInUse = new std::queue<CCSprite*>();
-		_bulletsCanUse = new std::queue<CCSprite*>();
 
 		CCSpriteFrameCache* cache = CCSpriteFrameCache::sharedSpriteFrameCache(); 
 		cache->addSpriteFramesWithFile("enemies_snow.plist");
@@ -117,14 +116,12 @@ bool HelloWorld::init()
 		addAnimationWithFramesToCache("magebolt","boom", 3, 10, 1, false, 1);
 
 
-
-
+		
 		//enemise
 
 
 		auto enemyManager = EnemyManager::sharedEnemyManager();
 		//WayPoints
-		enemyManager->readWayPoints(objects);
 		enemyManager->readEnemyInfo("EnemyInfo.xml");
 		enemyManager->setEnemyLayer(this);
 // 		for (int i = 0; i < 1; ++i)
@@ -368,4 +365,5 @@ void HelloWorld::update(float dt)
 {
 
 	EnemyManager::sharedEnemyManager()->update(dt);
+	LevelsManager::sharedLevelsManager()->update(dt);
 }

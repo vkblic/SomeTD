@@ -203,12 +203,12 @@ void Enemy::FollowPath(CCNode* sender)
 
 }
 
-void Enemy::run(std::vector<WayPoint>& wayPoints)
+void Enemy::run(std::vector<WayPointEx>& wayPoints)
 {
 	this->_wayPointIndex = 0;
 	for(auto it = wayPoints.begin(); it != wayPoints.end(); it++)
 	{
-		WayPoint temp = (*it);
+		WayPointEx temp = (*it);
 		temp.pos.x = temp.pos.x + (float)rand() / 1000;
 		temp.pos.y = temp.pos.y + (float)rand() / 500;
 		this->mWayPoints.push_back(temp);
@@ -225,7 +225,7 @@ void Enemy::run(std::vector<WayPoint>& wayPoints)
 	this->runAction(sequence);
 	this->scheduleUpdate();
 }
-void Enemy::run(std::vector<WayPoint>& wayPoints, float duration, float tension) 
+void Enemy::run(std::vector<WayPointEx>& wayPoints, float duration, float tension) 
 {   
 	// not like vector<T>, 
 	// capacity of CCPointArray::create() is no use for now

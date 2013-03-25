@@ -1,12 +1,79 @@
-#include "EnemyInfoReader.h"
+#include "XmlReader.h"
 #include "../libs/tinyxml2.h"
 #include "../Model/Enumeration.h"
 #include "../Helper/SpriteHelpers.h"
 
 
+bool XmlReader::readAllLevelInfo(std::map<std::string, LevelModel>& levelInfoMap, const char* fileName)
+{
+	tinyxml2::XMLDocument doc;
+	doc.LoadFile(fileName);
+
+	if(doc.Error())
+		return false;
+	auto levelsNode = doc.FirstChild()->NextSibling();
+	if(levelsNode->NoChildren())
+		return false;
+
+	auto levelNode  = levelsNode->FirstChild();
+	//std::map<std::string, EnemyModel>* dic = new std::map<std::string, EnemyModel>();
+	do 
+	{
+		LevelModel levelModel;
+		auto element = levelNode->ToElement();
+
+		// 2. info 
+		strcpy(levelModel.name, element->Attribute("name"));
+		strcpy(levelModel.mapFile, element->Attribute("mapFile"));
+		levelModel.waveCount = atoi(element->Attribute("waveCount"));
+		levelModel.waveInterval = atoi(element->Attribute("waveInterval"));
+		levelModel.entryCount = atoi(element->Attribute("entryCount"));
+		levelModel.waysEveryEntry = atoi(element->Attribute("waysEveryEntry"));
 
 
-bool EnemyInfoReader::readAllEnemyInfo(std::map<std::string, EnemyModel>& enemyInfoMap, const char* fileName)
+		// 2. animations
+		auto waveNode = levelNode->FirstChildElement();
+
+		do 
+		{
+			//wave
+			WaveModel waveModel;
+			waveModel.id = atoi(waveNode->Attribute("id"));
+			auto entryNode = waveNode->FirstChildElement();
+			
+			do 
+			{
+				//entry every wave 
+				auto enemyNode = entryNode->FirstChildElement();
+				do 
+				{
+					//enemise every entry
+					WaveEnemyModel waveEnemy;
+					waveEnemy.entryID =  atoi(entryNode->Attribute("entryID"));
+
+					strcpy(waveEnemy.enemyName, enemyNode->Attribute("enemyName"));
+					waveEnemy.delay = atoi(enemyNode->Attribute("delay"));
+					waveEnemy.wayID = atoi(enemyNode->Attribute("wayID"));
+					waveModel.enemise.push_back(waveEnemy);
+					enemyNode = enemyNode->NextSiblingElement();
+				} while (enemyNode != NULL);
+
+				entryNode = entryNode->NextSiblingElement();
+			} while (entryNode != NULL);
+
+			levelModel.waves.push_back(waveModel);
+			waveNode = waveNode->NextSiblingElement();
+		} while (waveNode != NULL);
+
+		levelInfoMap.insert(std::map<std::string, LevelModel>::value_type(levelModel.name, levelModel));
+		levelNode = levelNode->NextSibling();
+	} while (levelNode != NULL);
+
+	return true;
+}
+
+
+bool XmlReader::readAllEnemyInfo(std::map<std::string, EnemyModel>& enemyInfoMap, const char* fileName)
 {
 	tinyxml2::XMLDocument doc;
 	doc.LoadFile(fileName);
