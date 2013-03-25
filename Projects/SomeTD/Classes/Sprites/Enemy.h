@@ -4,6 +4,7 @@
 
 #include "cocos2d.h"
 #include "../Model/Enumeration.h"
+#include "../Model/Models.h"
 using namespace cocos2d;
 
 //Tower class
@@ -13,7 +14,7 @@ class Enemy : public CCSprite , public CCTouchDelegate
 {
 
 public:
-	static Enemy* create(const char* pszSpriteFrameName, CCSpriteBatchNode* hpBatchNode);
+	static Enemy* create(EnemyModel* enemyInfo, CCSpriteBatchNode* hpBatchNode);
 
 public:
 public:
@@ -29,7 +30,6 @@ public:
 
 public:
 	void update(float dt); // execute every frame
-	void destory();
 	void fire(CCSprite* target);
 	void onShoot(CCNode* shooter);
 	CCRect getCollisionRect();
@@ -42,6 +42,9 @@ public:
 
 	void setID(int id){ this->mID = id; }
 	unsigned long getID() { return this->mID; }
+
+	EnemyModel* getEnemyInfo() { return this->mEnemyInfo; }
+
 public:
 	void myInit();//自定义初始化函数
 
@@ -50,9 +53,11 @@ public:
 	 *
 	 *
 	 *
-	 **/
+	 */
 	void underAttack(int damage);
 
+
+	void destory();
 	void onDestoryed();
 
 private:
@@ -61,8 +66,7 @@ private:
 	/*
 	 *Set hp sprite position in enemy layer coordinate
 	 *
-	 **/
-
+	 */
 	void setHpSpritePosition();
 
 
@@ -83,10 +87,10 @@ private:
 private:
 
 
-	CCSpriteBatchNode* mBatchNode;
 	CCSpriteBatchNode* mHpBatchNode;
+	EnemyModel* mEnemyInfo;
 
-	int mMaxHP;
+	//int mMaxHP;
 	int mCurHP;
 	unsigned long mID;
 };

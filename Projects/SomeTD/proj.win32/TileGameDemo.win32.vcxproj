@@ -150,25 +150,31 @@
     <ClInclude Include="..\Classes\App\HelloWorldScene.h" />
     <ClInclude Include="..\Classes\Helper\CommonHelpers.h" />
     <ClInclude Include="..\Classes\Helper\SpriteHelpers.h" />
+    <ClInclude Include="..\Classes\libs\tinyxml2.h" />
     <ClInclude Include="..\Classes\Managers\EnemyManager.h" />
     <ClInclude Include="..\Classes\Model\Enumeration.h" />
+    <ClInclude Include="..\Classes\Model\Models.h" />
     <ClInclude Include="..\Classes\Model\TowerInformation.h" />
     <ClInclude Include="..\Classes\Sprites\Bullet.h" />
     <ClInclude Include="..\Classes\Sprites\Enemy.h" />
     <ClInclude Include="..\Classes\Sprites\Tower.h" />
     <ClInclude Include="..\Classes\Sprites\TowerMenu.h" />
+    <ClInclude Include="..\Classes\Utility\EnemyInfoReader.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\App\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\App\HelloWorldScene.cpp" />
+    <ClCompile Include="..\Classes\libs\tinyxml2.cpp" />
+    <ClCompile Include="..\Classes\libs\xmltest.cpp" />
     <ClCompile Include="..\Classes\Managers\EnemyManager.cpp" />
     <ClCompile Include="..\Classes\Model\TowerInformation.cpp" />
     <ClCompile Include="..\Classes\Sprites\Bullet.cpp" />
     <ClCompile Include="..\Classes\Sprites\Enemy.cpp" />
     <ClCompile Include="..\Classes\Sprites\Tower.cpp" />
     <ClCompile Include="..\Classes\Sprites\TowerMenu.cpp" />
+    <ClCompile Include="..\Classes\Utility\EnemyInfoReader.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -195,6 +201,9 @@
     <ProjectReference Include="..\..\..\libs\external\Box2D\proj.win32\Box2D.vcxproj">
       <Project>{929480e7-23c0-4df6-8456-096d71547116}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="..\Resources\EnemyInfo.xml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

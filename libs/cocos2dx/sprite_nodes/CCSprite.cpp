@@ -977,6 +977,10 @@ void CCSprite::setDisplayFrame(CCSpriteFrame *pNewFrame)
 
     // update rect
     m_bRectRotated = pNewFrame->isRotated();
+
+	// update colorrect
+	m_colorRect = pNewFrame->getColorRect();
+
     setTextureRect(pNewFrame->getRect(), m_bRectRotated, pNewFrame->getOriginalSize());
 }
 

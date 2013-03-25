@@ -98,6 +98,25 @@ bool CCSpriteFrame::initWithTexture(CCTexture2D* pobTexture, const CCRect& rect,
 
     return true;
 }
+bool CCSpriteFrame::initWithTextureEx(CCTexture2D* pobTexture, const CCRect& rect, bool rotated, const CCPoint& offset,const CCRect& colorRect, const CCSize& originalSize)
+{
+	m_pobTexture = pobTexture;
+
+	if (pobTexture)
+	{
+		pobTexture->retain();
+	}
+
+	m_obRectInPixels = rect;
+	m_obRect = CC_RECT_PIXELS_TO_POINTS(rect);
+	m_obOffsetInPixels = offset;
+	m_obOffset = CC_POINT_PIXELS_TO_POINTS( m_obOffsetInPixels );
+	m_obOriginalSizeInPixels = originalSize;
+	m_obOriginalSize = CC_SIZE_PIXELS_TO_POINTS( m_obOriginalSizeInPixels );
+	m_bRotated = rotated;
+	m_colorRect = colorRect;
+	return true;
+}
 
 bool CCSpriteFrame::initWithTextureFilename(const char* filename, const CCRect& rect, bool rotated, const CCPoint& offset, const CCSize& originalSize)
 {

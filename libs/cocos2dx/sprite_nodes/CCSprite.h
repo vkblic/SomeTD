@@ -496,8 +496,19 @@ public:
      */
     void setFlipY(bool bFlipY);
     
+	/**
+     * Gets coloreRect of displaying frame.
+     *
+     * @by kelyad 3/25/2013
+     */
+	inline const CCRect& getColorRect(void) { return m_colorRect; }
+
     /// @} End of Sprite properties getter/setters
     
+
+
+
+
 protected:
     void updateColor(void);
     virtual void setTextureCoords(CCRect rect);
@@ -531,6 +542,11 @@ protected:
     // texture
     CCRect m_obRect;                            /// Retangle of CCTexture2D
     bool   m_bRectRotated;                      /// Whether the texture is rotated
+
+	// colorRect
+	// by kelyad 3/25/2013
+	CCRect m_colorRect;							/// for collision rect					
+
 
     // Offset Position (used by Zwoptex)
     CCPoint m_obOffsetPosition;

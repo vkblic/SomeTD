@@ -132,21 +132,22 @@ void Tower::onExit()
 
 void Tower::myInit(eTower_Terrain terrain)
 {
-	this->mTargetID = -1;
+	mTargetID = -1;
 
-	this->mTowerType = eTower::Tower_None;
-	this->mShooterTypeUp = eTower_Shooter::Shooter_None;
-	this->mShooterTypeUpPart2 = eTower_Shooter::Shooter_None;
-	this->mShooterTypeDown = eTower_Shooter::Shooter_None;
-	this->mShooterTypeDownPart2 = eTower_Shooter::Shooter_None;
-	this->mTerrainType = terrain;
-	this->canFire = false;
-	this->mCurAnimationIndex = 0;
-	this->mCurPassedFrames = 0;
-	this->mFramesInterval = 1;
-	this->mShootWhen = 8;
-	this->mReloadTime = 0.8f;
-	this->mReloadElapsed = 0.0f;
+	mTowerType = eTower::Tower_None;
+	mShooterTypeUp = eTower_Shooter::Shooter_None;
+	mShooterTypeUpPart2 = eTower_Shooter::Shooter_None;
+	mShooterTypeDown = eTower_Shooter::Shooter_None;
+	mShooterTypeDownPart2 = eTower_Shooter::Shooter_None;
+	mTerrainType = terrain;
+	canFire = false;
+	mCurAnimationIndex = 0;
+	mCurPassedFrames = 0;
+	mFramesInterval = 1;
+	mShootWhen = 8;
+	mReloadTime = 0.8f;
+	mReloadElapsed = 0.0f;
+	mAttackRange = 200;
 	TowerInformation* towerInfo = TowerInformation::getInstance();
 
 	//this->mShooter = CCSprite::createWithSpriteFrame(towerInfo->GetShooterFrame(TOWER_SHOOTER_TYPE::Shooter_Mage_LV_1To3_Down));
@@ -156,21 +157,21 @@ void Tower::myInit(eTower_Terrain terrain)
 
 
 	//Terrain
-	this->mTerrain = CCSprite::createWithSpriteFrame(towerInfo->getTerrainFrame(terrain));
-	this->addChild(this->mTerrain, -1);
+	mTerrain = CCSprite::createWithSpriteFrame(towerInfo->getTerrainFrame(terrain));
+	this->addChild(mTerrain, -1);
 	CCSize towerSize = this->getContentSize();
 	CCSize terrainSize = this->getContentSize();
-	this->mTerrain->setPosition(CCPoint(94/2, 30));
+	mTerrain->setPosition(CCPoint(94/2, 30));
 	this->setOpacity(0);
 
 	//Range Sprite
-	this->mRange = CCSprite::createWithSpriteFrame(towerInfo->getTowerRange());
-	this->addChild(this->mRange);
-	this->mRange->setPosition(CCPoint(towerSize.width / 2, towerSize.height /2));
-	this->mRange->setVisible(false);
+	mRangeSprite = CCSprite::createWithSpriteFrame(towerInfo->getTowerRange());
+	this->addChild(this->mRangeSprite);
+	mRangeSprite->setPosition(CCPoint(towerSize.width / 2, towerSize.height /2));
+	mRangeSprite->setVisible(false);
 
-	float scale = 100 / (this->mRange->getContentSize().width / 2);
-	this->mRange->setScale(scale);
+	float scale = mAttackRange / (mRangeSprite->getContentSize().width / 2);
+	mRangeSprite->setScale(scale);
 
 }
 
@@ -356,7 +357,7 @@ void Tower::showPreivew(bool isShow, eTower_Preview towerType)
 
 void Tower::showRange(bool isShow)
 {
-	this->mRange->setVisible(isShow ? true : true);
+	this->mRangeSprite->setVisible(isShow ? true : true);
 }
 
 
@@ -387,7 +388,7 @@ void Tower::update(float dt)
 		// if no target, we get one 
 		if (this->mTargetID == -1)
 		{
-			unsigned long target = EnemyManager::sharedEnemyManager()->getEnemyInRange(this->getPosition(), 300);
+			unsigned long target = EnemyManager::sharedEnemyManager()->getEnemyInRange(this->getPosition(), mAttackRange);
 			if(target != -1)
 				CCLog("tower get new target: %d", target);
 			this->mTargetID = target;
@@ -395,9 +396,9 @@ void Tower::update(float dt)
 		else
 		{
 			// if there's a target, available check 
-			if(!EnemyManager::sharedEnemyManager()->isEnemyInRange(this->getPosition(), 300, this->mTargetID))
+			if(!EnemyManager::sharedEnemyManager()->isEnemyInRange(this->getPosition(), mAttackRange, mTargetID))
 			{
-				unsigned long target = EnemyManager::sharedEnemyManager()->getEnemyInRange(this->getPosition(), 300);
+				unsigned long target = EnemyManager::sharedEnemyManager()->getEnemyInRange(this->getPosition(), mAttackRange);
 				CCLog("tower get new target: %d", target);
 				this->mTargetID = target;
 			}
@@ -524,14 +525,14 @@ void Tower::onShoot()
 	//this->getParent()->addChild(this->testBullet);
 	// 
 	// check if target is still available, if not, get one.
-	if(!EnemyManager::sharedEnemyManager()->isEnemyInRange(this->getPosition(), 300, this->mTargetID))
+	if(!EnemyManager::sharedEnemyManager()->isEnemyInRange(this->getPosition(), mAttackRange, mTargetID))
 	{
-		unsigned long target = EnemyManager::sharedEnemyManager()->getEnemyInRange(this->getPosition(), 300);
+		unsigned long target = EnemyManager::sharedEnemyManager()->getEnemyInRange(this->getPosition(), mAttackRange);
 		CCLog("tower get new target: %d when shooting", target);
-		this->mTargetID = target;
+		mTargetID = target;
 	}
-	if (this->mTargetID != -1)
-		this->testBullet->reuse(100, EnemyManager::sharedEnemyManager()->getAvailableEnemy(this->mTargetID), CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("magebolt_0002.png"));
+	if (mTargetID != -1)
+		testBullet->reuse(100, EnemyManager::sharedEnemyManager()->getAvailableEnemy(mTargetID), CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("magebolt_0002.png"));
 	else
 		CCLog("no target in range when shooting, fire cancle!");
 }

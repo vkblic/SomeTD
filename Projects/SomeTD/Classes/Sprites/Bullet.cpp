@@ -66,9 +66,6 @@ void Bullet::onMove(CCPoint pos, CCPoint targetPos, float dt)
 }
 void Bullet::update(float dt)
 {
-
-
-
 	if(this->mTargetID == -1)
 	{
 		if(this->hitChecker())
@@ -83,6 +80,7 @@ void Bullet::update(float dt)
 	else
 	{
 		Enemy* target = EnemyManager::sharedEnemyManager()->getAvailableEnemy(this->mTargetID);
+		// if target already dead
 		if(target == NULL)
 		{
 			this->mTargetID = -1;
@@ -101,7 +99,7 @@ void Bullet::update(float dt)
 			this->mTargetPos = target->getPosition();
 			if(this->hitChecker())
 			{
-				target->underAttack(10);
+				target->underAttack(100);
 				this->playHitAnimation();
 			}
 			else

@@ -100,7 +100,8 @@ private:
 	CCSprite* mShooter;
 	CCSprite* mTerrain;
 	unsigned long mTargetID;
-	CCSprite* mRange;
+	CCSprite* mRangeSprite;
+	int mAttackRange;
 private:
 
 	Bullet* testBullet;

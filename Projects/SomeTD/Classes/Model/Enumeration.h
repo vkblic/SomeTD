@@ -12,6 +12,7 @@ using namespace cocos2d;
 const int TileWidth = 16;
 const int TileHeight = 16;
 
+static const float SECOND_PER_FRAME = 0.0167f;
 typedef struct WayPoint
 {
 	WayPoint(int x, int y)

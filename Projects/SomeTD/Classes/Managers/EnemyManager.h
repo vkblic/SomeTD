@@ -5,6 +5,7 @@
 #include "cocos2d.h"
 #include "../Sprites/Enemy.h"
 #include "../Model/Enumeration.h"
+#include "../Model/Models.h"
 using namespace cocos2d;
 
 class EnemyManager 
@@ -37,7 +38,21 @@ public:
 	 */
 	unsigned long addEnemy(const char* plFrameName);
 
+	/*
+	 *remove a enemy node from enemy map, add it to removed map for
+	 *future use
+	 *
+	 *@param	enemyID: a valid enemyID
+	 */
 	void removeEnemy(unsigned long enemyID);
+
+	/*
+	 *remove enemy node from removed map, add it to unused vector for
+	 *next frame erase.
+	 *
+	 *@param	enemyID: a valid enemyID
+	 */
+	void eraseEnemy(unsigned long enemyID);
 
 	void update(float dt);
 
@@ -58,17 +73,26 @@ public:
 	void runEnemiseOneByOne(float dt);
 
 	void readWayPoints(CCTMXObjectGroup* objects);
+
+	void readEnemyInfo(const char* fileName);
+
+
+
 private:
 	void clearUnusedEnemise();
 private:
+	std::map<std::string, EnemyModel> mEnemyInfo;
+
+	std::map<std::string, CCSpriteBatchNode*> mBatchNodes;
 	std::map<unsigned long, Enemy*> mEnemies;
+	std::map<unsigned long, Enemy*> mRemovedEnemies;
 	std::vector<Enemy*> mUnusedEnemy;
 	std::vector<WayPoint> mWayPoints;
 	CCNode* mEnemyLayer;
 	
-	CCSpriteBatchNode* mBatch;
+	//CCSpriteBatchNode* mBatch;
 
-	CCSpriteBatchNode* mHpBatchNode;
+	//CCSpriteBatchNode* mHpBatchNode;
 
 	unsigned long mIDSeed;
 };

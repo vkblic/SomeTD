@@ -1,9 +1,9 @@
 #ifndef __COMMONHELPERS_H__
 #define __COMMONHELPERS_H__
 #include "cocos2d.h"
+#include "../Model/Enumeration.h"
 using namespace cocos2d;
 
-static const float SECOND_PER_FRAME = 0.0167f;
 
 // ccVertex helper 
 static inline ccVertex2F vertex2FAdd(const ccVertex2F& v1, const ccVertex2F& v2)

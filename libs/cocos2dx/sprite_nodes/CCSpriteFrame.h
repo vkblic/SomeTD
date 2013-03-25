@@ -91,6 +91,14 @@ public:
     const CCPoint& getOffset(void);
     void setOffset(const CCPoint& offsets);
 
+	/*get colorRect from plist
+	 *
+	 *
+	by kelyad 3/25/2013
+		@for SomeTD
+	*/
+	inline const CCRect& getColorRect() { return this->m_colorRect; }
+
 public:
     ~CCSpriteFrame(void);
     virtual CCObject* copyWithZone(CCZone *pZone);
@@ -115,6 +123,10 @@ public:
      */
     static CCSpriteFrame* createWithTexture(CCTexture2D* pobTexture, const CCRect& rect, bool rotated, const CCPoint& offset, const CCSize& originalSize);
 
+
+
+
+
 public:
     /** Initializes a CCSpriteFrame with a texture, rect in points.
      It is assumed that the frame was not trimmed.
@@ -131,6 +143,15 @@ public:
     */
     bool initWithTexture(CCTexture2D* pobTexture, const CCRect& rect, bool rotated, const CCPoint& offset, const CCSize& originalSize);
 
+	/** Initializes a CCSpriteFrame with a texture, rect, rotated, offset and originalSize in pixels.
+    The originalSize is the size in points of the frame before being trimmed.
+    
+
+	 by kelyad 3/25/2013
+	 @for SomeTD
+     */
+    bool initWithTextureEx(CCTexture2D* pobTexture, const CCRect& rect, bool rotated, const CCPoint& offset,const CCRect& colorRect, const CCSize& originalSize);
+
     /** Initializes a CCSpriteFrame with a texture, rect, rotated, offset and originalSize in pixels.
      The originalSize is the size in pixels of the frame before being trimmed.
 
@@ -138,6 +159,8 @@ public:
      */
     bool initWithTextureFilename(const char* filename, const CCRect& rect, bool rotated, const CCPoint& offset, const CCSize& originalSize);
 
+
+	
 
 protected:
     CCPoint m_obOffset;
@@ -149,6 +172,10 @@ protected:
     CCSize m_obOriginalSizeInPixels;
     CCTexture2D *m_pobTexture;
     std::string  m_strTextureFilename;
+
+protected:
+	CCRect m_colorRect;
+
 };
 
 // end of sprite_nodes group

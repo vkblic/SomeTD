@@ -5,6 +5,7 @@
 #include "../Model/TowerInformation.h"
 #include "../Managers/EnemyManager.h"
 #include "../Sprites/Enemy.h"
+#include "../Utility/EnemyInfoReader.h"
 using namespace cocos2d;
 
 float HelloWorld::_scale = 1.0f;
@@ -42,6 +43,10 @@ bool HelloWorld::init()
 		if (!CCLayer::init())
 			break;
 
+		
+
+
+
 		// 		this->_tileMap = CCTMXTiledMap::create("TileMap.tmx");
 		// 		this->_background = _tileMap->layerNamed("Background");
 		// 
@@ -77,7 +82,7 @@ bool HelloWorld::init()
 		_bulletsCanUse = new std::queue<CCSprite*>();
 
 		CCSpriteFrameCache* cache = CCSpriteFrameCache::sharedSpriteFrameCache(); 
-		cache->addSpriteFramesWithFile("yeti.plist");
+		cache->addSpriteFramesWithFile("enemies_snow.plist");
 		//cache->addSpriteFramesWithFile("tower.plist");
 		cache->addSpriteFramesWithFile("towers.plist");
 		cache->addSpriteFramesWithFile("towers_arcane.plist");
@@ -85,6 +90,9 @@ bool HelloWorld::init()
 		cache->addSpriteFramesWithFile("common_spritesheet_16_a_2.plist");
 		cache->addSpriteFramesWithFile("gui_menu_sprite_3.plist");
 		
+	
+
+
 		//Tower information
 		TowerInformation::getInstance()->LoadConfig(cache);
 
@@ -105,8 +113,8 @@ bool HelloWorld::init()
 		// add animation
 		//½ÅÉ«¶¯»­
 		// 
-		addAnimationWithFramesToCache("yeti","yeti_move", 1, 25, SECOND_PER_FRAME * 2, true);
-		addAnimationWithFramesToCache("magebolt","magebolt_boom", 3, 10, SECOND_PER_FRAME , false, 1);
+		addAnimationWithFramesToCache("yeti","move", 1, 25, 2, true);
+		addAnimationWithFramesToCache("magebolt","boom", 3, 10, 1, false, 1);
 
 
 
@@ -117,15 +125,15 @@ bool HelloWorld::init()
 		auto enemyManager = EnemyManager::sharedEnemyManager();
 		//WayPoints
 		enemyManager->readWayPoints(objects);
-
+		enemyManager->readEnemyInfo("EnemyInfo.xml");
 		enemyManager->setEnemyLayer(this);
-		for (int i = 0; i < 1; ++i)
-		{
-
-			//enemy->setPosition(CCPoint(x, y));
-			enemyManager->addEnemy("yeti_0001.png");
-		}
-		
+// 		for (int i = 0; i < 1; ++i)
+// 		{
+// 
+// 			//enemy->setPosition(CCPoint(x, y));
+// 			enemyManager->addEnemy("yeti_0001.png");
+// 		}
+// 		
 
 
 

@@ -167,7 +167,8 @@ void CCSpriteFrameCache::addSpriteFramesWithDictionary(CCDictionary* dictionary,
             CCSize spriteSize = CCSizeFromString(frameDict->valueForKey("spriteSize")->getCString());
             CCPoint spriteOffset = CCPointFromString(frameDict->valueForKey("spriteOffset")->getCString());
             CCSize spriteSourceSize = CCSizeFromString(frameDict->valueForKey("spriteSourceSize")->getCString());
-            CCRect textureRect = CCRectFromString(frameDict->valueForKey("textureRect")->getCString());
+			CCRect textureRect = CCRectFromString(frameDict->valueForKey("textureRect")->getCString());
+			CCRect colorRect = CCRectFromString(frameDict->valueForKey("spriteColorRect")->getCString());
             bool textureRotated = frameDict->valueForKey("textureRotated")->boolValue();
 
             // get aliases
@@ -188,10 +189,11 @@ void CCSpriteFrameCache::addSpriteFramesWithDictionary(CCDictionary* dictionary,
             frameKey->release();
             // create frame
             spriteFrame = new CCSpriteFrame();
-            spriteFrame->initWithTexture(pobTexture,
+            spriteFrame->initWithTextureEx(pobTexture,
                             CCRectMake(textureRect.origin.x, textureRect.origin.y, spriteSize.width, spriteSize.height),
                             textureRotated,
                             spriteOffset,
+							colorRect,
                             spriteSourceSize);
         }
 

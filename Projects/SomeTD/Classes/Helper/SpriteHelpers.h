@@ -2,14 +2,15 @@
 #ifndef _SPRITE_HELPERS_H_
 #define _SPRITE_HELPERS_H_
 #include "cocos2d.h"
+#include "../Model/Enumeration.h"
 using namespace cocos2d;
-static CCAnimation* addAnimationWithFramesToCache(const char* textureFileName, const char* aniamtionName, int startIndex, int endIndex, float delay, bool restoreOriginalFrame, int loopCount = -1)  
+static CCAnimation* addAnimationWithFramesToCache(const char* textureFileName, const char* tag, int startIndex, int endIndex, float framesInterval, bool restoreOriginalFrame, int loopCount = -1)  
 {  
 	CCSpriteFrameCache* cache = CCSpriteFrameCache::sharedSpriteFrameCache();  
 
 	CCArray* framesArray = CCArray::createWithCapacity(endIndex);  
-	int bufferLen = strlen(textureFileName) + 10;
-	char *buffer = new char[bufferLen];
+	//int bufferLen = strlen(textureFileName) + 10;
+	char buffer[128] ;
 	CCSpriteFrame* preFrame;
 	for(int i = startIndex; i <= endIndex; i++)  
 	{
@@ -25,11 +26,13 @@ static CCAnimation* addAnimationWithFramesToCache(const char* textureFileName, c
 	CCAnimation* animation = CCAnimation::createWithSpriteFrames(framesArray);
 	animation->setLoops(loopCount);
 	animation->setRestoreOriginalFrame(restoreOriginalFrame);
-	animation->setDelayPerUnit(delay);
+	animation->setDelayPerUnit(framesInterval * SECOND_PER_FRAME);
 
 	auto animationCache = CCAnimationCache::sharedAnimationCache();
-	animationCache->addAnimation(animation, aniamtionName);
-	delete buffer;
+	sprintf(buffer, "%s_%s", textureFileName, tag);
+
+	animationCache->addAnimation(animation, buffer);
+	//delete buffer;
 	return animation;
 }  
 
@@ -72,8 +75,8 @@ static bool isSpriteTouched(cocos2d::CCSprite* sprite, cocos2d::CCTouch* touch)
 static bool isRectAndCircleCollided(CCPoint& circleCentre, float radius, CCRect& rect)
 {
 	
-	float distanceX = abs(circleCentre.x - rect.origin.x);
-	float distanceY = abs(circleCentre.y - rect.origin.y);
+	float distanceX = abs(circleCentre.x - rect.getMidX());
+	float distanceY = abs(circleCentre.y - rect.getMidY());
 	float halfW = rect.size.width / 2;
 	float halfH = rect.size.height / 2;
 

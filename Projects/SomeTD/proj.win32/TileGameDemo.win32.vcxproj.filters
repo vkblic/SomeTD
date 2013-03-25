@@ -20,6 +20,12 @@
     <Filter Include="Managers">
       <UniqueIdentifier>{1e27227c-c211-4461-8af2-aad186e0dc1f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Utility">
+      <UniqueIdentifier>{279aa3da-3492-4745-a5c9-b46544947906}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Libs">
+      <UniqueIdentifier>{5f5568c8-1af6-44ae-917b-6072e18cd25b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\TileGameDemo.ico">
@@ -97,6 +103,15 @@
     <ClInclude Include="..\Classes\Managers\EnemyManager.h">
       <Filter>Managers</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\libs\tinyxml2.h">
+      <Filter>Libs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Utility\EnemyInfoReader.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Model\Models.h">
+      <Filter>Model</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\Sprites\Enemy.cpp">
@@ -123,6 +138,15 @@
     </ClCompile>
     <ClCompile Include="..\Classes\Managers\EnemyManager.cpp">
       <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\libs\tinyxml2.cpp">
+      <Filter>Libs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\libs\xmltest.cpp">
+      <Filter>Libs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Utility\EnemyInfoReader.cpp">
+      <Filter>Utility</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -153,5 +177,10 @@
     <None Include="..\Resources\TileMap.tmx.bak">
       <Filter>resource</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="..\Resources\EnemyInfo.xml">
+      <Filter>resource</Filter>
+    </Xml>
   </ItemGroup>
 </Project>
