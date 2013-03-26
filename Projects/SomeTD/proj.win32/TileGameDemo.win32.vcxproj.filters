@@ -26,6 +26,9 @@
     <Filter Include="Libs">
       <UniqueIdentifier>{5f5568c8-1af6-44ae-917b-6072e18cd25b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="xml">
+      <UniqueIdentifier>{76481bb3-1ca7-49f3-bedf-407c08f92f92}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\TileGameDemo.ico">
@@ -162,9 +165,6 @@
     <None Include="..\Resources\KingdomRush.tmx">
       <Filter>resource</Filter>
     </None>
-    <None Include="..\Resources\KingdomRush_960_720.tmx">
-      <Filter>resource</Filter>
-    </None>
     <None Include="..\Resources\KingdomRushTest.tmx">
       <Filter>resource</Filter>
     </None>
@@ -183,13 +183,16 @@
     <None Include="..\Resources\TileMap.tmx.bak">
       <Filter>resource</Filter>
     </None>
+    <None Include="..\Resources\KingdomRush_960_720.tmx">
+      <Filter>xml</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="..\Resources\EnemyInfo.xml">
-      <Filter>resource</Filter>
+      <Filter>xml</Filter>
     </Xml>
     <Xml Include="..\Resources\LevelsInfo.xml">
-      <Filter>resource</Filter>
+      <Filter>xml</Filter>
     </Xml>
   </ItemGroup>
 </Project>

@@ -1,130 +1,131 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <levels version="1.0" >
-  <level name="demo" waveCount="6" waveInterval="10" entryCount="3" waysEveryEntry="3" mapFile="KingdomRush_960_720.tmx">
+  <level name="demo" waveCount="6" waveInterval="5.5" entryCount="3" waysEveryEntry="3" mapFile="KingdomRush_960_720.tmx">
     <wave id="0">
       <entry entryID="0">
         <enemy enemyName="yeti" delay="0" wayID="0"/>
-        <enemy enemyName="yeti" delay="0" wayID="2"/>
-        <enemy enemyName="yeti" delay="1" wayID="0"/>
-        <enemy enemyName="yeti" delay="1" wayID="1"/>
+        <enemy enemyName="marauder" delay="0.5" wayID="0"/>
         <enemy enemyName="yeti" delay="2" wayID="0"/>
-        <enemy enemyName="yeti" delay="2" wayID="1"/>
-        <enemy enemyName="yeti" delay="2" wayID="2"/>
-        <enemy enemyName="yeti" delay="3" wayID="1"/>
-        <enemy enemyName="yeti" delay="3" wayID="2"/>
+        <enemy enemyName="marauder" delay="1.5" wayID="0"/>
         <enemy enemyName="yeti" delay="4" wayID="0"/>
-        <enemy enemyName="yeti" delay="4" wayID="1"/>
-        <enemy enemyName="yeti" delay="4" wayID="2"/>
-        <enemy enemyName="yeti" delay="5" wayID="0"/>
-        <enemy enemyName="yeti" delay="5" wayID="1"/>
-        <enemy enemyName="yeti" delay="5" wayID="2"/>
-        <enemy enemyName="yeti" delay="6" wayID="0"/>
-        <enemy enemyName="yeti" delay="6" wayID="1"/>
-        <enemy enemyName="yeti" delay="6" wayID="2"/>
-        <enemy enemyName="yeti" delay="7" wayID="0"/>
-        <enemy enemyName="yeti" delay="7" wayID="1"/>
-        <enemy enemyName="yeti" delay="7" wayID="2"/>
+        <enemy enemyName="yeti" delay="5.5" wayID="0"/>
+        <enemy enemyName="marauder" delay="6.7" wayID="0"/>
+        <enemy enemyName="marauder" delay="7.1" wayID="0"/>
+        <enemy enemyName="yeti" delay="8.7" wayID="0"/>
+        <enemy enemyName="yeti" delay="9.1" wayID="0"/>
+        <enemy enemyName="marauder" delay="10.5" wayID="0"/>
+        <enemy enemyName="yeti" delay="11.9" wayID="0"/>
+        <enemy enemyName="marauder" delay="12" wayID="0"/>
+        <enemy enemyName="yeti" delay="13" wayID="0"/>
+        <enemy enemyName="yeti" delay="14" wayID="0"/>
+        <enemy enemyName="marauder" delay="15" wayID="0"/>
+        <enemy enemyName="marauder" delay="16" wayID="0"/>
+        <enemy enemyName="yeti" delay="17" wayID="0"/>
+        <enemy enemyName="marauder" delay="18" wayID="0"/>
+        <enemy enemyName="yeti" delay="19" wayID="0"/>
+        <enemy enemyName="marauder" delay="20" wayID="0"/>
+        <enemy enemyName="marauder" delay="22" wayID="0"/>
       </entry>
     </wave>
-    <wave id="1">
+    <!--<wave id="1">
       <entry entryID="0">
         <enemy enemyName="yeti" delay="0" wayID="0"/>
-        <enemy enemyName="yeti" delay="0" wayID="2"/>
+        <enemy enemyName="marauder" delay="0" wayID="0"/>
         <enemy enemyName="yeti" delay="1" wayID="0"/>
-        <enemy enemyName="yeti" delay="1" wayID="1"/>
+        <enemy enemyName="marauder" delay="1" wayID="0"/>
+        <enemy enemyName="marauder" delay="2" wayID="0"/>
         <enemy enemyName="yeti" delay="2" wayID="0"/>
-        <enemy enemyName="yeti" delay="2" wayID="1"/>
-        <enemy enemyName="yeti" delay="2" wayID="2"/>
-        <enemy enemyName="yeti" delay="3" wayID="1"/>
-        <enemy enemyName="yeti" delay="3" wayID="2"/>
+        <enemy enemyName="marauder" delay="2" wayID="0"/>
+        <enemy enemyName="yeti" delay="3" wayID="0"/>
+        <enemy enemyName="yeti" delay="3" wayID="0"/>
+        <enemy enemyName="marauder" delay="4" wayID="0"/>
         <enemy enemyName="yeti" delay="4" wayID="0"/>
-        <enemy enemyName="yeti" delay="4" wayID="1"/>
-        <enemy enemyName="yeti" delay="4" wayID="2"/>
+        <enemy enemyName="marauder" delay="4" wayID="0"/>
         <enemy enemyName="yeti" delay="5" wayID="0"/>
-        <enemy enemyName="yeti" delay="5" wayID="1"/>
-        <enemy enemyName="yeti" delay="5" wayID="2"/>
+        <enemy enemyName="marauder" delay="5" wayID="0"/>
+        <enemy enemyName="yeti" delay="5" wayID="0"/>
         <enemy enemyName="yeti" delay="6" wayID="0"/>
-        <enemy enemyName="yeti" delay="6" wayID="1"/>
-        <enemy enemyName="yeti" delay="6" wayID="2"/>
+        <enemy enemyName="marauder" delay="6" wayID="0"/>
+        <enemy enemyName="yeti" delay="6" wayID="0"/>
+        <enemy enemyName="marauder" delay="7" wayID="0"/>
         <enemy enemyName="yeti" delay="7" wayID="0"/>
-        <enemy enemyName="yeti" delay="7" wayID="1"/>
-        <enemy enemyName="yeti" delay="7" wayID="2"/>
+        <enemy enemyName="marauder" delay="7" wayID="0"/>
       </entry>
     </wave>
     <wave id="3">
       <entry entryID="0">
-        <enemy enemyName="yeti" delay="0" wayID="0"/>
-        <enemy enemyName="yeti" delay="0" wayID="2"/>
-        <enemy enemyName="yeti" delay="1" wayID="0"/>
-        <enemy enemyName="yeti" delay="1" wayID="1"/>
+        <enemy enemyName="marauder" delay="0" wayID="0"/>
+        <enemy enemyName="marauder" delay="0" wayID="0"/>
+        <enemy enemyName="marauder" delay="1" wayID="0"/>
+        <enemy enemyName="marauder" delay="1" wayID="0"/>
+        <enemy enemyName="marauder" delay="2" wayID="0"/>
         <enemy enemyName="yeti" delay="2" wayID="0"/>
-        <enemy enemyName="yeti" delay="2" wayID="1"/>
-        <enemy enemyName="yeti" delay="2" wayID="2"/>
-        <enemy enemyName="yeti" delay="3" wayID="1"/>
-        <enemy enemyName="yeti" delay="3" wayID="2"/>
+        <enemy enemyName="yeti" delay="2" wayID="0"/>
+        <enemy enemyName="yeti" delay="3" wayID="0"/>
+        <enemy enemyName="yeti" delay="3" wayID="0"/>
+        <enemy enemyName="marauder" delay="4" wayID="0"/>
         <enemy enemyName="yeti" delay="4" wayID="0"/>
-        <enemy enemyName="yeti" delay="4" wayID="1"/>
-        <enemy enemyName="yeti" delay="4" wayID="2"/>
+        <enemy enemyName="yeti" delay="4" wayID="0"/>
+        <enemy enemyName="marauder" delay="5" wayID="0"/>
         <enemy enemyName="yeti" delay="5" wayID="0"/>
-        <enemy enemyName="yeti" delay="5" wayID="1"/>
-        <enemy enemyName="yeti" delay="5" wayID="2"/>
+        <enemy enemyName="yeti" delay="5" wayID="0"/>
+        <enemy enemyName="marauder" delay="6" wayID="0"/>
         <enemy enemyName="yeti" delay="6" wayID="0"/>
-        <enemy enemyName="yeti" delay="6" wayID="1"/>
-        <enemy enemyName="yeti" delay="6" wayID="2"/>
+        <enemy enemyName="marauder" delay="6" wayID="0"/>
         <enemy enemyName="yeti" delay="7" wayID="0"/>
-        <enemy enemyName="yeti" delay="7" wayID="1"/>
-        <enemy enemyName="yeti" delay="7" wayID="2"/>
+        <enemy enemyName="yeti" delay="7" wayID="0"/>
+        <enemy enemyName="yeti" delay="7" wayID="0"/>
       </entry>
     </wave>
     <wave id="4">
       <entry entryID="0">
         <enemy enemyName="yeti" delay="0" wayID="0"/>
-        <enemy enemyName="yeti" delay="0" wayID="2"/>
+        <enemy enemyName="yeti" delay="0" wayID="0"/>
         <enemy enemyName="yeti" delay="1" wayID="0"/>
-        <enemy enemyName="yeti" delay="1" wayID="1"/>
+        <enemy enemyName="yeti" delay="1" wayID="0"/>
         <enemy enemyName="yeti" delay="2" wayID="0"/>
-        <enemy enemyName="yeti" delay="2" wayID="1"/>
-        <enemy enemyName="yeti" delay="2" wayID="2"/>
-        <enemy enemyName="yeti" delay="3" wayID="1"/>
-        <enemy enemyName="yeti" delay="3" wayID="2"/>
+        <enemy enemyName="yeti" delay="2" wayID="0"/>
+        <enemy enemyName="yeti" delay="2" wayID="0"/>
+        <enemy enemyName="yeti" delay="3" wayID="0"/>
+        <enemy enemyName="yeti" delay="3" wayID="0"/>
         <enemy enemyName="yeti" delay="4" wayID="0"/>
-        <enemy enemyName="yeti" delay="4" wayID="1"/>
-        <enemy enemyName="yeti" delay="4" wayID="2"/>
+        <enemy enemyName="yeti" delay="4" wayID="0"/>
+        <enemy enemyName="yeti" delay="4" wayID="0"/>
         <enemy enemyName="yeti" delay="5" wayID="0"/>
-        <enemy enemyName="yeti" delay="5" wayID="1"/>
-        <enemy enemyName="yeti" delay="5" wayID="2"/>
+        <enemy enemyName="yeti" delay="5" wayID="0"/>
+        <enemy enemyName="yeti" delay="5" wayID="0"/>
         <enemy enemyName="yeti" delay="6" wayID="0"/>
-        <enemy enemyName="yeti" delay="6" wayID="1"/>
-        <enemy enemyName="yeti" delay="6" wayID="2"/>
+        <enemy enemyName="yeti" delay="6" wayID="0"/>
+        <enemy enemyName="yeti" delay="6" wayID="0"/>
         <enemy enemyName="yeti" delay="7" wayID="0"/>
-        <enemy enemyName="yeti" delay="7" wayID="1"/>
-        <enemy enemyName="yeti" delay="7" wayID="2"/>
+        <enemy enemyName="yeti" delay="7" wayID="0"/>
+        <enemy enemyName="yeti" delay="7" wayID="0"/>
       </entry>
     </wave>
     <wave id="5">
       <entry entryID="0">
         <enemy enemyName="yeti" delay="0" wayID="0"/>
-        <enemy enemyName="yeti" delay="0" wayID="2"/>
+        <enemy enemyName="yeti" delay="0" wayID="0"/>
         <enemy enemyName="yeti" delay="1" wayID="0"/>
-        <enemy enemyName="yeti" delay="1" wayID="1"/>
+        <enemy enemyName="yeti" delay="1" wayID="0"/>
         <enemy enemyName="yeti" delay="2" wayID="0"/>
-        <enemy enemyName="yeti" delay="2" wayID="1"/>
-        <enemy enemyName="yeti" delay="2" wayID="2"/>
-        <enemy enemyName="yeti" delay="3" wayID="1"/>
-        <enemy enemyName="yeti" delay="3" wayID="2"/>
+        <enemy enemyName="yeti" delay="2" wayID="0"/>
+        <enemy enemyName="yeti" delay="2" wayID="0"/>
+        <enemy enemyName="yeti" delay="3" wayID="0"/>
+        <enemy enemyName="yeti" delay="3" wayID="0"/>
         <enemy enemyName="yeti" delay="4" wayID="0"/>
-        <enemy enemyName="yeti" delay="4" wayID="1"/>
-        <enemy enemyName="yeti" delay="4" wayID="2"/>
+        <enemy enemyName="yeti" delay="4" wayID="0"/>
+        <enemy enemyName="yeti" delay="4" wayID="0"/>
         <enemy enemyName="yeti" delay="5" wayID="0"/>
-        <enemy enemyName="yeti" delay="5" wayID="1"/>
-        <enemy enemyName="yeti" delay="5" wayID="2"/>
+        <enemy enemyName="yeti" delay="5" wayID="0"/>
+        <enemy enemyName="yeti" delay="5" wayID="0"/>
         <enemy enemyName="yeti" delay="6" wayID="0"/>
-        <enemy enemyName="yeti" delay="6" wayID="1"/>
-        <enemy enemyName="yeti" delay="6" wayID="2"/>
+        <enemy enemyName="yeti" delay="6" wayID="0"/>
+        <enemy enemyName="yeti" delay="6" wayID="0"/>
         <enemy enemyName="yeti" delay="7" wayID="0"/>
-        <enemy enemyName="yeti" delay="7" wayID="1"/>
-        <enemy enemyName="yeti" delay="7" wayID="2"/>
+        <enemy enemyName="yeti" delay="7" wayID="0"/>
+        <enemy enemyName="yeti" delay="7" wayID="0"/>
       </entry>
-    </wave>
+    </wave>-->
   </level>
 </levels>

@@ -22,6 +22,7 @@ enum eEnmeyTag
 	EnmeyTag_MoveRightUp,
 	EnmeyTag_MoveRightDown,
 	EnemyTag_Dead,
+	EnemyTag_Attack,
 
 	EnmeyTag_Max
 };

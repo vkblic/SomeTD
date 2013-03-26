@@ -183,7 +183,9 @@
     <None Include="..\Resources\hit.caf" />
     <None Include="..\Resources\KingdomRush.tmx" />
     <None Include="..\Resources\KingdomRushTest.tmx" />
-    <None Include="..\Resources\KingdomRush_960_720.tmx" />
+    <None Include="..\Resources\KingdomRush_960_720.tmx">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="..\Resources\move.caf" />
     <None Include="..\Resources\pickup.caf" />
     <None Include="..\Resources\TileMap.caf" />

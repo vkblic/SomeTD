@@ -26,7 +26,7 @@ bool XmlReader::readAllLevelInfo(std::map<std::string, LevelModel>& levelInfoMap
 		strcpy(levelModel.name, element->Attribute("name"));
 		strcpy(levelModel.mapFile, element->Attribute("mapFile"));
 		levelModel.waveCount = atoi(element->Attribute("waveCount"));
-		levelModel.waveInterval = atoi(element->Attribute("waveInterval"));
+		levelModel.waveInterval = atof(element->Attribute("waveInterval"));
 		levelModel.entryCount = atoi(element->Attribute("entryCount"));
 		levelModel.waysEveryEntry = atoi(element->Attribute("waysEveryEntry"));
 
@@ -52,7 +52,7 @@ bool XmlReader::readAllLevelInfo(std::map<std::string, LevelModel>& levelInfoMap
 					waveEnemy.entryID =  atoi(entryNode->Attribute("entryID"));
 
 					strcpy(waveEnemy.enemyName, enemyNode->Attribute("enemyName"));
-					waveEnemy.delay = atoi(enemyNode->Attribute("delay"));
+					waveEnemy.delay = atof(enemyNode->Attribute("delay"));
 					waveEnemy.wayID = atoi(enemyNode->Attribute("wayID"));
 					waveModel.enemise.push_back(waveEnemy);
 					enemyNode = enemyNode->NextSiblingElement();
@@ -174,9 +174,15 @@ bool XmlReader::readAllEnemyInfo(std::map<std::string, EnemyModel>& enemyInfoMap
 					if(defaultTag == tag)
 						enemyModel.animations[eEnmeyTag::EnemyTag_Default] = animate;
 				}
+				else if (tag == "attack")
+				{
+					enemyModel.animations[eEnmeyTag::EnemyTag_Attack] = animate;
+					if(defaultTag == tag)
+						enemyModel.animations[eEnmeyTag::EnemyTag_Attack] = animate;
+				}
 				else
 				{
-					CCLog("error! enemy animation tag:[%s], unidentifiable£¡",tag);
+					CCLog("error! enemy animation tag:[%s], unidentifiable!",tag);
 					CCAssert(false, "enemy animation tag:[%s], unidentifiable£¡");
 					return false;
 				}

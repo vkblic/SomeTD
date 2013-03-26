@@ -145,7 +145,7 @@ void Tower::myInit(eTower_Terrain terrain)
 	mCurPassedFrames = 0;
 	mFramesInterval = 1;
 	mShootWhen = 8;
-	mReloadTime = 0.8f;
+	mReloadTime = 0.2f;
 	mReloadElapsed = 0.0f;
 	mAttackRange = 200;
 	TowerInformation* towerInfo = TowerInformation::getInstance();

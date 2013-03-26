@@ -14,7 +14,8 @@ LevelsManager::LevelsManager()
 {
 	//this->mHpBatchNode = NULL;
 	//this->mBatch = NULL;
-	this->mIDSeed = 0;
+	mIsWaveRunning = false;
+	mIsCurLevelCompleted = false;
 }
 LevelsManager::~LevelsManager()
 {
@@ -35,6 +36,8 @@ LevelsManager* LevelsManager::sharedLevelsManager()
 void LevelsManager::readLevaInfo(const char* fileName, CCTMXObjectGroup* objects)
 {
 	XmlReader::readAllLevelInfo(mLeveInformations, fileName);
+
+	//read waypoints and entry information from tilemap
 	for(auto it = mLeveInformations.begin(); it != mLeveInformations.end(); ++it)
 	{
 		LevelModel* level = &it->second;
@@ -44,6 +47,16 @@ void LevelsManager::readLevaInfo(const char* fileName, CCTMXObjectGroup* objects
 			auto entry = this->readWayPoints(i, level->waysEveryEntry, objects);
 			level->entrise.push_back(entry);
 		}
+	}
+
+	// build wave queue
+
+	// just for test
+
+	mCurLevelInfo = &mLeveInformations["demo"];
+	for(auto wave = mCurLevelInfo->waves.begin(); wave != mCurLevelInfo->waves.end(); ++wave)
+	{
+		mRemainWave.push(&(*wave));
 	}
 }
 
@@ -84,18 +97,87 @@ Entry LevelsManager::readWayPoints(int entryId, int waysEveryEntry, CCTMXObjectG
 	return entry;
 }
 
+static float offset = 3;
+static float curWaveStartTime;
 void LevelsManager::update(float dt)
 {
+	if(mIsCurLevelCompleted)
+		return;
 	auto enemyManger = EnemyManager::sharedEnemyManager();
 	static float timeCounter = 0;
-	if(timeCounter >= 3)
+	timeCounter += dt;
+	if(timeCounter >= offset)
 	{
-		auto enemy = enemyManger->addEnemy("yeti");
-		enemy->run(this->mLeveInformations["demo"].entrise[0].ways[0], 15, 0);
-		timeCounter = 0;
+		//start wave
+		if(!mIsWaveRunning)
+		{
+			mIsWaveRunning = true;
+			if (mRemainWave.size() == 0)
+			{
+				//mIsCurLevelCompleted = true;
+				CCLog("Last wave completed!");
+
+				CCLog("level loop for test!");
+				for(auto wave = mCurLevelInfo->waves.begin(); wave != mCurLevelInfo->waves.end(); ++wave)
+				{
+					mRemainWave.push(&(*wave));
+				}
+				return;
+			}
+			auto wave = mRemainWave.front();
+			
+			for(auto enemy = (*wave).enemise.begin(); enemy != (*wave).enemise.end(); ++enemy)
+			{
+				mCurWaveRemainEnemy.push(&(*enemy));
+			}
+			mRemainWave.pop();
+			curWaveStartTime = 0;
+			CCLog("Wave start %d", (*wave).id);
+		}
+		// let enemy rush
+		else
+		{
+			curWaveStartTime += dt;
+			auto enemyManager = EnemyManager::sharedEnemyManager();
+			while (true)
+			{
+				if (mCurWaveRemainEnemy.size() == 0)
+					break;
+				auto enemy = mCurWaveRemainEnemy.front();
+				if(curWaveStartTime > enemy->delay)
+				{
+					CCLog("new [%s] start rush! curTime: %f, delay: %f", enemy->enemyName, curWaveStartTime, enemy->delay);
+					enemyManager->addEnemyAndRush(enemy->enemyName, mCurLevelInfo->entrise[enemy->entryID].pos, mCurLevelInfo->entrise[enemy->entryID].ways[enemy->wayID] );
+					mCurWaveRemainEnemy.pop();
+				}
+				else
+					break;
+			}
+			//size equal to zero means wave complete!
+			if (mCurWaveRemainEnemy.size() == 0)
+			{
+				CCLog("wave complted"); 
+				offset = timeCounter + mCurLevelInfo->waveInterval;
+				mIsWaveRunning = false;
+			}
+		}
+
+
+
+		//auto enemy = enemyManger->addEnemy("yeti");
+		//enemy->run(this->mLeveInformations["demo"].entrise[0].ways[0], 15, 0);
 	}
 	else
 	{
-		timeCounter += dt;
+		static float temp = 0;
+		if(temp > 1)
+		{
+			CCLog("next wave: %f", offset - timeCounter);
+			temp = 0;
+		}
+		else
+		{
+			temp += dt;
+		}
 	}
 }

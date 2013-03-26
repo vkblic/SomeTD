@@ -108,7 +108,7 @@ bool EnemyManager::isEnemyInRange(CCPoint pos, int rangeRadius, unsigned long en
 
 #pragma region enemy node
 
-Enemy* EnemyManager::addEnemy(const char* enemyName)
+Enemy* EnemyManager::addEnemy(const char* enemyName, CCPoint entry)
 {
 
 	auto enemyInfo = this->mEnemyInfo.find(enemyName);
@@ -156,6 +156,15 @@ Enemy* EnemyManager::addEnemy(const char* enemyName)
 	enemy->setID(this->mIDSeed++);
 	return enemy;
 }
+
+
+void EnemyManager::addEnemyAndRush(const char* name, CCPoint entry, const std::vector<WayPointEx>& wayPoints)
+{
+	Enemy* enemy =  this->addEnemy(name, entry);
+	enemy->setPosition(entry);
+	enemy->run(wayPoints);
+}
+
 
 void EnemyManager::removeEnemy(unsigned long enemyID)
 {

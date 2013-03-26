@@ -5,6 +5,7 @@
 #include "cocos2d.h"
 #include "../Model/Enumeration.h"
 #include "../Model/Models.h"
+#include <queue>
 using namespace cocos2d;
 
 class LevelsManager 
@@ -30,13 +31,15 @@ private:
 	void clearUnusedEnemise();
 private:
 	std::map<std::string, LevelModel> mLeveInformations;
-
-	
+	LevelModel* mCurLevelInfo;
+	std::queue<WaveModel*> mRemainWave;
+	std::queue<WaveEnemyModel*> mCurWaveRemainEnemy;
+	bool mIsWaveRunning;
+	bool mIsCurLevelCompleted;
 	//CCSpriteBatchNode* mBatch;
 
 	//CCSpriteBatchNode* mHpBatchNode;
 
-	unsigned long mIDSeed;
 };
 
 #endif

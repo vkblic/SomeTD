@@ -35,10 +35,10 @@ void Enemy::myInit()
 {
 
 	this->mHp = CCSprite::create("hp.png");
-	this->mHp->setAnchorPoint(CCPoint(0,0));
 
 	//this->mMaxHP = 100;
 	this->mCurHP = this->mEnemyInfo->hp;
+	this->mHp->setAnchorPoint(CCPoint(0,0));
 
 	this->mHpBatchNode->addChild(this->mHp);
 	this->updateHpSpriteSize();
@@ -106,10 +106,17 @@ CCRect Enemy::getCollisionRect()
 	CCPoint pos = this->getPosition();
 	auto size = this->getContentSize();
 
-	float x = pos.x - size.width / 2 + colorRect.getMinX();
-	float y = pos.y - size.height / 2 + colorRect.getMinY();
+	//left_bottom_X = pos.x - size.width / 2
+	//left_bottom_Y = pos.y - size.height / 2
+	//left_bottom_ColorRect_X = colorRect.origin.x
+	//left_bottom_ColorRect_Y = size.height - colorRect.size.height - colorRect.origin.y
+	// final_X =  left_bottom_X + left_bottom_ColorRect_X
+	// final_Y =  left_bottom_Y + left_bottom_ColorRect_Y
 
-	CCRect old(pos.x, pos.y, size.width * 0.8, size.height * 0.8);
+	float x = pos.x - size.width / 2 + colorRect.getMinX();
+	float y = pos.y + size.height / 2 - colorRect.getMaxY();
+
+	//CCRect old(pos.x, pos.y, size.width, size.height);
 
 	//CCLog("colorRect: {{%f, %f}, {%f, %f}}",colorRect.origin.x, colorRect.origin.y, colorRect.size.width, colorRect.size.height);
 	//CCLog("collisionRect Old: {{%f, %f}, {%f, %f}}",old.origin.x, old.origin.y, old.size.width, old.size.height);
@@ -119,10 +126,11 @@ CCRect Enemy::getCollisionRect()
 
 void Enemy::setHpSpritePosition()
 {
-	CCSize enemySize = this->getContentSize();
-	CCPoint pos = this->getPosition();
+	//CCSize enemySize = this->getContentSize();
+	//CCPoint pos = this->getPosition();
+	CCRect collisionRect = this->getCollisionRect();
 
-	auto newPos = CCPoint(pos.x - enemySize.width / 2, pos.y + enemySize.height / 2 );
+	auto newPos = CCPoint(collisionRect.getMinX(), collisionRect.getMaxY() + 2);
 	this->mHp->setPosition(newPos);
 
 }
@@ -136,7 +144,7 @@ void Enemy::updateHpSpriteSize()
 	}
 	float precentOfHp = (float)this->mCurHP / (float)this->mEnemyInfo->hp;
 
-	CCSize enemySize = this->getContentSize();
+	CCSize enemySize = this->getColorRect().size;
 	CCSize sizeHp =  this->mHp->getContentSize();
 	float scaleX = enemySize.width / sizeHp.width * precentOfHp;
 	//CCLog("scaleX%f",scaleX);
@@ -203,29 +211,29 @@ void Enemy::FollowPath(CCNode* sender)
 
 }
 
-void Enemy::run(std::vector<WayPointEx>& wayPoints)
-{
-	this->_wayPointIndex = 0;
-	for(auto it = wayPoints.begin(); it != wayPoints.end(); it++)
-	{
-		WayPointEx temp = (*it);
-		temp.pos.x = temp.pos.x + (float)rand() / 1000;
-		temp.pos.y = temp.pos.y + (float)rand() / 500;
-		this->mWayPoints.push_back(temp);
-	}
-
-	this->runAction(CCAnimate::create(CCAnimationCache::sharedAnimationCache()->animationByName("yeti_move")));
-
-	CCSequence *sequence = CCSequence::create( 
-		CCMoveTo::create(1, this->mWayPoints.at(this->_wayPointIndex++).pos),
-		CCCallFuncN::create(this, callfuncN_selector(Enemy::FollowPath)), 
-		NULL
-		);
-
-	this->runAction(sequence);
-	this->scheduleUpdate();
-}
-void Enemy::run(std::vector<WayPointEx>& wayPoints, float duration, float tension) 
+// void Enemy::run(std::vector<WayPointEx>& wayPoints)
+// {
+// 	this->_wayPointIndex = 0;
+// 	for(auto it = wayPoints.begin(); it != wayPoints.end(); it++)
+// 	{
+// 		WayPointEx temp = (*it);
+// 		temp.pos.x = temp.pos.x + (float)rand() / 1000;
+// 		temp.pos.y = temp.pos.y + (float)rand() / 500;
+// 		this->mWayPoints.push_back(temp);
+// 	}
+// 
+// 	this->runAction(CCAnimate::create(CCAnimationCache::sharedAnimationCache()->animationByName("yeti_move")));
+// 
+// 	CCSequence *sequence = CCSequence::create( 
+// 		CCMoveTo::create(1, this->mWayPoints.at(this->_wayPointIndex++).pos),
+// 		CCCallFuncN::create(this, callfuncN_selector(Enemy::FollowPath)), 
+// 		NULL
+// 		);
+// 
+// 	this->runAction(sequence);
+// 	this->scheduleUpdate();
+// }
+void Enemy::run(const std::vector<WayPointEx>& wayPoints) 
 {   
 	// not like vector<T>, 
 	// capacity of CCPointArray::create() is no use for now
@@ -239,6 +247,6 @@ void Enemy::run(std::vector<WayPointEx>& wayPoints, float duration, float tensio
 		pointArray->addControlPoint(temp);
 	}
 	this->runAction(CCAnimate::create(this->mEnemyInfo->animations[eEnmeyTag::EnemyTag_Default]));
-	this->runAction(CCCardinalSplineTo::create(duration, pointArray, tension));
+	this->runAction(CCCardinalSplineTo::create(mEnemyInfo->speed, pointArray, 0));
 	this->scheduleUpdate();
 }

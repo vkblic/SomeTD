@@ -35,7 +35,18 @@ public:
 	 *
 	 *@param	plFrameName: enemy node pointer
 	 *@return	a valid enemy node pointer	 */
-	Enemy* addEnemy(const char* name);
+	Enemy* addEnemy(const char* name, CCPoint entry);
+
+		/*
+	 *add a enemy node to manager, manager have responsibility to 
+	 *retain or release it 
+	 *
+	 *@param	plFrameName: enemy node pointer
+	 *@return	a valid enemy node pointer	 */
+	void addEnemyAndRush(const char* name, CCPoint entry, const std::vector<WayPointEx>& wayPoints);
+
+
+
 
 	/*
 	 *remove a enemy node from enemy map, add it to removed map for

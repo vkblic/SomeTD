@@ -36,9 +36,9 @@ public:
 
 	void FollowPath(CCNode* sender);
 
-	void run(std::vector<WayPointEx>& wayPoints);
+	//void run(std::vector<WayPointEx>& wayPoints);
 
-	void run(std::vector<WayPointEx>& wayPoints, float duration, float tension);
+	void run(const std::vector<WayPointEx>& wayPoints);
 
 	void setID(int id){ this->mID = id; }
 	unsigned long getID() { return this->mID; }

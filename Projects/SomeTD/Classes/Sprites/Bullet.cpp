@@ -99,7 +99,7 @@ void Bullet::update(float dt)
 			this->mTargetPos = target->getPosition();
 			if(this->hitChecker())
 			{
-				target->underAttack(100);
+				target->underAttack(300);
 				this->playHitAnimation();
 			}
 			else
