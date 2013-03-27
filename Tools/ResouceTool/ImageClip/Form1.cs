@@ -16,7 +16,7 @@ namespace ImageClip
 		{
 			InitializeComponent();
 			this.textBoxSrcPath.Text = @"E:\Developer\[GameProgramming]\[SomeTD]\Resouce\Kingdom Rush.app\";
-			this.textBoxOutput.Text = @"E:\Developer\[GameProgramming]\[SomeTD]\Resouce\Kingdom Rush.app\temp\ingame_gui\";
+			this.textBoxOutput.Text = @"E:\Developer\[GameProgramming]\[SomeTD]\Resouce\Kingdom Rush.app\temp\towerHD\";
 		}
 
 		private void btnGenerate_Click(object sender, EventArgs e)

@@ -58,7 +58,7 @@ namespace ImageClip
 					for (int j = 0; j < texInfo.texRect.Height; j++)
 					{
 						pixel = oldBitmap.GetPixel(texInfo.texRect.X + i, texInfo.texRect.Y + j);
-						newBitmap.SetPixel(i + texInfo.offset.X, j + texInfo.offset.Y, pixel);
+						newBitmap.SetPixel(i + texInfo.innerRect.X, j + texInfo.innerRect.Y, pixel);
 
 					}
 				}

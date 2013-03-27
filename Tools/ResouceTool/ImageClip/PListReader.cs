@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using HtmlAgilityPack;
-using System.Collections.Generic;
 namespace ImageClip
 {
 
@@ -43,12 +42,24 @@ namespace ImageClip
 		public int Height { get; set; }
 
 	}
+	public class point
+	{
+		public point(int x, int y)
+		{
+
+			this.x = x;
+			this.y = y;
+		}
+		public int x;
+		public int y;
+	}
 	public class TextureInfo
 	{
 		public string fileName;
 		public rect texRect;
 		public size sourceSize;
-		public rect offset;
+		public point offset;
+		public rect innerRect;
 		bool isRotated;
 
 	}
@@ -125,7 +136,9 @@ namespace ImageClip
 
 
 				//计算并存储offsetRect
-				texInfo.offset = GetOffsetRect(value[plistKeyInfo.Offset], value[plistKeyInfo.ColorRect]);
+				texInfo.offset = new point(0, 0);
+				GetTowNumber(value[plistKeyInfo.Offset], out texInfo.offset.x, out texInfo.offset.y);
+
 
 				//获取SourceSize
 				int width;
@@ -138,6 +151,13 @@ namespace ImageClip
 				// 					tempinfo.texRect.X, tempinfo.texRect.Y,
 				// 					tempinfo.texRect.Width, tempinfo.texRect.Height
 				// 					);
+
+				//计算实际的innerRect的值
+				texInfo.innerRect = new rect(0, 0, 0, 0);
+				texInfo.innerRect.Width = texInfo.texRect.Width;
+				texInfo.innerRect.Height = texInfo.texRect.Height;
+				texInfo.innerRect.X = (texInfo.sourceSize.Width - texInfo.texRect.Width) / 2 + texInfo.offset.x;
+				texInfo.innerRect.Y = (texInfo.sourceSize.Height - texInfo.texRect.Height) / 2 - texInfo.offset.y;
 
 				texInfoes.Add(texInfo);
 			}
@@ -178,6 +198,9 @@ namespace ImageClip
 
 			return new rect(temp[0], temp[1], temp[2], temp[3]);
 		}
+
+
+
 
 		/// <summary>
 		/// 计算偏移rect

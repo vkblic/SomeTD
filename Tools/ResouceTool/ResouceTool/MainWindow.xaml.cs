@@ -92,7 +92,7 @@ namespace ResouceTool
 			//myImage3.Source = bi3;
 
 		}
-		System.Windows.Thickness thickness = new System.Windows.Thickness();
+		//System.Windows.Thickness thickness = new System.Windows.Thickness();
 		Point lastPoint = new Point();
 		private void image1_MouseMove(object sender, MouseEventArgs e)
 		{
