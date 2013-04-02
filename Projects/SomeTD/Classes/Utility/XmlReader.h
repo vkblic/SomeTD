@@ -7,7 +7,7 @@
 class XmlReader
 {
 public:
-	static bool readAllEnemyInfo(std::map<std::string, EnemyModel>& enemyInfoMap, const char* fileName);
+	static bool readActiveObjectInfoFromFile(std::map<std::string, ActiveObjModel>& enemyInfoMap, const char* fileName);
 	static bool readAllLevelInfo(std::map<std::string, LevelModel>& levelInfoMap, const char* fileName);
 };
 #endif

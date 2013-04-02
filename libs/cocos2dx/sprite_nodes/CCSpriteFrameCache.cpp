@@ -150,14 +150,16 @@ void CCSpriteFrameCache::addSpriteFramesWithDictionary(CCDictionary* dictionary,
             }
 
             CCPoint offset = CCPointFromString(frameDict->valueForKey("offset")->getCString());
-            CCSize sourceSize = CCSizeFromString(frameDict->valueForKey("sourceSize")->getCString());
-
+			CCSize sourceSize = CCSizeFromString(frameDict->valueForKey("sourceSize")->getCString());
+			CCRect colorRect = CCRectFromString(frameDict->valueForKey("sourceColorRect")->getCString());
+			
             // create frame
             spriteFrame = new CCSpriteFrame();
-            spriteFrame->initWithTexture(pobTexture, 
+            spriteFrame->initWithTextureEx(pobTexture, 
                 frame,
                 rotated,
                 offset,
+				colorRect,
                 sourceSize
                 );
         } 

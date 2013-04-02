@@ -52,8 +52,8 @@ private:
 	cocos2d::CCTMXLayer*	_background;
 	std::queue<CCSprite*>* _bulletsInUse;
 	std::queue<CCSprite*>* _bulletsCanUse;
-	bool canFire;
-	Tower* mTower;
+	//bool canFire;
+	//Tower* mTower;
 //Events
 public:	 
 };

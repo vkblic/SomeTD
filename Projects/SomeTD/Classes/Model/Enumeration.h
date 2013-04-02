@@ -11,7 +11,7 @@
 using namespace cocos2d;
 const int TileWidth = 16;
 const int TileHeight = 16;
-
+const int HP_BAR_WIDTH = 30;
 static const float SECOND_PER_FRAME = 0.0167f;
 typedef struct WayPoint
 {
@@ -36,10 +36,15 @@ enum eTower
 	Tower_Mage_LV1 = 0x0001,
 	Tower_Mage_LV2 = 0x0002,
 	Tower_Mage_LV3 = 0x0004,
+	Tower_barrack_LV1 = 0x0010,
+	Tower_barrack_LV2 = 0x0020,
+	Tower_barrack_LV3 = 0x0030,
 
 	// high 16bit
 	Tower_Mage_LV4_Arcane = 0x00010000,
 	Tower_Mage_LV4_Sorcerer = 0x00020000,
+	Tower_barrack_LV4_barbarians = 0x00100000,
+	Tower_barrack_LV4_paladins = 0x00200000,
 
 	Tower_Max,
 	

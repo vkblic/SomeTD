@@ -56,6 +56,14 @@ void TowerMenu::myInit()
 	this->mMainMenuFrame[eMenu_Frame::Mage_Lv4_Sorcerer_Off] = frameChache->spriteFrameByName("main_icons_off_0007.png");
 	this->mMainMenuFrame[eMenu_Frame::Mage_Lv4_Sorcerer_Confirm] = frameChache->spriteFrameByName("main_icons_disabled_0007.png");
 
+	this->mMainMenuFrame[eMenu_Frame::Barrack_Lv4_Barbarians_Normal] = frameChache->spriteFrameByName("main_icons_0008.png");
+	this->mMainMenuFrame[eMenu_Frame::Barrack_Lv4_Barbarians_Off] = frameChache->spriteFrameByName("main_icons_off_0008.png");
+	this->mMainMenuFrame[eMenu_Frame::Barrack_Lv4_Barbarians_Confirm] = frameChache->spriteFrameByName("main_icons_disabled_0008.png");
+	this->mMainMenuFrame[eMenu_Frame::Barrack_Lv4_Paladins_Normal] = frameChache->spriteFrameByName("main_icons_0009.png");
+	this->mMainMenuFrame[eMenu_Frame::Barrack_Lv4_Paladins_Off] = frameChache->spriteFrameByName("main_icons_off_0009.png");
+	this->mMainMenuFrame[eMenu_Frame::Barrack_Lv4_Paladins_Confirm] = frameChache->spriteFrameByName("main_icons_disabled_0009.png");
+
+
 	this->mMainMenuFrame[eMenu_Frame::Artillery_Normal] = frameChache->spriteFrameByName("main_icons_0004.png");
 	this->mMainMenuFrame[eMenu_Frame::Artillery_Off] = frameChache->spriteFrameByName("main_icons_off_0004.png");
 	this->mMainMenuFrame[eMenu_Frame::Artillery_Disabled] = frameChache->spriteFrameByName("main_icons_disabled_0004.png");
@@ -288,7 +296,7 @@ CCSprite* TowerMenu::getTouchedItem(CCTouch* touch )
 					{
 						topLeft->setDisplayFrame(this->mMainMenuFrame[eMenu_Frame::Comfirm_Normal]);
 						topLeft->setTag(MenuItemTag::SpecialLeftChecked);
-						topRight->setDisplayFrame(this->mMainMenuFrame[eMenu_Frame::Barrack_Lv4_Rightr_Off]);
+						topRight->setDisplayFrame(this->mMainMenuFrame[eMenu_Frame::Barrack_Lv4_Barbarians_Off]);
 						topRight->setTag(MenuItemTag::NonTouched);
 					}
 					break;
@@ -337,7 +345,7 @@ CCSprite* TowerMenu::getTouchedItem(CCTouch* touch )
 					{
 						topRight->setDisplayFrame(this->mMainMenuFrame[eMenu_Frame::Comfirm_Normal]);
 						topRight->setTag(MenuItemTag::SpecialLeftChecked);
-						topLeft->setDisplayFrame(this->mMainMenuFrame[eMenu_Frame::Barrack_Lv4_Rightr_Off]);
+						topLeft->setDisplayFrame(this->mMainMenuFrame[eMenu_Frame::Barrack_Lv4_Paladins_Off]);
 						topLeft->setTag(MenuItemTag::NonTouched);
 					}
 					break;
@@ -431,6 +439,13 @@ void TowerMenu::showMenu(CCPoint pos, eMenu_Level lv, Tower* tower, SEL_MenuTouc
 			this->mMainMenuItem[eMenu_Sprite::Bottom_Left]->setTag(MenuItemTag::NonTouched);
 			this->mMainMenuItem[eMenu_Sprite::Bottom_Right]->setDisplayFrame(this->mMainMenuFrame[eMenu_Frame::Artillery_Normal]);
 			this->mMainMenuItem[eMenu_Sprite::Bottom_Right]->setTag(MenuItemTag::NonTouched);
+
+			this->mMainMenuItem[eMenu_Sprite::Top_Left]->setVisible(true);
+			this->mMainMenuItem[eMenu_Sprite::Top_Right]->setVisible(true);
+			this->mMainMenuItem[eMenu_Sprite::Bottom_Left]->setVisible(true);
+			this->mMainMenuItem[eMenu_Sprite::Bottom_Right]->setVisible(true);
+			this->mMainMenuItem[eMenu_Sprite::Top_Centre]->setVisible(false);
+			this->mMainMenuItem[eMenu_Sprite::Bottom_Centre]->setVisible(false);
 		}
 		break;
 	case eMenu_Level::Lv1_Archer:
@@ -442,25 +457,39 @@ void TowerMenu::showMenu(CCPoint pos, eMenu_Level lv, Tower* tower, SEL_MenuTouc
 	case eMenu_Level::Lv2_Mage:
 	case eMenu_Level::Lv2_Artillery:
 		{
+			this->mMainMenuItem[eMenu_Sprite::Top_Centre]->setDisplayFrame(this->mMainMenuFrame[eMenu_Frame::Upgrade_Normal]);
+			this->mMainMenuItem[eMenu_Sprite::Bottom_Centre]->setDisplayFrame(this->mMainMenuFrame[eMenu_Frame::Sale_Normal]);
 			this->mMainMenuItem[eMenu_Sprite::Top_Left]->setVisible(false);
 			this->mMainMenuItem[eMenu_Sprite::Top_Right]->setVisible(false);
 			this->mMainMenuItem[eMenu_Sprite::Bottom_Left]->setVisible(false);
 			this->mMainMenuItem[eMenu_Sprite::Bottom_Right]->setVisible(false);
-			this->mMainMenuItem[eMenu_Sprite::Top_Centre]->setDisplayFrame(this->mMainMenuFrame[eMenu_Frame::Upgrade_Normal]);
 			this->mMainMenuItem[eMenu_Sprite::Top_Centre]->setVisible(true);
-			this->mMainMenuItem[eMenu_Sprite::Bottom_Centre]->setDisplayFrame(this->mMainMenuFrame[eMenu_Frame::Sale_Normal]);
 			this->mMainMenuItem[eMenu_Sprite::Bottom_Centre]->setVisible(true);
 		}
 		break;
-	case eMenu_Level::Lv3_Archer:
-	case eMenu_Level::Lv3_Barrack:
+	
 	case eMenu_Level::Lv3_Mage:
-	case eMenu_Level::Lv3_Artillery:
 		{
 			this->mMainMenuItem[eMenu_Sprite::Top_Left]->setVisible(true);
 			this->mMainMenuItem[eMenu_Sprite::Top_Right]->setVisible(true);
 			this->mMainMenuItem[eMenu_Sprite::Top_Left]->setDisplayFrame(this->mMainMenuFrame[eMenu_Frame::Mage_Lv4_Arcane_Normal]);
 			this->mMainMenuItem[eMenu_Sprite::Top_Right]->setDisplayFrame(this->mMainMenuFrame[eMenu_Frame::Mage_Lv4_Sorcerer_Normal]);
+
+			this->mMainMenuItem[eMenu_Sprite::Bottom_Left]->setVisible(false);
+			this->mMainMenuItem[eMenu_Sprite::Bottom_Right]->setVisible(false);
+			this->mMainMenuItem[eMenu_Sprite::Top_Centre]->setVisible(false);
+			this->mMainMenuItem[eMenu_Sprite::Bottom_Centre]->setDisplayFrame(this->mMainMenuFrame[eMenu_Frame::Sale_Normal]);
+			this->mMainMenuItem[eMenu_Sprite::Bottom_Centre]->setVisible(true);
+		}
+		break;
+	case eMenu_Level::Lv3_Archer:
+	case eMenu_Level::Lv3_Artillery:
+	case eMenu_Level::Lv3_Barrack:
+		{
+			this->mMainMenuItem[eMenu_Sprite::Top_Left]->setVisible(true);
+			this->mMainMenuItem[eMenu_Sprite::Top_Right]->setVisible(true);
+			this->mMainMenuItem[eMenu_Sprite::Top_Left]->setDisplayFrame(this->mMainMenuFrame[eMenu_Frame::Barrack_Lv4_Barbarians_Normal]);
+			this->mMainMenuItem[eMenu_Sprite::Top_Right]->setDisplayFrame(this->mMainMenuFrame[eMenu_Frame::Barrack_Lv4_Paladins_Normal]);
 
 			this->mMainMenuItem[eMenu_Sprite::Bottom_Left]->setVisible(false);
 			this->mMainMenuItem[eMenu_Sprite::Bottom_Right]->setVisible(false);

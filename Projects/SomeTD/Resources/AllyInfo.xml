@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<enemise version="1.0" >
+  <enemy name ="soldier_lvl4_paladin" textureSet="soldier.png" plist="soldier.plist">
+    <informations hp="5000" physicalDefend="10" magicDefend="0" physicalAttack="100" magicAttack="1" speed="10" defaultFrame="soldier_lvl4_paladin_0001.png" alertRange="50"/>
+    <animations defaultTag="move_rightleft">
+      <animation name="soldier_lvl4_paladin" tag="move_rightleft" startIndex="1" endIndex="6" framesInterval="6" frameCount="15" key="%s_%.4d.png" loop="-1" restoreOriginalFrame="false"/>
+      <animation name="soldier_lvl4_paladin" tag="attack" startIndex="7" endIndex="13" framesInterval="6" frameCount="21" key="%s_%.4d.png" loop="1" restoreOriginalFrame="true"/>
+      <animation name="soldier_lvl4_paladin" tag="dead" startIndex="91" endIndex="97" framesInterval="6"  frameCount="31" key="%s_%.4d.png" loop="1" restoreOriginalFrame="false"/>
+
+    </animations>
+
+  </enemy>
+
+
+  
+
+</enemise>

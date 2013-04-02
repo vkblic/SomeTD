@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<towers version="1.0" >
+  <tower name ="mage_lv1" textureSet="towers.png" plist="towers.plist" 
+         physicalAttack="50,75" magicAttack="0,0" speed="35" 
+         previewFrame="tower_preview_mage.png" shootWhen="7" framesInterval="2"
+     >
+    <animations defaultTag="move_rightdown">
+      <animation name="yeti" tag="move_up" startIndex="26" endIndex="28" framesInterval="3" frameCount="22" key="%s_%.4d.png" loop="-1" >
+        <frame number="26" index="0"/>
+        <frame number="28" index="2"/>
+        <frame number="30" index="4"/>
+        <frame number="32" index="6"/>
+        <frame number="34" index="8"/>
+        <frame number="36" index="10"/>
+        <frame number="38" index="12"/>
+        <frame number="40" index="14"/>
+        <frame number="42" index="16"/>
+        <frame number="44" index="18"/>
+        <frame number="46" index="20"/>
+        <frame number="48" index="22"/>
+      </animation>
+      <animation name="yeti" tag="move_down" startIndex="50" endIndex="72" framesInterval="3" frameCount="22" key="%s_%.4d.png" loop="-1" >
+        <frame number="50" index="0"/>
+        <frame number="52" index="2"/>
+        <frame number="54" index="4"/>
+        <frame number="56" index="6"/>
+        <frame number="58" index="8"/>
+        <frame number="60" index="10"/>
+        <frame number="62" index="12"/>
+        <frame number="64" index="14"/>
+        <frame number="66" index="16"/>
+        <frame number="68" index="18"/>
+        <frame number="70" index="20"/>
+        <frame number="72" index="22"/>
+      </animation>
+      <animation name="yeti" tag="move_rightdown" startIndex="1" endIndex="25" framesInterval="3" frameCount="22" key="%s_%.4d.png" loop="-1">
+        <frame number="1" index="0"/>
+        <frame number="3" index="2"/>
+        <frame number="4" index="4"/>
+        <frame number="6" index="6"/>
+        <frame number="7" index="8"/>
+        <frame number="9" index="10"/>
+        <frame number="10" index="12"/>
+        <frame number="12" index="14"/>
+        <frame number="13" index="16"/>
+        <frame number="15" index="18"/>
+        <frame number="16" index="20"/>
+        <frame number="18" index="22"/>
+        <frame number="19" index="22"/>
+        <frame number="21" index="22"/>
+        <frame number="22" index="22"/>
+        <frame number="24" index="22"/>
+        <frame number="25" index="22"/>
+      </animation>
+      <animation name="yeti" tag="dead" startIndex="128" endIndex="155" framesInterval="3"  frameCount="22" key="%s_%.4d.png" loop="1">
+        <frame number="128" index="0"/>
+        <frame number="129" index="1"/>
+        <frame number="131" index="4"/>
+        <frame number="132" index="6"/>
+        <frame number="134" index="8"/>
+        <frame number="136" index="10"/>
+        <frame number="147" index="12"/>
+        <frame number="149" index="14"/>
+        <frame number="151" index="16"/>
+        <frame number="153" index="18"/>
+        <frame number="155" index="20"/>
+      </animation>
+    </animations>
+
+  </tower>
+
+
+  <enemy name ="marauder" textureSet="enemies_snow.png" plist="enemies_snow.plist">
+    <informations hp="500" physicalDefend="10" magicDefend="0" physicalAttack="20" magicAttack="1" speed="25" defaultFrame="marauder_0001.png"/>
+    <animations defaultTag="move_right">
+      <animation name="marauder" tag="move_up" startIndex="23" endIndex="43" framesInterval="3" frameCount="20" key="%s_%.4d.png" loop="-1" />
+      <animation name="marauder" tag="move_down" startIndex="45" endIndex="65" framesInterval="3" frameCount="20" key="%s_%.4d.png" loop="-1" />
+      <animation name="marauder" tag="move_right" startIndex="1" endIndex="20" framesInterval="3" frameCount="20" key="%s_%.4d.png" loop="-1" />
+      <animation name="marauder" tag="attack" startIndex="23" endIndex="43" framesInterval="3" frameCount="20" key="%s_%.4d.png" loop="-1" />
+      <animation name="marauder" tag="dead" startIndex="104" endIndex="121" framesInterval="3" frameCount="17" key="%s_%.4d.png" loop="1" />
+    </animations>
+  </enemy>
+</towers>

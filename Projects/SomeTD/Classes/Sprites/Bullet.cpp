@@ -16,7 +16,6 @@ Bullet* Bullet::create()
 	if (bullte && bullte->init())//±¸×¢1
 	{
 		bullte->autorelease();
-		//CCLog("Bullet::create: %d", bullte->retainCount());
 		return bullte;
 	}
 	CC_SAFE_DELETE(bullte);
@@ -26,7 +25,7 @@ Bullet* Bullet::create()
 
 
 
-void Bullet::reuse(float speed, Enemy* target, CCSpriteFrame* frame)
+void Bullet::reuse(float speed, EnemyUnit* target, CCSpriteFrame* frame)
 {
 	this->mSpeed = speed;
 	this->mTargetID = target->getID();
@@ -41,8 +40,6 @@ void Bullet::reuse(float speed, Enemy* target, CCSpriteFrame* frame)
 void Bullet::playHitAnimation()
 {
 	this->unscheduleUpdate();
-	//this->destory();
-	CCLog("Bullet::update() hit", this->mTargetID);
 
 	CCSequence* sequence = CCSequence::createWithTwoActions(
 		CCAnimate::create(CCAnimationCache::sharedAnimationCache()->animationByName("magebolt_boom")),
@@ -79,7 +76,7 @@ void Bullet::update(float dt)
 	}
 	else
 	{
-		Enemy* target = EnemyManager::sharedEnemyManager()->getAvailableEnemy(this->mTargetID);
+		EnemyUnit* target = EnemyManager::sharedEnemyManager()->getAvailableEnemy(this->mTargetID);
 		// if target already dead
 		if(target == NULL)
 		{
@@ -99,7 +96,7 @@ void Bullet::update(float dt)
 			this->mTargetPos = target->getPosition();
 			if(this->hitChecker())
 			{
-				target->underAttack(300);
+				target->underAttack(30);
 				this->playHitAnimation();
 			}
 			else
@@ -129,9 +126,8 @@ bool Bullet::hitChecker()
 	if(!targetCollisionRect.intersectsRect(collisionRect))
 		return false;
 
-	CCLog("Bullet::isHit() hit target !", this->mTargetID);
+	//CCLog("Bullet::isHit() hit target !", this->mTargetID);
 	return true;
-
 }
 void Bullet::destory()
 {

@@ -71,9 +71,6 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Classes\Sprites\Enemy.h">
-      <Filter>Sprites</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\App\AppDelegate.h">
       <Filter>App</Filter>
     </ClInclude>
@@ -118,11 +115,20 @@
     <ClInclude Include="..\Classes\Utility\XmlReader.h">
       <Filter>Utility</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\Managers\TowerManager.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Managers\AlliesManager.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Sprites\EnemyUnit.h">
+      <Filter>Sprites</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Sprites\AllyUnit.h">
+      <Filter>Sprites</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\Classes\Sprites\Enemy.cpp">
-      <Filter>Sprites</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\App\AppDelegate.cpp">
       <Filter>App</Filter>
     </ClCompile>
@@ -156,6 +162,18 @@
     </ClCompile>
     <ClCompile Include="..\Classes\Utility\XmlReader.cpp">
       <Filter>Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Managers\TowerManager.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Managers\AlliesManager.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Sprites\EnemyUnit.cpp">
+      <Filter>Sprites</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Sprites\AllyUnit.cpp">
+      <Filter>Sprites</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -192,6 +210,12 @@
       <Filter>xml</Filter>
     </Xml>
     <Xml Include="..\Resources\LevelsInfo.xml">
+      <Filter>xml</Filter>
+    </Xml>
+    <Xml Include="..\Resources\TowerInfo.xml">
+      <Filter>xml</Filter>
+    </Xml>
+    <Xml Include="..\Resources\AllyInfo.xml">
       <Filter>xml</Filter>
     </Xml>
   </ItemGroup>

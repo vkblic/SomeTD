@@ -55,7 +55,7 @@ void EnemyManager::setEnemyLayer(CCNode* layer)
 
 void EnemyManager::readEnemyInfo(const char* fileName)
 {
-	XmlReader::readAllEnemyInfo(this->mEnemyInfo, fileName);
+	XmlReader::readActiveObjectInfoFromFile(this->mEnemyInfo, fileName);
 }
 
 
@@ -65,7 +65,7 @@ void EnemyManager::readEnemyInfo(const char* fileName)
 
 #pragma region Range checker
 
-unsigned long EnemyManager::getEnemyInRange(CCPoint pos, int rangeRadius)
+ long EnemyManager::getEnemyInRange(CCPoint pos, int rangeRadius)
 {
 
 	for(auto it = this->mEnemies.begin();it != this->mEnemies.end(); ++it)
@@ -75,18 +75,20 @@ unsigned long EnemyManager::getEnemyInRange(CCPoint pos, int rangeRadius)
 			CCPoint targetPos = it->second->getPosition();
 			CCSize targetSize = it->second->getContentSize();
 			CCRect rect = it->second->getCollisionRect();
-			CCLog("New target in range.");
-			CCLog("target: {{%f, %f}, {%f, %f}}", targetPos.x, targetPos.y, targetSize.width, targetSize.height);
-			CCLog("collisionRect Old: {{%f, %f}, {%f, %f}}",rect.origin.x, rect.origin.y, rect.size.width, rect.size.height);
-			CCLog("tower: pos(%f, %f)", pos.x, pos.y );
+			//CCLog("New target in range.");
+			//CCLog("target: {{%f, %f}, {%f, %f}}", targetPos.x, targetPos.y, targetSize.width, targetSize.height);
+			//CCLog("collisionRect Old: {{%f, %f}, {%f, %f}}",rect.origin.x, rect.origin.y, rect.size.width, rect.size.height);
+			//CCLog("tower: pos(%f, %f)", pos.x, pos.y );
 			return it->first;
 		}
 	}
 	return -1;
 }
 
-bool EnemyManager::isEnemyInRange(CCPoint pos, int rangeRadius, unsigned long enemyID)
+bool EnemyManager::isEnemyInRange(CCPoint pos, int rangeRadius,  long enemyID)
 {
+	if (enemyID == -1)
+		return false;
 	auto it = this->mEnemies.find(enemyID);
 
 	// enemy already dead
@@ -97,9 +99,9 @@ bool EnemyManager::isEnemyInRange(CCPoint pos, int rangeRadius, unsigned long en
 		return true;
 	CCPoint targetPos = it->second->getPosition();
 	CCSize targetSize = it->second->getContentSize();
-	CCLog("\ntarget out of range.");
-	CCLog("target: pos(%f, %f), width: %f, height: %f", targetPos.x, targetPos.y, targetSize.width, targetSize.height);
-	CCLog("tower: pos(%f, %f)", pos.x, pos.y );
+	//CCLog("\ntarget out of range.");
+	//CCLog("target: pos(%f, %f), width: %f, height: %f", targetPos.x, targetPos.y, targetSize.width, targetSize.height);
+	//CCLog("tower: pos(%f, %f)", pos.x, pos.y );
 	return false;
 }
 
@@ -108,11 +110,11 @@ bool EnemyManager::isEnemyInRange(CCPoint pos, int rangeRadius, unsigned long en
 
 #pragma region enemy node
 
-Enemy* EnemyManager::addEnemy(const char* enemyName, CCPoint entry)
+EnemyUnit* EnemyManager::addEnemy(const char* enemyName, CCPoint entry)
 {
 
 	auto enemyInfo = this->mEnemyInfo.find(enemyName);
-	EnemyModel* temp = &(*enemyInfo).second;
+	ActiveObjModel* temp = &(*enemyInfo).second;
 
 	auto it = this->mBatchNodes.find(temp->textureSet);
 	CCSpriteBatchNode* batch;
@@ -149,35 +151,35 @@ Enemy* EnemyManager::addEnemy(const char* enemyName, CCPoint entry)
 	}
 
 
-	auto enemy = Enemy::create(temp, hpBatch);
+	auto enemy = EnemyUnit::create(temp, hpBatch);
 	//CCLog("EnemyManager::addEnemy: retainCount: %d", enemy->retainCount());
-	this->mEnemies.insert(std::pair<unsigned long, Enemy*>(this->mIDSeed, enemy));
+	this->mEnemies.insert(std::pair< long, EnemyUnit*>(this->mIDSeed, enemy));
 	batch->addChild(enemy);
 	enemy->setID(this->mIDSeed++);
 	return enemy;
 }
 
 
-void EnemyManager::addEnemyAndRush(const char* name, CCPoint entry, const std::vector<WayPointEx>& wayPoints)
+void EnemyManager::addEnemyAndRush(const char* name, CCPoint entry, const std::vector<WayPointEx>* wayPoints)
 {
-	Enemy* enemy =  this->addEnemy(name, entry);
+	EnemyUnit* enemy =  this->addEnemy(name, entry);
 	enemy->setPosition(entry);
 	enemy->run(wayPoints);
 }
 
 
-void EnemyManager::removeEnemy(unsigned long enemyID)
+void EnemyManager::removeEnemy( long enemyID)
 {
 	auto it = this->mEnemies.find(enemyID);
 	if(it == this->mEnemies.end())
 		CCAssert(false, "must find id in map! there must be some error some where!");
 
-	this->mRemovedEnemies.insert(std::map<unsigned long, Enemy*>::value_type(enemyID, it->second));
+	this->mRemovedEnemies.insert(std::map< long, EnemyUnit*>::value_type(enemyID, it->second));
 
 	this->mEnemies.erase(it);
 }
 
-void EnemyManager::eraseEnemy(unsigned long enemyID)
+void EnemyManager::eraseEnemy( long enemyID)
 {
 	auto it = this->mRemovedEnemies.find(enemyID);
 	if(it == this->mRemovedEnemies.end())
@@ -202,7 +204,7 @@ void EnemyManager::clearUnusedEnemise()
 	this->mUnusedEnemy.clear();
 }
 
-Enemy* EnemyManager::getAvailableEnemy(unsigned long enemyID)
+EnemyUnit* EnemyManager::getAvailableEnemy( long enemyID)
 {
 	auto it = this->mEnemies.find(enemyID);
 	if (it == this->mEnemies.end())

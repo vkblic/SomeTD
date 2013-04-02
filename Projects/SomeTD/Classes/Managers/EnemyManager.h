@@ -3,7 +3,7 @@
 #define _ENEMY_MANAGER_
 
 #include "cocos2d.h"
-#include "../Sprites/Enemy.h"
+#include "../Sprites/EnemyUnit.h"
 #include "../Model/Enumeration.h"
 #include "../Model/Models.h"
 using namespace cocos2d;
@@ -27,7 +27,7 @@ public:
 	 *@return	a valid enemy id if there has a enemy in range, 
 	 *@			if not, the value is -1
 	 */
-	unsigned long getEnemyInRange(CCPoint pos, int rangeRadius);
+	 long getEnemyInRange(CCPoint pos, int rangeRadius);
 
 	/*
 	 *add a enemy node to manager, manager have responsibility to 
@@ -35,7 +35,7 @@ public:
 	 *
 	 *@param	plFrameName: enemy node pointer
 	 *@return	a valid enemy node pointer	 */
-	Enemy* addEnemy(const char* name, CCPoint entry);
+	EnemyUnit* addEnemy(const char* name, CCPoint entry);
 
 		/*
 	 *add a enemy node to manager, manager have responsibility to 
@@ -43,7 +43,7 @@ public:
 	 *
 	 *@param	plFrameName: enemy node pointer
 	 *@return	a valid enemy node pointer	 */
-	void addEnemyAndRush(const char* name, CCPoint entry, const std::vector<WayPointEx>& wayPoints);
+	void addEnemyAndRush(const char* name, CCPoint entry, const std::vector<WayPointEx>* wayPoints);
 
 
 
@@ -54,7 +54,7 @@ public:
 	 *
 	 *@param	enemyID: a valid enemyID
 	 */
-	void removeEnemy(unsigned long enemyID);
+	void removeEnemy( long enemyID);
 
 	/*
 	 *remove enemy node from removed map, add it to unused vector for
@@ -62,13 +62,13 @@ public:
 	 *
 	 *@param	enemyID: a valid enemyID
 	 */
-	void eraseEnemy(unsigned long enemyID);
+	void eraseEnemy( long enemyID);
 
 	void update(float dt);
 
 	void setEnemyLayer(CCNode* layer);
 
-	bool isEnemyInRange(CCPoint pos, int rangeRadius, unsigned long enemyID);
+	bool isEnemyInRange(CCPoint pos, int rangeRadius,  long enemyID);
 
 	/*
 	 *get the nearness enemy unit in range 
@@ -78,21 +78,20 @@ public:
 	 *@return	a valid enemy object pointer, if it's available
 	 *@			if not(destroyed of out of screen), the value NULL
 	 */
-	Enemy* getAvailableEnemy(unsigned long enemyID);
+	EnemyUnit* getAvailableEnemy( long enemyID);
 
 	void readEnemyInfo(const char* fileName);
-
 
 
 private:
 	void clearUnusedEnemise();
 private:
-	std::map<std::string, EnemyModel> mEnemyInfo;
+	std::map<std::string, ActiveObjModel> mEnemyInfo;
 
 	std::map<std::string, CCSpriteBatchNode*> mBatchNodes;
-	std::map<unsigned long, Enemy*> mEnemies;
-	std::map<unsigned long, Enemy*> mRemovedEnemies;
-	std::vector<Enemy*> mUnusedEnemy;
+	std::map< long, EnemyUnit*> mEnemies;
+	std::map< long, EnemyUnit*> mRemovedEnemies;
+	std::vector<EnemyUnit*> mUnusedEnemy;
 	std::vector<WayPoint> mWayPoints;
 	CCNode* mEnemyLayer;
 	
@@ -100,7 +99,7 @@ private:
 
 	//CCSpriteBatchNode* mHpBatchNode;
 
-	unsigned long mIDSeed;
+	 long mIDSeed;
 };
 
 #endif

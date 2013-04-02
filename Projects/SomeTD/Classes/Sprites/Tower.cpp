@@ -10,21 +10,75 @@
 #include "../Helper/CommonHelpers.h"
 #include "../Model/TowerInformation.h"
 #include "../Managers/EnemyManager.h"
+#include "../Managers/AlliesManager.h"
 #include "Bullet.h"
 using namespace cocos2d;
 Tower* Tower::create()
 {
 	Tower *tower = new Tower();
-	auto initFrame = TowerInformation::getInstance()->getTowerFrame(eTower::Tower_Mage_LV1);
+	auto initFrame = TowerInformation::getInstance()->getTowerFrame(Tower_Mage_LV1);
 	if (tower && tower->initWithSpriteFrame(initFrame))//±¸×¢1
 	{
 		//tower->loadResource();
 		tower->autorelease();
-		CCLog("tower: %d", tower->retainCount());
+		//CCLog("tower: %d", tower->retainCount());
 		return tower;
 	}
 	CC_SAFE_DELETE(tower);
 	return NULL;
+
+}
+
+void Tower::myInit(eTower_Terrain terrain, CCSpriteBatchNode* batchNode)
+{
+	mTargetID = -1;
+
+	mTowerType = Tower_None;
+	mShooterTypeUp = Shooter_None;
+	mShooterTypeUpPart2 = Shooter_None;
+	mShooterTypeDown = Shooter_None;
+	mShooterTypeDownPart2 = Shooter_None;
+	mTerrainType = terrain;
+	mCanFire = false;
+	mCurAnimationIndex = 0;
+	mCurPassedFrames = 0;
+	mFramesInterval = 1;
+	mShootWhen = 8;
+	mReloadTime = 0.2f;
+	mReloadElapsed = 0.0f;
+	mAttackRange = 200;
+
+	mBatchNode = batchNode;
+	
+	for(int i = 0; i < 3; ++i)
+	{
+		mSoldiers[i] = -1;
+
+	}
+	TowerInformation* towerInfo = TowerInformation::getInstance();
+
+	//this->mShooter = CCSprite::createWithSpriteFrame(towerInfo->GetShooterFrame(TOWER_SHOOTER_TYPE::Shooter_Mage_LV_1To3_Down));
+	//this->addChild(this->mShooter, 1);
+	//this->mShooter->setPosition(CCPoint(48, 64));
+	this->mShooter = NULL;
+
+
+	//Terrain
+	mTerrain = CCSprite::createWithSpriteFrame(towerInfo->getTerrainFrame(terrain));
+	this->addChild(mTerrain, -1);
+	CCSize towerSize = this->getContentSize();
+	CCSize terrainSize = this->getContentSize();
+	mTerrain->setPosition(CCPoint(94/2, 30));
+	this->setOpacity(0);
+
+	//Range Sprite
+	mRangeSprite = CCSprite::createWithSpriteFrame(towerInfo->getTowerRange());
+	this->addChild(this->mRangeSprite);
+	mRangeSprite->setPosition(CCPoint(towerSize.width / 2, towerSize.height /2));
+	mRangeSprite->setVisible(false);
+
+	float scale = mAttackRange / (mRangeSprite->getContentSize().width / 2);
+	mRangeSprite->setScale(scale);
 
 }
 
@@ -76,32 +130,62 @@ void Tower::ccTouchEnded(CCTouch* touch, CCEvent* event)
 	TowerMenu::eMenu_Level mLv = TowerMenu::eMenu_Level::Lv0;
 	switch (this->mTowerType)
 	{
-	case eTower::Tower_Mage_LV1:
+	case Tower_Mage_LV1:
 		{
 			mLv = TowerMenu::eMenu_Level::Lv1_Mage;
 		}
 		break;
-	case eTower::Tower_Mage_LV2:
+	case Tower_Mage_LV2:
 		{
 
 			mLv = TowerMenu::eMenu_Level::Lv2_Mage;
 		}
 		break;
-	case eTower::Tower_Mage_LV3:
+	case Tower_Mage_LV3:
 		{
 
 			mLv = TowerMenu::eMenu_Level::Lv3_Mage;
 		}
 		break;
-	case eTower::Tower_Mage_LV4_Arcane:
+	case Tower_Mage_LV4_Arcane:
 		{
 
-			mLv = TowerMenu::eMenu_Level::Lv1_Mage;
+			mLv = TowerMenu::eMenu_Level::Lv4_Mage_Arcane;
 		}
-	case eTower::Tower_Mage_LV4_Sorcerer:
+		break;
+	case Tower_Mage_LV4_Sorcerer:
 		{
 
-			mLv = TowerMenu::eMenu_Level::Lv1_Mage;
+			mLv = TowerMenu::eMenu_Level::Lv4_Mage_Sorcerer;
+		}
+		break;
+	case Tower_barrack_LV1:
+		{
+			mLv = TowerMenu::eMenu_Level::Lv1_Barrack;
+		}
+		break;
+	case Tower_barrack_LV2:
+		{
+
+			mLv = TowerMenu::eMenu_Level::Lv2_Barrack;
+		}
+		break;
+	case Tower_barrack_LV3:
+		{
+
+			mLv = TowerMenu::eMenu_Level::Lv3_Barrack;
+		}
+		break;
+	case Tower_barrack_LV4_paladins:
+		{
+
+			mLv = TowerMenu::eMenu_Level::Lv4_Barrack_Paladins;
+		}
+		break;
+	case Tower_barrack_LV4_barbarians:
+		{
+
+			mLv = TowerMenu::eMenu_Level::Lv4_Barrack_Barbarians;
 		}
 		break;
 	default:
@@ -128,51 +212,6 @@ void Tower::onExit()
 	//ÒÆ³ý¼àÌý
 	CCDirector::sharedDirector()->getTouchDispatcher()->removeDelegate(this);
 	CCSprite::onExit();
-}
-
-void Tower::myInit(eTower_Terrain terrain)
-{
-	mTargetID = -1;
-
-	mTowerType = eTower::Tower_None;
-	mShooterTypeUp = eTower_Shooter::Shooter_None;
-	mShooterTypeUpPart2 = eTower_Shooter::Shooter_None;
-	mShooterTypeDown = eTower_Shooter::Shooter_None;
-	mShooterTypeDownPart2 = eTower_Shooter::Shooter_None;
-	mTerrainType = terrain;
-	canFire = false;
-	mCurAnimationIndex = 0;
-	mCurPassedFrames = 0;
-	mFramesInterval = 1;
-	mShootWhen = 8;
-	mReloadTime = 0.2f;
-	mReloadElapsed = 0.0f;
-	mAttackRange = 200;
-	TowerInformation* towerInfo = TowerInformation::getInstance();
-
-	//this->mShooter = CCSprite::createWithSpriteFrame(towerInfo->GetShooterFrame(TOWER_SHOOTER_TYPE::Shooter_Mage_LV_1To3_Down));
-	//this->addChild(this->mShooter, 1);
-	//this->mShooter->setPosition(CCPoint(48, 64));
-	this->mShooter = NULL;
-
-
-	//Terrain
-	mTerrain = CCSprite::createWithSpriteFrame(towerInfo->getTerrainFrame(terrain));
-	this->addChild(mTerrain, -1);
-	CCSize towerSize = this->getContentSize();
-	CCSize terrainSize = this->getContentSize();
-	mTerrain->setPosition(CCPoint(94/2, 30));
-	this->setOpacity(0);
-
-	//Range Sprite
-	mRangeSprite = CCSprite::createWithSpriteFrame(towerInfo->getTowerRange());
-	this->addChild(this->mRangeSprite);
-	mRangeSprite->setPosition(CCPoint(towerSize.width / 2, towerSize.height /2));
-	mRangeSprite->setVisible(false);
-
-	float scale = mAttackRange / (mRangeSprite->getContentSize().width / 2);
-	mRangeSprite->setScale(scale);
-
 }
 
 void Tower::onMenuSelected(int type)
@@ -209,23 +248,29 @@ void Tower::onMenuSelected(int type)
 	case TowerMenu::BarrackComfirmed:
 		{
 			CCLog("TowerMenu::BarrackComfirmed");
+			this->mTowerType = Tower_barrack_LV1;
+			this->mShooterTypeUp = Shooter_None;
+			this->mShooterTypeUpPart2 = Shooter_None;
+			this->mShooterTypeDown = Shooter_None;
+			this->mShooterTypeDownPart2 = Shooter_None;
+			this->BuildTower();
 		}
 		break;
 	case TowerMenu::MageChecked:
 		{
 			CCLog("TowerMenu::MageChecked");
 			this->showPreivew(true, Tower_Preview_Mage);
-			this->showRange(true);
+			//this->showRange(true);
 		}
 		break;
 	case TowerMenu::MageConfirmed:
 		{
 			CCLog("TowerMenu::MageConfirmed");
-			this->mTowerType = eTower::Tower_Mage_LV1;
-			this->mShooterTypeUp = eTower_Shooter::Shooter_Mage_LV_1To3_Up;
-			this->mShooterTypeUpPart2 = eTower_Shooter::Shooter_Mage_LV_1To3_Up_Part2;
-			this->mShooterTypeDown = eTower_Shooter::Shooter_Mage_LV_1To3_Down;
-			this->mShooterTypeDownPart2 = eTower_Shooter::Shooter_Mage_LV_1To3_Down_Part2;
+			this->mTowerType = Tower_Mage_LV1;
+			this->mShooterTypeUp = Shooter_Mage_LV_1To3_Up;
+			this->mShooterTypeUpPart2 = Shooter_Mage_LV_1To3_Up_Part2;
+			this->mShooterTypeDown = Shooter_Mage_LV_1To3_Down;
+			this->mShooterTypeDownPart2 = Shooter_Mage_LV_1To3_Down_Part2;
 			this->BuildTower();
 		}
 		break;
@@ -250,20 +295,32 @@ void Tower::onMenuSelected(int type)
 	case TowerMenu::UpgradeConfirmed:
 		{
 			CCLog("TowerMenu::UpgradeConfirmed");
-			this->upgradeTower();
+			this->upgradeTower('\0');
 		}
 		break;
 	case TowerMenu::SpecialLeftChecked:
-		CCLog("SpecialLeftChecked");
+		{
+			CCLog("SpecialLeftChecked");
+			this->showRange(true);
+		}
 		break;
 	case TowerMenu::SpecialLeftConfirmed:
-		CCLog("SpecialLeftConfirmed");
+		{
+			CCLog("SpecialLeftConfirmed");
+			this->upgradeTower('l');
+		}
 		break;
 	case TowerMenu::SpecialRightChecked:
-		CCLog("SpecialRightChecked");
-		break;
+		{
+			CCLog("SpecialLeftChecked");
+			this->showRange(true);
+		}
 	case TowerMenu::SpecialRightConfirmed:
-		CCLog("SpecialRightConfirmed");
+		{
+			CCLog("SpecialRightConfirmed");
+			this->upgradeTower('r');
+		}
+		break;
 		break;
 	default:
 		break;
@@ -276,6 +333,24 @@ void Tower::BuildTower()
 	TowerInformation* tInfo = TowerInformation::getInstance();
 	this->setDisplayFrame(tInfo->getTowerFrame(this->mTowerType));
 	this->setOpacity(255);
+
+	// deal with Barrack
+	if(mTowerType & 0x00F000F0)
+	{
+		this->mCanFire = false;
+		this->scheduleUpdate();
+		CCPoint pos = this->getPosition();
+		CCPoint massPos = CCPoint(pos.x, pos.y - 100);
+		this->setMassPos(massPos);
+
+		for(int i = 0; i < 3;++ i)
+		{
+			auto ally = AllyManager::sharedAllyManager()->addAllyAndGetReadyForFight("soldier_lvl4_paladin", pos);
+			ally->moveTo(mSoldiersMassPos[i]);
+		}
+		return;
+	}
+
 	if(this->mShooter)
 	{
 		this->mShooter->release();
@@ -284,33 +359,63 @@ void Tower::BuildTower()
 	this->mShooter = CCSprite::createWithSpriteFrame(tInfo->getShooterFrame((eTower_Shooter)this->mShooterTypeDown));
 	this->addChild(this->mShooter, 1);
 	this->mShooter->setPosition(CCPoint(47, 67));
-	this->canFire = true;
+	this->mCanFire = true;
 	this->scheduleUpdate();
 }
 
 
-void Tower::upgradeTower()
+void Tower::upgradeTower(const char special)
 {
-
 	switch (this->mTowerType)
 	{
-	case eTower::Tower_Mage_LV1:
+	case Tower_Mage_LV1:
 		{
-			this->mTowerType = eTower::Tower_Mage_LV2;
+			this->mTowerType = Tower_Mage_LV2;
 		}
 		break;
-	case eTower::Tower_Mage_LV2:
+	case Tower_Mage_LV2:
 		{
-			this->mTowerType = eTower::Tower_Mage_LV3;
+			this->mTowerType = Tower_Mage_LV3;
 		}
 		break;	
-	case eTower::Tower_Mage_LV3:
+	case Tower_Mage_LV3:
 		{
-			this->mTowerType = eTower::Tower_Mage_LV1;
+			if(special == 'l')
+			{
+				this->mTowerType = Tower_Mage_LV4_Arcane;
+			}
+
+			else if(special == 'r')
+			{
+				this->mTowerType = Tower_Mage_LV4_Sorcerer;
+			}
+		}
+		break;
+	case Tower_barrack_LV1:
+		{
+			this->mTowerType = Tower_barrack_LV2;
+		}
+		break;
+	case Tower_barrack_LV2:
+		{
+			this->mTowerType = Tower_barrack_LV3;
+		}
+		break;	
+	case Tower_barrack_LV3:
+		{
+			if(special == 'l')
+			{
+				this->mTowerType = Tower_barrack_LV4_barbarians;
+			}
+
+			else if(special == 'r')
+			{
+				this->mTowerType = Tower_barrack_LV4_paladins;
+			}
 		}
 		break;
 	default:
-		break;
+		return;
 	}
 
 
@@ -320,8 +425,8 @@ void Tower::upgradeTower()
 	this->setDisplayFrame(tInfo->getTowerFrame(this->mTowerType));
 	this->setOpacity(255);
 
-	// special tower with 
-	if( this->mTowerType & 0xFFFF0000)
+	// special tower only 
+	if( (this->mTowerType & 0xFFFF0000) && !(mTowerType & 0x00F000F0))
 	{
 		if(this->mShooter)
 		{
@@ -331,7 +436,7 @@ void Tower::upgradeTower()
 		this->mShooter = CCSprite::createWithSpriteFrame(tInfo->getShooterFrame((eTower_Shooter)this->mShooterTypeDown));
 		this->addChild(this->mShooter, 1);
 		this->mShooter->setPosition(CCPoint(48, 64));
-		this->canFire = true;
+		this->mCanFire = true;
 	}
 
 }
@@ -357,7 +462,7 @@ void Tower::showPreivew(bool isShow, eTower_Preview towerType)
 
 void Tower::showRange(bool isShow)
 {
-	this->mRangeSprite->setVisible(isShow ? true : true);
+	this->mRangeSprite->setVisible(isShow);
 }
 
 
@@ -366,8 +471,8 @@ void Tower::update(float dt)
 	static float dtMin = 0;
 	static float total = 0;
 	total += dt;
-// 	if (total > 20)
-// 		return ;
+	// 	if (total > 20)
+	// 		return ;
 	if (dtMin > 0.1)
 	{
 		//CCLog("Tower::update");
@@ -378,41 +483,50 @@ void Tower::update(float dt)
 		dtMin += dt;
 		//return;
 	}
-	if(this->canFire)
+	// deal with barrack
+	if (mTowerType & 0x00F000F0)
 	{
-		if(this->mReloadElapsed < this->mReloadTime)
-		{
-			this->mReloadElapsed += dt;
-			return;
-		}
-		// if no target, we get one 
-		if (this->mTargetID == -1)
-		{
-			unsigned long target = EnemyManager::sharedEnemyManager()->getEnemyInRange(this->getPosition(), mAttackRange);
-			if(target != -1)
-				CCLog("tower get new target: %d", target);
-			this->mTargetID = target;
-		}
-		else
-		{
-			// if there's a target, available check 
-			if(!EnemyManager::sharedEnemyManager()->isEnemyInRange(this->getPosition(), mAttackRange, mTargetID))
-			{
-				unsigned long target = EnemyManager::sharedEnemyManager()->getEnemyInRange(this->getPosition(), mAttackRange);
-				CCLog("tower get new target: %d", target);
-				this->mTargetID = target;
-			}
-		}
-		if(this->mTargetID != -1)
-			this->fire();
+		return;
 	}
 	else
 	{
-		this->firing();
+		if(this->mCanFire)
+		{
+			if(this->mReloadElapsed < this->mReloadTime)
+			{
+				this->mReloadElapsed += dt;
+				return;
+			}
+			// if no target, we get one 
+			if (this->mTargetID == -1)
+			{
+				long target = EnemyManager::sharedEnemyManager()->getEnemyInRange(this->getPosition(), mAttackRange);
+				if(target != -1)
+					this->mTargetID = target;
+			}
+			else
+			{
+				// if there's a target, available check 
+				if(!EnemyManager::sharedEnemyManager()->isEnemyInRange(this->getPosition(), mAttackRange, mTargetID))
+				{
+					long target = EnemyManager::sharedEnemyManager()->getEnemyInRange(this->getPosition(), mAttackRange);
+					//CCLog("tower get new target: %d", target);
+					this->mTargetID = target;
+				}
+			}
+			if(this->mTargetID != -1)
+				this->fire();
+		}
+		else
+		{
+			this->firing();
+		}
 	}
 
-	
+
+
 }
+
 void Tower::firing()
 {
 	auto tInfo = TowerInformation::getInstance();
@@ -421,17 +535,18 @@ void Tower::firing()
 	std::vector<CCSpriteFrame*>* towerFrames = tInfo->getTowerAnimation(this->mTowerType);
 	int framesCount = towerFrames->size();
 
-	
+
 
 	if(this->mCurAnimationIndex > framesCount)
 	{
-		this->canFire = true;
+		this->mCanFire = true;
 		this->mReloadElapsed = 0;
 		// restore frame
 		this->mShooter->setDisplayFrame(tInfo->getShooterFrame(this->mShooterTypeDown));
 		this->setDisplayFrame(tInfo->getTowerFrame(this->mTowerType));
 		return;
 	}
+
 	// deal with frame interval 
 	if (this->mCurPassedFrames % this->mFramesInterval == 0)
 	{
@@ -457,7 +572,7 @@ void Tower::firing()
 
 void Tower::fire()
 {
-	this->canFire = false;
+	this->mCanFire = false;
 	this->mCurAnimationIndex = 0;
 	this->mCurPassedFrames = 0;
 	this->mFramesInterval = 2;
@@ -479,7 +594,7 @@ void Tower::fire()
 	//);
 	//
 	//CCSpawn* spawn = CCSpawn::create(
-	//	CCAnimate::create(tInfo->getShooterAnimation(eTower_Shooter::Shooter_Mage_LV_1To3_Down)),
+	//	CCAnimate::create(tInfo->getShooterAnimation(Shooter_Mage_LV_1To3_Down)),
 	//	firecallback, 
 	//	//towerAnimCallback,
 	//	NULL
@@ -497,13 +612,12 @@ void Tower::fire()
 void Tower::onShoot()
 {
 
-	CCLog("Tower::onShoot()");
+	//CCLog("Tower::onShoot()");
 	static bool first = true;
 
 	//if(first)
 	//{
-		this->testBullet = Bullet::create();
-		this->getParent()->addChild(this->testBullet);
+	auto bullet = Bullet::create();
 	//	first = false;
 	//}
 
@@ -520,20 +634,31 @@ void Tower::onShoot()
 		+ this->mShooter->getPosition().y; //- this->mShooter->getContentSize().height / 2;
 	//+ 23; // offset
 
-	this->testBullet->setPosition(bulletPos);
+	bullet->setPosition(bulletPos);
 	//bullet->setScale(0.25);
 	//this->getParent()->addChild(this->testBullet);
 	// 
 	// check if target is still available, if not, get one.
 	if(!EnemyManager::sharedEnemyManager()->isEnemyInRange(this->getPosition(), mAttackRange, mTargetID))
 	{
-		unsigned long target = EnemyManager::sharedEnemyManager()->getEnemyInRange(this->getPosition(), mAttackRange);
-		CCLog("tower get new target: %d when shooting", target);
+		long target = EnemyManager::sharedEnemyManager()->getEnemyInRange(this->getPosition(), mAttackRange);
+		//CCLog("tower get new target: %d when shooting", target);
 		mTargetID = target;
 	}
 	if (mTargetID != -1)
-		testBullet->reuse(100, EnemyManager::sharedEnemyManager()->getAvailableEnemy(mTargetID), CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("magebolt_0002.png"));
-	else
-		CCLog("no target in range when shooting, fire cancle!");
+	{
+		bullet->reuse(100, EnemyManager::sharedEnemyManager()->getAvailableEnemy(mTargetID), CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("magebolt_0002.png"));
+
+		mBatchNode->addChild(bullet);
+	}
+
+	//else
+	//CCLog("no target in range when shooting, fire cancle!");
 }
 
+void Tower::setMassPos(const CCPoint& pos)
+{
+	mSoldiersMassPos[0] = CCPoint(pos.x - 30, pos.y);
+	mSoldiersMassPos[1] = CCPoint(pos.x , pos.y);
+	mSoldiersMassPos[2] = CCPoint(pos.x + 30, pos.y);
+}

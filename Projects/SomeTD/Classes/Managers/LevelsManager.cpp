@@ -76,10 +76,11 @@ Entry LevelsManager::readWayPoints(int entryId, int waysEveryEntry, CCTMXObjectG
 	if(entryPair == NULL)
 		return entry;
 	entry.pos = CCPoint(entryPair->valueForKey("x")->intValue(), entryPair->valueForKey("y")->intValue());
-	int index = 0;
+	
 	for (int i = 0; i < waysEveryEntry; ++i)
 	{
 		std::vector<WayPointEx> way;
+		int index = 0;
 		while (true)
 		{
 			sprintf(buffer, "WayPoint_%d_%d_%d", entry.id, i, index);
@@ -97,10 +98,21 @@ Entry LevelsManager::readWayPoints(int entryId, int waysEveryEntry, CCTMXObjectG
 	return entry;
 }
 
-static float offset = 3;
+static float offset = 1;
 static float curWaveStartTime;
+static bool test = false;
 void LevelsManager::update(float dt)
 {
+	// for test
+	while (false)
+	{
+		if (test)
+			return;
+		EnemyManager::sharedEnemyManager()->addEnemyAndRush("marauder", mCurLevelInfo->entrise[0].pos, &mCurLevelInfo->entrise[0].ways[0] );
+		test = true;
+		return;
+	} 
+
 	if(mIsCurLevelCompleted)
 		return;
 	auto enemyManger = EnemyManager::sharedEnemyManager();
@@ -147,7 +159,7 @@ void LevelsManager::update(float dt)
 				if(curWaveStartTime > enemy->delay)
 				{
 					CCLog("new [%s] start rush! curTime: %f, delay: %f", enemy->enemyName, curWaveStartTime, enemy->delay);
-					enemyManager->addEnemyAndRush(enemy->enemyName, mCurLevelInfo->entrise[enemy->entryID].pos, mCurLevelInfo->entrise[enemy->entryID].ways[enemy->wayID] );
+					enemyManager->addEnemyAndRush(enemy->enemyName, mCurLevelInfo->entrise[enemy->entryID].pos, &mCurLevelInfo->entrise[enemy->entryID].ways[enemy->wayID] );
 					mCurWaveRemainEnemy.pop();
 				}
 				else

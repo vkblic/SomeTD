@@ -13,42 +13,72 @@
  </layer>
  <objectgroup name="Objects" width="60" height="45">
   <object name="Entry_0" x="457" y="-150"/>
-  <object name="WayPoint_0_0_0" x="457" y="-100"/>
-  <object name="WayPoint_0_0_1" x="439" y="16"/>
-  <object name="WayPoint_0_0_2" x="411" y="44"/>
-  <object name="WayPoint_0_0_3" x="371" y="62"/>
-  <object name="WayPoint_0_0_4" x="333" y="83"/>
-  <object name="WayPoint_0_0_5" x="301" y="112"/>
-  <object name="WayPoint_0_0_6" x="286" y="149"/>
-  <object name="WayPoint_0_0_7" x="306" y="183"/>
-  <object name="WayPoint_0_0_8" x="356" y="195"/>
-  <object name="WayPoint_0_0_9" x="413" y="188"/>
-  <object name="WayPoint_0_0_11" x="497" y="225"/>
-  <object name="WayPoint_0_0_10" x="463" y="199"/>
-  <object name="WayPoint_0_0_12" x="511" y="262"/>
-  <object name="WayPoint_0_0_13" x="515" y="301"/>
-  <object name="WayPoint_0_0_14" x="505" y="345"/>
-  <object name="WayPoint_0_0_15" x="476" y="367"/>
-  <object name="WayPoint_0_0_16" x="451" y="394"/>
-  <object name="WayPoint_0_0_17" x="435" y="433"/>
-  <object name="WayPoint_0_0_18" x="446" y="473"/>
-  <object name="WayPoint_0_0_19" x="481" y="490"/>
-  <object name="WayPoint_0_0_20" x="519" y="499"/>
-  <object name="WayPoint_0_0_21" x="558" y="505"/>
-  <object name="WayPoint_0_0_22" x="599" y="512"/>
-  <object name="WayPoint_0_0_23" x="636" y="532"/>
-  <object name="WayPoint_0_0_24" x="663" y="560"/>
-  <object name="WayPoint_0_0_25" x="678" y="592"/>
-  <object name="WayPoint_0_0_26" x="680" y="632"/>
-  <object name="WayPoint_0_0_27" x="672" y="668"/>
-  <object name="WayPoint_0_0_28" x="664" y="706"/>
-  <object name="WayPoint_0_0_29" x="655" y="757"/>
+  <object name="WayPoint_0_0_0" x="452" y="-61"/>
+  <object name="WayPoint_0_0_1" x="448" y="-16"/>
+  <object name="WayPoint_0_0_2" x="439" y="16"/>
+  <object name="WayPoint_0_0_3" x="411" y="44"/>
+  <object name="WayPoint_0_0_4" x="371" y="62"/>
+  <object name="WayPoint_0_0_5" x="333" y="83"/>
+  <object name="WayPoint_0_0_6" x="301" y="112"/>
+  <object name="WayPoint_0_0_7" x="286" y="149"/>
+  <object name="WayPoint_0_0_8" x="306" y="183"/>
+  <object name="WayPoint_0_0_9" x="356" y="195"/>
+  <object name="WayPoint_0_0_10" x="413" y="188"/>
+  <object name="WayPoint_0_0_11" x="463" y="199"/>
+  <object name="WayPoint_0_0_12" x="497" y="225"/>
+  <object name="WayPoint_0_0_13" x="511" y="262"/>
+  <object name="WayPoint_0_0_14" x="515" y="301"/>
+  <object name="WayPoint_0_0_15" x="505" y="345"/>
+  <object name="WayPoint_0_0_16" x="476" y="367"/>
+  <object name="WayPoint_0_0_17" x="451" y="394"/>
+  <object name="WayPoint_0_0_18" x="422" y="425"/>
+  <object name="WayPoint_0_0_19" x="389" y="445"/>
+  <object name="WayPoint_0_0_20" x="355" y="463"/>
+  <object name="WayPoint_0_0_21" x="319" y="472"/>
+  <object name="WayPoint_0_0_22" x="284" y="482"/>
+  <object name="WayPoint_0_0_23" x="249" y="494"/>
+  <object name="WayPoint_0_0_24" x="212" y="497"/>
+  <object name="WayPoint_0_0_25" x="178" y="494"/>
+  <object name="WayPoint_0_0_26" x="149" y="478"/>
+  <object name="WayPoint_0_0_27" x="122" y="453"/>
+  <object name="WayPoint_0_0_28" x="91" y="437"/>
+  <object name="WayPoint_0_0_29" x="54" y="431"/>
+  <object name="WayPoint_0_0_30" x="18" y="428"/>
+  <object name="WayPoint_0_1_0" x="404" y="-64"/>
+  <object name="WayPoint_0_1_1" x="402" y="-20"/>
+  <object name="WayPoint_0_1_2" x="385" y="15"/>
+  <object name="WayPoint_0_1_3" x="356" y="37"/>
+  <object name="WayPoint_0_1_4" x="318" y="51"/>
+  <object name="WayPoint_0_1_5" x="280" y="74"/>
+  <object name="WayPoint_0_1_6" x="253" y="107"/>
+  <object name="WayPoint_0_1_7" x="243" y="148"/>
+  <object name="WayPoint_0_1_8" x="254" y="189"/>
+  <object name="WayPoint_0_1_9" x="286" y="221"/>
+  <object name="WayPoint_0_1_10" x="324" y="237"/>
+  <object name="WayPoint_0_1_11" x="369" y="236"/>
+  <object name="WayPoint_0_1_12" x="410" y="234"/>
+  <object name="WayPoint_0_1_13" x="450" y="241"/>
+  <object name="WayPoint_0_1_14" x="462" y="268"/>
+  <object name="WayPoint_0_1_15" x="464" y="303"/>
+  <object name="WayPoint_0_1_16" x="439" y="339"/>
+  <object name="WayPoint_0_1_17" x="404" y="368"/>
+  <object name="WayPoint_0_1_18" x="372" y="400"/>
+  <object name="WayPoint_0_1_19" x="328" y="417"/>
+  <object name="WayPoint_0_1_20" x="282" y="429"/>
+  <object name="WayPoint_0_1_21" x="243" y="442"/>
+  <object name="WayPoint_0_1_22" x="202" y="448"/>
+  <object name="WayPoint_0_1_23" x="168" y="440"/>
+  <object name="WayPoint_0_1_24" x="141" y="418"/>
+  <object name="WayPoint_0_1_25" x="111" y="394"/>
+  <object name="WayPoint_0_1_26" x="76" y="381"/>
+  <object name="WayPoint_0_1_27" x="36" y="376"/>
+  <object name="Tower0" x="510" y="434"/>
   <object name="Tower1" x="624" y="432"/>
   <object name="Tower2" x="576" y="368"/>
   <object name="Tower3" x="576" y="256"/>
   <object name="Tower4" x="560" y="176"/>
-  <object name="Tower5" x="420" y="135"/>
-  <object name="Tower6" x="352" y="144"/>
+  <object name="Tower5" x="469" y="130"/>
+  <object name="Tower6" x="377" y="133"/>
   <object name="Tower7" x="808" y="323"/>
   <object name="Tower8" x="767" y="257"/>
   <object name="Tower9" x="746" y="569"/>
@@ -59,6 +89,6 @@
   <object name="Tower14" x="309" y="296"/>
   <object name="Tower15" x="394" y="295"/>
   <object name="Tower16" x="217" y="388"/>
-  <object name="Tower17" x="510" y="434"/>
+  <object name="TestAlly" x="344" y="212"/>
  </objectgroup>
 </map>

@@ -151,13 +151,16 @@
     <ClInclude Include="..\Classes\Helper\CommonHelpers.h" />
     <ClInclude Include="..\Classes\Helper\SpriteHelpers.h" />
     <ClInclude Include="..\Classes\libs\tinyxml2.h" />
+    <ClInclude Include="..\Classes\Managers\AlliesManager.h" />
     <ClInclude Include="..\Classes\Managers\EnemyManager.h" />
     <ClInclude Include="..\Classes\Managers\LevelsManager.h" />
+    <ClInclude Include="..\Classes\Managers\TowerManager.h" />
     <ClInclude Include="..\Classes\Model\Enumeration.h" />
     <ClInclude Include="..\Classes\Model\Models.h" />
     <ClInclude Include="..\Classes\Model\TowerInformation.h" />
+    <ClInclude Include="..\Classes\Sprites\AllyUnit.h" />
     <ClInclude Include="..\Classes\Sprites\Bullet.h" />
-    <ClInclude Include="..\Classes\Sprites\Enemy.h" />
+    <ClInclude Include="..\Classes\Sprites\EnemyUnit.h" />
     <ClInclude Include="..\Classes\Sprites\Tower.h" />
     <ClInclude Include="..\Classes\Sprites\TowerMenu.h" />
     <ClInclude Include="..\Classes\Utility\XmlReader.h" />
@@ -169,11 +172,14 @@
     <ClCompile Include="..\Classes\App\HelloWorldScene.cpp" />
     <ClCompile Include="..\Classes\libs\tinyxml2.cpp" />
     <ClCompile Include="..\Classes\libs\xmltest.cpp" />
+    <ClCompile Include="..\Classes\Managers\AlliesManager.cpp" />
     <ClCompile Include="..\Classes\Managers\EnemyManager.cpp" />
     <ClCompile Include="..\Classes\Managers\LevelsManager.cpp" />
+    <ClCompile Include="..\Classes\Managers\TowerManager.cpp" />
     <ClCompile Include="..\Classes\Model\TowerInformation.cpp" />
+    <ClCompile Include="..\Classes\Sprites\AllyUnit.cpp" />
     <ClCompile Include="..\Classes\Sprites\Bullet.cpp" />
-    <ClCompile Include="..\Classes\Sprites\Enemy.cpp" />
+    <ClCompile Include="..\Classes\Sprites\EnemyUnit.cpp" />
     <ClCompile Include="..\Classes\Sprites\Tower.cpp" />
     <ClCompile Include="..\Classes\Sprites\TowerMenu.cpp" />
     <ClCompile Include="..\Classes\Utility\XmlReader.cpp" />
@@ -207,12 +213,14 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Xml Include="..\Resources\AllyInfo.xml" />
     <Xml Include="..\Resources\EnemyInfo.xml">
       <SubType>Designer</SubType>
     </Xml>
     <Xml Include="..\Resources\LevelsInfo.xml">
       <SubType>Designer</SubType>
     </Xml>
+    <Xml Include="..\Resources\TowerInfo.xml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

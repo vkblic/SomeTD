@@ -1,6 +1,6 @@
 
-#ifndef _ENEMY_
-#define _ENEMY_
+#ifndef _ALLY_UNIT_
+#define _ALLY_UNIT_
 
 #include "cocos2d.h"
 #include "../Model/Enumeration.h"
@@ -8,17 +8,23 @@
 using namespace cocos2d;
 
 //Tower class
+enum eAllyStatus
+{
+	AllyStatus_Moving,
+	AllyStatus_MovingToTarget,
+	AllyStatus_Attack,
+	AllyStatus_Waiting
+};
 
-
-class Enemy : public CCSprite , public CCTouchDelegate
+class AllyUnit : public CCSprite , public CCTouchDelegate
 {
 
 public:
-	static Enemy* create(EnemyModel* enemyInfo, CCSpriteBatchNode* hpBatchNode);
+	static AllyUnit* create(ActiveObjModel* enemyInfo, CCSpriteBatchNode* hpBatchNode);
 
 public:
 public:
-	virtual ~Enemy();
+	virtual ~AllyUnit();
 
 	//重写触屏相关函数----
 	virtual void onEnter();
@@ -30,20 +36,18 @@ public:
 
 public:
 	void update(float dt); // execute every frame
-	void fire(CCSprite* target);
-	void onShoot(CCNode* shooter);
-	CCRect getCollisionRect();
 
-	void FollowPath(CCNode* sender);
+	CCRect getCollisionRect();
 
 	//void run(std::vector<WayPointEx>& wayPoints);
 
-	void run(const std::vector<WayPointEx>& wayPoints);
-
+	void run();
+	void moveTo(const CCPoint& distPos);
+	void onInPosition();
 	void setID(int id){ this->mID = id; }
-	unsigned long getID() { return this->mID; }
+	 long getID() { return this->mID; }
 
-	EnemyModel* getEnemyInfo() { return this->mEnemyInfo; }
+	ActiveObjModel* getEnemyInfo() { return this->mAllyInfo; }
 
 public:
 	void myInit();//自定义初始化函数
@@ -59,7 +63,9 @@ public:
 
 	void destory();
 	void onDestoryed();
-
+	void startAttack();
+	void attacking();
+	void onHit();
 private:
 	//void getNextLv(eTower)
 
@@ -75,24 +81,25 @@ private:
 
 
 private:
-	int _wayPointIndex;
-	int _wayPointCount;
-	std::vector<WayPointEx> mWayPoints;
+	int mCurWayPointIndex;
+	const std::vector<WayPointEx>* mWayPoints;
+	eActiveObjTag mCurActiveObjTag;
 	//eTower_Preview mPreviewType;
 	
 	//CCSequence* mShooterAnimationSequence;
 	//CCSequence* mTowerAnimationSequence;
 private:
 	CCSprite* mHp;
-private:
-
-
 	CCSpriteBatchNode* mHpBatchNode;
-	EnemyModel* mEnemyInfo;
+	ActiveObjModel* mAllyInfo;
 
 	//int mMaxHP;
 	int mCurHP;
-	unsigned long mID;
+	long mID;
+	long mTargetID;
+	eAllyStatus mCurStatus;
+	CCRect mDefualtColorRect;
+	float mHpBarMaxWidth;
 };
 
 

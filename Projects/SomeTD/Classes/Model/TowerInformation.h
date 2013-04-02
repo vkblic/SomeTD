@@ -76,7 +76,7 @@ public:
 	void LoadConfig(CCSpriteFrameCache* spriteFrameCache);
 
 private:
-	std::vector<CCSpriteFrame*> mTowerFrame; //there's only two texture for now
+	std::map<eTower, CCSpriteFrame*> mTowerFrame; //there's only two texture for now
 	std::vector<CCSpriteFrame*>  mShooterFrame;
 	std::vector<std::vector<CCSpriteFrame*>*> mTowerAnimation;
 	std::vector<std::vector<CCSpriteFrame*>*> mShooterAnimation;
@@ -85,8 +85,41 @@ private:
 	std::vector<CCSpriteFrame*> mTowerConstructingFrame;
 	CCSpriteFrame* mRangeFrame;
 	std::vector<int> mAttackRange;
-	eTower towerType;
+	eTower mTowerType;
 };
+
+struct TowerModel
+{
+	eTower mTowerType ;
+	eTower_Shooter mShooterTypeUp;
+	eTower_Shooter mShooterTypeUpPart2;
+	eTower_Shooter mShooterTypeDown;
+	eTower_Shooter mShooterTypeDownPart2;
+
+	/*
+	 *shoot when animation frame index equal this value.
+	 *@range [0, frameCount - 1]
+	 */
+	int mShootWhen;
+
+	/*
+	 *change display frame every x frame
+	 *@default: 1
+	 *@must >= 1
+	 */
+	int mFramesInterval;
+
+	/*
+	 *time use for reload, or we can see fire interval time.
+	 *@unit: second
+	 *@range [0, max)
+	 */
+	float mReloadTime;
+
+	eTower_Terrain mTerrainType;
+
+};
+
 
 
 

@@ -4,8 +4,9 @@
 #include "../Helper/CommonHelpers.h"
 #include "../Model/TowerInformation.h"
 #include "../Managers/EnemyManager.h"
+#include "../Managers/AlliesManager.h"
 #include "../Managers/LevelsManager.h"
-#include "../Sprites/Enemy.h"
+#include "../Sprites/EnemyUnit.h"
 #include "../Utility/XmlReader.h"
 
 using namespace cocos2d;
@@ -51,7 +52,7 @@ bool HelloWorld::init()
 
 		// 		this->_tileMap = CCTMXTiledMap::create("TileMap.tmx");
 		// 		this->_background = _tileMap->layerNamed("Background");
-		// 
+		//  
 		// 		this->addChild(this->_tileMap, -1);
 		// 
 		// 		CCTMXObjectGroup *objects = this->_tileMap->objectGroupNamed("Objects");
@@ -81,15 +82,12 @@ bool HelloWorld::init()
 
 
 		CCSpriteFrameCache* cache = CCSpriteFrameCache::sharedSpriteFrameCache(); 
-		cache->addSpriteFramesWithFile("enemies_snow.plist");
-		//cache->addSpriteFramesWithFile("tower.plist");
+		cache->addSpriteFramesWithFile("enemies.plist");
+		cache->addSpriteFramesWithFile("soldier.plist");
+		cache->addSpriteFramesWithFile("InGameUI.plist");
 		cache->addSpriteFramesWithFile("towers.plist");
-		cache->addSpriteFramesWithFile("towers_arcane.plist");
-		cache->addSpriteFramesWithFile("ingame_gui.plist");
-		cache->addSpriteFramesWithFile("common_spritesheet_16_a_2.plist");
-		cache->addSpriteFramesWithFile("gui_menu_sprite_3.plist");
+
 		
-	
 
 
 		//Tower information
@@ -97,22 +95,44 @@ bool HelloWorld::init()
 
 
 		// Tower
-		CCDictionary* tower1 = objects->objectNamed("Tower1");
-		int towerX = tower1->valueForKey("x")->intValue();
-		int towerY = tower1->valueForKey("y")->intValue();
+		char buffer[64];
+		auto batchNode = CCSpriteBatchNode::create("towers.png");
+		this->addChild(batchNode);
+		for (int i = 0; true; ++i)
+		{
+			sprintf(buffer, "Tower%d", i);
 
-		this->mTower = Tower::create();
-		this->mTower->myInit(eTower_Terrain::Terrain_Build_DarkGray);
-		this->mTower->setPosition(CCPoint(towerX, towerY));
-		this->addChild(this->mTower);
+			CCDictionary* towerPos = objects->objectNamed(buffer);
+			if (towerPos == NULL)
+				break;
+			int towerX = towerPos->valueForKey("x")->intValue();
+			int towerY = towerPos->valueForKey("y")->intValue();
 
-		this->addChild(TowerMenu::sharedTowerMenu());
+			auto tower = Tower::create();
+			tower->myInit(Terrain_Build_DarkGray, batchNode);
+			tower->setPosition(CCPoint(towerX, towerY));
+			
+			batchNode->addChild(tower);
+		}
+		
+		
+		
+		//CCDictionary* tower1 = objects->objectNamed("Tower1");
+		//int towerX = tower1->valueForKey("x")->intValue();
+		//int towerY = tower1->valueForKey("y")->intValue();
+		//
+		//this->mTower = Tower::create();
+		//this->mTower->myInit(Terrain_Build_DarkGray);
+		//this->mTower->setPosition(CCPoint(towerX, towerY));
+		//this->addChild(this->mTower);
+
+		this->addChild(TowerMenu::sharedTowerMenu(), 2);
 		TowerMenu::sharedTowerMenu()->setVisible(false);
 
 		// add animation
 		//脚色动画
 		// 
-		addAnimationWithFramesToCache("yeti","move", 1, 25, 2, true);
+		//addAnimationWithFramesToCache("yeti","move", 1, 25, 2, true);
 		addAnimationWithFramesToCache("magebolt","boom", 3, 10, 1, false, 1);
 
 
@@ -124,7 +144,18 @@ bool HelloWorld::init()
 		//WayPoints
 		enemyManager->readEnemyInfo("EnemyInfo.xml");
 		enemyManager->setEnemyLayer(this);
-// 		for (int i = 0; i < 1; ++i)
+
+		//
+		auto allyManager = AllyManager::sharedAllyManager();
+		//WayPoints
+		allyManager->readAlliesInfo("AllyInfo.xml");
+		allyManager->setObjectLayer(this);
+
+
+		//TestAlly
+		auto testAlly = objects->objectNamed("TestAlly");
+		CCPoint testPos = CCPoint(testAlly->valueForKey("x")->intValue(), testAlly->valueForKey("y")->intValue());
+		AllyManager::sharedAllyManager()->addAllyAndGetReadyForFight("soldier_lvl4_paladin", testPos);
 // 		{
 // 
 // 			//enemy->setPosition(CCPoint(x, y));
@@ -251,8 +282,8 @@ void HelloWorld::ccTouchEnded(CCTouch *pTouch, CCEvent *pEvent)
 	touchLocation = this->convertToNodeSpace(touchLocation);
 	//CCLog("Background UI coor, x: %f, y: %f", touchLocation.x, touchLocation.y);
 	//bullet
-	if(this->canFire)
-	{
+	//if(this->canFire)
+	//{
 // 		 		Bullet *bullet = Bullet::create(100, this->_player, "magebolt_0002.png");
 // 				
 // 					bullet->setPosition(touchLocation);
@@ -261,16 +292,16 @@ void HelloWorld::ccTouchEnded(CCTouch *pTouch, CCEvent *pEvent)
 //  		bullet->reuse();
 		
 		//this->mTower->fire(this->_player);
-		return ;
+	//	return ;
 
-	}
+	//}
 
 	//EnemyManager::sharedEnemyManager()->runEnemiseOneByOne(1000);
 	//start player moving
 	// animation
 	// 
 
-	this->canFire = true;
+	//this->canFire = true;
 
 	//动作, 暂时不用
 	return ;

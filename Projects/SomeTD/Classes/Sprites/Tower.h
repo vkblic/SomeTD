@@ -5,7 +5,7 @@
 #include "cocos2d.h"
 #include "Bullet.h"
 #include "../Model/Enumeration.h"
-#include "../Sprites/Enemy.h"
+#include "../Sprites/EnemyUnit.h"
 using namespace cocos2d;
 
 //Tower class
@@ -35,12 +35,12 @@ public:
 public:
 	//Menu
 	void onMenuSelected(int type);
-	void myInit(eTower_Terrain terrain);
-
+	void myInit(eTower_Terrain terrain, CCSpriteBatchNode* batchNode);
+	void setMassPos(const CCPoint& pos);
 private:
 
 	void BuildTower();
-	void upgradeTower();
+	void upgradeTower(const char special);
 	void showPreivew(bool isShow, eTower_Preview towerType);
 	void showRange(bool isShow);
 	void fire();
@@ -54,10 +54,11 @@ private:
 	eTower_Shooter mShooterTypeUpPart2;
 	eTower_Shooter mShooterTypeDown;
 	eTower_Shooter mShooterTypeDownPart2;
-
+	long mSoldiers[3];
+	CCPoint mSoldiersMassPos[3];
 	int mCurAnimationIndex;
 	int mCurPassedFrames;
-
+	CCSpriteBatchNode* mBatchNode;
 
 	/*
 	 *shoot when animation frame index equal this value.
@@ -99,13 +100,12 @@ private:
 	 */
 	CCSprite* mShooter;
 	CCSprite* mTerrain;
-	unsigned long mTargetID;
+	 long mTargetID;
 	CCSprite* mRangeSprite;
 	int mAttackRange;
 private:
 
-	Bullet* testBullet;
-	bool canFire;
+	bool mCanFire;
 };
 
 

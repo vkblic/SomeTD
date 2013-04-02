@@ -29,4 +29,7 @@ static inline ccVertex2F vertex2FNormalization(const ccVertex2F& v1)
 	return v;
 }
 
+
+
+
 #endif

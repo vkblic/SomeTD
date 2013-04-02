@@ -40,7 +40,7 @@ bool XmlReader::readAllLevelInfo(std::map<std::string, LevelModel>& levelInfoMap
 			WaveModel waveModel;
 			waveModel.id = atoi(waveNode->Attribute("id"));
 			auto entryNode = waveNode->FirstChildElement();
-			
+
 			do 
 			{
 				//entry every wave 
@@ -73,40 +73,40 @@ bool XmlReader::readAllLevelInfo(std::map<std::string, LevelModel>& levelInfoMap
 }
 
 
-bool XmlReader::readAllEnemyInfo(std::map<std::string, EnemyModel>& enemyInfoMap, const char* fileName)
+bool XmlReader::readActiveObjectInfoFromFile(std::map<std::string, ActiveObjModel>& objectsInfoMap, const char* fileName)
 {
 	tinyxml2::XMLDocument doc;
 	doc.LoadFile(fileName);
 
 	if(doc.Error())
 		return false;
-	auto enemiseNode = doc.FirstChild()->NextSibling();
-	if(enemiseNode->NoChildren())
+	auto objectsNode = doc.FirstChild()->NextSibling();
+	if(objectsNode->NoChildren())
 		return false;
 
-	auto enemyNode  = enemiseNode->FirstChild();
+	auto objectNode  = objectsNode->FirstChild();
 	//std::map<std::string, EnemyModel>* dic = new std::map<std::string, EnemyModel>();
 	do 
 	{
-		EnemyModel enemyModel;
-		auto element = enemyNode->ToElement();
+		ActiveObjModel object;
+		auto element = objectNode->ToElement();
 
 		// 2. info 
-		strcpy(enemyModel.name, element->Attribute("name"));
-		strcpy(enemyModel.textureSet, element->Attribute("textureSet"));
-		strcpy(enemyModel.plist, element->Attribute("plist"));
-		auto infoElement = enemyNode->FirstChildElement();
-		enemyModel.hp = atoi(infoElement->Attribute("hp"));
-		enemyModel.physicalAttack = atoi(infoElement->Attribute("physicalAttack"));
-		enemyModel.physicalDefend = atoi(infoElement->Attribute("physicalDefend"));
-		enemyModel.magicDefend = atoi(infoElement->Attribute("magicDefend"));
-		enemyModel.magicAttack = atoi(infoElement->Attribute("magicAttack"));
-		enemyModel.speed = atof(infoElement->Attribute("speed"));
-
-		enemyModel.defaultFrame = CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(infoElement->Attribute("defaultFrame"));
+		strcpy(object.name, element->Attribute("name"));
+		strcpy(object.textureSet, element->Attribute("textureSet"));
+		strcpy(object.plist, element->Attribute("plist"));
+		auto infoElement = objectNode->FirstChildElement();
+		object.hp = atoi(infoElement->Attribute("hp"));
+		object.physicalAttack = atoi(infoElement->Attribute("physicalAttack"));
+		object.physicalDefend = atoi(infoElement->Attribute("physicalDefend"));
+		object.magicDefend = atoi(infoElement->Attribute("magicDefend"));
+		object.magicAttack = atoi(infoElement->Attribute("magicAttack"));
+		object.speed = atof(infoElement->Attribute("speed"));
+		object.alertRange = atoi(infoElement->Attribute("alertRange"));
+		object.defaultFrame = CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(infoElement->Attribute("defaultFrame"));
 
 		// 2. animations
-		auto animations = enemyNode->FirstChild()->NextSiblingElement();
+		auto animations = objectNode->FirstChild()->NextSiblingElement();
 
 		if(!animations->NoChildren())
 		{
@@ -114,71 +114,44 @@ bool XmlReader::readAllEnemyInfo(std::map<std::string, EnemyModel>& enemyInfoMap
 			auto animateElement = animations->FirstChildElement();
 			do 
 			{
+				bool restoreOriginalFrame = false;
+				if(strcmp("true", animateElement->Attribute("restoreOriginalFrame")) == 0)
+					restoreOriginalFrame = true;
 				std::string tag = animateElement->Attribute("tag");
 				CCAnimation* animate = addAnimationWithFramesToCache(
 					animateElement->Attribute("name"), animateElement->Attribute("tag"),
 					atoi(animateElement->Attribute("startIndex")), atoi(animateElement->Attribute("endIndex")), atoi(animateElement->Attribute("framesInterval")), 
-					false, atoi(animateElement->Attribute("loop"))) ;
+					restoreOriginalFrame, atoi(animateElement->Attribute("loop"))) ;
 
 				if(tag == "move_up")
 				{
-					enemyModel.animations[eEnmeyTag::EnmeyTag_MoveUp] = animate;
+					object.animations[ActiveObjTag_MoveUp] = animate;
 					if(defaultTag == tag)
-						enemyModel.animations[eEnmeyTag::EnemyTag_Default] = animate;
+						object.animations[ActiveObjTag_Default] = animate;
 				}
 				else if (tag == "move_down")
 				{
-					enemyModel.animations[eEnmeyTag::EnmeyTag_MoveDown] = animate;
+					object.animations[ActiveObjTag_MoveDown] = animate;
 					if(defaultTag == tag)
-						enemyModel.animations[eEnmeyTag::EnemyTag_Default] = animate;
+						object.animations[ActiveObjTag_Default] = animate;
 				}
-				else if (tag == "move_right")
+				else if (tag == "move_rightleft")
 				{
-					enemyModel.animations[eEnmeyTag::EnmeyTag_MoveRight] = animate;
+					object.animations[ActiveObjTag_MoveRightLeft] = animate;
 					if(defaultTag == tag)
-						enemyModel.animations[eEnmeyTag::EnemyTag_Default] = animate;
-				}
-				else if (tag == "move_left")
-				{
-					enemyModel.animations[eEnmeyTag::EnmeyTag_MoveLeft] = animate;
-					if(defaultTag == tag)
-						enemyModel.animations[eEnmeyTag::EnemyTag_Default] = animate;
-				}
-				else if (tag == "move_leftup")
-				{
-					enemyModel.animations[eEnmeyTag::EnmeyTag_MoveLeftUp] = animate;
-					if(defaultTag == tag)
-						enemyModel.animations[eEnmeyTag::EnemyTag_Default] = animate;
-				}
-				else if (tag == "move_leftdown")
-				{
-					enemyModel.animations[eEnmeyTag::EnmeyTag_MoveLeftDown] = animate;
-					if(defaultTag == tag)
-						enemyModel.animations[eEnmeyTag::EnemyTag_Default] = animate;
-				}
-				else if (tag == "move_rightup")
-				{
-					enemyModel.animations[eEnmeyTag::EnmeyTag_MoveRightUp] = animate;
-					if(defaultTag == tag)
-						enemyModel.animations[eEnmeyTag::EnemyTag_Default] = animate;
-				}
-				else if (tag == "move_rightdown")
-				{
-					enemyModel.animations[eEnmeyTag::EnmeyTag_MoveRightDown] = animate;
-					if(defaultTag == tag)
-						enemyModel.animations[eEnmeyTag::EnemyTag_Default] = animate;
+						object.animations[ActiveObjTag_Default] = animate;
 				}
 				else if (tag == "dead")
 				{
-					enemyModel.animations[eEnmeyTag::EnemyTag_Dead] = animate;
+					object.animations[ActiveObjTag_Dead] = animate;
 					if(defaultTag == tag)
-						enemyModel.animations[eEnmeyTag::EnemyTag_Default] = animate;
+						object.animations[ActiveObjTag_Default] = animate;
 				}
 				else if (tag == "attack")
 				{
-					enemyModel.animations[eEnmeyTag::EnemyTag_Attack] = animate;
+					object.animations[ActiveObjTag_Attack] = animate;
 					if(defaultTag == tag)
-						enemyModel.animations[eEnmeyTag::EnemyTag_Attack] = animate;
+						object.animations[ActiveObjTag_Attack] = animate;
 				}
 				else
 				{
@@ -191,9 +164,9 @@ bool XmlReader::readAllEnemyInfo(std::map<std::string, EnemyModel>& enemyInfoMap
 			} while (animateElement != NULL);
 		}
 
-		enemyInfoMap.insert(std::map<std::string, EnemyModel>::value_type(enemyModel.name, enemyModel));
-		enemyNode = enemyNode->NextSibling();
-	} while (enemyNode != NULL);
+		objectsInfoMap.insert(std::map<std::string, ActiveObjModel>::value_type(object.name, object));
+		objectNode = objectNode->NextSibling();
+	} while (objectNode != NULL);
 
 	return true;
 }

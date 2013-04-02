@@ -10,31 +10,29 @@
 #include "cocos2d.h"
 using namespace cocos2d;
 
-enum eEnmeyTag
-{
-	EnemyTag_Default,
-	EnmeyTag_MoveUp,
-	EnmeyTag_MoveDown,
-	EnmeyTag_MoveRight,
-	EnmeyTag_MoveLeft,
-	EnmeyTag_MoveLeftUp,
-	EnmeyTag_MoveLeftDown,
-	EnmeyTag_MoveRightUp,
-	EnmeyTag_MoveRightDown,
-	EnemyTag_Dead,
-	EnemyTag_Attack,
+#pragma region ActiveObject
 
-	EnmeyTag_Max
+enum eActiveObjTag
+{
+	ActiveObjTag_Stoped,
+	ActiveObjTag_Default,
+	ActiveObjTag_MoveUp,
+	ActiveObjTag_MoveDown,
+	ActiveObjTag_MoveRightLeft,
+	ActiveObjTag_Dead,
+	ActiveObjTag_Attack,
+
+	ActiveObjTag_Max
 };
 
-typedef struct EnemyModel
+typedef struct ActiveObjModel
 {
-	EnemyModel()
+	ActiveObjModel()
 	{
 		this->name[0] = '\0';
 		this->textureSet[0] = '\0';
 		this->plist[0] = '\0';
-		this->animations.resize(EnmeyTag_Max);
+		this->animations.resize(ActiveObjTag_Max);
 	}
 	char name[128];
 	char textureSet[36];
@@ -48,7 +46,7 @@ typedef struct EnemyModel
 	int magicDefend;
 	int physicalAttack;
 	int magicAttack;
-
+	int alertRange;
 	/*
 	 *tiles per seconds
 	 */
@@ -56,6 +54,8 @@ typedef struct EnemyModel
 
 	CCPoint pos;
 }*pEnemyModel;
+
+#pragma endregion
 
 
 #pragma region Level
@@ -119,4 +119,6 @@ typedef struct LevelModel
 
 
 #pragma endregion
+
+
 #endif
