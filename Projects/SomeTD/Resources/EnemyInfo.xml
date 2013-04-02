@@ -5,7 +5,7 @@
     <animations defaultTag="move_rightleft">
       <animation name="BossRotten" tag="move_down" startIndex="17" endIndex="31" framesInterval="3" frameCount="15" key="%s_%.4d.png" loop="-1" restoreOriginalFrame="false"/>
       <animation name="BossRotten" tag="move_rightleft" startIndex="1" endIndex="15" framesInterval="3" frameCount="15" key="%s_%.4d.png" loop="-1" restoreOriginalFrame="false"/>
-      <animation name="BossRotten" tag="attack" startIndex="49" endIndex="79" framesInterval="3" frameCount="21" key="%s_%.4d.png" loop="1" restoreOriginalFrame="true"/>
+      <animation name="BossRotten" tag="attack" startIndex="49" endIndex="79" framesInterval="6" frameCount="21" key="%s_%.4d.png" loop="1" restoreOriginalFrame="true"/>
       <animation name="BossRotten" tag="dead" startIndex="83" endIndex="113" framesInterval="3"  frameCount="31" key="%s_%.4d.png" loop="1" restoreOriginalFrame="false"/>
 
     </animations>
@@ -19,7 +19,7 @@
       <animation name="necromancer" tag="move_rightleft" startIndex="1" endIndex="23" framesInterval="3" frameCount="20" key="%s_%.4d.png" loop="-1" restoreOriginalFrame="false"/>
       <animation name="necromancer" tag="move_up" startIndex="27" endIndex="43" framesInterval="3" frameCount="20" key="%s_%.4d.png" loop="-1" restoreOriginalFrame="false"/>
       <animation name="necromancer" tag="move_down" startIndex="49" endIndex="67" framesInterval="3" frameCount="20" key="%s_%.4d.png" loop="-1" restoreOriginalFrame="false"/>
-      <animation name="necromancer" tag="attack" startIndex="74" endIndex="94" framesInterval="4" frameCount="21" key="%s_%.4d.png" loop="1" restoreOriginalFrame="true"/>
+      <animation name="necromancer" tag="attack" startIndex="74" endIndex="94" framesInterval="6" frameCount="21" key="%s_%.4d.png" loop="1" restoreOriginalFrame="true"/>
       <animation name="necromancer" tag="dead" startIndex="187" endIndex="199" framesInterval="3" frameCount="17" key="%s_%.4d.png" loop="1" restoreOriginalFrame="false"/>
     </animations>
   </enemy>
@@ -29,7 +29,7 @@
       <animation name="marauder" tag="move_up" startIndex="23" endIndex="43" framesInterval="3" frameCount="20" key="%s_%.4d.png" loop="-1" restoreOriginalFrame="false"/>
       <animation name="marauder" tag="move_down" startIndex="45" endIndex="65" framesInterval="3" frameCount="20" key="%s_%.4d.png" loop="-1" restoreOriginalFrame="false"/>
       <animation name="marauder" tag="move_rightleft" startIndex="1" endIndex="20" framesInterval="3" frameCount="20" key="%s_%.4d.png" loop="-1" restoreOriginalFrame="false"/>
-      <animation name="marauder" tag="attack" startIndex="67" endIndex="75" framesInterval="4" frameCount="20" key="%s_%.4d.png" loop="1" restoreOriginalFrame="true"/>
+      <animation name="marauder" tag="attack" startIndex="67" endIndex="75" framesInterval="6" frameCount="20" key="%s_%.4d.png" loop="1" restoreOriginalFrame="true"/>
       <animation name="marauder" tag="dead" startIndex="104" endIndex="121" framesInterval="3" frameCount="17" key="%s_%.4d.png" loop="1" restoreOriginalFrame="false"/>
     </animations>
   </enemy>

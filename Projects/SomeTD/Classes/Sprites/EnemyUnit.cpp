@@ -303,12 +303,13 @@ CCRect EnemyUnit::getCollisionRect()
 	CCPoint pos = this->getPosition();
 	auto size = this->getContentSize();
 
-	//left_bottom_X = pos.x - size.width / 2
-	//left_bottom_Y = pos.y - size.height / 2
-	//left_bottom_ColorRect_X = colorRect.origin.x
-	//left_bottom_ColorRect_Y = size.height - colorRect.size.height - colorRect.origin.y
-	// final_X =  left_bottom_X + left_bottom_ColorRect_X
-	// final_Y =  left_bottom_Y + left_bottom_ColorRect_Y
+	/* calculate detail
+	 *	left_bottom_X = pos.x - size.width / 2
+	 *	left_bottom_Y = pos.y - size.height / 2
+	 *	left_bottom_ColorRect_X = colorRect.origin.x
+	 *	left_bottom_ColorRect_Y = size.height - colorRect.size.height - colorRect.origin.y
+ 	 *  final_X =  left_bottom_X + left_bottom_ColorRect_X
+	 *	final_Y =  left_bottom_Y + left_bottom_ColorRect_Y*/
 
 	float x = pos.x - size.width / 2 + mDefualtColorRect.getMinX();
 	float y = pos.y + size.height / 2 - mDefualtColorRect.getMaxY();

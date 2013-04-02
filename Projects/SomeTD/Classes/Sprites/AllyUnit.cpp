@@ -97,35 +97,46 @@ void AllyUnit::update(float dt)
 	{
 		return;
 	}
-	
+
 	if(!enemyManager->isEnemyInRange(this->getPosition(), mAllyInfo->alertRange, mTargetID))
 	{
 		long id = enemyManager->getEnemyInRange(this->getPosition(), mAllyInfo->alertRange);
 		if(id != -1)
 		{
 			mTargetID = id;
-			// let enemy stop running 
 			auto enemy = enemyManager->getAvailableEnemy(mTargetID);
 			enemy->targetAlert(this->mID);
-			CCPoint targetPos = enemy->getPosition();
-			CCPoint pos = this->getPosition();
+			// let enemy stop running 
+			// note: the pos is not the center point of collision rect!
+			// 1. get distance color(collision) rect of ally
+
 			CCRect targetCollisionRect = enemy->getCollisionRect();
-			CCRect collisionRect = this->getCollisionRect();
-			float distX = (targetPos.x > pos.x) 
-				? targetPos.x - (targetCollisionRect.size.width / 2 + collisionRect.size.width / 2)
-				: targetPos.x + (targetCollisionRect.size.width / 2 + collisionRect.size.width / 2);
-			float distY = targetCollisionRect.origin.y + collisionRect.size.height / 2;
-			CCPoint distPos = CCPoint(distX, distY);
+			CCRect CollisionRect = this->getCollisionRect();
 
-			CCLog("targetPos {%f, %f}", targetPos.x, targetPos.y);
+			CCPoint distColorRectLeftTop;
+			if(targetCollisionRect.getMidX() > CollisionRect.getMidX())
+			{
+				// move to left of the target
+				distColorRectLeftTop.x = targetCollisionRect.getMinX() - mDefualtColorRect.size.width;
+			}
+			else
+			{
+				// move to right of the target
+				distColorRectLeftTop.x = targetCollisionRect.getMaxX();
+			}
+			distColorRectLeftTop.y = targetCollisionRect.getMinY() + mDefualtColorRect.size.height;
 
-			CCLog("pos {%f, %f}", pos.x, pos.y);
-			CCLog("targetCollisionRect {%f, %f} {%f, %f}", targetCollisionRect.origin.x, targetCollisionRect.origin.y, targetCollisionRect.size.width, targetCollisionRect.size.height);
-			CCLog("collisionRect {%f, %f} {%f, %f}", collisionRect.origin.x, collisionRect.origin.y, collisionRect.size.width, collisionRect.size.height);
+			CCPoint distSpriteRectLeftTop = CCPoint(
+				distColorRectLeftTop.x - mDefualtColorRect.origin.x,
+				distColorRectLeftTop.y + mDefualtColorRect.origin.y
+			);
+			CCSize size = this->getContentSize();
+			CCPoint distPos = CCPoint(
+				distSpriteRectLeftTop.x + size.width / 2,
+				distSpriteRectLeftTop.y - size.height / 2
+			);
 
-			CCLog("distPos {%f, %f}", distPos.x, distPos.y);
-
-
+			// start move to animation
 			CCSequence* sequence = CCSequence::create(
 				CCMoveTo::create(1, distPos ),
 				CCCallFunc::create(this, callfunc_selector(AllyUnit::startAttack)),
@@ -138,6 +149,9 @@ void AllyUnit::update(float dt)
 
 
 			//set direction
+			// note: there can't just use collisionRect centre point to decide direction.
+			// because the center of sprite is not the centre of collisionRect
+			auto pos = this->getPosition();
 			ccVertex2F toNewPos = vertex2( distPos.x - pos.x, distPos.y - pos.y);
 			float z = sqrtf(toNewPos.y * toNewPos.y + toNewPos.x * toNewPos.x);
 			float cosF = (float)toNewPos.x / z;
@@ -152,9 +166,9 @@ void AllyUnit::update(float dt)
 		return;
 
 
-	
 
-	
+
+
 
 
 }
@@ -169,6 +183,17 @@ void AllyUnit::startAttack()
 	}
 	else
 	{
+		// set direction
+		if (this->getCollisionRect().getMidX() > enemy->getCollisionRect().getMidX())
+		{
+			this->setFlipX(true);
+			enemy->setFlipX(false);
+		}
+		else
+		{
+			this->setFlipX(false);
+			enemy->setFlipX(true);
+		}
 		enemy->startAttack();
 		this->attacking();
 	}
@@ -232,7 +257,7 @@ void AllyUnit::moveTo(const CCPoint& distPos)
 		);
 	this->runAction(sequence);
 	this->runAction(CCAnimate::create(this->mAllyInfo->animations[ActiveObjTag_MoveRightLeft]));
-	
+
 	//set direction
 	ccVertex2F toNewPos = vertex2( distPos.x - pos.x, distPos.y - pos.y);
 	float z = sqrtf(toNewPos.y * toNewPos.y + toNewPos.x * toNewPos.x);
