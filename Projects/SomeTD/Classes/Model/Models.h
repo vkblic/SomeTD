@@ -25,6 +25,23 @@ enum eActiveObjTag
 	ActiveObjTag_Max
 };
 
+typedef enum
+{ 
+	STATE_NULL,
+	STATE_Idle,
+	STATE_Moving,
+	STATE_Stoped,
+	STATE_MovingWithAttack,
+	STATE_MovingToTarget,
+	STATE_Attacking,
+	STATE_Dead,
+
+
+	STATE_MAX
+} ActiveObj_States;
+
+
+
 typedef struct ActiveObjModel
 {
 	ActiveObjModel()

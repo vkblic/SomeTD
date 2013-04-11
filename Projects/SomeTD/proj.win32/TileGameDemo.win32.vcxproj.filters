@@ -29,6 +29,12 @@
     <Filter Include="xml">
       <UniqueIdentifier>{76481bb3-1ca7-49f3-bedf-407c08f92f92}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MessagePump">
+      <UniqueIdentifier>{0f80fc17-d3bb-4b4c-97b2-e8d367ccbad8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common">
+      <UniqueIdentifier>{091eb598-79b7-4322-89d4-c756514b11b0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\TileGameDemo.ico">
@@ -118,14 +124,32 @@
     <ClInclude Include="..\Classes\Managers\TowerManager.h">
       <Filter>Managers</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Managers\AlliesManager.h">
-      <Filter>Managers</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\Sprites\EnemyUnit.h">
       <Filter>Sprites</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Sprites\AllyUnit.h">
       <Filter>Sprites</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MessagePump\MsgObject.h">
+      <Filter>MessagePump</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MessagePump\MsgRoute.h">
+      <Filter>MessagePump</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Common\Common.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Sprites\Entity.h">
+      <Filter>Sprites</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Sprites\ActiveEntity.h">
+      <Filter>Sprites</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Managers\EntityManager.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Managers\AllyManager.h">
+      <Filter>Managers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -166,14 +190,29 @@
     <ClCompile Include="..\Classes\Managers\TowerManager.cpp">
       <Filter>Managers</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Managers\AlliesManager.cpp">
-      <Filter>Managers</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Sprites\EnemyUnit.cpp">
       <Filter>Sprites</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Sprites\AllyUnit.cpp">
       <Filter>Sprites</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MessagePump\MsgObject.cpp">
+      <Filter>MessagePump</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MessagePump\MsgRoute.cpp">
+      <Filter>MessagePump</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Sprites\Entity.cpp">
+      <Filter>Sprites</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Sprites\ActiveEntity.cpp">
+      <Filter>Sprites</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Managers\EntityManager.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Managers\AllyManager.cpp">
+      <Filter>Managers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

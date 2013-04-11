@@ -54,7 +54,7 @@ private:
 	eTower_Shooter mShooterTypeUpPart2;
 	eTower_Shooter mShooterTypeDown;
 	eTower_Shooter mShooterTypeDownPart2;
-	long mSoldiers[3];
+	entity_id mSoldiers[3];
 	CCPoint mSoldiersMassPos[3];
 	int mCurAnimationIndex;
 	int mCurPassedFrames;
@@ -100,7 +100,7 @@ private:
 	 */
 	CCSprite* mShooter;
 	CCSprite* mTerrain;
-	 long mTargetID;
+	 entity_id mTargetID;
 	CCSprite* mRangeSprite;
 	int mAttackRange;
 private:

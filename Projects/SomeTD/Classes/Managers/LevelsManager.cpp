@@ -101,7 +101,7 @@ Entry LevelsManager::readWayPoints(int entryId, int waysEveryEntry, CCTMXObjectG
 static float offset = 1;
 static float curWaveStartTime;
 static bool test = false;
-void LevelsManager::update(float dt)
+void LevelsManager::frameTrigger(float dt)
 {
 	// for test
 	while (false)
@@ -127,9 +127,9 @@ void LevelsManager::update(float dt)
 			if (mRemainWave.size() == 0)
 			{
 				//mIsCurLevelCompleted = true;
-				CCLog("Last wave completed!");
+				//CCLog("Last wave completed!");
 
-				CCLog("level loop for test!");
+				//CCLog("level loop for test!");
 				for(auto wave = mCurLevelInfo->waves.begin(); wave != mCurLevelInfo->waves.end(); ++wave)
 				{
 					mRemainWave.push(&(*wave));
@@ -144,7 +144,7 @@ void LevelsManager::update(float dt)
 			}
 			mRemainWave.pop();
 			curWaveStartTime = 0;
-			CCLog("Wave start %d", (*wave).id);
+			//CCLog("Wave start %d", (*wave).id);
 		}
 		// let enemy rush
 		else
@@ -158,7 +158,7 @@ void LevelsManager::update(float dt)
 				auto enemy = mCurWaveRemainEnemy.front();
 				if(curWaveStartTime > enemy->delay)
 				{
-					CCLog("new [%s] start rush! curTime: %f, delay: %f", enemy->enemyName, curWaveStartTime, enemy->delay);
+					//CCLog("new [%s] start rush! curTime: %f, delay: %f", enemy->enemyName, curWaveStartTime, enemy->delay);
 					enemyManager->addEnemyAndRush(enemy->enemyName, mCurLevelInfo->entrise[enemy->entryID].pos, &mCurLevelInfo->entrise[enemy->entryID].ways[enemy->wayID] );
 					mCurWaveRemainEnemy.pop();
 				}
@@ -168,7 +168,7 @@ void LevelsManager::update(float dt)
 			//size equal to zero means wave complete!
 			if (mCurWaveRemainEnemy.size() == 0)
 			{
-				CCLog("wave complted"); 
+				//CCLog("wave complted"); 
 				offset = timeCounter + mCurLevelInfo->waveInterval;
 				mIsWaveRunning = false;
 			}
@@ -184,7 +184,7 @@ void LevelsManager::update(float dt)
 		static float temp = 0;
 		if(temp > 1)
 		{
-			CCLog("next wave: %f", offset - timeCounter);
+			//CCLog("next wave: %f", offset - timeCounter);
 			temp = 0;
 		}
 		else

@@ -14,7 +14,7 @@
 
 
   <enemy name ="necromancer" textureSet="enemies.png" plist="enemies.plist">
-    <informations hp="136" physicalDefend="10" magicDefend="0" physicalAttack="20" magicAttack="1" speed="60" defaultFrame="necromancer_0001.png" alertRange="50"/>
+    <informations hp="136" physicalDefend="10" magicDefend="0" physicalAttack="220" magicAttack="1" speed="60" defaultFrame="necromancer_0001.png" alertRange="50"/>
     <animations defaultTag="move_rightleft">
       <animation name="necromancer" tag="move_rightleft" startIndex="1" endIndex="23" framesInterval="3" frameCount="20" key="%s_%.4d.png" loop="-1" restoreOriginalFrame="false"/>
       <animation name="necromancer" tag="move_up" startIndex="27" endIndex="43" framesInterval="3" frameCount="20" key="%s_%.4d.png" loop="-1" restoreOriginalFrame="false"/>
@@ -24,7 +24,7 @@
     </animations>
   </enemy>
   <enemy name ="marauder" textureSet="enemies.png" plist="enemies.plist">
-    <informations hp="10000" physicalDefend="10" magicDefend="0" physicalAttack="200" magicAttack="1" speed="25" defaultFrame="marauder_0001.png" alertRange="50"/>
+    <informations hp="10000" physicalDefend="10" magicDefend="0" physicalAttack="200" magicAttack="1" speed="200" defaultFrame="marauder_0001.png" alertRange="50"/>
     <animations defaultTag="move_rightleft">
       <animation name="marauder" tag="move_up" startIndex="23" endIndex="43" framesInterval="3" frameCount="20" key="%s_%.4d.png" loop="-1" restoreOriginalFrame="false"/>
       <animation name="marauder" tag="move_down" startIndex="45" endIndex="65" framesInterval="3" frameCount="20" key="%s_%.4d.png" loop="-1" restoreOriginalFrame="false"/>

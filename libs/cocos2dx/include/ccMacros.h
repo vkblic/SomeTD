@@ -40,7 +40,7 @@ extern void CC_DLL cc_assert_script_compatible(bool cond, const char *msg);
 #define CCAssert(cond, msg)                             \
     {                                                   \
         cc_assert_script_compatible(!!(cond), (msg));   \
-        CC_ASSERT(cond);                                \
+        CC_ASSERT(cond && msg);                         \
     }
 #else
 #define CCAssert(cond, msg)

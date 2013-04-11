@@ -10,7 +10,7 @@
 #include "../Helper/CommonHelpers.h"
 #include "../Model/TowerInformation.h"
 #include "../Managers/EnemyManager.h"
-#include "../Managers/AlliesManager.h"
+#include "../Managers/AllyManager.h"
 #include "Bullet.h"
 using namespace cocos2d;
 Tower* Tower::create()
@@ -345,8 +345,8 @@ void Tower::BuildTower()
 
 		for(int i = 0; i < 3;++ i)
 		{
-			auto ally = AllyManager::sharedAllyManager()->addAllyAndGetReadyForFight("soldier_lvl4_paladin", pos);
-			ally->moveTo(mSoldiersMassPos[i]);
+			auto ally = AllyManager::sharedAllyManager()->addAlly("soldier_lvl4_paladin", pos);
+			ally->moveToAndGetRead(mSoldiersMassPos[i]);
 		}
 		return;
 	}
@@ -500,7 +500,7 @@ void Tower::update(float dt)
 			// if no target, we get one 
 			if (this->mTargetID == -1)
 			{
-				long target = EnemyManager::sharedEnemyManager()->getEnemyInRange(this->getPosition(), mAttackRange);
+				entity_id target = EnemyManager::sharedEnemyManager()->getEnemyInRange(this->getPosition(), mAttackRange);
 				if(target != -1)
 					this->mTargetID = target;
 			}
@@ -509,7 +509,7 @@ void Tower::update(float dt)
 				// if there's a target, available check 
 				if(!EnemyManager::sharedEnemyManager()->isEnemyInRange(this->getPosition(), mAttackRange, mTargetID))
 				{
-					long target = EnemyManager::sharedEnemyManager()->getEnemyInRange(this->getPosition(), mAttackRange);
+					entity_id target = EnemyManager::sharedEnemyManager()->getEnemyInRange(this->getPosition(), mAttackRange);
 					//CCLog("tower get new target: %d", target);
 					this->mTargetID = target;
 				}
@@ -641,7 +641,7 @@ void Tower::onShoot()
 	// check if target is still available, if not, get one.
 	if(!EnemyManager::sharedEnemyManager()->isEnemyInRange(this->getPosition(), mAttackRange, mTargetID))
 	{
-		long target = EnemyManager::sharedEnemyManager()->getEnemyInRange(this->getPosition(), mAttackRange);
+		entity_id target = EnemyManager::sharedEnemyManager()->getEnemyInRange(this->getPosition(), mAttackRange);
 		//CCLog("tower get new target: %d when shooting", target);
 		mTargetID = target;
 	}

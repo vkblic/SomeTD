@@ -4,10 +4,11 @@
 #include "../Helper/CommonHelpers.h"
 #include "../Model/TowerInformation.h"
 #include "../Managers/EnemyManager.h"
-#include "../Managers/AlliesManager.h"
+#include "../Managers/AllyManager.h"
 #include "../Managers/LevelsManager.h"
 #include "../Sprites/EnemyUnit.h"
 #include "../Utility/XmlReader.h"
+#include "../MessagePump/MsgRoute.h"
 
 using namespace cocos2d;
 
@@ -42,7 +43,6 @@ bool HelloWorld::init()
 		//////////////////////////////////////////////////////////////////////////
 		// super init first
 		//////////////////////////////////////////////////////////////////////////
-
 		if (!CCLayer::init())
 			break;
 
@@ -155,7 +155,7 @@ bool HelloWorld::init()
 		//TestAlly
 		auto testAlly = objects->objectNamed("TestAlly");
 		CCPoint testPos = CCPoint(testAlly->valueForKey("x")->intValue(), testAlly->valueForKey("y")->intValue());
-		AllyManager::sharedAllyManager()->addAllyAndGetReadyForFight("soldier_lvl4_paladin", testPos);
+		AllyManager::sharedAllyManager()->addAlly("soldier_lvl4_paladin", testPos);
 // 		{
 // 
 // 			//enemy->setPosition(CCPoint(x, y));
@@ -394,7 +394,12 @@ void HelloWorld::ccTouchEnded(CCTouch *pTouch, CCEvent *pEvent)
 
 void HelloWorld::update(float dt)
 {
+	MsgRoute::sharedMsgRount()->TickRun();
+	// send delayed msg
+	MsgRoute::sharedMsgRount()->routeDelayedMessages();
 
-	EnemyManager::sharedEnemyManager()->update(dt);
-	LevelsManager::sharedLevelsManager()->update(dt);
+	// execute all child's update method
+	EnemyManager::sharedEnemyManager()->frameTrigger(dt);
+	AllyManager::sharedAllyManager()->frameTrigger(dt);
+	LevelsManager::sharedLevelsManager()->frameTrigger(dt);
 }

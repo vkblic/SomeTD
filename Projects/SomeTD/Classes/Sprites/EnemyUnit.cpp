@@ -7,7 +7,7 @@
 
 #include "EnemyUnit.h"
 #include "../Managers/EnemyManager.h"
-#include "../Managers/AlliesManager.h"
+#include "../Managers/AllyManager.h"
 #include "../Helper/CommonHelpers.h"
 #include <math.h>
 using namespace cocos2d;
@@ -19,7 +19,7 @@ EnemyUnit* EnemyUnit::create(ActiveObjModel* enemyInfo, CCSpriteBatchNode* hpBat
 	if (enemy && enemy->initWithSpriteFrame(enemyInfo->defaultFrame))//
 	{
 		enemy->mHpBatchNode = hpBatchNode;
-		enemy->mEnemyInfo = enemyInfo;
+		enemy->mEntityInfo = enemyInfo;
 		enemy->myInit();
 		//tower->loadResource();
 		enemy->autorelease();
@@ -36,15 +36,17 @@ EnemyUnit::~EnemyUnit()
 void EnemyUnit::myInit()
 {
 
-	mHp = CCSprite::create("hp.png");
 	mCurWayPointIndex = 0;
-	mDefualtColorRect = this->getColorRect();
-	mCurHP = this->mEnemyInfo->hp;
-	mHp->setAnchorPoint(CCPoint(0,0));
-	mHpBatchNode->addChild(this->mHp);
-	mHpBarMaxWidth = mDefualtColorRect.size.width > HP_BAR_WIDTH ? HP_BAR_WIDTH : mDefualtColorRect.size.width * 0.8;
-	this->updateHpSpriteSize();
-	this->setHpSpritePosition();
+	ActiveEntity::myInit();
+
+	//mHp = CCSprite::create("hp.png");
+	//mDefualtColorRect = this->getColorRect();
+	//mCurHP = this->mEnemyInfo->hp;
+	//mHp->setAnchorPoint(CCPoint(0,0));
+	//mHpBatchNode->addChild(this->mHp);
+	//mHpBarMaxWidth = mDefualtColorRect.size.width > HP_BAR_WIDTH ? HP_BAR_WIDTH : mDefualtColorRect.size.width * 0.8;
+	//this->updateHpSpriteSize();
+	//this->setHpSpritePosition();
 	//this->addChild(hpC);
 
 }
@@ -83,140 +85,139 @@ void EnemyUnit::onExit()
 	CCSprite::onExit();
 }
 
-static CCPoint ccCardinalSplineAt(CCPoint &p0, CCPoint &p1, CCPoint &p2, CCPoint &p3, float tension, float t)
+
+/*void updatebak(float dt)
 {
-	float t2 = t * t;
-	float t3 = t2 * t;
-
-	/*
-	* Formula: s(-ttt + 2tt - t)P1 + s(-ttt + tt)P2 + (2ttt - 3tt + 1)P2 + s(ttt - 2tt + t)P3 + (-2ttt + 3tt)P3 + s(ttt - tt)P4
-	*/
-	float s = (1 - tension) / 2;
-
-	float b1 = s * ((-t3 + (2 * t2)) - t);                      // s(-t3 + 2 t2 - t)P1
-	float b2 = s * (-t3 + t2) + (2 * t3 - 3 * t2 + 1);          // s(-t3 + t2)P2 + (2 t3 - 3 t2 + 1)P2
-	float b3 = s * (t3 - 2 * t2 + t) + (-2 * t3 + 3 * t2);      // s(t3 - 2 t2 + t)P3 + (-2 t3 + 3 t2)P3
-	float b4 = s * (t3 - t2);                                   // s(t3 - t2)P4
-
-	float x = (p0.x*b1 + p1.x*b2 + p2.x*b3 + p3.x*b4);
-	float y = (p0.y*b1 + p1.y*b2 + p2.y*b3 + p3.y*b4);
-
-	return ccp(x,y);
+if(mCurStatus == EnemyStatus_WaitingForAttack || mCurStatus == EnemyStatus_Attacking)
+{
+if( mCurEnemyTag != ActiveObjTag_Stoped && mCurEnemyTag != ActiveObjTag_Attack)
+{
+mCurEnemyTag = ActiveObjTag_Stoped;
+this->stopAllActions();
 }
+return;
+}
+CCPoint targetPos = mWayPoints->at(mCurWayPointIndex).pos;
+CCPoint pos = this->getPosition();
+ccVertex2F toNewTarget = vertex2( targetPos.x - pos.x, targetPos.y - pos.y);
+ccVertex2F temp = vertex2FNormalization(toNewTarget);
+ccVertex2F toNewPos = vertex2FMul(temp, dt * mEntityInfo->speed);
 
-void EnemyUnit::update(float dt)
+CCPoint newPos = CCPoint(pos.x + toNewPos.x, pos.y + toNewPos.y);
+this->setPosition(newPos);
+
+//float angleRadians = asinf((float)toNewPos.y / sqrtf(toNewPos.y * toNewPos.y + toNewPos.x * toNewPos.x));
+float z = sqrtf(toNewPos.y * toNewPos.y + toNewPos.x * toNewPos.x);
+float sinF = (float)toNewPos.y / z ;
+float sin1_2Pi = sqrt(2) / 2;
+
+this->setFlipX(false);
+if(sinF > sin1_2Pi  )
 {
-	if(mCurStatus == EnemyStatus_WaitingForAttack || mCurStatus == EnemyStatus_Attacking)
-	{
-		if( mCurEnemyTag != ActiveObjTag_Stoped && mCurEnemyTag != ActiveObjTag_Attack)
-		{
-			mCurEnemyTag = ActiveObjTag_Stoped;
-			this->stopAllActions();
-		}
-		return;
-	}
-	CCPoint targetPos = mWayPoints->at(mCurWayPointIndex).pos;
-	CCPoint pos = this->getPosition();
-	ccVertex2F toNewTarget = vertex2( targetPos.x - pos.x, targetPos.y - pos.y);
-	ccVertex2F temp = vertex2FNormalization(toNewTarget);
-	ccVertex2F toNewPos = vertex2FMul(temp, dt * mEnemyInfo->speed);
+//this->stopAllActions();
+if (mCurEnemyTag != ActiveObjTag_MoveUp)
+{
+this->stopAllActions();
+this->runAction(CCAnimate::create(this->mEntityInfo->animations[ActiveObjTag_MoveUp]));
+//CCLog("EnmeyTag_MoveUp");
+//CCLog("%f",sinF);
+mCurEnemyTag = ActiveObjTag_MoveUp;
+}
+}
+else if(sinF >= -1 && sinF < -0.8)
+{
+if (mCurEnemyTag != ActiveObjTag_MoveDown)
+{
+this->stopAllActions();
+this->runAction(CCAnimate::create(this->mEntityInfo->animations[ActiveObjTag_MoveDown]));
+//CCLog("EnmeyTag_MoveDown");
+//CCLog("%f",sinF);
+mCurEnemyTag = ActiveObjTag_MoveDown;
+}
+}
+else
+{
+float cosF = (float)toNewPos.x / z;
+//CCLog("cos: %f sin: %f",cosF, sinF);
+if(cosF < 0)
+{
+this->setFlipX(true);
+//CCLog("EnmeyTag_MoveLeft");
+}
+else
+{
 
-	CCPoint newPos = CCPoint(pos.x + toNewPos.x, pos.y + toNewPos.y);
-	this->setPosition(newPos);
+//CCLog("EnmeyTag_MoveRight");
+}
+if (mCurEnemyTag != ActiveObjTag_MoveRightLeft)
+{
+this->stopAllActions();
+this->runAction(CCAnimate::create(this->mEntityInfo->animations[ActiveObjTag_MoveRightLeft]));
+mCurEnemyTag = ActiveObjTag_MoveRightLeft;
 
-	//float angleRadians = asinf((float)toNewPos.y / sqrtf(toNewPos.y * toNewPos.y + toNewPos.x * toNewPos.x));
-	float z = sqrtf(toNewPos.y * toNewPos.y + toNewPos.x * toNewPos.x);
-	float sinF = (float)toNewPos.y / z ;
-	float sin1_2Pi = sqrt(2) / 2;
-
-	this->setFlipX(false);
-	if(sinF > sin1_2Pi  )
-	{
-		//this->stopAllActions();
-		if (mCurEnemyTag != ActiveObjTag_MoveUp)
-		{
-			this->stopAllActions();
-			this->runAction(CCAnimate::create(this->mEnemyInfo->animations[ActiveObjTag_MoveUp]));
-			//CCLog("EnmeyTag_MoveUp");
-			//CCLog("%f",sinF);
-			mCurEnemyTag = ActiveObjTag_MoveUp;
-		}
-	}
-	else if(sinF >= -1 && sinF < -0.8)
-	{
-		if (mCurEnemyTag != ActiveObjTag_MoveDown)
-		{
-			this->stopAllActions();
-			this->runAction(CCAnimate::create(this->mEnemyInfo->animations[ActiveObjTag_MoveDown]));
-			//CCLog("EnmeyTag_MoveDown");
-			//CCLog("%f",sinF);
-			mCurEnemyTag = ActiveObjTag_MoveDown;
-		}
-	}
-	else
-	{
-		float cosF = (float)toNewPos.x / z;
-		//CCLog("cos: %f sin: %f",cosF, sinF);
-		if(cosF < 0)
-		{
-			this->setFlipX(true);
-			//CCLog("EnmeyTag_MoveLeft");
-		}
-		else
-		{
-
-			//CCLog("EnmeyTag_MoveRight");
-		}
-		if (mCurEnemyTag != ActiveObjTag_MoveRightLeft)
-		{
-			this->stopAllActions();
-			this->runAction(CCAnimate::create(this->mEnemyInfo->animations[ActiveObjTag_MoveRightLeft]));
-			mCurEnemyTag = ActiveObjTag_MoveRightLeft;
-
-		}
-		//float aCosF = acosf((float)toNewPos.x / sqrtf(toNewPos.y * toNewPos.y + toNewPos.x * toNewPos.x));
-
-	}
-
-	//float angleDegrees = CC_RADIANS_TO_DEGREES(angleRadians);
-	//float cocosAngle = -1 * angleDegrees;
-	//
-	//static float t = 0;
-	//if(t > 1)
-	//{
-	//	CCLog("%f", angleRadians);
-	//	CCLog("%f", angleDegrees);
-	//	t = 0;
-	//}
-	//else
-	//{
-	//	t += dt;
-	//}
-	//
-	//this->setRotation(cocosAngle);
-
-
-
-	if (abs(targetPos.x - newPos.x) < 2 && abs(targetPos.y - newPos.y) < 2 )
-	{
-		++mCurWayPointIndex;
-		if(mCurWayPointIndex == mWayPoints->size())
-		{
-			this->onArriveEndPoint();
-			return;
-		}
-	}
-	// update postion of hp bar
-	this->setHpSpritePosition();
-
+}
+//float aCosF = acosf((float)toNewPos.x / sqrtf(toNewPos.y * toNewPos.y + toNewPos.x * toNewPos.x));
 
 }
 
-CCPoint EnemyUnit::getControlPointAt(int index)
+//float angleDegrees = CC_RADIANS_TO_DEGREES(angleRadians);
+//float cocosAngle = -1 * angleDegrees;
+//
+//static float t = 0;
+//if(t > 1)
+//{
+//	CCLog("%f", angleRadians);
+//	CCLog("%f", angleDegrees);
+//	t = 0;
+//}
+//else
+//{
+//	t += dt;
+//}
+//
+//this->setRotation(cocosAngle);
+
+
+
+if (abs(targetPos.x - newPos.x) < 2 && abs(targetPos.y - newPos.y) < 2 )
 {
-	//index = MIN(mWayPoints->size() - 1, MAX(index, 0));
-	//return mWayPoints[index];
-	return CCPoint();
+++mCurWayPointIndex;
+if(mCurWayPointIndex == mWayPoints->size())
+{
+this->onArriveEndPoint();
+return;
+}
+}
+// update postion of hp bar
+this->setHpSpritePosition();
+
+
+}*/
+
+
+void EnemyUnit::frameListener(float dt)
+{
+
+	switch (mState)
+	{
+	case STATE_Moving:
+		{
+			// if reach end point, the return value is true.
+			if(this->movingUpdate(dt))
+				return;
+
+			// send location info
+			this->sendMovingmsg();
+
+			// update postion of hp bar
+			this->setHpSpritePosition();
+		}
+		break;
+
+	default:
+		break;
+	}
+
 }
 
 void EnemyUnit::run(const std::vector<WayPointEx>* wayPoints) 
@@ -234,123 +235,169 @@ void EnemyUnit::run(const std::vector<WayPointEx>* wayPoints)
 		pointArray->addControlPoint(temp);
 	}
 	mCurEnemyTag = ActiveObjTag_Default;
-	this->runAction(CCAnimate::create(this->mEnemyInfo->animations[ActiveObjTag_Default]));
+	this->runAction(CCAnimate::create(this->mEntityInfo->animations[ActiveObjTag_Default]));
 	//CCSequence* sequence = CCSequence::createWithTwoActions(
 	//	CCCardinalSplineTo::create(mEnemyInfo->speed, pointArray, 0)
 	//	,CCCallFunc::create(this, callfunc_selector(Enemy::onArriveEndPoint))
 	//	);
 	//this->runAction(sequence);
-	this->scheduleUpdate();
-	mCurStatus = EnemyStatus_Moving;
+	mState = STATE_Moving;
 }
 
-void EnemyUnit::startAttack()
+void EnemyUnit::enterAttacking()
 {
-
-	//CCLog("EnemyUnit::startAttack()");
-	mCurEnemyTag = ActiveObjTag_Attack;
-	mCurStatus = EnemyStatus_Attacking;
-
-	auto target  = AllyManager::sharedAllyManager()->getAvailableObject(mTargetID);
-	if(target == NULL)
+	// set direction
+	if (this->getCollisionRect().getMidX() > mTargetCollisionRect.getMidX())
 	{
-		mCurStatus = EnemyStatus_Moving;
-		mCurEnemyTag = ActiveObjTag_Stoped;
-		mTargetID = -1;
+		this->setFlipX(true);
 	}
 	else
 	{
-		this->attacking();
+		this->setFlipX(false);
 	}
+	this->onAttacking();
 }
 
-void EnemyUnit::attacking()
+void EnemyUnit::onAttacking()
 {
 	CCSequence* sequence = CCSequence::createWithTwoActions(
-		CCAnimate::create(this->mEnemyInfo->animations[ActiveObjTag_Attack]),
-		CCCallFunc::create(this, callfunc_selector(EnemyUnit::onHit))
+		CCAnimate::create(this->mEntityInfo->animations[ActiveObjTag_Attack])
+		,CCCallFunc::create(this, callfunc_selector(EnemyUnit::onHitTarget))
 		);
-
 	this->runAction(sequence);
+
 }
 
-
-void EnemyUnit::onHit()
+void EnemyUnit::onHitTarget()
 {
-	//CCLog("EnemyUnit::onHit()");
-	auto allyManager = AllyManager::sharedAllyManager();
-	auto target = allyManager->getAvailableObject(mTargetID);
-	if(target != NULL)
+	AllyManager::sharedAllyManager()->sendDamageMsg(this->mEntityID, this->mTargetID, this->mEntityInfo->physicalAttack);
+	if(mState != STATE_Attacking)
+		return;
+	this->onAttacking();
+}
+
+void EnemyUnit::exitAttacing()
+{
+	this->setDisplayFrame(mEntityInfo->defaultFrame);
+}
+
+// move
+void EnemyUnit::enterMoving()
+{
+	mCurEnemyTag = ActiveObjTag_Stoped;
+	
+}
+
+void EnemyUnit::exitMoving()
+{
+	this->stopAllActions();
+	this->setDisplayFrame(mEntityInfo->defaultFrame);
+}
+
+bool EnemyUnit::movingUpdate(float dt)
+{
+	CCPoint targetPos = mWayPoints->at(mCurWayPointIndex).pos;
+	CCPoint pos = this->getPosition();
+	ccVertex2F toNewTarget = vertex2( targetPos.x - pos.x, targetPos.y - pos.y);
+	ccVertex2F temp = vertex2FNormalization(toNewTarget);
+	ccVertex2F toNewPos = vertex2FMul(temp, dt * mEntityInfo->speed);
+
+	CCPoint newPos = CCPoint(pos.x + toNewPos.x, pos.y + toNewPos.y);
+	this->setPosition(newPos);
+
+	if (abs(targetPos.x - newPos.x) < 2 && abs(targetPos.y - newPos.y) < 2 )
 	{
-		target->underAttack(mEnemyInfo->physicalAttack);
-		target = allyManager->getAvailableObject(mTargetID);
+		++mCurWayPointIndex;
+		if(mCurWayPointIndex == mWayPoints->size())
+		{
+			EnemyManager::sharedEnemyManager()->sendDelayedMsg(MSG_ArriveEndPoint, 1, mEntityID, mEntityID);
+			//this->onArriveEndPoint();
+			return true;
+		}
 	}
-	if(target == NULL)
+
+	// change animation when direction changed
+	float z = sqrtf(toNewPos.y * toNewPos.y + toNewPos.x * toNewPos.x);
+	float sinF = (float)toNewPos.y / z ;
+	float sin1_2Pi = sqrt(2) / 2;
+
+	this->setFlipX(false);
+	if(sinF > sin1_2Pi  )
 	{
-		mCurEnemyTag = ActiveObjTag_Stoped;
-		mCurStatus = EnemyStatus_Moving;
-		mTargetID = -1;
+		if (mCurEnemyTag != ActiveObjTag_MoveUp)
+		{
+			this->stopAllActions();
+			this->runAction(CCAnimate::create(this->mEntityInfo->animations[ActiveObjTag_MoveUp]));
+			//CCLog("EnmeyTag_MoveUp");
+			//CCLog("%f",sinF);
+			mCurEnemyTag = ActiveObjTag_MoveUp;
+		}
+	}
+	else if(sinF >= -1 && sinF < -0.8)
+	{
+		if (mCurEnemyTag != ActiveObjTag_MoveDown)
+		{
+			this->stopAllActions();
+			this->runAction(CCAnimate::create(this->mEntityInfo->animations[ActiveObjTag_MoveDown]));
+			//CCLog("EnmeyTag_MoveDown");
+			//CCLog("%f",sinF);
+			mCurEnemyTag = ActiveObjTag_MoveDown;
+		}
 	}
 	else
 	{
-		this->startAttack();
+		float cosF = (float)toNewPos.x / z;
+		//CCLog("cos: %f sin: %f",cosF, sinF);
+		this->setFlipX(cosF < 0 ? true : false);
+		//CCLog(cosF < 0 ? "EnmeyTag_MoveLeft" : "EnmeyTag_MoveRight");
+		if (mCurEnemyTag != ActiveObjTag_MoveRightLeft)
+		{
+			this->stopAllActions();
+			this->runAction(CCAnimate::create(this->mEntityInfo->animations[ActiveObjTag_MoveRightLeft]));
+			mCurEnemyTag = ActiveObjTag_MoveRightLeft;
+
+		}
 	}
+
+	return false;
 }
 
-CCRect EnemyUnit::getCollisionRect()
+void EnemyUnit::sendMovingmsg()
 {
-	//auto colorRect = this->getColorRect();
-	CCPoint pos = this->getPosition();
-	auto size = this->getContentSize();
-
-	/* calculate detail
-	 *	left_bottom_X = pos.x - size.width / 2
-	 *	left_bottom_Y = pos.y - size.height / 2
-	 *	left_bottom_ColorRect_X = colorRect.origin.x
-	 *	left_bottom_ColorRect_Y = size.height - colorRect.size.height - colorRect.origin.y
- 	 *  final_X =  left_bottom_X + left_bottom_ColorRect_X
-	 *	final_Y =  left_bottom_Y + left_bottom_ColorRect_Y*/
-
-	float x = pos.x - size.width / 2 + mDefualtColorRect.getMinX();
-	float y = pos.y + size.height / 2 - mDefualtColorRect.getMaxY();
-
-	//CCRect old(pos.x, pos.y, size.width, size.height);
-
-	//CCLog("colorRect: {{%f, %f}, {%f, %f}}",colorRect.origin.x, colorRect.origin.y, colorRect.size.width, colorRect.size.height);
-	//CCLog("collisionRect Old: {{%f, %f}, {%f, %f}}",old.origin.x, old.origin.y, old.size.width, old.size.height);
-	//CCLog("collisionRect New: {{%f, %f}, {%f, %f}}",x, y, colorRect.size.width, colorRect.size.height);
-	return CCRect(x, y, mDefualtColorRect.size.width, mDefualtColorRect.size.height);
-}
-
-void EnemyUnit::setHpSpritePosition()
-{
-	//CCSize enemySize = this->getContentSize();
-	//CCPoint pos = this->getPosition();
-	CCRect collisionRect = this->getCollisionRect();
-
-	auto newPos = CCPoint(collisionRect.getMinX() + (collisionRect.size.width - mHpBarMaxWidth) / 2, collisionRect.getMaxY() + 2);
-	this->mHp->setPosition(newPos);
-
-}
-void EnemyUnit::updateHpSpriteSize()
-{
-	//CCAssert(hp >= 0 && hp <= this->mMaxHP, "hp percent value of enemy node is not allow!");
-	//this->mCurHP = hp;
-	if (this->mCurHP <= 0)
+	for(auto iter = mAttackers.begin(); iter != mAttackers.end(); ++iter)
 	{
-		this->mHp->setVisible(false);
+		EnemyManager::sharedEnemyManager()->sendCollisionRecMsg(mEntityID, iter->first, this->getCollisionRect());
 	}
-	float precentOfHp = (float)this->mCurHP / (float)this->mEnemyInfo->hp;
-
-	//CCSize enemySize = this->getColorRect().size;
-	CCSize sizeHp =  this->mHp->getContentSize();
-
-	float scaleX = mHpBarMaxWidth / sizeHp.width * precentOfHp;
-	//CCLog("scaleX%f",scaleX);
-	//CCLog("Enemy hp: scaleX: %f, scaleY: %f", scaleX, scaleY);
-	this->mHp->setScaleX(scaleX);
 }
 
+
+bool EnemyUnit::isTargetNoAvailable(entity_id attackerId)
+{
+	if (mTargetID == attackerId)
+		return true;
+	return false;
+}
+
+void EnemyUnit::removeAttacker(entity_id attackerID)
+{
+	auto iter = mAttackers.find(attackerID);
+	if ( iter == mAttackers.end() )
+		kkAssertMsgf(false, "[EnemyUnit::removeAttacker], attacker can't find in map, id: %d", attackerID );
+	mAttackers.erase(iter);
+}
+
+void EnemyUnit::addAttacker(entity_id attackerID, CCRect rect)
+{
+	mAttackers.insert(std::pair<entity_id, CCRect>(attackerID, rect));
+}
+
+
+
+void EnemyUnit::underAttack(int damage, entity_id attackerID, CCRect rect)
+{
+	mAttackers.insert(std::pair<entity_id, CCRect>(attackerID, rect));
+	this->underAttack(damage);
+}
 void EnemyUnit::underAttack(int damage)
 {
 	this->mCurHP -= damage;
@@ -361,22 +408,39 @@ void EnemyUnit::underAttack(int damage)
 		return;
 	}
 }
+
+
+
 void EnemyUnit::destory()
 {
 	this->unscheduleUpdate();
 	this->stopAllActions();
 	CCSequence* sequence = CCSequence::createWithTwoActions(
-		CCAnimate::create(this->mEnemyInfo->animations[ActiveObjTag_Dead])
+		CCAnimate::create(this->mEntityInfo->animations[ActiveObjTag_Dead])
 		,CCCallFunc::create(this, callfunc_selector(EnemyUnit::onDestoryed))
 		);
 	this->runAction(sequence);
-	EnemyManager::sharedEnemyManager()->removeEnemy(this->mID);
+	EnemyManager::sharedEnemyManager()->removeEnemy(this->mEntityID);
+	this->sendDeadMsg();
 
 }
+
+void EnemyUnit::sendDeadMsg()
+{
+	//send not avialable msg
+	auto enemyManager = EnemyManager::sharedEnemyManager();
+	enemyManager->sendMsg(MSG_AttackerNoAvailable, mEntityID, mTargetID);
+	for(auto iter = mAttackers.begin(); iter != mAttackers.end(); ++iter)
+	{
+		enemyManager->sendMsg(MSG_TargetNotAvailable, mEntityID, iter->first);
+	}
+
+}
+
 void EnemyUnit::onDestoryed()
 {
 	// add to EnemyManager's remove queue
-	EnemyManager::sharedEnemyManager()->eraseEnemy(this->mID);
+	EnemyManager::sharedEnemyManager()->eraseEnemy(this->mEntityID);
 
 	// remove hp sprite
 	//this->mHp->release();
@@ -384,12 +448,12 @@ void EnemyUnit::onDestoryed()
 }
 void EnemyUnit::onArriveEndPoint()
 {
-	this->unscheduleUpdate();
+	//this->unscheduleUpdate();
 	this->stopAllActions();
-	EnemyManager::sharedEnemyManager()->removeEnemy(this->mID);
+	EnemyManager::sharedEnemyManager()->removeEnemy(this->mEntityID);
 	// add to EnemyManager's remove queue
-	EnemyManager::sharedEnemyManager()->eraseEnemy(this->mID);
-
+	EnemyManager::sharedEnemyManager()->eraseEnemy(this->mEntityID);
+	//sendDeadMsg();
 	// remove hp sprite
 	//this->mHp->release();
 	this->mHpBatchNode->removeChild(this->mHp, true);

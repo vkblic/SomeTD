@@ -2,7 +2,7 @@
 #ifndef _ALLY_UNIT_
 #define _ALLY_UNIT_
 
-#include "cocos2d.h"
+#include "ActiveEntity.h"
 #include "../Model/Enumeration.h"
 #include "../Model/Models.h"
 using namespace cocos2d;
@@ -16,7 +16,7 @@ enum eAllyStatus
 	AllyStatus_Waiting
 };
 
-class AllyUnit : public CCSprite , public CCTouchDelegate
+class AllyUnit : public ActiveEntity , public CCTouchDelegate
 {
 
 public:
@@ -35,71 +35,74 @@ public:
 
 
 public:
-	void update(float dt); // execute every frame
+	void frameListener(float dt); // execute every frame
 
-	CCRect getCollisionRect();
+	void updatebak(float dt); // execute every frame
+
 
 	//void run(std::vector<WayPointEx>& wayPoints);
 
-	void run();
-	void moveTo(const CCPoint& distPos);
-	void onInPosition();
-	void setID(int id){ this->mID = id; }
-	 long getID() { return this->mID; }
-
-	ActiveObjModel* getEnemyInfo() { return this->mAllyInfo; }
+	
 
 public:
 	void myInit();//自定义初始化函数
 
 
+	bool targetIs(entity_id targetID) { return mTargetID == targetID; }
 	/*
-	 *
-	 *
-	 *
-	 */
-	void underAttack(int damage);
+	*
+	*
+	*
+	*/
+	void run() {mState = STATE_Idle;}
+	void moveToAndGetRead(const CCPoint& distPos);
+	void onInPosition();
+	//void attacking();
+	//void onHit();
 
 
+public: 
+	// idle
+	bool findTarget();
+	bool targetCheck(entity_id targetID);
+
+	
+	// moveToTarget
+	void enterMoveToTarget();
+	bool onMovingToTarget(float dt);
+	void setTargetCollisionRect( const CCRect& rect ) 
+	{this->mTargetCollisionRect = rect;}
+	void exitMoveToTarget();
+
+	// attacking
+	void enterAttacking();
+	void attacking();
+	void onHitTarget();
+	void exitAttacing();
+
+	//be injured
+	void underAttack(int damage, entity_id attackerID, CCRect rect);
+
+	//dead
 	void destory();
 	void onDestoryed();
-	void startAttack();
-	void attacking();
-	void onHit();
-private:
-	//void getNextLv(eTower)
 
-	/*
-	 *Set hp sprite position in enemy layer coordinate
-	 *
-	 */
-	void setHpSpritePosition();
-
-
-	
-	void updateHpSpriteSize();
-
+	//msg
+	void sendDeadMsg();
 
 private:
-	int mCurWayPointIndex;
-	const std::vector<WayPointEx>* mWayPoints;
-	eActiveObjTag mCurActiveObjTag;
-	//eTower_Preview mPreviewType;
-	
-	//CCSequence* mShooterAnimationSequence;
-	//CCSequence* mTowerAnimationSequence;
-private:
-	CCSprite* mHp;
-	CCSpriteBatchNode* mHpBatchNode;
-	ActiveObjModel* mAllyInfo;
+
+
 
 	//int mMaxHP;
-	int mCurHP;
-	long mID;
-	long mTargetID;
-	eAllyStatus mCurStatus;
-	CCRect mDefualtColorRect;
-	float mHpBarMaxWidth;
+	entity_id mTargetID;
+	CCRect mTargetCollisionRect;
+	CCRect mPreTargetCollisionRect;
+	CCPoint mDestinationPos;
+	std::map<entity_id, CCRect> mAttackers;
+
+	// other
+	int mTargetSearchInterval;
 };
 
 

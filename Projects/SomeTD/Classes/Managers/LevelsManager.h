@@ -25,7 +25,7 @@ public:
 
 	void readLevaInfo(const char* fileName, CCTMXObjectGroup* objects);
 
-	void update(float dt);
+	void frameTrigger(float dt);
 
 private:
 	void clearUnusedEnemise();

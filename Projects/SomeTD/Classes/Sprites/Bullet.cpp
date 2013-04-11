@@ -28,7 +28,7 @@ Bullet* Bullet::create()
 void Bullet::reuse(float speed, EnemyUnit* target, CCSpriteFrame* frame)
 {
 	this->mSpeed = speed;
-	this->mTargetID = target->getID();
+	this->mTargetID = target->getEntityID();
 	this->mTargetPos = target->getPosition();
 	this->mTargetCollisionRect = target->getCollisionRect();
 	//this->mTargetPos

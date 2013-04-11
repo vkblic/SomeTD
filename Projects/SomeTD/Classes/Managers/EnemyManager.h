@@ -27,7 +27,7 @@ public:
 	 *@return	a valid enemy id if there has a enemy in range, 
 	 *@			if not, the value is -1
 	 */
-	 long getEnemyInRange(CCPoint pos, int rangeRadius);
+	 entity_id getEnemyInRange(CCPoint pos, int rangeRadius);
 
 	/*
 	 *add a enemy node to manager, manager have responsibility to 
@@ -54,7 +54,7 @@ public:
 	 *
 	 *@param	enemyID: a valid enemyID
 	 */
-	void removeEnemy( long enemyID);
+	void removeEnemy( entity_id enemyID);
 
 	/*
 	 *remove enemy node from removed map, add it to unused vector for
@@ -62,13 +62,13 @@ public:
 	 *
 	 *@param	enemyID: a valid enemyID
 	 */
-	void eraseEnemy( long enemyID);
+	void eraseEnemy( entity_id enemyID);
 
-	void update(float dt);
+	void frameTrigger(float dt);
 
 	void setEnemyLayer(CCNode* layer);
 
-	bool isEnemyInRange(CCPoint pos, int rangeRadius,  long enemyID);
+	bool isEnemyInRange(CCPoint pos, int rangeRadius,  entity_id enemyID);
 
 	/*
 	 *get the nearness enemy unit in range 
@@ -78,10 +78,20 @@ public:
 	 *@return	a valid enemy object pointer, if it's available
 	 *@			if not(destroyed of out of screen), the value NULL
 	 */
-	EnemyUnit* getAvailableEnemy( long enemyID);
+	EnemyUnit* getAvailableEnemy( entity_id enemyID);
 
 	void readEnemyInfo(const char* fileName);
+	// fsm
+public:
 
+	void fsmTranslater( const MsgObject& msg, EnemyUnit* enemy);
+	void changeState( EnemyUnit* unit, ActiveObj_States state );
+	void sendMsg( MsgName name, entity_id senderID, entity_id receiverID );
+	void sendDelayedMsg(MsgName name, int delay, entity_id senderID, entity_id receiverID );
+	void sendCollisionRecMsg(entity_id senderID, entity_id receiverID, CCRect rect);
+	void sendDamageMsg( entity_id senderID, entity_id receiverID, int damage );
+
+	//void broadcaseDeadMsg( entity_id senderID );
 
 private:
 	void clearUnusedEnemise();
@@ -89,8 +99,8 @@ private:
 	std::map<std::string, ActiveObjModel> mEnemyInfo;
 
 	std::map<std::string, CCSpriteBatchNode*> mBatchNodes;
-	std::map< long, EnemyUnit*> mEnemies;
-	std::map< long, EnemyUnit*> mRemovedEnemies;
+	std::map< entity_id, EnemyUnit*> mEnemies;
+	std::map< entity_id, EnemyUnit*> mRemovedEnemies;
 	std::vector<EnemyUnit*> mUnusedEnemy;
 	std::vector<WayPoint> mWayPoints;
 	CCNode* mEnemyLayer;
@@ -99,7 +109,7 @@ private:
 
 	//CCSpriteBatchNode* mHpBatchNode;
 
-	 long mIDSeed;
+	 //long mIDSeed;
 };
 
 #endif

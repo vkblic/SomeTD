@@ -3,6 +3,7 @@
 #define _ENEMY_UNIT_
 
 #include "cocos2d.h"
+#include "ActiveEntity.h"
 #include "../Model/Enumeration.h"
 #include "../Model/Models.h"
 using namespace cocos2d;
@@ -15,7 +16,9 @@ enum eEnemyStatus
 	EnemyStatus_Attacking
 };
 
-class EnemyUnit : public CCSprite , public CCTouchDelegate
+
+
+class EnemyUnit : public ActiveEntity , public CCTouchDelegate
 {
 
 public:
@@ -34,81 +37,69 @@ public:
 
 
 public:
-	void update(float dt); // execute every frame
-
-	CCPoint getControlPointAt(int index);
-
-	CCRect getCollisionRect();
-
-	//void run(std::vector<WayPointEx>& wayPoints);
+	void frameListener(float dt); // execute every frame
 
 	void run(const std::vector<WayPointEx>* wayPoints);
 
-	void setID(int id){ this->mID = id; }
-	 long getID() { return this->mID; }
 
-	ActiveObjModel* getEnemyInfo() { return this->mEnemyInfo; }
 
 public:
 	void myInit();//自定义初始化函数
-
-
-	/*
-	 *
-	 *
-	 *
-	 */
+	void underAttack(int damage, entity_id attackerID, CCRect rect);
 	void underAttack(int damage);
-
 	void destory();
 	void onDestoryed();
 	void onArriveEndPoint();
-	void targetAlert(long targetID) 
-	{ 
-		mTargetID = targetID;
-		mCurStatus = EnemyStatus_WaitingForAttack; 
+
+
+	void addAttacker(entity_id attackerID, CCRect rect);
+	void removeAttacker(entity_id attackerID);
+	void removeTarget() {mTargetID = non_entity;}
+	void setTarget(entity_id targetID) {mTargetID = targetID;}
+	entity_id getTarget(){return mTargetID;}
+	void setTargetCollisionRect( const CCRect& rect ) 
+	{
+		this->mTargetCollisionRect = rect;
 	}
-	void startAttack();
-	void attacking();
-private:
-	//void getNextLv(eTower)
+	//void targetAlert(entity_id targetID) 
+	//{ 
+	//	mTargetID = targetID;
+	//	//mCurStatus = EnemyStatus_WaitingForAttack; 
+	//}
+	//void startAttack();
+	//void onHit();
 
-	/*
-	 *Set hp sprite position in enemy layer coordinate
-	 *
-	 */
-	void setHpSpritePosition();
+public:
+	// attacking
+	void enterAttacking();
+	void onAttacking();
+	void onHitTarget();
+	void exitAttacing();
+
+	// moving
+	void enterMoving();
+	bool movingUpdate(float dt);
+	void exitMoving();
+	void sendMovingmsg();
+
+	// when dead
+	void sendDeadMsg();
 
 
-	
-	void updateHpSpriteSize();
+	//stoped
+	bool isTargetNoAvailable(entity_id attackerId);
 
-	//void fire(CCSprite* target);
-	void onHit();
-
-private:
+protected:
 	int mCurWayPointIndex;
 	const std::vector<WayPointEx>* mWayPoints;
 	eActiveObjTag mCurEnemyTag;
-	//eTower_Preview mPreviewType;
-	
-	//CCSequence* mShooterAnimationSequence;
-	//CCSequence* mTowerAnimationSequence;
-private:
-	CCSprite* mHp;
-private:
 
+protected:
 
-	CCSpriteBatchNode* mHpBatchNode;
-	ActiveObjModel* mEnemyInfo;
-
-	//int mMaxHP;
-	int mCurHP;
-	long mID;
-	eEnemyStatus mCurStatus;
-	long mTargetID;
-	CCRect mDefualtColorRect;
-	float mHpBarMaxWidth;
+	//eEnemyStatus mCurStatus;
+	entity_id mTargetID;
+	CCRect mTargetCollisionRect;
+	std::map<entity_id, CCRect> mAttackers;
 };
 
 

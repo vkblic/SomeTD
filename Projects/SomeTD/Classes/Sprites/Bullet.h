@@ -34,7 +34,7 @@ private:
 	float mSpeed;
 	CCPoint mTargetPos;
 	CCRect mTargetCollisionRect;
-	 long mTargetID;
+	 entity_id mTargetID;
 
 	char temp[256];
 };

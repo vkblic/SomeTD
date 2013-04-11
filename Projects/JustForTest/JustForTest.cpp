@@ -3,6 +3,14 @@
 
 #include "stdafx.h"
 #include "A.h"
+#include <stdlib.h>
+#include <stdio.h>
+#include <assert.h>
+#include <queue>
+#include <vector>
+#include <deque>
+#include <list>
+#include <iostream>
 
 class MyClass
 {
@@ -24,59 +32,46 @@ MyClass::~MyClass()
 {
 }
 
+inline int rangedRand(int range_min, int range_max)
+{
+	int r = (double)rand() / (RAND_MAX + 1) * (range_max - range_min)
+		+ range_min;
+	return r;
+
+
+}
+
+
+typedef long entity_id;
+const entity_id nonEntity = -1;
+#define non_entity nonEntity
+static entity_id id_seed = 0;
+
+static entity_id generateID()
+{
+	id_seed++;
+	//CCLog("idSeed: %d ", id_seed);
+	return id_seed;
+}
+
+
+#define assertMsg(a, b) assert(a && b)
 
 int _tmain(int argc, _TCHAR* argv[])
 {
+	//assertMsg(false, "aasdfsa");
 
-	int* p = new int[4];
-	int* pp = p;
-	for(int i = 0; i < 4; i++)
+	//	printf("%d" maxaa(1, 5));
+
+	for(int i =0; i < 10; i++)
 	{
-		*(pp + i) = i;
+		printf("%d\n", generateID());
 	}
 
-	for(int i = 0; i < 4; i++)
-	{
-		printf("p:%d\n",p[i]);
-	}
-
-	for(int i = 0; i < 4; i++)
-	{
-		printf("pp:%d\n",*(pp + i));
-	}
-
+	//err("aaaa%d", 10);
+	//printf(#a);
 	return 0;
 
-	MyClass** myClass = new MyClass*[4];
-	auto classtest  = myClass[0];
-	for (int i = 0; i < 4; i++)
-	{
-		myClass[i] = new MyClass();
-		myClass[i]->showSomeThing();
-		myClass[i]->a = i + 1;
-	}
+ }
 
-	for (int i = 0; i < 4; i++)
-	{
-		myClass[i]->showSomeThing();
-	}
-	return 0;
-
-	while (true)
-	{
-		int a;
-	}
-
-
-	A a;
-	MyStruct myStruct = a.GetStruct();
-
-	MyStruct* s1 = &myStruct;
-	MyStruct* s2 = &a.mStruct;
-	MyStruct* s3 = &a.GetStructRef();
-	MyStruct* s4 = &a.GetStruct();
-
-	printf("&myStruct: %p \n&a.mStruct: %p \n&a.GetStructRef(): %p\n&a.GetStruct(): %p\n", s1, s2, s3, s4);
-	return 0;
-}
 

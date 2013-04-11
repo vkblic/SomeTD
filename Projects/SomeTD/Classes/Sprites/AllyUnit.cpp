@@ -7,7 +7,7 @@
 
 #include "AllyUnit.h"
 #include "../Managers/EnemyManager.h"
-#include "../Managers/AlliesManager.h"
+#include "../Managers/AllyManager.h"
 #include "../Helper/CommonHelpers.h"
 #include <math.h>
 using namespace cocos2d;
@@ -19,7 +19,7 @@ AllyUnit* AllyUnit::create(ActiveObjModel* enemyInfo, CCSpriteBatchNode* hpBatch
 	if (enemy && enemy->initWithSpriteFrame(enemyInfo->defaultFrame))//
 	{
 		enemy->mHpBatchNode = hpBatchNode;
-		enemy->mAllyInfo = enemyInfo;
+		enemy->mEntityInfo = enemyInfo;
 		enemy->myInit();
 		//tower->loadResource();
 		enemy->autorelease();
@@ -35,19 +35,8 @@ AllyUnit::~AllyUnit()
 
 void AllyUnit::myInit()
 {
-
-	mDefualtColorRect = this->getColorRect();
-	mHp = CCSprite::create("hp.png");
-	mCurWayPointIndex = 0;
-	mTargetID = -1;
-	mCurHP = this->mAllyInfo->hp;
-	mHp->setAnchorPoint(CCPoint(0,0));
-	mHpBatchNode->addChild(this->mHp);
-	mHpBarMaxWidth = mDefualtColorRect.size.width > HP_BAR_WIDTH ? HP_BAR_WIDTH : mDefualtColorRect.size.width * 0.8;
-	this->updateHpSpriteSize();
-	this->setHpSpritePosition();
-	//this->addChild(hpC);
-
+	ActiveEntity::myInit();
+	mTargetSearchInterval = rangedRand(5, 10);
 }
 
 bool AllyUnit::ccTouchBegan(CCTouch* touch, CCEvent* event)
@@ -83,172 +72,197 @@ void AllyUnit::onExit()
 	CCDirector::sharedDirector()->getTouchDispatcher()->removeDelegate(this);
 	CCSprite::onExit();
 }
-
-
-void AllyUnit::update(float dt)
+bool AllyUnit::findTarget()
 {
-
-	// update postion of hp bar
-	this->setHpSpritePosition();
-
-	auto enemyManager = EnemyManager::sharedEnemyManager();
-
-	if(mCurStatus == AllyStatus_Moving || mCurStatus == AllyStatus_MovingToTarget)
-	{
-		return;
-	}
-
-	if(!enemyManager->isEnemyInRange(this->getPosition(), mAllyInfo->alertRange, mTargetID))
-	{
-		long id = enemyManager->getEnemyInRange(this->getPosition(), mAllyInfo->alertRange);
-		if(id != -1)
-		{
-			mTargetID = id;
-			auto enemy = enemyManager->getAvailableEnemy(mTargetID);
-			enemy->targetAlert(this->mID);
-			// let enemy stop running 
-			// note: the pos is not the center point of collision rect!
-			// 1. get distance color(collision) rect of ally
-
-			CCRect targetCollisionRect = enemy->getCollisionRect();
-			CCRect CollisionRect = this->getCollisionRect();
-
-			CCPoint distColorRectLeftTop;
-			if(targetCollisionRect.getMidX() > CollisionRect.getMidX())
-			{
-				// move to left of the target
-				distColorRectLeftTop.x = targetCollisionRect.getMinX() - mDefualtColorRect.size.width;
-			}
-			else
-			{
-				// move to right of the target
-				distColorRectLeftTop.x = targetCollisionRect.getMaxX();
-			}
-			distColorRectLeftTop.y = targetCollisionRect.getMinY() + mDefualtColorRect.size.height;
-
-			CCPoint distSpriteRectLeftTop = CCPoint(
-				distColorRectLeftTop.x - mDefualtColorRect.origin.x,
-				distColorRectLeftTop.y + mDefualtColorRect.origin.y
-			);
-			CCSize size = this->getContentSize();
-			CCPoint distPos = CCPoint(
-				distSpriteRectLeftTop.x + size.width / 2,
-				distSpriteRectLeftTop.y - size.height / 2
-			);
-
-			// start move to animation
-			CCSequence* sequence = CCSequence::create(
-				CCMoveTo::create(1, distPos ),
-				CCCallFunc::create(this, callfunc_selector(AllyUnit::startAttack)),
-				NULL
-				);
-			this->runAction(sequence);
-			this->runAction(CCAnimate::create(this->mAllyInfo->animations[ActiveObjTag_MoveRightLeft]));
-			mCurStatus = AllyStatus_MovingToTarget;
-
-
-
-			//set direction
-			// note: there can't just use collisionRect centre point to decide direction.
-			// because the center of sprite is not the centre of collisionRect
-			auto pos = this->getPosition();
-			ccVertex2F toNewPos = vertex2( distPos.x - pos.x, distPos.y - pos.y);
-			float z = sqrtf(toNewPos.y * toNewPos.y + toNewPos.x * toNewPos.x);
-			float cosF = (float)toNewPos.x / z;
-			if(cosF < 0)
-				this->setFlipX(true);
-			else
-				this->setFlipX(false);
-
-		}
-	}
-	if(mTargetID == -1)
-		return;
-
-
-
-
-
-
-
+	entity_id id = EnemyManager::sharedEnemyManager()->getEnemyInRange(this->getPosition(), mEntityInfo->alertRange);
+	if (id == non_entity)
+		return false;
+	mTargetID = id;
+	return true;
 }
 
-void AllyUnit::startAttack()
+bool AllyUnit::targetCheck(entity_id targetID)
 {
-	auto enemy  = EnemyManager::sharedEnemyManager()->getAvailableEnemy(mTargetID);
-	if(enemy == NULL)
+	if (EnemyManager::sharedEnemyManager()->isEnemyInRange(this->getPosition(), mEntityInfo->alertRange, targetID))
 	{
-		mCurStatus = AllyStatus_Waiting;
-		mTargetID = -1;
+		mTargetID = targetID;
 	}
-	else
+	return false;
+}
+
+
+void AllyUnit::enterMoveToTarget()
+{
+	AllyManager::sharedAllyManager()->sendMsg(MSG_RequestPosition, this->mEntityID, this->mTargetID);
+	AllyManager::sharedAllyManager()->sendMsg(MSG_StopMoving, this->mEntityID, this->mTargetID);
+	this->runAction(CCAnimate::create(this->mEntityInfo->animations[ActiveObjTag_MoveRightLeft]));
+}
+
+bool AllyUnit::onMovingToTarget(float dt)
+{
+	// let enemy stop running 
+	// note: the pos is not the center point of collision rect!
+	// 1. get distance color(collision) rect of ally
+
+	//CCRect targetCollisionRect = enemy->getCollisionRect();
+	if (!mPreTargetCollisionRect.equals(mTargetCollisionRect) )
 	{
-		// set direction
-		if (this->getCollisionRect().getMidX() > enemy->getCollisionRect().getMidX())
+
+		CCRect CollisionRect = this->getCollisionRect();
+
+		CCPoint destColorRectLeftTop;
+		if(mTargetCollisionRect.getMidX() > CollisionRect.getMidX())
 		{
-			this->setFlipX(true);
-			enemy->setFlipX(false);
+			// move to left of the target
+			destColorRectLeftTop.x = mTargetCollisionRect.getMinX() - mDefualtColorRect.size.width;
 		}
 		else
 		{
-			this->setFlipX(false);
-			enemy->setFlipX(true);
+			// move to right of the target
+			destColorRectLeftTop.x = mTargetCollisionRect.getMaxX();
 		}
-		enemy->startAttack();
-		this->attacking();
-	}
-	//EnemyManager::sharedEnemyManager()->removeEnemy(this->mID);
-	// add to EnemyManager's remove queue
-	//EnemyManager::sharedEnemyManager()->eraseEnemy(this->mID);
+		destColorRectLeftTop.y = mTargetCollisionRect.getMinY() + mDefualtColorRect.size.height;
 
-	// remove hp sprite
-	//this->mHp->release();
-	//this->mHpBatchNode->removeChild(this->mHp, true);
+		CCPoint destSpriteRectLeftTop = CCPoint(
+			destColorRectLeftTop.x - mDefualtColorRect.origin.x,
+			destColorRectLeftTop.y + mDefualtColorRect.origin.y
+			);
+		CCSize size = this->getContentSize();
+		mDestinationPos = CCPoint(
+			destSpriteRectLeftTop.x + size.width / 2,
+			destSpriteRectLeftTop.y - size.height / 2
+			);
+	}
+
+	CCPoint pos = this->getPosition();
+	if(abs(pos.x - mDestinationPos.x) < 2 && abs(pos.y - mDestinationPos.y) < 2 )
+	{
+		this->setPosition(mDestinationPos);
+		return true;
+	}
+
+	// calculate 'move by' vector
+	ccVertex2F toNewTarget = vertex2( mDestinationPos.x - pos.x, mDestinationPos.y - pos.y);
+	ccVertex2F temp = vertex2FNormalization(toNewTarget);
+	ccVertex2F toNewPos = vertex2FMul(temp, dt * this->mEntityInfo->speed * 5);
+
+	CCPoint newPos = CCPoint(pos.x + toNewPos.x, pos.y + toNewPos.y);
+
+
+
+	this->setPosition(newPos);
+	//auto pos = this->getPosition();
+	//ccVertex2F toNewPos = vertex2( mDestinationPos.x - pos.x, mDestinationPos.y - pos.y);
+	float z = sqrtf(toNewPos.y * toNewPos.y + toNewPos.x * toNewPos.x);
+	float cosF = (float)toNewPos.x / z;
+	if(cosF < 0)
+		this->setFlipX(true);
+	else
+		this->setFlipX(false);
+
+	return false;
 }
+
+
+
+void AllyUnit::exitMoveToTarget()
+{
+	this->stopAllActions();	
+}
+
+void AllyUnit::frameListener(float dt)
+{
+	switch (mState)
+	{
+	case STATE_Idle:
+		{
+			// not search every frame to improve performance
+			if( mTargetSearchInterval-- > 0 )
+				break;
+			if(this->findTarget())
+				AllyManager::sharedAllyManager()->sendMsg(MSG_FoundTarget, mEntityID, mEntityID);
+			else
+				mTargetSearchInterval = rangedRand(5, 10);
+		}
+		break;
+	case STATE_MovingToTarget:
+		{
+			// if reach end point, the return value is true.
+			if(this->onMovingToTarget(dt))
+			{
+				// get target location
+				//this->changeState(ally, STATE_Attacking);
+				AllyManager::sharedAllyManager()->sendMsg(MSG_InAttackPosition, mEntityID, mEntityID);
+			}
+			// update postion of hp bar
+			this->setHpSpritePosition();
+		}
+		break;
+
+	default:
+		break;
+	}
+}
+
+void AllyUnit::enterAttacking()
+{
+	AllyManager::sharedAllyManager()->sendMsg(MSG_InAttackPosition, mEntityID, mTargetID);
+	// set direction
+	if (this->getCollisionRect().getMidX() > mTargetCollisionRect.getMidX())
+	{
+		this->setFlipX(true);
+	}
+	else
+	{
+		this->setFlipX(false);
+	}
+	this->attacking();
+}
+
 void AllyUnit::attacking()
 {
-	this->stopAllActions();
-	mCurStatus = AllyStatus_Attack;
 	CCSequence* sequence = CCSequence::createWithTwoActions(
-		CCAnimate::create(this->mAllyInfo->animations[ActiveObjTag_Attack])
-		,CCCallFunc::create(this, callfunc_selector(AllyUnit::onHit))
+		CCAnimate::create(this->mEntityInfo->animations[ActiveObjTag_Attack])
+		,CCCallFunc::create(this, callfunc_selector(AllyUnit::onHitTarget))
 		);
 	this->runAction(sequence);
 
 }
 
 
-void AllyUnit::onHit()
+void AllyUnit::onHitTarget()
 {
-	auto target = EnemyManager::sharedEnemyManager()->getAvailableEnemy(mTargetID);
+	this->stopAllActions();
+	AllyManager::sharedAllyManager()->sendDamageMsg(mEntityID, mTargetID, mEntityInfo->physicalAttack);
+	if(mState != STATE_Attacking)
+		return;
+	this->attacking();
+}
 
-	if(target != NULL)
+void AllyUnit::exitAttacing()
+{
+	// prevent [onHitTarget] execute when attacking animation end!
+	this->stopAllActions();
+	
+	this->setDisplayFrame(mEntityInfo->defaultFrame);
+}
+
+void AllyUnit::sendDeadMsg()
+{
+	//send not avialable msg
+	auto allyManager = AllyManager::sharedAllyManager();
+	allyManager->sendMsg(MSG_AttackerNoAvailable, mEntityID, mTargetID);
+	for(auto iter = mAttackers.begin(); iter != mAttackers.end(); ++iter)
 	{
-		target->underAttack(mAllyInfo->physicalAttack);
-		target = EnemyManager::sharedEnemyManager()->getAvailableEnemy(mTargetID);
-	}
-	if(target == NULL)
-	{
-		mCurStatus = AllyStatus_Waiting;
-		mTargetID = -1;
-		this->setDisplayFrame(mAllyInfo->defaultFrame);
-	}
-	else
-	{
-		this->attacking();
+		allyManager->sendMsg(MSG_TargetNotAvailable, mEntityID, iter->first);
 	}
 
 }
 
-void AllyUnit::run() 
-{   
-	mCurStatus = AllyStatus_Waiting;
-	this->scheduleUpdate();
-}
 
-void AllyUnit::moveTo(const CCPoint& distPos)
+
+void AllyUnit::moveToAndGetRead(const CCPoint& distPos)
 {
-	mCurStatus = AllyStatus_Moving;
 	CCPoint pos = this->getPosition();
 	CCSequence* sequence = CCSequence::create(
 		CCMoveTo::create(1, distPos ),
@@ -256,7 +270,7 @@ void AllyUnit::moveTo(const CCPoint& distPos)
 		NULL
 		);
 	this->runAction(sequence);
-	this->runAction(CCAnimate::create(this->mAllyInfo->animations[ActiveObjTag_MoveRightLeft]));
+	this->runAction(CCAnimate::create(this->mEntityInfo->animations[ActiveObjTag_MoveRightLeft]));
 
 	//set direction
 	ccVertex2F toNewPos = vertex2( distPos.x - pos.x, distPos.y - pos.y);
@@ -272,65 +286,13 @@ void AllyUnit::moveTo(const CCPoint& distPos)
 void AllyUnit::onInPosition()
 {
 	this->stopAllActions();
-	mCurStatus = AllyStatus_Waiting;
+	this->setDisplayFrame(mEntityInfo->defaultFrame);
+	mState = STATE_Idle;
 }
 
-CCRect AllyUnit::getCollisionRect()
+void AllyUnit::underAttack(int damage, entity_id attackerID, CCRect rect)
 {
-	//auto colorRect = this->getColorRect();
-	CCPoint pos = this->getPosition();
-	auto size = this->getContentSize();
-
-	//left_bottom_X = pos.x - size.width / 2
-	//left_bottom_Y = pos.y - size.height / 2
-	//left_bottom_ColorRect_X = colorRect.origin.x
-	//left_bottom_ColorRect_Y = size.height - colorRect.size.height - colorRect.origin.y
-	// final_X =  left_bottom_X + left_bottom_ColorRect_X
-	// final_Y =  left_bottom_Y + left_bottom_ColorRect_Y
-
-	float x = pos.x - size.width / 2 + mDefualtColorRect.getMinX();
-	float y = pos.y + size.height / 2 - mDefualtColorRect.getMaxY();
-
-	//CCRect old(pos.x, pos.y, size.width, size.height);
-
-	//CCLog("colorRect: {{%f, %f}, {%f, %f}}",colorRect.origin.x, colorRect.origin.y, colorRect.size.width, colorRect.size.height);
-	//CCLog("collisionRect Old: {{%f, %f}, {%f, %f}}",old.origin.x, old.origin.y, old.size.width, old.size.height);
-	//CCLog("collisionRect New: {{%f, %f}, {%f, %f}}",x, y, colorRect.size.width, colorRect.size.height);
-	return CCRect(x, y, mDefualtColorRect.size.width, mDefualtColorRect.size.height);
-}
-
-void AllyUnit::setHpSpritePosition()
-{
-	//CCSize enemySize = this->getContentSize();
-	//CCPoint pos = this->getPosition();
-	CCRect collisionRect = this->getCollisionRect();
-
-	auto newPos = CCPoint(collisionRect.getMinX() + (collisionRect.size.width - mHpBarMaxWidth) / 2, collisionRect.getMaxY() + 2);
-	this->mHp->setPosition(newPos);
-
-}
-
-void AllyUnit::updateHpSpriteSize()
-{
-	//CCAssert(hp >= 0 && hp <= this->mMaxHP, "hp percent value of enemy node is not allow!");
-	//this->mCurHP = hp;
-	if (this->mCurHP <= 0)
-	{
-		this->mHp->setVisible(false);
-	}
-	float precentOfHp = (float)this->mCurHP / (float)this->mAllyInfo->hp;
-
-	//CCSize enemySize = this->getColorRect().size;
-	CCSize sizeHp =  this->mHp->getContentSize();
-
-	float scaleX = mHpBarMaxWidth / sizeHp.width * precentOfHp;
-	//CCLog("scaleX%f",scaleX);
-	//CCLog("Enemy hp: scaleX: %f, scaleY: %f", scaleX, scaleY);
-	this->mHp->setScaleX(scaleX);
-}
-
-void AllyUnit::underAttack(int damage)
-{
+	mAttackers.insert(std::pair<entity_id, CCRect>(attackerID, rect));
 	this->mCurHP -= damage;
 	this->updateHpSpriteSize();
 	if(this->mCurHP <= 0)
@@ -342,21 +304,21 @@ void AllyUnit::underAttack(int damage)
 
 void AllyUnit::destory()
 {
-	this->unscheduleUpdate();
 	this->stopAllActions();
 	CCSequence* sequence = CCSequence::createWithTwoActions(
-		CCAnimate::create(this->mAllyInfo->animations[ActiveObjTag_Dead])
+		CCAnimate::create(this->mEntityInfo->animations[ActiveObjTag_Dead])
 		,CCCallFunc::create(this, callfunc_selector(AllyUnit::onDestoryed))
 		);
 	this->runAction(sequence);
-	AllyManager::sharedAllyManager()->removeAllyByID(this->mID);
-
+	this->sendDeadMsg();
+	AllyManager::sharedAllyManager()->removeAllyByID(mEntityID);
+	//AllyManager::sharedAllyManager()->broadcaseDeadMsg(mEntityID);
 }
 
 void AllyUnit::onDestoryed()
 {
 	// add to EnemyManager's remove queue
-	AllyManager::sharedAllyManager()->eraseAllyByID(this->mID);
+	AllyManager::sharedAllyManager()->eraseAllyByID(this->mEntityID);
 
 	// remove hp sprite
 	//this->mHp->release();

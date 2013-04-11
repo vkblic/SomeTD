@@ -6,6 +6,7 @@
 #include "../Sprites/AllyUnit.h"
 #include "../Model/Enumeration.h"
 #include "../Model/Models.h"
+#include "../MessagePump/MsgObject.h"
 using namespace cocos2d;
 
 class AllyManager 
@@ -27,7 +28,7 @@ public:
 	 *@return	a valid enemy id if there has a enemy in range, 
 	 *@			if not, the value is -1
 	 */
-	 long getObjInRange(CCPoint pos, int rangeRadius);
+	 entity_id getObjInRange( CCPoint pos, int rangeRadius );
 
 	/*
 	 *add a enemy node to manager, manager have responsibility to 
@@ -39,7 +40,6 @@ public:
 	AllyUnit* addAlly(const char* name, CCPoint pos);
 
 
-	AllyUnit* addAllyAndGetReadyForFight(const char* name, CCPoint pos);
 
 
 	/*
@@ -48,7 +48,7 @@ public:
 	 *
 	 *@param	enemyID: a valid enemyID
 	 */
-	void removeAllyByID( long id);
+	void removeAllyByID( entity_id id );
 
 	/*
 	 *remove enemy node from removed map, add it to unused vector for
@@ -56,13 +56,11 @@ public:
 	 *
 	 *@param	enemyID: a valid enemyID
 	 */
-	void eraseAllyByID( long id);
+	void eraseAllyByID( entity_id id);
 
-	void update(float dt);
+	void setObjectLayer( CCNode* layer );
 
-	void setObjectLayer(CCNode* layer);
-
-	bool isOjbectInRange(CCPoint pos, int rangeRadius,  long enemyID);
+	bool isOjbectInRange( CCPoint pos, int rangeRadius,  entity_id enemyID );
 
 	/*
 	 *get the obj unit by ID 
@@ -71,26 +69,36 @@ public:
 	 *@return	a valid object pointer, if it's available
 	 *@			if not(destroyed of out of screen), the value NULL
 	 */
-	AllyUnit* getAvailableObject( long id);
+	AllyUnit* getAvailableObject( entity_id id );
 
 
 	/*
 	 *read allies information from file to activeOjbect map
 	*
 	 */
-	void readAlliesInfo(const char* fileName);
+	void readAlliesInfo( const char* fileName );
 
 
+	void frameTrigger(float dt);
 
+
+// fsm
+public:
+
+	void fsmTranslater( const MsgObject& msg, AllyUnit* ally);
+	void changeState( AllyUnit* unit, ActiveObj_States state );
+	void sendMsg( MsgName name, entity_id senderID, entity_id receiverID );
+	void sendDamageMsg( entity_id senderID, entity_id receiverID, int damage );
+	void sendCollisionRecMsg(entity_id senderID, entity_id receiverID, CCRect rect);
 private:
-	void clearUnusedEnemise();
+	void clearUnusedAllies();
 	CCSpriteBatchNode* getBatchNode( const char* textureSetName );
 private:
 	std::map<std::string, ActiveObjModel> mAllyInfo;
 
 	std::map<std::string, CCSpriteBatchNode*> mBatchNodes;
-	std::map< long, AllyUnit*> mAllies;
-	std::map< long, AllyUnit*> mRemovedAllies;
+	std::map<entity_id, AllyUnit*> mAllies;
+	std::map<entity_id, AllyUnit*> mRemovedAllies;
 	std::vector<AllyUnit*> mUnusedAllies;
 	std::vector<WayPoint> mWayPoints;
 	CCNode* mAllyLayer;
@@ -99,7 +107,7 @@ private:
 
 	//CCSpriteBatchNode* mHpBatchNode;
 
-	 long mIDSeed;
+	 entity_id mIDSeed;
 };
 
 #endif
