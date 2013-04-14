@@ -11,7 +11,7 @@
 #include "../Helper/CommonHelpers.h"
 #include "../Helper/SpriteHelpers.h"
 #include "../Common/Common.h"
-#include "Utility/XmlReader.h"
+#include "../Utility/XmlReader.h"
 #include "../MessagePump/MsgRoute.h"
 using namespace cocos2d;
 
@@ -75,11 +75,12 @@ entity_id AllyManager::getObjInRange(CCPoint pos, int rangeRadius)
 
 	for(auto it = this->mAllies.begin();it != this->mAllies.end(); ++it)
 	{
-		if (isRectAndCircleCollided(pos, rangeRadius, it->second->getCollisionRect()))
+		CCRect collisionRect = it->second->getCollisionRect();
+		if (isRectAndCircleCollided(pos, rangeRadius, collisionRect))
 		{
 			CCPoint targetPos = it->second->getPosition();
 			CCSize targetSize = it->second->getContentSize();
-			CCRect rect = it->second->getCollisionRect();
+			//CCRect rect = it->second->getCollisionRect();
 			//CCLog("New target in range.");
 			//CCLog("target: {{%f, %f}, {%f, %f}}", targetPos.x, targetPos.y, targetSize.width, targetSize.height);
 			//CCLog("collisionRect Old: {{%f, %f}, {%f, %f}}",rect.origin.x, rect.origin.y, rect.size.width, rect.size.height);
@@ -97,8 +98,8 @@ bool AllyManager::isOjbectInRange(CCPoint pos, int rangeRadius,  entity_id id)
 	// enemy already dead
 	if (it == this->mAllies.end())
 		return false;
-
-	if (isRectAndCircleCollided(pos, rangeRadius, it->second->getCollisionRect()))
+	CCRect collisionRect = it->second->getCollisionRect();
+	if (isRectAndCircleCollided(pos, rangeRadius, collisionRect))
 		return true;
 	CCPoint targetPos = it->second->getPosition();
 	CCSize targetSize = it->second->getContentSize();
@@ -126,8 +127,7 @@ AllyUnit* AllyManager::addAlly(const char* enemyName, CCPoint pos)
 	auto ally = AllyUnit::create(temp, hpBatch);
 	//CCLog("EnemyManager::addEnemy: retainCount: %d", enemy->retainCount());
 	auto entityID = EntityManager::sharedEntityManager()->generateID();
-	// for debug
-	entityID += 10000;
+	// for debug		entityID += 10000;
 	this->mAllies.insert(std::pair< entity_id, AllyUnit*>(entityID, ally));
 	batch->addChild(ally);
 	ally->setEntityID(entityID);
@@ -266,7 +266,7 @@ void AllyManager::frameTrigger(float dt)
 
 void AllyManager::fsmTranslater(const MsgObject& msg, AllyUnit* ally)
 {
-	MsgRoute* msgRoute = MsgRoute::sharedMsgRount();
+	//MsgRoute* msgRoute = MsgRoute::sharedMsgRount();
 	//AllyUnit* ally = this->getAvailableObject(msg.receiver_id);
 	//if(ally == nullptr && (msg.receiver_id != msg.sender_id))
 	//	msgRoute->sendDelayedMsg(MSG_TargetNotAvailable, 1, 0, msg.sender_id);

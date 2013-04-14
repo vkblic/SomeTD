@@ -53,22 +53,16 @@ void AllyUnit::ccTouchMoved(CCTouch* touch, CCEvent* event)
 void AllyUnit::ccTouchEnded(CCTouch* touch, CCEvent* event)
 {
 
-
-	//CCLog("%s","精灵33~~~ccTouchEnded");
 } 
 
-//---SpriteClassModel 起始结束的生命周期函数----
 void AllyUnit::onEnter()
 {
-	//注册监听   1.dele类，2.优先级，3.YES为阻碍其他类的move 和 end
-
 	CCDirector::sharedDirector()->getTouchDispatcher()->addTargetedDelegate(this, 0, true);
 	CCSprite::onEnter();
 }
 
 void AllyUnit::onExit()
 {
-	//移除监听
 	CCDirector::sharedDirector()->getTouchDispatcher()->removeDelegate(this);
 	CCSprite::onExit();
 }
@@ -259,8 +253,10 @@ void AllyUnit::sendDeadMsg()
 	//send not avialable msg
 	auto allyManager = AllyManager::sharedAllyManager();
 	allyManager->sendMsg(MSG_AttackerNoAvailable, mEntityID, mTargetID);
+		CCLog("[EnemyUnit::sendDeadMsg]: attackerCount: %d", mAttackers.size());
 	for(auto iter = mAttackers.begin(); iter != mAttackers.end(); ++iter)
 	{
+		CCLog("[EnemyUnit::sendDeadMsg]: Target: %d, attacker: %d", mEntityID, iter->first);
 		allyManager->sendMsg(MSG_TargetNotAvailable, mEntityID, iter->first);
 	}
 

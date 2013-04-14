@@ -26,7 +26,6 @@ public:
 public:
 	virtual ~AllyUnit();
 
-	//重写触屏相关函数----
 	virtual void onEnter();
 	virtual void onExit();
 	virtual bool ccTouchBegan(CCTouch* touch, CCEvent* event);
@@ -43,7 +42,7 @@ public:
 
 
 public:
-	void myInit();//自定义初始化函数
+	void myInit();
 
 
 	bool targetIs(entity_id targetID) { return mTargetID == targetID; }

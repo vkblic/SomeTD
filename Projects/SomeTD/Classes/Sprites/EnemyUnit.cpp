@@ -435,10 +435,10 @@ void EnemyUnit::sendDeadMsg()
 	auto enemyManager = EnemyManager::sharedEnemyManager();
 	enemyManager->sendMsg(MSG_AttackerNoAvailable, mEntityID, mTargetID);
 
-	CCLog("attackerCount: %d", mAttackers.size());
+	CCLog("[EnemyUnit::sendDeadMsg]: attackerCount: %d", mAttackers.size());
 	for(auto iter = mAttackers.begin(); iter != mAttackers.end(); ++iter)
 	{
-		CCLog("Target: %d, attacker: %d", mEntityID, iter->first);
+		CCLog("[EnemyUnit::sendDeadMsg]: Target: %d, attacker: %d", mEntityID, iter->first);
 		enemyManager->sendMsg(MSG_TargetNotAvailable, mEntityID, iter->first);
 	}
 

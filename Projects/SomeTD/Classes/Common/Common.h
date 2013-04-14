@@ -37,7 +37,8 @@ inline void kkAssertMsgf(bool cond, const char * pszFormat, ...)
 
 	va_list ap;
 	va_start(ap, pszFormat);
-	vsnprintf_s(szBuf, MAX_LOG_LEN, MAX_LOG_LEN, pszFormat, ap);
+	//vsnprintf_l(szBuf, MAX_LOG_LEN, MAX_LOG_LEN, pszFormat, ap);
+	vsnprintf(szBuf, MAX_LOG_LEN, pszFormat, ap);
 	va_end(ap);
 	kkAssertMsg(cond, szBuf);
 }

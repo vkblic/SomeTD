@@ -9,7 +9,7 @@
 #include "EntityManager.h"
 #include "../Helper/CommonHelpers.h"
 #include "../Helper/SpriteHelpers.h"
-#include "Utility/XmlReader.h"
+#include "../Utility/XmlReader.h"
 #include "../Common/Common.h"
 #include "../MessagePump/MsgRoute.h"
 using namespace cocos2d;
@@ -72,11 +72,12 @@ entity_id EnemyManager::getEnemyInRange(CCPoint pos, int rangeRadius)
 
 	for(auto it = this->mEnemies.begin();it != this->mEnemies.end(); ++it)
 	{
-		if (isRectAndCircleCollided(pos, rangeRadius, it->second->getCollisionRect()))
+		CCRect rect = it->second->getCollisionRect();
+		if (isRectAndCircleCollided(pos, rangeRadius, rect))
 		{
 			CCPoint targetPos = it->second->getPosition();
 			CCSize targetSize = it->second->getContentSize();
-			CCRect rect = it->second->getCollisionRect();
+			//CCRect rect = it->second->getCollisionRect();
 			//CCLog("New target in range.");
 			//CCLog("target: {{%f, %f}, {%f, %f}}", targetPos.x, targetPos.y, targetSize.width, targetSize.height);
 			//CCLog("collisionRect Old: {{%f, %f}, {%f, %f}}",rect.origin.x, rect.origin.y, rect.size.width, rect.size.height);
@@ -96,8 +97,8 @@ bool EnemyManager::isEnemyInRange(CCPoint pos, int rangeRadius,  entity_id enemy
 	// enemy already dead
 	if (it == this->mEnemies.end())
 		return false;
-
-	if (isRectAndCircleCollided(pos, rangeRadius, it->second->getCollisionRect()))
+	CCRect collisionRect = it->second->getCollisionRect();
+	if (isRectAndCircleCollided(pos, rangeRadius, collisionRect))
 		return true;
 	CCPoint targetPos = it->second->getPosition();
 	CCSize targetSize = it->second->getContentSize();
@@ -280,7 +281,7 @@ void EnemyManager::sendDamageMsg(entity_id senderID, entity_id receiverID, int d
 
 void EnemyManager::fsmTranslater(const MsgObject& msg, EnemyUnit* enemy)
 {
-	MsgRoute* msgRoute = MsgRoute::sharedMsgRount();
+	//MsgRoute* msgRoute = MsgRoute::sharedMsgRount();
 	//EnemyUnit* enemy = this->getAvailableEnemy(msg.receiver_id);
 	//if(enemy == nullptr && (msg.receiver_id != msg.sender_id))
 	//	msgRoute->sendDelayedMsg(MSG_TargetNotAvailable, 1, 0, msg.sender_id);
@@ -413,7 +414,12 @@ void EnemyManager::fsmTranslater(const MsgObject& msg, EnemyUnit* enemy)
 			{
 				enemy->exitAttacing();
 			}
-			else if( msg.name == MSG_StopMoving || msg.name == MSG_InAttackPosition)
+			else if( msg.name == MSG_StopMoving)
+			{
+				// for now collision rect is not need.
+				enemy->addAttacker(msg.sender_id, CCRect());
+			}
+			else if( msg.name == MSG_InAttackPosition)
 			{
 				// temporary do nothing
 			}

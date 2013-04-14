@@ -20,7 +20,7 @@ public:
 	ActiveObjModel* getEntityInfo() { return this->mEntityInfo; }
 
 public:
-	void myInit();//自定义初始化函数
+	void myInit();//
 protected:
 	//void getNextLv(eTower)
 

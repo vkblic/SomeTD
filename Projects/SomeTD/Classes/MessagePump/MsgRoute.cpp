@@ -93,13 +93,13 @@ void MsgRoute::routeMessage(const MsgObject& msg )
 	{
 	case FSM_Ally:
 		{
-			CCLog("[-->FSM_Ally] [ %d --> %d] [%s] [%s]", msg.sender_id, msg.receiver_id, getMsgNameStr(msg.name), getStateNameStr(static_cast<ActiveEntity*>(gameObj)->getState()));
+			CCLog("[-->FSM_Ally] [ %d --> %d] [%s] [%s] [entityID: %d]", msg.sender_id, msg.receiver_id, getMsgNameStr(msg.name), getStateNameStr(static_cast<ActiveEntity*>(gameObj)->getState()), gameObj->getEntityID());
 			AllyManager::sharedAllyManager()->fsmTranslater(msg, static_cast<AllyUnit*>(gameObj));
 		}
 		break;
 	case FSM_Enemy:
 		{
-			CCLog("[-->FSM_Enemy] [ %d --> %d] [%s] [%s]", msg.sender_id, msg.receiver_id, getMsgNameStr(msg.name), getStateNameStr(static_cast<ActiveEntity*>(gameObj)->getState()));
+			CCLog("[-->FSM_Enemy] [ %d --> %d] [%s] [%s] [entityID: %d]", msg.sender_id, msg.receiver_id, getMsgNameStr(msg.name), getStateNameStr(static_cast<ActiveEntity*>(gameObj)->getState()), gameObj->getEntityID());
 			EnemyManager::sharedEnemyManager()->fsmTranslater(msg, static_cast<EnemyUnit*>(gameObj));
 		}
 		break;

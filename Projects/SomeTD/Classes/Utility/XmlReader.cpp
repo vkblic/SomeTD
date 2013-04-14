@@ -7,10 +7,14 @@
 bool XmlReader::readAllLevelInfo(std::map<std::string, LevelModel>& levelInfoMap, const char* fileName)
 {
 	tinyxml2::XMLDocument doc;
-	doc.LoadFile(fileName);
+	std::string fullPath = CCFileUtils::sharedFileUtils()->fullPathForFilename(fileName);
+	doc.LoadFile(fullPath.c_str());
 
 	if(doc.Error())
-		return false;
+	{
+		CCLog("config file: %s can't be read!", fullPath.c_str());
+		CCAssert(false, "");
+	}
 	auto levelsNode = doc.FirstChild()->NextSibling();
 	if(levelsNode->NoChildren())
 		return false;
@@ -76,10 +80,14 @@ bool XmlReader::readAllLevelInfo(std::map<std::string, LevelModel>& levelInfoMap
 bool XmlReader::readActiveObjectInfoFromFile(std::map<std::string, ActiveObjModel>& objectsInfoMap, const char* fileName)
 {
 	tinyxml2::XMLDocument doc;
-	doc.LoadFile(fileName);
-
+	std::string fullPath = CCFileUtils::sharedFileUtils()->fullPathForFilename(fileName);
+	doc.LoadFile(fullPath.c_str());
+	
 	if(doc.Error())
-		return false;
+	{
+		CCLog("config file: %s can't be read!", fullPath.c_str());
+		CCAssert(false, "");
+	}
 	auto objectsNode = doc.FirstChild()->NextSibling();
 	if(objectsNode->NoChildren())
 		return false;
@@ -155,7 +163,7 @@ bool XmlReader::readActiveObjectInfoFromFile(std::map<std::string, ActiveObjMode
 				}
 				else
 				{
-					CCLog("error! enemy animation tag:[%s], unidentifiable!",tag);
+					CCLog("error! enemy animation tag:[%s], unidentifiable!", tag.c_str());
 					CCAssert(false, "enemy animation tag:[%s], unidentifiable£¡");
 					return false;
 				}
