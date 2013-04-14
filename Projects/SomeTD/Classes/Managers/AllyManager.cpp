@@ -277,8 +277,13 @@ void AllyManager::fsmTranslater(const MsgObject& msg, AllyUnit* ally)
 			this->sendCollisionRecMsg(msg.receiver_id, msg.sender_id, ally->getCollisionRect());
 		}
 		return;
-	default:
-		break;
+	case MSG_AttackerNoAvailable:
+		{
+			ally->removeAttacker(msg.sender_id);
+		}
+		return;
+		default:
+			break;
 	}
 
 
@@ -309,7 +314,7 @@ void AllyManager::fsmTranslater(const MsgObject& msg, AllyUnit* ally)
 			}
 			else
 			{
-				kkAssertMsgf(false, "[AllyManager::fsmTranslater], STATE_Idle can't handle message: %s", EnumStr(msg.name));
+				kkAssertMsgf(false, "[AllyManager::fsmTranslater], [STATE_Idle] can't handle message: %s", EnumStr(msg.name));
 			}
 		}
 		break;
@@ -340,7 +345,7 @@ void AllyManager::fsmTranslater(const MsgObject& msg, AllyUnit* ally)
 			}
 			else
 			{
-				kkAssertMsgf(false, "[AllyManager::fsmTranslater], STATE_MovingToTarget can't handle message: %s", EnumStr(msg.name));
+				kkAssertMsgf(false, "[AllyManager::fsmTranslater], [STATE_MovingToTarget] can't handle message: %s", EnumStr(msg.name));
 			}
 		}
 		break;
@@ -354,9 +359,10 @@ void AllyManager::fsmTranslater(const MsgObject& msg, AllyUnit* ally)
 			{
 				this->changeState(ally, STATE_Idle);
 			}
+
 			else if(msg.name == MSG_ReceivePosition)
 			{
-					kkAssertMsg(ally->targetIs(msg.sender_id), "[AllyManager::fsmTranslater], STATE_Attacking-MSG_ReceivePosition, targetIs check faild");
+				kkAssertMsg(ally->targetIs(msg.sender_id), "[AllyManager::fsmTranslater], STATE_Attacking-MSG_ReceivePosition, targetIs check faild");
 				this->changeState(ally, STATE_MovingToTarget);
 			}
 			else if( msg.name == MSG_Damage)
@@ -369,6 +375,10 @@ void AllyManager::fsmTranslater(const MsgObject& msg, AllyUnit* ally)
 			else if(msg.name == MSG_RESERVED_Exit)
 			{
 				ally->exitAttacing();
+			}
+			else
+			{
+				kkAssertMsgf(false, "[AllyManager::fsmTranslater], [STATE_Attacking] can't handle message: %s", EnumStr(msg.name));
 			}
 		}
 		break;

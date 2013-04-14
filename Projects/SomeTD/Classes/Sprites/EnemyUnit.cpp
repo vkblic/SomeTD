@@ -246,6 +246,8 @@ void EnemyUnit::run(const std::vector<WayPointEx>* wayPoints)
 
 void EnemyUnit::enterAttacking()
 {
+	//temporary deal with the situation: when no attacking hit before dead, dead msg to target send fail.
+	AllyManager::sharedAllyManager()->sendDamageMsg(this->mEntityID, this->mTargetID, 0);
 	// set direction
 	if (this->getCollisionRect().getMidX() > mTargetCollisionRect.getMidX())
 	{
@@ -388,14 +390,16 @@ void EnemyUnit::removeAttacker(entity_id attackerID)
 
 void EnemyUnit::addAttacker(entity_id attackerID, CCRect rect)
 {
+	CCLog("[ EnemyUnit::addAttacker]: attacker: %d before: %d", attackerID, mAttackers.size());
 	mAttackers.insert(std::pair<entity_id, CCRect>(attackerID, rect));
+	CCLog("[ EnemyUnit::addAttacker]: attacker: %d after: %d", attackerID, mAttackers.size());
 }
 
 
 
 void EnemyUnit::underAttack(int damage, entity_id attackerID, CCRect rect)
 {
-	mAttackers.insert(std::pair<entity_id, CCRect>(attackerID, rect));
+	addAttacker(attackerID, rect);
 	this->underAttack(damage);
 }
 void EnemyUnit::underAttack(int damage)
@@ -430,8 +434,11 @@ void EnemyUnit::sendDeadMsg()
 	//send not avialable msg
 	auto enemyManager = EnemyManager::sharedEnemyManager();
 	enemyManager->sendMsg(MSG_AttackerNoAvailable, mEntityID, mTargetID);
+
+	CCLog("attackerCount: %d", mAttackers.size());
 	for(auto iter = mAttackers.begin(); iter != mAttackers.end(); ++iter)
 	{
+		CCLog("Target: %d, attacker: %d", mEntityID, iter->first);
 		enemyManager->sendMsg(MSG_TargetNotAvailable, mEntityID, iter->first);
 	}
 

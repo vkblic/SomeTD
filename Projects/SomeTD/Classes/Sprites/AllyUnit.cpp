@@ -90,6 +90,13 @@ bool AllyUnit::targetCheck(entity_id targetID)
 	return false;
 }
 
+void AllyUnit::removeAttacker(entity_id attackerID)
+{
+	auto iter = mAttackers.find(attackerID);
+	if ( iter == mAttackers.end() )
+		kkAssertMsgf(false, "[AllyUnit::removeAttacker], attacker can't find in map, id: %d", attackerID );
+	mAttackers.erase(iter);
+}
 
 void AllyUnit::enterMoveToTarget()
 {

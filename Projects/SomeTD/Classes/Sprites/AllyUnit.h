@@ -37,12 +37,10 @@ public:
 public:
 	void frameListener(float dt); // execute every frame
 
-	void updatebak(float dt); // execute every frame
-
-
+	void removeAttacker(entity_id attackerID);
 	//void run(std::vector<WayPointEx>& wayPoints);
 
-	
+
 
 public:
 	void myInit();//自定义初始化函数
@@ -66,7 +64,7 @@ public:
 	bool findTarget();
 	bool targetCheck(entity_id targetID);
 
-	
+
 	// moveToTarget
 	void enterMoveToTarget();
 	bool onMovingToTarget(float dt);

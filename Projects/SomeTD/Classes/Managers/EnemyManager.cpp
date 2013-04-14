@@ -321,9 +321,24 @@ void EnemyManager::fsmTranslater(const MsgObject& msg, EnemyUnit* enemy)
 			{
 				enemy->removeAttacker(msg.sender_id);
 			}
+
+			// cause of no remote attack add, temporary, in STATE_Moving must not deal with MSG_Damage
+			//else if( msg.name == MSG_Damage)
+			//{
+			//	auto damageMsg = static_cast<const MsgDamage&>(msg);
+			//	// calc hp
+			//	enemy->underAttack(damageMsg.damage, damageMsg.sender_id, damageMsg.senderCollisionRect);
+			//
+			//}
+
+
 			else if(msg.name == MSG_RESERVED_Exit)
 			{
 				enemy->exitMoving();
+			}
+			else
+			{
+				kkAssertMsgf(false, "[EnemyManager::fsmTranslater], [STATE_Moving] can't handle message: %s", EnumStr(msg.name));
 			}
 		}
 		break;
@@ -332,6 +347,13 @@ void EnemyManager::fsmTranslater(const MsgObject& msg, EnemyUnit* enemy)
 			if(msg.name == MSG_RESERVED_Enter)
 			{
 
+			}
+			else if( msg.name == MSG_StopMoving)
+			{
+				// for now collision rect is not need.
+				enemy->addAttacker(msg.sender_id, CCRect());
+				//this->changeState(enemy, STATE_Stoped);
+				//CCLog("targeID:%d", enemy->getTarget());
 			}
 			else if ( msg.name == MSG_InAttackPosition )
 			{
@@ -358,6 +380,11 @@ void EnemyManager::fsmTranslater(const MsgObject& msg, EnemyUnit* enemy)
 			}
 			else if(msg.name == MSG_RESERVED_Exit)
 			{
+
+			}
+			else
+			{
+				kkAssertMsgf(false, "[EnemyManager::fsmTranslater], [STATE_Stoped] can't handle message: %s", EnumStr(msg.name));
 			}
 		}
 		break;
@@ -367,7 +394,6 @@ void EnemyManager::fsmTranslater(const MsgObject& msg, EnemyUnit* enemy)
 			{
 				enemy->enterAttacking();
 			}
-
 			else if(msg.name == MSG_TargetNotAvailable)
 			{
 				this->changeState(enemy, STATE_Moving);
@@ -383,9 +409,17 @@ void EnemyManager::fsmTranslater(const MsgObject& msg, EnemyUnit* enemy)
 				enemy->underAttack(damageMsg.damage, damageMsg.sender_id, damageMsg.senderCollisionRect);
 
 			}
-			else if(msg.name == MSG_RESERVED_Exit)
+			else if(msg.name == MSG_RESERVED_Exit )
 			{
 				enemy->exitAttacing();
+			}
+			else if( msg.name == MSG_StopMoving || msg.name == MSG_InAttackPosition)
+			{
+				// temporary do nothing
+			}
+			else
+			{
+				kkAssertMsgf(false, "[EnemyManager::fsmTranslater], [STATE_Attacking] can't handle message: %s", EnumStr(msg.name));
 			}
 		}
 		break;
