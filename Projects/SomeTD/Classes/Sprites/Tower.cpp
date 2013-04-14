@@ -345,8 +345,10 @@ void Tower::BuildTower()
 
 		for(int i = 0; i < 3;++ i)
 		{
-			auto ally = AllyManager::sharedAllyManager()->addAlly("soldier_lvl4_paladin", pos);
-			ally->moveToAndGetRead(mSoldiersMassPos[i]);
+			auto ally = AllyManager::sharedAllyManager()->addAlly("soldier_lvl4_paladin", pos, this->getPosition());
+			ally->setTowerAlertRange(mAttackRange);
+			ally->setMassPos(mSoldiersMassPos[i]);
+			ally->moveToMassPos();
 		}
 		return;
 	}
@@ -647,7 +649,7 @@ void Tower::onShoot()
 	}
 	if (mTargetID != -1)
 	{
-		bullet->reuse(100, EnemyManager::sharedEnemyManager()->getAvailableEnemy(mTargetID), CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("magebolt_0002.png"));
+		bullet->reuse(100, 130, EnemyManager::sharedEnemyManager()->getAvailableEnemy(mTargetID), CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("magebolt_0002.png"));
 
 		mBatchNode->addChild(bullet);
 	}

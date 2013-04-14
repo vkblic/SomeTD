@@ -25,12 +25,14 @@ Bullet* Bullet::create()
 
 
 
-void Bullet::reuse(float speed, EnemyUnit* target, CCSpriteFrame* frame)
+void Bullet::reuse(float speed, int damage, EnemyUnit* target, CCSpriteFrame* frame)
 {
-	this->mSpeed = speed;
-	this->mTargetID = target->getEntityID();
-	this->mTargetPos = target->getPosition();
-	this->mTargetCollisionRect = target->getCollisionRect();
+	mSpeed = speed;
+	mDamage = damage;
+	mTargetID = target->getEntityID();
+	mTargetPos = target->getPosition();
+	mTargetCollisionRect = target->getCollisionRect();
+
 	//this->mTargetPos
 	this->scheduleUpdate();
 	this->setVisible(true);
@@ -96,7 +98,7 @@ void Bullet::update(float dt)
 			this->mTargetPos = target->getPosition();
 			if(this->hitChecker())
 			{
-				target->underAttack(30);
+				target->underAttack(mDamage);
 				this->playHitAnimation();
 			}
 			else
@@ -132,6 +134,7 @@ bool Bullet::hitChecker()
 void Bullet::destory()
 {
 	this->setVisible(false);
+	this->autorelease();
 	//this->release();
 }
 

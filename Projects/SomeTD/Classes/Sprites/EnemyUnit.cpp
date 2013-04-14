@@ -37,6 +37,7 @@ void EnemyUnit::myInit()
 {
 
 	mCurWayPointIndex = 0;
+	mTargetID = non_entity;
 	ActiveEntity::myInit();
 
 	//mHp = CCSprite::create("hp.png");
@@ -433,7 +434,8 @@ void EnemyUnit::sendDeadMsg()
 {
 	//send not avialable msg
 	auto enemyManager = EnemyManager::sharedEnemyManager();
-	enemyManager->sendMsg(MSG_AttackerNoAvailable, mEntityID, mTargetID);
+	if (mTargetID != non_entity)
+		enemyManager->sendMsg(MSG_AttackerNoAvailable, mEntityID, mTargetID);
 
 	CCLog("[EnemyUnit::sendDeadMsg]: attackerCount: %d", mAttackers.size());
 	for(auto iter = mAttackers.begin(); iter != mAttackers.end(); ++iter)

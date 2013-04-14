@@ -100,13 +100,35 @@ bool EnemyManager::isEnemyInRange(CCPoint pos, int rangeRadius,  entity_id enemy
 	CCRect collisionRect = it->second->getCollisionRect();
 	if (isRectAndCircleCollided(pos, rangeRadius, collisionRect))
 		return true;
-	CCPoint targetPos = it->second->getPosition();
-	CCSize targetSize = it->second->getContentSize();
+	//CCPoint targetPos = it->second->getPosition();
+	//CCSize targetSize = it->second->getContentSize();
 	//CCLog("\ntarget out of range.");
 	//CCLog("target: pos(%f, %f), width: %f, height: %f", targetPos.x, targetPos.y, targetSize.width, targetSize.height);
 	//CCLog("tower: pos(%f, %f)", pos.x, pos.y );
 	return false;
 }
+bool EnemyManager::isEnemyInRangeAndInTowerRange(CCPoint pos, int rangeRadius, CCPoint towerPos, int towerRangeRadius, entity_id enemyID)
+{
+
+	if (enemyID == -1)
+		return false;
+	auto it = this->mEnemies.find(enemyID);
+
+	// enemy already dead
+	if (it == this->mEnemies.end())
+		return false;
+	CCRect collisionRect = it->second->getCollisionRect();
+	auto isInRange = isRectAndCircleCollided(pos, rangeRadius, collisionRect);
+	auto isInTowerRange = isRectAndCircleCollided(towerPos, towerRangeRadius, collisionRect);
+	
+	if (isInRange && isInTowerRange)
+		return true;
+	return false;
+
+}
+
+
+
 
 #pragma endregion
 

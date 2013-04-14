@@ -61,46 +61,46 @@ private:
 	CCSpriteBatchNode* mBatchNode;
 
 	/*
-	 *shoot when animation frame index equal this value.
-	 *@range [0, frameCount - 1]
-	 */
+	*shoot when animation frame index equal this value.
+	*@range [0, frameCount - 1]
+	*/
 	int mShootWhen;
 
 	/*
-	 *change display frame every x frame
-	 *@default: 1
-	 *@must >= 1
-	 */
+	*change display frame every x frame
+	*@default: 1
+	*@must >= 1
+	*/
 	int mFramesInterval;
 
 	/*
-	 *time use for reload, or we can see fire interval time.
-	 *@unit: second
-	 *@range [0, max)
-	 */
+	*time use for reload, or we can see fire interval time.
+	*@unit: second
+	*@range [0, max)
+	*/
 	float mReloadTime;
 
 
 	/*
-	 *time already use for reload.
-	 *@unit: second
-	 *@range [0, mFireInterval)
-	 */
+	*time already use for reload.
+	*@unit: second
+	*@range [0, mFireInterval)
+	*/
 	float mReloadElapsed;
 
 
 	eTower_Terrain mTerrainType;
 	//eTower_Preview mPreviewType;
-	
+
 	//CCSequence* mShooterAnimationSequence;
 	//CCSequence* mTowerAnimationSequence;
 private:
 	/*
-	 相关的精灵对象
-	 */
+	相关的精灵对象
+	*/
 	CCSprite* mShooter;
 	CCSprite* mTerrain;
-	 entity_id mTargetID;
+	entity_id mTargetID;
 	CCSprite* mRangeSprite;
 	int mAttackRange;
 private:

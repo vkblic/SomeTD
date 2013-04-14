@@ -70,7 +70,7 @@ void AllyManager::readAlliesInfo(const char* fileName)
 
 #pragma region Range checker
 
-entity_id AllyManager::getObjInRange(CCPoint pos, int rangeRadius)
+entity_id AllyManager::getObjInRange(const CCPoint& pos, int rangeRadius)
 {
 
 	for(auto it = this->mAllies.begin();it != this->mAllies.end(); ++it)
@@ -91,7 +91,7 @@ entity_id AllyManager::getObjInRange(CCPoint pos, int rangeRadius)
 	return -1;
 }
 
-bool AllyManager::isOjbectInRange(CCPoint pos, int rangeRadius,  entity_id id)
+bool AllyManager::isOjbectInRange(const CCPoint& pos, int rangeRadius,  entity_id id)
 {
 	auto it = this->mAllies.find(id);
 
@@ -114,7 +114,7 @@ bool AllyManager::isOjbectInRange(CCPoint pos, int rangeRadius,  entity_id id)
 
 #pragma region enemy node
 
-AllyUnit* AllyManager::addAlly(const char* enemyName, CCPoint pos)
+AllyUnit* AllyManager::addAlly(const char* enemyName, const CCPoint& pos, const CCPoint& towerPos)
 {
 
 	auto allyInfo = this->mAllyInfo.find(enemyName);
@@ -132,8 +132,8 @@ AllyUnit* AllyManager::addAlly(const char* enemyName, CCPoint pos)
 	batch->addChild(ally);
 	ally->setEntityID(entityID);
 	ally->setPosition(pos);
+	ally->setTowerPos(towerPos);
 	EntityManager::sharedEntityManager()->addEntity(ally);
-	ally->run();
 	ally->setFSM_Machine(FSM_Ally);
 	return ally;
 }
@@ -293,7 +293,7 @@ void AllyManager::fsmTranslater(const MsgObject& msg, AllyUnit* ally)
 		{
 			if(msg.name == MSG_RESERVED_Enter)
 			{
-				// do nothing
+				ally->onEnterIdle();
 			}
 			else if(msg.name == MSG_RESERVED_Exit)
 			{
@@ -314,7 +314,7 @@ void AllyManager::fsmTranslater(const MsgObject& msg, AllyUnit* ally)
 			}
 			else
 			{
-				kkAssertMsgf(false, "[AllyManager::fsmTranslater], [STATE_Idle] can't handle message: %s", EnumStr(msg.name));
+				kkAssertMsgf(false, "[AllyManager::fsmTranslater], [STATE_Idle] can't handle message");
 			}
 		}
 		break;
@@ -336,7 +336,7 @@ void AllyManager::fsmTranslater(const MsgObject& msg, AllyUnit* ally)
 
 			else if(msg.name == MSG_TargetNotAvailable)
 			{
-				this->changeState(ally, STATE_Idle);
+				this->changeState(ally, STATE_Moving);
 			}
 
 			else if(msg.name == MSG_RESERVED_Exit)
@@ -345,7 +345,7 @@ void AllyManager::fsmTranslater(const MsgObject& msg, AllyUnit* ally)
 			}
 			else
 			{
-				kkAssertMsgf(false, "[AllyManager::fsmTranslater], [STATE_MovingToTarget] can't handle message: %s", EnumStr(msg.name));
+				kkAssertMsgf(false, "[AllyManager::fsmTranslater], [STATE_MovingToTarget] can't handle message");
 			}
 		}
 		break;
@@ -357,7 +357,8 @@ void AllyManager::fsmTranslater(const MsgObject& msg, AllyUnit* ally)
 			}
 			else if(msg.name == MSG_TargetNotAvailable)
 			{
-				this->changeState(ally, STATE_Idle);
+				// back to flag pos when k.o. a enemy.
+				this->changeState(ally, STATE_Moving);
 			}
 
 			else if(msg.name == MSG_ReceivePosition)
@@ -378,10 +379,29 @@ void AllyManager::fsmTranslater(const MsgObject& msg, AllyUnit* ally)
 			}
 			else
 			{
-				kkAssertMsgf(false, "[AllyManager::fsmTranslater], [STATE_Attacking] can't handle message: %s", EnumStr(msg.name));
+				kkAssertMsgf(false, "[AllyManager::fsmTranslater], [STATE_Attacking] can't handle message");
 			}
 		}
 		break;
+	case STATE_Moving:
+		{
+			if(msg.name == MSG_RESERVED_Enter)
+			{
+				ally->moveToMassPos();
+			}
+			else if(msg.name == MSG_InPostion)
+			{
+				this->changeState(ally, STATE_Idle);
+			}
+			else if(msg.name == MSG_RESERVED_Exit)
+			{
+				// do nothing temporary
+			}
+			else
+			{
+				kkAssertMsgf(false, "[AllyManager::fsmTranslater], [STATE_Moving] can't handle message");
+			}
+		}
 	default:
 		break;
 	}

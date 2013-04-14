@@ -11,10 +11,9 @@ enum MsgName
 	MSG_RESERVED_Exit,		
 	MSG_RESERVED_Update,	
 	MSG_Timeout,
-	//MSG_ChangeState,
+	MSG_ChangeState,
 	MSG_FoundTarget,
 	MSG_CommandMove,
-	MSG_InAttackPosition,
 	MSG_TargetNotAvailable,
 	MSG_AttackerNoAvailable,
 	MSG_RequestPosition,
@@ -24,7 +23,14 @@ enum MsgName
 	//enemy
 	MSG_StopMoving,
 	MSG_ArriveEndPoint,
-	MSG_MAX
+	//ally
+	MSG_InAttackPosition,
+	MSG_InPostion,
+
+
+
+	MSG_MAX,
+
 };
 
 

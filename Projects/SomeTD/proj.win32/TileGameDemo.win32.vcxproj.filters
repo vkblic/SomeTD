@@ -178,9 +178,6 @@
     <ClCompile Include="..\Classes\libs\tinyxml2.cpp">
       <Filter>Libs</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\libs\xmltest.cpp">
-      <Filter>Libs</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Managers\LevelsManager.cpp">
       <Filter>Managers</Filter>
     </ClCompile>

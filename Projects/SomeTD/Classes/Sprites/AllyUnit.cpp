@@ -71,13 +71,17 @@ bool AllyUnit::findTarget()
 	entity_id id = EnemyManager::sharedEnemyManager()->getEnemyInRange(this->getPosition(), mEntityInfo->alertRange);
 	if (id == non_entity)
 		return false;
+
+	// towerRange check
+	if( !EnemyManager::sharedEnemyManager()->isEnemyInRange(mTowerPos, mTowerAlertRange, id))
+		return false;
 	mTargetID = id;
 	return true;
 }
 
 bool AllyUnit::targetCheck(entity_id targetID)
 {
-	if (EnemyManager::sharedEnemyManager()->isEnemyInRange(this->getPosition(), mEntityInfo->alertRange, targetID))
+	if (EnemyManager::sharedEnemyManager()->isEnemyInRangeAndInTowerRange(this->getPosition(), mEntityInfo->alertRange, mTowerPos, mTowerAlertRange, targetID))
 	{
 		mTargetID = targetID;
 	}
@@ -99,7 +103,7 @@ void AllyUnit::enterMoveToTarget()
 	this->runAction(CCAnimate::create(this->mEntityInfo->animations[ActiveObjTag_MoveRightLeft]));
 }
 
-bool AllyUnit::onMovingToTarget(float dt)
+bool AllyUnit::onMovingToTarget( float dt )
 {
 	// let enemy stop running 
 	// note: the pos is not the center point of collision rect!
@@ -131,23 +135,28 @@ bool AllyUnit::onMovingToTarget(float dt)
 		CCSize size = this->getContentSize();
 		mDestinationPos = CCPoint(
 			destSpriteRectLeftTop.x + size.width / 2,
-			destSpriteRectLeftTop.y - size.height / 2
+			destSpriteRectLeftTop.y - size.height / 2 + rangedRand(0, 15)
 			);
 	}
 
+	return onMoveTo(dt, mDestinationPos);
+}
+
+bool AllyUnit::onMoveTo( float dt, const CCPoint& destPos ) 
+{
 	CCPoint pos = this->getPosition();
-	if(abs(pos.x - mDestinationPos.x) < 2 && abs(pos.y - mDestinationPos.y) < 2 )
+	if(abs(pos.x - destPos.x) < 2 && abs(pos.y - destPos.y) < 2 )
 	{
-		this->setPosition(mDestinationPos);
+		this->setPosition(destPos);
 		return true;
 	}
 
 	// calculate 'move by' vector
-	ccVertex2F toNewTarget = vertex2( mDestinationPos.x - pos.x, mDestinationPos.y - pos.y);
-	ccVertex2F temp = vertex2FNormalization(toNewTarget);
-	ccVertex2F toNewPos = vertex2FMul(temp, dt * this->mEntityInfo->speed * 5);
+	ccVertex2F toNewTarget = vertex2( destPos.x - pos.x, destPos.y - pos.y );
+	ccVertex2F temp = vertex2FNormalization( toNewTarget );
+	ccVertex2F toNewPos = vertex2FMul( temp, dt * this->mEntityInfo->speed * 5 );
 
-	CCPoint newPos = CCPoint(pos.x + toNewPos.x, pos.y + toNewPos.y);
+	CCPoint newPos = CCPoint( pos.x + toNewPos.x, pos.y + toNewPos.y );
 
 
 
@@ -156,15 +165,12 @@ bool AllyUnit::onMovingToTarget(float dt)
 	//ccVertex2F toNewPos = vertex2( mDestinationPos.x - pos.x, mDestinationPos.y - pos.y);
 	float z = sqrtf(toNewPos.y * toNewPos.y + toNewPos.x * toNewPos.x);
 	float cosF = (float)toNewPos.x / z;
-	if(cosF < 0)
-		this->setFlipX(true);
+	if( cosF < 0 )
+		this->setFlipX( true );
 	else
-		this->setFlipX(false);
-
+		this->setFlipX( false );
 	return false;
 }
-
-
 
 void AllyUnit::exitMoveToTarget()
 {
@@ -188,7 +194,7 @@ void AllyUnit::frameListener(float dt)
 		break;
 	case STATE_MovingToTarget:
 		{
-			// if reach end point, the return value is true.
+			// if reach attacking pos, the return value is true.
 			if(this->onMovingToTarget(dt))
 			{
 				// get target location
@@ -197,6 +203,22 @@ void AllyUnit::frameListener(float dt)
 			}
 			// update postion of hp bar
 			this->setHpSpritePosition();
+		}
+		break;
+	case STATE_Moving:
+		{
+			// if reach mass point, the return value is true.
+			if(this->onMoveTo(dt, mMassPos))
+			{
+				// get target location
+				//this->changeState(ally, STATE_Attacking);
+				AllyManager::sharedAllyManager()->sendMsg(MSG_InPostion, mEntityID, mEntityID);
+			}
+
+
+			// update postion of hp bar
+			this->setHpSpritePosition();
+
 		}
 		break;
 
@@ -264,26 +286,30 @@ void AllyUnit::sendDeadMsg()
 
 
 
-void AllyUnit::moveToAndGetRead(const CCPoint& distPos)
+void AllyUnit::moveToMassPos()
 {
-	CCPoint pos = this->getPosition();
-	CCSequence* sequence = CCSequence::create(
-		CCMoveTo::create(1, distPos ),
-		CCCallFunc::create(this, callfunc_selector(AllyUnit::onInPosition)),
-		NULL
-		);
-	this->runAction(sequence);
-	this->runAction(CCAnimate::create(this->mEntityInfo->animations[ActiveObjTag_MoveRightLeft]));
-
-	//set direction
-	ccVertex2F toNewPos = vertex2( distPos.x - pos.x, distPos.y - pos.y);
-	float z = sqrtf(toNewPos.y * toNewPos.y + toNewPos.x * toNewPos.x);
-	float cosF = (float)toNewPos.x / z;
-	if(cosF < 0)
-		this->setFlipX(true);
-	else
-		this->setFlipX(false);
-
+	//CCPoint pos = this->getPosition();
+	//CCSequence* sequence = CCSequence::create(
+	//	CCMoveTo::create(0.3f, mMassPos ),
+	//	CCCallFunc::create(this, callfunc_selector(AllyUnit::onInPosition)),
+	//	NULL
+	//	);
+	//this->runAction(sequence);
+	//this->runAction(CCAnimate::create(this->mEntityInfo->animations[ActiveObjTag_MoveRightLeft]));
+	//
+	////set direction
+	//ccVertex2F toNewPos = vertex2( mMassPos.x - pos.x, mMassPos.y - pos.y);
+	//float z = sqrtf(toNewPos.y * toNewPos.y + toNewPos.x * toNewPos.x);
+	//float cosF = (float)toNewPos.x / z;
+	//if(cosF < 0)
+	//	this->setFlipX(true);
+	//else
+	//	this->setFlipX(false);
+	//
+	
+	// just need to init ally
+	mState = STATE_Moving;
+	CCLog("Foree set state to: [STATE_Moving], {AllyUnit::moveToMassPos}");
 }
 
 void AllyUnit::onInPosition()
@@ -291,6 +317,7 @@ void AllyUnit::onInPosition()
 	this->stopAllActions();
 	this->setDisplayFrame(mEntityInfo->defaultFrame);
 	mState = STATE_Idle;
+	CCLog("[AllyUnit::onInPosition] foree set state to: [STATE_Idle] ");
 }
 
 void AllyUnit::underAttack(int damage, entity_id attackerID, CCRect rect)
