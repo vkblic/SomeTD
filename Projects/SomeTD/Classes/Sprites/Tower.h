@@ -5,7 +5,7 @@
 #include "cocos2d.h"
 #include "Bullet.h"
 #include "../Model/Enumeration.h"
-#include "../Sprites/EnemyUnit.h"
+#include "../Sprites/AllyUnit.h"
 using namespace cocos2d;
 
 //Tower class
@@ -48,13 +48,19 @@ private:
 	void onShoot();
 	//void getNextLv(eTower)
 
+
+
+
 private:
 	eTower mTowerType ;
 	eTower_Shooter mShooterTypeUp;
 	eTower_Shooter mShooterTypeUpPart2;
 	eTower_Shooter mShooterTypeDown;
 	eTower_Shooter mShooterTypeDownPart2;
-	entity_id mSoldiers[3];
+
+	// allyUnit never remove by allyManager, when dead, just insert into 
+	// "waiting for bring back to life " map.
+	std::vector<AllyUnit*> mSoldiers;
 	CCPoint mSoldiersMassPos[3];
 	int mCurAnimationIndex;
 	int mCurPassedFrames;
@@ -106,6 +112,16 @@ private:
 private:
 
 	bool mCanFire;
+
+public:	
+	bool mMassConfirm;
+	void MassCommandCancle()
+	{
+		mMassConfirm = false;
+		this->showRange(false, Tower_barrack_LV1);
+
+	}
+
 };
 
 

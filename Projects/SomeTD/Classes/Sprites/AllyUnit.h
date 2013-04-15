@@ -38,7 +38,7 @@ public:
 
 	void removeAttacker(entity_id attackerID);
 	//void run(std::vector<WayPointEx>& wayPoints);
-
+	void removeTarget();
 
 
 public:
@@ -53,7 +53,18 @@ public:
 	*/
 	//void run() {mState = STATE_Idle;}
 	void moveToMassPos();
-	void onInPosition();
+
+	void moveBackToMassPos() 
+	{
+		// just need to init ally
+		CCLog("Foree set state to: [STATE_Moving], {AllyUnit::moveBackToMassPos}");
+		mState = STATE_Moving;
+		// stop attacking
+		this->stopAllActions();
+		this->runAction(CCAnimate::create(this->mEntityInfo->animations[ActiveObjTag_MoveRightLeft]));
+	}
+
+	void onExitMoving();
 	//void attacking();
 	//void onHit();
 
@@ -71,7 +82,7 @@ public:
 	void enterMoveToTarget();
 	bool onMovingToTarget( float dt );
 
-	bool onMoveTo( float dt, const CCPoint& destPos ) ;
+	bool onMoving( float dt, const CCPoint& destPos ) ;
 
 	void setTargetCollisionRect( const CCRect& rect ) 
 	{
@@ -94,7 +105,7 @@ public:
 	void onDestoryed();
 
 	//msg
-	void sendDeadMsg();
+	void sendNonAvailableMsg();
 
 private:
 

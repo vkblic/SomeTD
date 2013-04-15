@@ -358,6 +358,7 @@ void AllyManager::fsmTranslater(const MsgObject& msg, AllyUnit* ally)
 			else if(msg.name == MSG_TargetNotAvailable)
 			{
 				// back to flag pos when k.o. a enemy.
+				ally->removeTarget();
 				this->changeState(ally, STATE_Moving);
 			}
 
@@ -387,7 +388,8 @@ void AllyManager::fsmTranslater(const MsgObject& msg, AllyUnit* ally)
 		{
 			if(msg.name == MSG_RESERVED_Enter)
 			{
-				ally->moveToMassPos();
+				//ally->moveToMassPos();
+				ally->moveBackToMassPos();
 			}
 			else if(msg.name == MSG_InPostion)
 			{
@@ -396,6 +398,7 @@ void AllyManager::fsmTranslater(const MsgObject& msg, AllyUnit* ally)
 			else if(msg.name == MSG_RESERVED_Exit)
 			{
 				// do nothing temporary
+				ally->onExitMoving();
 			}
 			else
 			{

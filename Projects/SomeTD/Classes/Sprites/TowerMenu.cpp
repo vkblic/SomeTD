@@ -197,7 +197,7 @@ CCSprite* TowerMenu::getTouchedItem(CCTouch* touch )
 					this->mMainMenuItem[eMenu_Sprite::Top_Right]->setTag(MenuItemTag::BarrackComfirmed);
 					return this->mMainMenuItem[eMenu_Sprite::Top_Right];
 				}
-				
+
 				//this->mMainMenuItem[eMenu_Sprite::Top_Left]->setDisplayFrame(this->mMainMenuFrame[eMenu_Frame::Archer_Off]);
 				this->mMainMenuItem[eMenu_Sprite::Top_Left]->setDisplayFrame(this->mMainMenuFrame[eMenu_Frame::Lock_Off]);
 				this->mMainMenuItem[eMenu_Sprite::Top_Left]->setTag(MenuItemTag::NonTouched);
@@ -207,7 +207,7 @@ CCSprite* TowerMenu::getTouchedItem(CCTouch* touch )
 				this->mMainMenuItem[eMenu_Sprite::Bottom_Left]->setTag(MenuItemTag::NonTouched);
 				this->mMainMenuItem[eMenu_Sprite::Bottom_Right]->setDisplayFrame(this->mMainMenuFrame[eMenu_Frame::Lock_Off]);
 				//this->mMainMenuItem[eMenu_Sprite::Bottom_Right]->setDisplayFrame(this->mMainMenuFrame[eMenu_Frame::Artillery_Off]);
-				
+
 				this->mMainMenuItem[eMenu_Sprite::Bottom_Right]->setTag(MenuItemTag::NonTouched);
 				return this->mMainMenuItem[eMenu_Sprite::Top_Right];
 			}
@@ -278,6 +278,17 @@ CCSprite* TowerMenu::getTouchedItem(CCTouch* touch )
 				bottomCentre->setTag(MenuItemTag::NonTouched);
 				return topCentre;
 			}
+
+			if (mCurLevel == Lv2_Barrack || Lv1_Barrack == mCurLevel)
+			{
+				CCSprite* massBtn = this->mMainMenuItem[eMenu_Sprite::Mass_Btn];
+				if(isSpriteTouched(massBtn, touch))
+				{
+					massBtn->setTag(MenuItemTag::MassConfirmed);
+					return massBtn;
+				}
+			}
+
 		}
 		break;
 	case eMenu_Level::Lv3_Archer:
@@ -288,6 +299,16 @@ CCSprite* TowerMenu::getTouchedItem(CCTouch* touch )
 			CCSprite* topLeft = this->mMainMenuItem[eMenu_Sprite::Top_Left];
 			CCSprite* topRight = this->mMainMenuItem[eMenu_Sprite::Top_Right];
 			CCSprite* bottomCentre = this->mMainMenuItem[eMenu_Sprite::Bottom_Centre];
+
+			if ( Lv3_Barrack == mCurLevel)
+			{
+				CCSprite* massBtn = this->mMainMenuItem[eMenu_Sprite::Mass_Btn];
+				if(isSpriteTouched(massBtn, touch))
+				{
+					massBtn->setTag(MenuItemTag::MassConfirmed);
+					return massBtn;
+				}
+			}
 			if(isSpriteTouched(topLeft, touch))
 			{
 				// lv4 is not available

@@ -131,7 +131,7 @@ public:
 		UpgradeChecked			= 0x0010,
 		SpecialLeftChecked		= 0x0020,
 		SpecialRightChecked		= 0x0040,
-
+		MassChecked				= 0x0080,
 
 
 		// high 16 bit for confirmed status
@@ -142,7 +142,7 @@ public:
 		UpgradeConfirmed		= UpgradeChecked << 16,
 		SpecialLeftConfirmed	= SpecialLeftChecked << 16,
 		SpecialRightConfirmed	= SpecialRightChecked << 16,
-
+		MassConfirmed			= MassChecked << 16,
 
 		//
 		Checker = 0xFFFF0000,

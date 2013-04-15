@@ -288,7 +288,7 @@ void EnemyUnit::exitAttacing()
 void EnemyUnit::enterMoving()
 {
 	mCurEnemyTag = ActiveObjTag_Stoped;
-	
+
 }
 
 void EnemyUnit::exitMoving()
@@ -386,14 +386,23 @@ void EnemyUnit::removeAttacker(entity_id attackerID)
 	auto iter = mAttackers.find(attackerID);
 	if ( iter == mAttackers.end() )
 		kkAssertMsgf(false, "[EnemyUnit::removeAttacker], attacker can't find in map, id: %d", attackerID );
+
+	CCLog("Enemy: [%d] remove attacker: [%d]", mEntityID, attackerID);
 	mAttackers.erase(iter);
+}
+void EnemyUnit::removeTarget()
+{
+	// it cause iter error remove temporary
+	//EnemyManager::sharedEnemyManager()->sendMsg(MSG_AttackerNoAvailable, mEntityID, mTargetID);
+	mTargetID = non_entity;
 }
 
 void EnemyUnit::addAttacker(entity_id attackerID, CCRect rect)
 {
-	CCLog("[ EnemyUnit::addAttacker]: attacker: %d before: %d", attackerID, mAttackers.size());
+	//CCLog("[ EnemyUnit::addAttacker]: attacker: %d before: %d", attackerID, mAttackers.size());
 	mAttackers.insert(std::pair<entity_id, CCRect>(attackerID, rect));
-	CCLog("[ EnemyUnit::addAttacker]: attacker: %d after: %d", attackerID, mAttackers.size());
+	//CCLog("[ EnemyUnit::addAttacker]: attacker: %d after: %d", attackerID, mAttackers.size());
+	CCLog("Enemy: [%d] add attacker: [%d]", mEntityID, attackerID);
 }
 
 
@@ -418,6 +427,11 @@ void EnemyUnit::underAttack(int damage)
 
 void EnemyUnit::destory()
 {
+	// cause of targetNotAvailable msg let target send attacker nonavailable msg, 
+	// so we need send msg first.
+	// if not, this entity has been removed when target' msg come,
+	// that will let assert hit.
+	this->sendDeadMsg();
 	this->unscheduleUpdate();
 	this->stopAllActions();
 	CCSequence* sequence = CCSequence::createWithTwoActions(
@@ -426,7 +440,6 @@ void EnemyUnit::destory()
 		);
 	this->runAction(sequence);
 	EnemyManager::sharedEnemyManager()->removeEnemy(this->mEntityID);
-	this->sendDeadMsg();
 
 }
 
@@ -435,15 +448,17 @@ void EnemyUnit::sendDeadMsg()
 	//send not avialable msg
 	auto enemyManager = EnemyManager::sharedEnemyManager();
 	if (mTargetID != non_entity)
-		enemyManager->sendMsg(MSG_AttackerNoAvailable, mEntityID, mTargetID);
-
-	CCLog("[EnemyUnit::sendDeadMsg]: attackerCount: %d", mAttackers.size());
-	for(auto iter = mAttackers.begin(); iter != mAttackers.end(); ++iter)
 	{
-		CCLog("[EnemyUnit::sendDeadMsg]: Target: %d, attacker: %d", mEntityID, iter->first);
-		enemyManager->sendMsg(MSG_TargetNotAvailable, mEntityID, iter->first);
+		CCLog("Enemy send [MSG_AttackerNoAvailable]: attacker: %d, Target: %d", mEntityID, mTargetID);
+		enemyManager->sendMsg(MSG_AttackerNoAvailable, mEntityID, mTargetID);	
 	}
 
+	//CCLog("[EnemyUnit::sendDeadMsg]: attackerCount: %d", mAttackers.size());
+	for(auto iter = mAttackers.begin(); iter != mAttackers.end(); ++iter)
+	{
+		CCLog("Enemy send [MSG_TargetNotAvailable]: Target: %d, attacker: %d", mEntityID, iter->first);
+		enemyManager->sendMsg(MSG_TargetNotAvailable, mEntityID, iter->first);
+	}
 }
 
 void EnemyUnit::onDestoryed()

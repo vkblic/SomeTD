@@ -36,6 +36,7 @@ AllyUnit::~AllyUnit()
 void AllyUnit::myInit()
 {
 	ActiveEntity::myInit();
+	mTargetID = non_entity;
 	mTargetSearchInterval = rangedRand(5, 10);
 }
 
@@ -95,11 +96,18 @@ void AllyUnit::removeAttacker(entity_id attackerID)
 		kkAssertMsgf(false, "[AllyUnit::removeAttacker], attacker can't find in map, id: %d", attackerID );
 	mAttackers.erase(iter);
 }
+void AllyUnit::removeTarget()
+{
+	// it cause iter error remove temporary
+	//AllyManager::sharedAllyManager()->sendMsg(MSG_AttackerNoAvailable, mEntityID, mTargetID);
+	mTargetID = non_entity;
+}
 
 void AllyUnit::enterMoveToTarget()
 {
 	AllyManager::sharedAllyManager()->sendMsg(MSG_RequestPosition, this->mEntityID, this->mTargetID);
 	AllyManager::sharedAllyManager()->sendMsg(MSG_StopMoving, this->mEntityID, this->mTargetID);
+
 	this->runAction(CCAnimate::create(this->mEntityInfo->animations[ActiveObjTag_MoveRightLeft]));
 }
 
@@ -139,10 +147,10 @@ bool AllyUnit::onMovingToTarget( float dt )
 			);
 	}
 
-	return onMoveTo(dt, mDestinationPos);
+	return onMoving(dt, mDestinationPos);
 }
 
-bool AllyUnit::onMoveTo( float dt, const CCPoint& destPos ) 
+bool AllyUnit::onMoving( float dt, const CCPoint& destPos ) 
 {
 	CCPoint pos = this->getPosition();
 	if(abs(pos.x - destPos.x) < 2 && abs(pos.y - destPos.y) < 2 )
@@ -208,7 +216,7 @@ void AllyUnit::frameListener(float dt)
 	case STATE_Moving:
 		{
 			// if reach mass point, the return value is true.
-			if(this->onMoveTo(dt, mMassPos))
+			if(this->onMoving(dt, mMassPos))
 			{
 				// get target location
 				//this->changeState(ally, STATE_Attacking);
@@ -256,9 +264,9 @@ void AllyUnit::attacking()
 void AllyUnit::onHitTarget()
 {
 	this->stopAllActions();
-	AllyManager::sharedAllyManager()->sendDamageMsg(mEntityID, mTargetID, mEntityInfo->physicalAttack);
 	if(mState != STATE_Attacking)
 		return;
+	AllyManager::sharedAllyManager()->sendDamageMsg(mEntityID, mTargetID, mEntityInfo->physicalAttack);
 	this->attacking();
 }
 
@@ -266,58 +274,53 @@ void AllyUnit::exitAttacing()
 {
 	// prevent [onHitTarget] execute when attacking animation end!
 	this->stopAllActions();
-	
+
 	this->setDisplayFrame(mEntityInfo->defaultFrame);
 }
 
-void AllyUnit::sendDeadMsg()
+void AllyUnit::sendNonAvailableMsg()
 {
 	//send not avialable msg
 	auto allyManager = AllyManager::sharedAllyManager();
-	allyManager->sendMsg(MSG_AttackerNoAvailable, mEntityID, mTargetID);
-		CCLog("[EnemyUnit::sendDeadMsg]: attackerCount: %d", mAttackers.size());
+	if (mTargetID != non_entity)
+	{
+		CCLog("Ally send [MSG_AttackerNoAvailable]: attacker: %d, Target: %d", mEntityID, mTargetID);
+		allyManager->sendMsg(MSG_AttackerNoAvailable, mEntityID, mTargetID);
+	}
 	for(auto iter = mAttackers.begin(); iter != mAttackers.end(); ++iter)
 	{
-		CCLog("[EnemyUnit::sendDeadMsg]: Target: %d, attacker: %d", mEntityID, iter->first);
+		CCLog("Ally send [MSG_TargetNotAvailable]: Target: %d, attacker: %d", mEntityID, iter->first);
 		allyManager->sendMsg(MSG_TargetNotAvailable, mEntityID, iter->first);
 	}
 
+	auto attacker = mAttackers.find(mTargetID);
+	if (attacker != mAttackers.end())
+	{
+		mAttackers.erase(attacker);
+	}
 }
 
 
 
 void AllyUnit::moveToMassPos()
 {
-	//CCPoint pos = this->getPosition();
-	//CCSequence* sequence = CCSequence::create(
-	//	CCMoveTo::create(0.3f, mMassPos ),
-	//	CCCallFunc::create(this, callfunc_selector(AllyUnit::onInPosition)),
-	//	NULL
-	//	);
-	//this->runAction(sequence);
+
+	this->sendNonAvailableMsg();
+
+
+	this->moveBackToMassPos();
+
+	CCLog("{AllyUnit::moveToMassPos}");
+
+	// start moving animation
 	//this->runAction(CCAnimate::create(this->mEntityInfo->animations[ActiveObjTag_MoveRightLeft]));
-	//
-	////set direction
-	//ccVertex2F toNewPos = vertex2( mMassPos.x - pos.x, mMassPos.y - pos.y);
-	//float z = sqrtf(toNewPos.y * toNewPos.y + toNewPos.x * toNewPos.x);
-	//float cosF = (float)toNewPos.x / z;
-	//if(cosF < 0)
-	//	this->setFlipX(true);
-	//else
-	//	this->setFlipX(false);
-	//
-	
-	// just need to init ally
-	mState = STATE_Moving;
-	CCLog("Foree set state to: [STATE_Moving], {AllyUnit::moveToMassPos}");
+
 }
 
-void AllyUnit::onInPosition()
+void AllyUnit::onExitMoving()
 {
 	this->stopAllActions();
 	this->setDisplayFrame(mEntityInfo->defaultFrame);
-	mState = STATE_Idle;
-	CCLog("[AllyUnit::onInPosition] foree set state to: [STATE_Idle] ");
 }
 
 void AllyUnit::underAttack(int damage, entity_id attackerID, CCRect rect)
@@ -334,13 +337,13 @@ void AllyUnit::underAttack(int damage, entity_id attackerID, CCRect rect)
 
 void AllyUnit::destory()
 {
+	this->sendNonAvailableMsg();
 	this->stopAllActions();
 	CCSequence* sequence = CCSequence::createWithTwoActions(
 		CCAnimate::create(this->mEntityInfo->animations[ActiveObjTag_Dead])
 		,CCCallFunc::create(this, callfunc_selector(AllyUnit::onDestoryed))
 		);
 	this->runAction(sequence);
-	this->sendDeadMsg();
 	AllyManager::sharedAllyManager()->removeAllyByID(mEntityID);
 	//AllyManager::sharedAllyManager()->broadcaseDeadMsg(mEntityID);
 }

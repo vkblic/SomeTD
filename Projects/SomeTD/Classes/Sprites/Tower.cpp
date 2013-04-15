@@ -48,12 +48,12 @@ void Tower::myInit(eTower_Terrain terrain, CCSpriteBatchNode* batchNode)
 	mReloadElapsed = 0.0f;
 	mAttackRange = 200;
 
+	mMassConfirm = false;
 	mBatchNode = batchNode;
-	
+	mSoldiers.resize(3);
 	for(int i = 0; i < 3; ++i)
 	{
-		mSoldiers[i] = -1;
-
+		mSoldiers[i] = nullptr;
 	}
 	TowerInformation* towerInfo = TowerInformation::getInstance();
 
@@ -104,6 +104,23 @@ bool Tower::ccTouchBegan(CCTouch* touch, CCEvent* event)
 	// 	CCSize size = this->getContentSize();
 	// 	CCRect rect = CCRect(0, 0, size.width, size.height);
 	bool isTouched = isSpriteTouched(this, touch);
+	
+	// temporary deal with mass
+	if( !isTouched && mMassConfirm)
+	{
+		CCPoint massPos = touch->getLocation();
+
+		this->setMassPos(massPos);
+		for(int i = 0; i < 3;++ i)
+		{
+			//auto ally = AllyManager::sharedAllyManager()->addAlly("soldier_lvl4_paladin", pos, this->getPosition());
+			//ally->setTowerAlertRange(mAttackRange);
+			//auto ally = AllyManager::sharedAllyManager()->getAvailableObject(mSoldiersMassPos[i]);
+			mSoldiers[i]->setMassPos(mSoldiersMassPos[i]);
+			mSoldiers[i]->moveToMassPos();
+		}
+
+	}
 	// 	if (!isTouched)
 	// 		TowerMenu::sharedTowerMenu()->setVisible(false);
 	return isTouched;
@@ -257,6 +274,14 @@ void Tower::onMenuSelected(int type)
 			this->BuildTower();
 		}
 		break;
+
+	case TowerMenu::MassConfirmed:
+		{
+			CCLog("TowerMenu::MassConfirmed");
+			mMassConfirm = true;
+			this->showRange(true, Tower_barrack_LV1);
+		}
+		break;
 	case TowerMenu::MageChecked:
 		{
 			CCLog("TowerMenu::MageChecked");
@@ -343,10 +368,10 @@ void Tower::BuildTower()
 		CCPoint pos = this->getPosition();
 		CCPoint massPos = CCPoint(pos.x, pos.y - 100);
 		this->setMassPos(massPos);
-
 		for(int i = 0; i < 3;++ i)
 		{
 			auto ally = AllyManager::sharedAllyManager()->addAlly("soldier_lvl4_paladin", pos, this->getPosition());
+			mSoldiers[i] = ally;
 			ally->setTowerAlertRange(mAttackRange);
 			ally->setMassPos(mSoldiersMassPos[i]);
 			ally->moveToMassPos();
