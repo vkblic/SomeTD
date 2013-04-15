@@ -42,7 +42,7 @@ private:
 	void BuildTower();
 	void upgradeTower(const char special);
 	void showPreivew(bool isShow, eTower_Preview towerType);
-	void showRange(bool isShow);
+	void showRange(bool isShow, eTower towerType);
 	void fire();
 	void firing();
 	void onShoot();

@@ -54,8 +54,11 @@ public:
 		return mTowerConstructingFrame[type];
 	}
 
-	CCSpriteFrame* getTowerRange()
+	CCSpriteFrame* getTowerRange(eTower towerType)
 	{
+		if(towerType & 0x00F0)
+			return mRangeFrameBarrack;
+		else
 		return mRangeFrame;
 	}
 
@@ -84,6 +87,7 @@ private:
 	std::vector<CCSpriteFrame*> mTowerPreviewFrame;
 	std::vector<CCSpriteFrame*> mTowerConstructingFrame;
 	CCSpriteFrame* mRangeFrame;
+	CCSpriteFrame* mRangeFrameBarrack;
 	std::vector<int> mAttackRange;
 	eTower mTowerType;
 };

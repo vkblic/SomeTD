@@ -26,6 +26,7 @@ public:
 		Range_Circle,
 		Rally_Circle,
 
+		
 
 
 		// archer tower
@@ -49,6 +50,12 @@ public:
 		Barrack_Lv4_Paladins_Normal,
 		Barrack_Lv4_Paladins_Off,
 		Barrack_Lv4_Paladins_Confirm,
+
+		Barrack_Mass_Normal,
+		Barrack_Mass_Off,
+		Barrack_Mass_Disable,
+		
+
 
 		// mage tower
 		Mage_Normal,
@@ -84,6 +91,7 @@ public:
 		Bottom_Right,
 		Top_Centre,
 		Bottom_Centre,
+		Mass_Btn, //temp
 		Menu_Sprite_Max
 	};
 
@@ -137,8 +145,8 @@ public:
 
 
 		//
-		Checker = 0xFFFF0000
-
+		Checker = 0xFFFF0000,
+		Lock = 0xFFFFFFFF
 	};
 
 

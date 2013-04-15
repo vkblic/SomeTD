@@ -72,7 +72,8 @@ void Tower::myInit(eTower_Terrain terrain, CCSpriteBatchNode* batchNode)
 	this->setOpacity(0);
 
 	//Range Sprite
-	mRangeSprite = CCSprite::createWithSpriteFrame(towerInfo->getTowerRange());
+	mRangeSprite = CCSprite::createWithSpriteFrame(towerInfo->getTowerRange(mTowerType));
+	mRangeSprite->setOpacity(150);
 	this->addChild(this->mRangeSprite);
 	mRangeSprite->setPosition(CCPoint(towerSize.width / 2, towerSize.height /2));
 	mRangeSprite->setVisible(false);
@@ -223,14 +224,14 @@ void Tower::onMenuSelected(int type)
 		{
 			CCLog("TowerMenu::NonTouched");
 			this->showPreivew(false, Tower_Preview_None);
-			this->showRange(false);
+			this->showRange(false, mTowerType);
 		}
 		break;
 	case TowerMenu::ArcherChecked:
 		{
 			CCLog("TowerMenu::ArcherChecked");
 			this->showPreivew(true, Tower_Preview_Archer);
-			this->showRange(true);
+			this->showRange(true, mTowerType);
 		}
 		break;
 	case TowerMenu::ArcherConfirmed:
@@ -242,7 +243,7 @@ void Tower::onMenuSelected(int type)
 		{
 			CCLog("TowerMenu::BarrackChecked");
 			this->showPreivew(true, Tower_Preview_Barrack);
-			this->showRange(true);
+			this->showRange(true, Tower_barrack_LV1);
 		}
 		break;
 	case TowerMenu::BarrackComfirmed:
@@ -260,7 +261,7 @@ void Tower::onMenuSelected(int type)
 		{
 			CCLog("TowerMenu::MageChecked");
 			this->showPreivew(true, Tower_Preview_Mage);
-			//this->showRange(true);
+			this->showRange(true, mTowerType);
 		}
 		break;
 	case TowerMenu::MageConfirmed:
@@ -278,7 +279,7 @@ void Tower::onMenuSelected(int type)
 		{
 			CCLog("TowerMenu::ArtilleryChecked");
 			this->showPreivew(true, Tower_Preview_Artillery);
-			this->showRange(true);
+			this->showRange(true, mTowerType);
 		}
 		break;
 	case TowerMenu::ArtilleryConfirmed:
@@ -289,7 +290,7 @@ void Tower::onMenuSelected(int type)
 	case TowerMenu::UpgradeChecked:
 		{
 			CCLog("TowerMenu::UpgradeChecked");
-			this->showRange(true);
+			this->showRange(true, mTowerType);
 		}
 		break;
 	case TowerMenu::UpgradeConfirmed:
@@ -301,7 +302,7 @@ void Tower::onMenuSelected(int type)
 	case TowerMenu::SpecialLeftChecked:
 		{
 			CCLog("SpecialLeftChecked");
-			this->showRange(true);
+			this->showRange(true, mTowerType);
 		}
 		break;
 	case TowerMenu::SpecialLeftConfirmed:
@@ -313,7 +314,7 @@ void Tower::onMenuSelected(int type)
 	case TowerMenu::SpecialRightChecked:
 		{
 			CCLog("SpecialLeftChecked");
-			this->showRange(true);
+			this->showRange(true, mTowerType);
 		}
 	case TowerMenu::SpecialRightConfirmed:
 		{
@@ -462,8 +463,9 @@ void Tower::showPreivew(bool isShow, eTower_Preview towerType)
 	this->setOpacity(180);
 }
 
-void Tower::showRange(bool isShow)
+void Tower::showRange(bool isShow, eTower towerType )
 {
+	mRangeSprite->setDisplayFrame(TowerInformation::getInstance()->getTowerRange(towerType));
 	this->mRangeSprite->setVisible(isShow);
 }
 
