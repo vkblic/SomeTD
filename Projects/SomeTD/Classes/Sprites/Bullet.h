@@ -28,13 +28,14 @@ public:
 	void playHitAnimation();
 	void onMove(CCPoint pos, CCPoint targetPos, float dt);
 	void destory();
-	void reuse(float speed, EnemyUnit* target, CCSpriteFrame* frame);
+	void reuse(float speed, int damage, EnemyUnit* target, CCSpriteFrame* frame);
 	CCRect getCollisionRect();
 private:
 	float mSpeed;
 	CCPoint mTargetPos;
 	CCRect mTargetCollisionRect;
-	 entity_id mTargetID;
+	entity_id mTargetID;
+	int mDamage;
 
 	char temp[256];
 };

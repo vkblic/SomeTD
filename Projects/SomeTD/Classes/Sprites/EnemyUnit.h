@@ -54,7 +54,7 @@ public:
 
 	void addAttacker(entity_id attackerID, CCRect rect);
 	void removeAttacker(entity_id attackerID);
-	void removeTarget() {mTargetID = non_entity;}
+	void removeTarget();
 	void setTarget(entity_id targetID) {mTargetID = targetID;}
 	entity_id getTarget(){return mTargetID;}
 	void setTargetCollisionRect( const CCRect& rect ) 

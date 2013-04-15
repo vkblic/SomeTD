@@ -38,7 +38,7 @@ public:
 
 	void removeAttacker(entity_id attackerID);
 	//void run(std::vector<WayPointEx>& wayPoints);
-
+	void removeTarget();
 
 
 public:
@@ -51,9 +51,20 @@ public:
 	*
 	*
 	*/
-	void run() {mState = STATE_Idle;}
-	void moveToAndGetRead(const CCPoint& distPos);
-	void onInPosition();
+	//void run() {mState = STATE_Idle;}
+	void moveToMassPos();
+
+	void moveBackToMassPos() 
+	{
+		// just need to init ally
+		CCLog("Foree set state to: [STATE_Moving], {AllyUnit::moveBackToMassPos}");
+		mState = STATE_Moving;
+		// stop attacking
+		this->stopAllActions();
+		this->runAction(CCAnimate::create(this->mEntityInfo->animations[ActiveObjTag_MoveRightLeft]));
+	}
+
+	void onExitMoving();
 	//void attacking();
 	//void onHit();
 
@@ -61,14 +72,23 @@ public:
 public: 
 	// idle
 	bool findTarget();
-	bool targetCheck(entity_id targetID);
-
+	bool targetCheck( entity_id targetID );
+	void onEnterIdle()
+	{
+		mTargetID = non_entity;
+	}
 
 	// moveToTarget
 	void enterMoveToTarget();
-	bool onMovingToTarget(float dt);
+	bool onMovingToTarget( float dt );
+
+	bool onMoving( float dt, const CCPoint& destPos ) ;
+
 	void setTargetCollisionRect( const CCRect& rect ) 
-	{this->mTargetCollisionRect = rect;}
+	{
+		this->mTargetCollisionRect = rect;
+	}
+
 	void exitMoveToTarget();
 
 	// attacking
@@ -78,14 +98,14 @@ public:
 	void exitAttacing();
 
 	//be injured
-	void underAttack(int damage, entity_id attackerID, CCRect rect);
+	void underAttack( int damage, entity_id attackerID, CCRect rect );
 
 	//dead
 	void destory();
 	void onDestoryed();
 
 	//msg
-	void sendDeadMsg();
+	void sendNonAvailableMsg();
 
 private:
 
@@ -100,6 +120,17 @@ private:
 
 	// other
 	int mTargetSearchInterval;
+
+	//temp
+private:
+	CCPoint mTowerPos;
+	int mTowerAlertRange;
+	CCPoint mMassPos;
+public:
+	void setTowerPos( const CCPoint& towerPos ) { mTowerPos = towerPos; }
+	void setTowerAlertRange( int range ) { mTowerAlertRange = range; }
+	void setMassPos( const CCPoint& massPos ) { mMassPos = massPos; }
+
 };
 
 

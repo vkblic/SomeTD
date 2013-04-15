@@ -70,6 +70,10 @@ public:
 
 	bool isEnemyInRange(CCPoint pos, int rangeRadius,  entity_id enemyID);
 
+
+
+	bool isEnemyInRangeAndInTowerRange(CCPoint pos, int rangeRadius, CCPoint towerPos, int towerRangeRadius, entity_id enemyID);
+
 	/*
 	 *get the nearness enemy unit in range 
 	 *

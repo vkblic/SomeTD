@@ -155,7 +155,11 @@ bool HelloWorld::init()
 		//TestAlly
 		auto testAlly = objects->objectNamed("TestAlly");
 		CCPoint testPos = CCPoint(testAlly->valueForKey("x")->intValue(), testAlly->valueForKey("y")->intValue());
-		AllyManager::sharedAllyManager()->addAlly("soldier_lvl4_paladin", testPos);
+		auto ally = AllyManager::sharedAllyManager()->addAlly("soldier_lvl4_paladin", testPos, testPos);
+		ally->setTowerAlertRange(100);
+		ally->setMassPos(testPos);
+		ally->moveToMassPos();
+		//ally->setma
 // 		{
 // 
 // 			//enemy->setPosition(CCPoint(x, y));

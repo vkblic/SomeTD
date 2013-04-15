@@ -119,6 +119,7 @@ void TowerInformation::LoadConfig(CCSpriteFrameCache* spriteFrameCache)
 
 	//Range Frame
 	mRangeFrame = spriteFrameCache->spriteFrameByName("range_circle.png");
+	mRangeFrameBarrack = spriteFrameCache->spriteFrameByName("rally_circle.png");
 
 	//Range num
 	mAttackRange.resize(Tower_Max);

@@ -72,7 +72,7 @@ static bool isSpriteTouched(cocos2d::CCSprite* sprite, cocos2d::CCTouch* touch)
 	return isTouched;
 }
 
-static bool isRectAndCircleCollided(CCPoint& circleCentre, float radius, CCRect& rect)
+static bool isRectAndCircleCollided(const CCPoint& circleCentre, float radius, CCRect& rect)
 {
 	
 	float distanceX = abs(circleCentre.x - rect.getMidX());

@@ -177,7 +177,6 @@
     <ClCompile Include="..\Classes\App\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\App\HelloWorldScene.cpp" />
     <ClCompile Include="..\Classes\libs\tinyxml2.cpp" />
-    <ClCompile Include="..\Classes\libs\xmltest.cpp" />
     <ClCompile Include="..\Classes\Managers\AllyManager.cpp" />
     <ClCompile Include="..\Classes\Managers\EnemyManager.cpp" />
     <ClCompile Include="..\Classes\Managers\EntityManager.cpp" />

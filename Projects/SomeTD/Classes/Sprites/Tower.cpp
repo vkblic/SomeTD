@@ -48,12 +48,12 @@ void Tower::myInit(eTower_Terrain terrain, CCSpriteBatchNode* batchNode)
 	mReloadElapsed = 0.0f;
 	mAttackRange = 200;
 
+	mMassConfirm = false;
 	mBatchNode = batchNode;
-	
+	mSoldiers.resize(3);
 	for(int i = 0; i < 3; ++i)
 	{
-		mSoldiers[i] = -1;
-
+		mSoldiers[i] = nullptr;
 	}
 	TowerInformation* towerInfo = TowerInformation::getInstance();
 
@@ -72,7 +72,8 @@ void Tower::myInit(eTower_Terrain terrain, CCSpriteBatchNode* batchNode)
 	this->setOpacity(0);
 
 	//Range Sprite
-	mRangeSprite = CCSprite::createWithSpriteFrame(towerInfo->getTowerRange());
+	mRangeSprite = CCSprite::createWithSpriteFrame(towerInfo->getTowerRange(mTowerType));
+	mRangeSprite->setOpacity(150);
 	this->addChild(this->mRangeSprite);
 	mRangeSprite->setPosition(CCPoint(towerSize.width / 2, towerSize.height /2));
 	mRangeSprite->setVisible(false);
@@ -103,6 +104,23 @@ bool Tower::ccTouchBegan(CCTouch* touch, CCEvent* event)
 	// 	CCSize size = this->getContentSize();
 	// 	CCRect rect = CCRect(0, 0, size.width, size.height);
 	bool isTouched = isSpriteTouched(this, touch);
+	
+	// temporary deal with mass
+	if( !isTouched && mMassConfirm)
+	{
+		CCPoint massPos = touch->getLocation();
+
+		this->setMassPos(massPos);
+		for(int i = 0; i < 3;++ i)
+		{
+			//auto ally = AllyManager::sharedAllyManager()->addAlly("soldier_lvl4_paladin", pos, this->getPosition());
+			//ally->setTowerAlertRange(mAttackRange);
+			//auto ally = AllyManager::sharedAllyManager()->getAvailableObject(mSoldiersMassPos[i]);
+			mSoldiers[i]->setMassPos(mSoldiersMassPos[i]);
+			mSoldiers[i]->moveToMassPos();
+		}
+
+	}
 	// 	if (!isTouched)
 	// 		TowerMenu::sharedTowerMenu()->setVisible(false);
 	return isTouched;
@@ -223,14 +241,14 @@ void Tower::onMenuSelected(int type)
 		{
 			CCLog("TowerMenu::NonTouched");
 			this->showPreivew(false, Tower_Preview_None);
-			this->showRange(false);
+			this->showRange(false, mTowerType);
 		}
 		break;
 	case TowerMenu::ArcherChecked:
 		{
 			CCLog("TowerMenu::ArcherChecked");
 			this->showPreivew(true, Tower_Preview_Archer);
-			this->showRange(true);
+			this->showRange(true, mTowerType);
 		}
 		break;
 	case TowerMenu::ArcherConfirmed:
@@ -242,7 +260,7 @@ void Tower::onMenuSelected(int type)
 		{
 			CCLog("TowerMenu::BarrackChecked");
 			this->showPreivew(true, Tower_Preview_Barrack);
-			this->showRange(true);
+			this->showRange(true, Tower_barrack_LV1);
 		}
 		break;
 	case TowerMenu::BarrackComfirmed:
@@ -256,11 +274,19 @@ void Tower::onMenuSelected(int type)
 			this->BuildTower();
 		}
 		break;
+
+	case TowerMenu::MassConfirmed:
+		{
+			CCLog("TowerMenu::MassConfirmed");
+			mMassConfirm = true;
+			this->showRange(true, Tower_barrack_LV1);
+		}
+		break;
 	case TowerMenu::MageChecked:
 		{
 			CCLog("TowerMenu::MageChecked");
 			this->showPreivew(true, Tower_Preview_Mage);
-			//this->showRange(true);
+			this->showRange(true, mTowerType);
 		}
 		break;
 	case TowerMenu::MageConfirmed:
@@ -278,7 +304,7 @@ void Tower::onMenuSelected(int type)
 		{
 			CCLog("TowerMenu::ArtilleryChecked");
 			this->showPreivew(true, Tower_Preview_Artillery);
-			this->showRange(true);
+			this->showRange(true, mTowerType);
 		}
 		break;
 	case TowerMenu::ArtilleryConfirmed:
@@ -289,7 +315,7 @@ void Tower::onMenuSelected(int type)
 	case TowerMenu::UpgradeChecked:
 		{
 			CCLog("TowerMenu::UpgradeChecked");
-			this->showRange(true);
+			this->showRange(true, mTowerType);
 		}
 		break;
 	case TowerMenu::UpgradeConfirmed:
@@ -301,7 +327,7 @@ void Tower::onMenuSelected(int type)
 	case TowerMenu::SpecialLeftChecked:
 		{
 			CCLog("SpecialLeftChecked");
-			this->showRange(true);
+			this->showRange(true, mTowerType);
 		}
 		break;
 	case TowerMenu::SpecialLeftConfirmed:
@@ -313,7 +339,7 @@ void Tower::onMenuSelected(int type)
 	case TowerMenu::SpecialRightChecked:
 		{
 			CCLog("SpecialLeftChecked");
-			this->showRange(true);
+			this->showRange(true, mTowerType);
 		}
 	case TowerMenu::SpecialRightConfirmed:
 		{
@@ -342,11 +368,13 @@ void Tower::BuildTower()
 		CCPoint pos = this->getPosition();
 		CCPoint massPos = CCPoint(pos.x, pos.y - 100);
 		this->setMassPos(massPos);
-
 		for(int i = 0; i < 3;++ i)
 		{
-			auto ally = AllyManager::sharedAllyManager()->addAlly("soldier_lvl4_paladin", pos);
-			ally->moveToAndGetRead(mSoldiersMassPos[i]);
+			auto ally = AllyManager::sharedAllyManager()->addAlly("soldier_lvl4_paladin", pos, this->getPosition());
+			mSoldiers[i] = ally;
+			ally->setTowerAlertRange(mAttackRange);
+			ally->setMassPos(mSoldiersMassPos[i]);
+			ally->moveToMassPos();
 		}
 		return;
 	}
@@ -460,8 +488,9 @@ void Tower::showPreivew(bool isShow, eTower_Preview towerType)
 	this->setOpacity(180);
 }
 
-void Tower::showRange(bool isShow)
+void Tower::showRange(bool isShow, eTower towerType )
 {
+	mRangeSprite->setDisplayFrame(TowerInformation::getInstance()->getTowerRange(towerType));
 	this->mRangeSprite->setVisible(isShow);
 }
 
@@ -647,7 +676,7 @@ void Tower::onShoot()
 	}
 	if (mTargetID != -1)
 	{
-		bullet->reuse(100, EnemyManager::sharedEnemyManager()->getAvailableEnemy(mTargetID), CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("magebolt_0002.png"));
+		bullet->reuse(100, 130, EnemyManager::sharedEnemyManager()->getAvailableEnemy(mTargetID), CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("magebolt_0002.png"));
 
 		mBatchNode->addChild(bullet);
 	}

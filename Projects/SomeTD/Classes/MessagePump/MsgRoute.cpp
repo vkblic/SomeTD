@@ -20,9 +20,12 @@ MsgRoute::MsgRoute()
 	mMsgNameStr[MSG_RESERVED_Exit] = "MSG_RESERVED_Exit";
 	mMsgNameStr[MSG_RESERVED_Update] = "MSG_RESERVED_Update";
 	mMsgNameStr[MSG_Timeout] = "MSG_Timeout";
+	mMsgNameStr[MSG_ChangeState] = "MSG_ChangeState";
 	mMsgNameStr[MSG_FoundTarget] = "MSG_FoundTarget";
 	mMsgNameStr[MSG_CommandMove] = "MSG_CommandMove";
 	mMsgNameStr[MSG_InAttackPosition] = "MSG_InAttackPosition";
+	mMsgNameStr[MSG_InPostion] = "MSG_InPostion";
+	
 	mMsgNameStr[MSG_TargetNotAvailable] = "MSG_TargetNotAvailable";
 	mMsgNameStr[MSG_AttackerNoAvailable] = "MSG_AttackerNoAvailable";
 	mMsgNameStr[MSG_RequestPosition] = "MSG_RequestPosition";

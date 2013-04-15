@@ -5,7 +5,7 @@
 #include "cocos2d.h"
 #include "Bullet.h"
 #include "../Model/Enumeration.h"
-#include "../Sprites/EnemyUnit.h"
+#include "../Sprites/AllyUnit.h"
 using namespace cocos2d;
 
 //Tower class
@@ -42,11 +42,14 @@ private:
 	void BuildTower();
 	void upgradeTower(const char special);
 	void showPreivew(bool isShow, eTower_Preview towerType);
-	void showRange(bool isShow);
+	void showRange(bool isShow, eTower towerType);
 	void fire();
 	void firing();
 	void onShoot();
 	//void getNextLv(eTower)
+
+
+
 
 private:
 	eTower mTowerType ;
@@ -54,58 +57,71 @@ private:
 	eTower_Shooter mShooterTypeUpPart2;
 	eTower_Shooter mShooterTypeDown;
 	eTower_Shooter mShooterTypeDownPart2;
-	entity_id mSoldiers[3];
+
+	// allyUnit never remove by allyManager, when dead, just insert into 
+	// "waiting for bring back to life " map.
+	std::vector<AllyUnit*> mSoldiers;
 	CCPoint mSoldiersMassPos[3];
 	int mCurAnimationIndex;
 	int mCurPassedFrames;
 	CCSpriteBatchNode* mBatchNode;
 
 	/*
-	 *shoot when animation frame index equal this value.
-	 *@range [0, frameCount - 1]
-	 */
+	*shoot when animation frame index equal this value.
+	*@range [0, frameCount - 1]
+	*/
 	int mShootWhen;
 
 	/*
-	 *change display frame every x frame
-	 *@default: 1
-	 *@must >= 1
-	 */
+	*change display frame every x frame
+	*@default: 1
+	*@must >= 1
+	*/
 	int mFramesInterval;
 
 	/*
-	 *time use for reload, or we can see fire interval time.
-	 *@unit: second
-	 *@range [0, max)
-	 */
+	*time use for reload, or we can see fire interval time.
+	*@unit: second
+	*@range [0, max)
+	*/
 	float mReloadTime;
 
 
 	/*
-	 *time already use for reload.
-	 *@unit: second
-	 *@range [0, mFireInterval)
-	 */
+	*time already use for reload.
+	*@unit: second
+	*@range [0, mFireInterval)
+	*/
 	float mReloadElapsed;
 
 
 	eTower_Terrain mTerrainType;
 	//eTower_Preview mPreviewType;
-	
+
 	//CCSequence* mShooterAnimationSequence;
 	//CCSequence* mTowerAnimationSequence;
 private:
 	/*
-	 相关的精灵对象
-	 */
+	相关的精灵对象
+	*/
 	CCSprite* mShooter;
 	CCSprite* mTerrain;
-	 entity_id mTargetID;
+	entity_id mTargetID;
 	CCSprite* mRangeSprite;
 	int mAttackRange;
 private:
 
 	bool mCanFire;
+
+public:	
+	bool mMassConfirm;
+	void MassCommandCancle()
+	{
+		mMassConfirm = false;
+		this->showRange(false, Tower_barrack_LV1);
+
+	}
+
 };
 
 

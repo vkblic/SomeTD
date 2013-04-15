@@ -24,7 +24,7 @@
     </animations>
   </enemy>
   <enemy name ="marauder" textureSet="enemies.png" plist="enemies.plist">
-    <informations hp="1000" physicalDefend="10" magicDefend="0" physicalAttack="20" magicAttack="1" speed="200" defaultFrame="marauder_0001.png" alertRange="50"/>
+    <informations hp="1700" physicalDefend="10" magicDefend="0" physicalAttack="20" magicAttack="1" speed="40" defaultFrame="marauder_0001.png" alertRange="50"/>
     <animations defaultTag="move_rightleft">
       <animation name="marauder" tag="move_up" startIndex="23" endIndex="43" framesInterval="3" frameCount="20" key="%s_%.4d.png" loop="-1" restoreOriginalFrame="false"/>
       <animation name="marauder" tag="move_down" startIndex="45" endIndex="65" framesInterval="3" frameCount="20" key="%s_%.4d.png" loop="-1" restoreOriginalFrame="false"/>

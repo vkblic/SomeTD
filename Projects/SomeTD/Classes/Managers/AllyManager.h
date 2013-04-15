@@ -28,7 +28,7 @@ public:
 	 *@return	a valid enemy id if there has a enemy in range, 
 	 *@			if not, the value is -1
 	 */
-	 entity_id getObjInRange( CCPoint pos, int rangeRadius );
+	 entity_id getObjInRange( const CCPoint&  pos, int rangeRadius );
 
 	/*
 	 *add a enemy node to manager, manager have responsibility to 
@@ -37,7 +37,7 @@ public:
 	 *@param	plFrameName: enemy node pointer
 	 *@return	a valid enemy node pointer	 
 	 */
-	AllyUnit* addAlly(const char* name, CCPoint pos);
+	AllyUnit* addAlly(const char* name, const CCPoint& pos, const CCPoint&  towerPos);
 
 
 
@@ -60,7 +60,7 @@ public:
 
 	void setObjectLayer( CCNode* layer );
 
-	bool isOjbectInRange( CCPoint pos, int rangeRadius,  entity_id enemyID );
+	bool isOjbectInRange( const CCPoint&  pos, int rangeRadius,  entity_id enemyID );
 
 	/*
 	 *get the obj unit by ID 
