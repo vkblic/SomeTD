@@ -115,7 +115,7 @@ private:
 
 public:	
 	bool mMassConfirm;
-	void MassCommandCancle()
+	void MassCommandCancel()
 	{
 		mMassConfirm = false;
 		this->showRange(false, Tower_barrack_LV1);

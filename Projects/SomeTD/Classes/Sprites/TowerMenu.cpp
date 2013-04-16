@@ -125,6 +125,8 @@ void TowerMenu::myInit()
 			this->addChild(*it);
 	}
 	this->mCurLevel = eMenu_Level::Lv0;
+
+	mCurTower = nullptr;
 }
 
 bool TowerMenu::ccTouchBegan(CCTouch* touch, CCEvent* event)
@@ -467,6 +469,12 @@ void TowerMenu::onExit()
 
 void TowerMenu::showMenu(CCPoint pos, eMenu_Level lv, Tower* tower, SEL_MenuTouchedFunc callback)
 {
+	// cancel set mass to previous tower
+	if (mCurTower != nullptr) //tower pointer is nullprt the first time showMenu execute.
+		mCurTower->MassCommandCancel();
+
+
+
 	this->mCurTower = tower;
 	this->mCallFunc = callback;
 	this->setPosition(pos);
@@ -591,9 +599,7 @@ void TowerMenu::hideMenu()
 		CCCallFunc::create(this, callfunc_selector(TowerMenu::onMenuHided))
 		);
 	this->runAction(sequence);
-	//this->resetFrame();
 	(this->mCurTower->*mCallFunc)(MenuItemTag::NonTouched);
-	this->mCurTower = NULL;
 }
 void TowerMenu::onMenuHided()
 {

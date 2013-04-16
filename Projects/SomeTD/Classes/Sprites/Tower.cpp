@@ -110,6 +110,14 @@ bool Tower::ccTouchBegan(CCTouch* touch, CCEvent* event)
 	{
 		CCPoint massPos = touch->getLocation();
 
+		// check if masspos vaild(int range)
+
+		CCPoint pos = this->getPosition();
+
+		float distpow2 = pow(massPos.x - pos.x, 2) + pow(massPos.y - pos.y, 2);
+
+		if(distpow2 > pow(mAttackRange, 2))
+			return true;
 		this->setMassPos(massPos);
 		for(int i = 0; i < 3;++ i)
 		{
@@ -118,7 +126,11 @@ bool Tower::ccTouchBegan(CCTouch* touch, CCEvent* event)
 			//auto ally = AllyManager::sharedAllyManager()->getAvailableObject(mSoldiersMassPos[i]);
 			mSoldiers[i]->setMassPos(mSoldiersMassPos[i]);
 			mSoldiers[i]->moveToMassPos();
+			this->showRange(false, Tower_barrack_LV1);
 		}
+		mMassConfirm = false;
+		return true;
+
 
 	}
 	// 	if (!isTouched)
@@ -241,7 +253,9 @@ void Tower::onMenuSelected(int type)
 		{
 			CCLog("TowerMenu::NonTouched");
 			this->showPreivew(false, Tower_Preview_None);
-			this->showRange(false, mTowerType);
+			if (!mMassConfirm)
+				this->showRange(false, mTowerType);
+
 		}
 		break;
 	case TowerMenu::ArcherChecked:
