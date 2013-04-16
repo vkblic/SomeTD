@@ -268,14 +268,20 @@ void AllyUnit::onHitTarget()
 	if(mState != STATE_Attacking)
 		return;
 	AllyManager::sharedAllyManager()->sendDamageMsg(mEntityID, mTargetID, mEntityInfo->physicalAttack);
+
+	// enemy may be dead after damage!
+	// this is important
+	if(mState != STATE_Attacking)
+		return;
 	this->attacking();
 }
 
 void AllyUnit::exitAttacing()
 {
 	// prevent [onHitTarget] execute when attacking animation end!
+	
 	this->stopAllActions();
-
+	CCLog("[AllyUnit::exitAttacing()]");
 	this->setDisplayFrame(mEntityInfo->defaultFrame);
 }
 
@@ -305,7 +311,7 @@ void AllyUnit::sendNonAvailableMsg()
 
 void AllyUnit::moveToMassPos()
 {
-
+	//need refactor
 	this->sendNonAvailableMsg();
 
 
