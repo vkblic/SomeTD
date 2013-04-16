@@ -93,7 +93,8 @@ void AllyUnit::removeAttacker(entity_id attackerID)
 {
 	auto iter = mAttackers.find(attackerID);
 	if ( iter == mAttackers.end() )
-		kkAssertMsgf(false, "[AllyUnit::removeAttacker], attacker can't find in map, id: %d", attackerID );
+		return;
+		//kkAssertMsgf(false, "[AllyUnit::removeAttacker], attacker can't find in map, id: %d", attackerID );
 	mAttackers.erase(iter);
 }
 void AllyUnit::removeTarget()
@@ -143,7 +144,7 @@ bool AllyUnit::onMovingToTarget( float dt )
 		CCSize size = this->getContentSize();
 		mDestinationPos = CCPoint(
 			destSpriteRectLeftTop.x + size.width / 2,
-			destSpriteRectLeftTop.y - size.height / 2 + rangedRand(0, 15)
+			destSpriteRectLeftTop.y - size.height / 2 + rangedRand(0, 5)
 			);
 	}
 

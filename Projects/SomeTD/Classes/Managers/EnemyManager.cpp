@@ -419,6 +419,7 @@ void EnemyManager::fsmTranslater(const MsgObject& msg, EnemyUnit* enemy)
 			}
 			else if(msg.name == MSG_TargetNotAvailable)
 			{
+				enemy->removeTarget();
 				this->changeState(enemy, STATE_Moving);
 			}
 			else if ( msg.name == MSG_AttackerNoAvailable)

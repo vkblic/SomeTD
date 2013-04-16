@@ -273,9 +273,10 @@ void EnemyUnit::onAttacking()
 
 void EnemyUnit::onHitTarget()
 {
-	AllyManager::sharedAllyManager()->sendDamageMsg(this->mEntityID, this->mTargetID, this->mEntityInfo->physicalAttack);
 	if(mState != STATE_Attacking)
-		return;
+	return;
+	AllyManager::sharedAllyManager()->sendDamageMsg(this->mEntityID, this->mTargetID, this->mEntityInfo->physicalAttack);
+	
 	this->onAttacking();
 }
 
@@ -385,7 +386,8 @@ void EnemyUnit::removeAttacker(entity_id attackerID)
 {
 	auto iter = mAttackers.find(attackerID);
 	if ( iter == mAttackers.end() )
-		kkAssertMsgf(false, "[EnemyUnit::removeAttacker], attacker can't find in map, id: %d", attackerID );
+		return;
+		//kkAssertMsgf(false, "[EnemyUnit::removeAttacker], attacker can't find in map, id: %d", attackerID );
 
 	CCLog("Enemy: [%d] remove attacker: [%d]", mEntityID, attackerID);
 	mAttackers.erase(iter);
