@@ -198,6 +198,10 @@
 		AC12C80B16F0D3AC0024EAC6 /* CCPhysicsSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC12C75516F0D3AC0024EAC6 /* CCPhysicsSprite.cpp */; };
 		AC12C80C16F0D3AC0024EAC6 /* cocos2dx-ext.mkf in Resources */ = {isa = PBXBuildFile; fileRef = AC12C75816F0D3AC0024EAC6 /* cocos2dx-ext.mkf */; };
 		AC12C80D16F0D3AC0024EAC6 /* cocos2dx-ext_public.defines.txt in Resources */ = {isa = PBXBuildFile; fileRef = AC12C75916F0D3AC0024EAC6 /* cocos2dx-ext_public.defines.txt */; };
+		AC9F2266171DA3B400AECA4B /* Icon-57.png in Resources */ = {isa = PBXBuildFile; fileRef = AC9F2262171DA3B400AECA4B /* Icon-57.png */; };
+		AC9F2267171DA3B400AECA4B /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = AC9F2263171DA3B400AECA4B /* Icon-72.png */; };
+		AC9F2268171DA3B400AECA4B /* Icon-114.png in Resources */ = {isa = PBXBuildFile; fileRef = AC9F2264171DA3B400AECA4B /* Icon-114.png */; };
+		AC9F2269171DA3B400AECA4B /* Icon-144.png in Resources */ = {isa = PBXBuildFile; fileRef = AC9F2265171DA3B400AECA4B /* Icon-144.png */; };
 		ACD6B409171A9C6100A6C473 /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ACD6B3D5171A9C6100A6C473 /* AppDelegate.cpp */; };
 		ACD6B40A171A9C6100A6C473 /* HelloWorldScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ACD6B3D7171A9C6100A6C473 /* HelloWorldScene.cpp */; };
 		ACD6B40B171A9C6100A6C473 /* tinyxml2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ACD6B3DF171A9C6100A6C473 /* tinyxml2.cpp */; };
@@ -698,6 +702,10 @@
 		AC12C75616F0D3AC0024EAC6 /* CCPhysicsSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCPhysicsSprite.h; sourceTree = "<group>"; };
 		AC12C75816F0D3AC0024EAC6 /* cocos2dx-ext.mkf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "cocos2dx-ext.mkf"; sourceTree = "<group>"; };
 		AC12C75916F0D3AC0024EAC6 /* cocos2dx-ext_public.defines.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "cocos2dx-ext_public.defines.txt"; sourceTree = "<group>"; };
+		AC9F2262171DA3B400AECA4B /* Icon-57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-57.png"; sourceTree = "<group>"; };
+		AC9F2263171DA3B400AECA4B /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
+		AC9F2264171DA3B400AECA4B /* Icon-114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-114.png"; sourceTree = "<group>"; };
+		AC9F2265171DA3B400AECA4B /* Icon-144.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-144.png"; sourceTree = "<group>"; };
 		ACD6B3D5171A9C6100A6C473 /* AppDelegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AppDelegate.cpp; sourceTree = "<group>"; };
 		ACD6B3D6171A9C6100A6C473 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		ACD6B3D7171A9C6100A6C473 /* HelloWorldScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HelloWorldScene.cpp; sourceTree = "<group>"; };
@@ -865,6 +873,10 @@
 		AC12B50F16F0D23B0024EAC6 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				AC9F2262171DA3B400AECA4B /* Icon-57.png */,
+				AC9F2263171DA3B400AECA4B /* Icon-72.png */,
+				AC9F2264171DA3B400AECA4B /* Icon-114.png */,
+				AC9F2265171DA3B400AECA4B /* Icon-144.png */,
 				ACD6B41D171A9C7800A6C473 /* AllyInfo.xml */,
 				ACD6B41E171A9C7800A6C473 /* CloseNormal.png */,
 				ACD6B41F171A9C7800A6C473 /* CloseSelected.png */,
@@ -1975,6 +1987,10 @@
 				AC12C77E16F0D3AC0024EAC6 /* CMakeLists.txt in Resources */,
 				AC12C80C16F0D3AC0024EAC6 /* cocos2dx-ext.mkf in Resources */,
 				AC12C80D16F0D3AC0024EAC6 /* cocos2dx-ext_public.defines.txt in Resources */,
+				AC9F2266171DA3B400AECA4B /* Icon-57.png in Resources */,
+				AC9F2267171DA3B400AECA4B /* Icon-72.png in Resources */,
+				AC9F2268171DA3B400AECA4B /* Icon-114.png in Resources */,
+				AC9F2269171DA3B400AECA4B /* Icon-144.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2192,8 +2208,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -2226,8 +2242,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					NDEBUG,
