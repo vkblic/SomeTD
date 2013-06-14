@@ -109,9 +109,6 @@
     <ClInclude Include="..\Classes\Managers\EnemyManager.h">
       <Filter>Managers</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\libs\tinyxml2.h">
-      <Filter>Libs</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\Model\Models.h">
       <Filter>Model</Filter>
     </ClInclude>
@@ -174,9 +171,6 @@
     </ClCompile>
     <ClCompile Include="..\Classes\Managers\EnemyManager.cpp">
       <Filter>Managers</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\libs\tinyxml2.cpp">
-      <Filter>Libs</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Managers\LevelsManager.cpp">
       <Filter>Managers</Filter>

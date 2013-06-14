@@ -56,7 +56,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>.;..\Classes;$(SolutionDir)libs\cocos2dx;$(SolutionDir)libs\cocos2dx\include;$(SolutionDir)libs\cocos2dx\kazmath\include;$(SolutionDir)libs\cocos2dx\platform\win32;$(SolutionDir)libs\cocos2dx\platform\third_party\win32;$(SolutionDir)libs\cocos2dx\platform\third_party\win32\OGLES;$(SolutionDir)libs\external;$(SolutionDir)libs\CocosDenshion\include;$(SolutionDir)libs\extensions\GUI;$(SolutionDir)libs\extensions;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..\Classes;$(SolutionDir)libs\cocos2dx;$(SolutionDir)libs\cocos2dx\include;$(SolutionDir)libs\cocos2dx\kazmath\include;$(SolutionDir)libs\cocos2dx\platform\win32;$(SolutionDir)libs\cocos2dx\platform\third_party\win32;$(SolutionDir)libs\cocos2dx\platform\third_party\win32\OGLES;$(SolutionDir)libs\external;$(SolutionDir)libs\CocosDenshion\include;$(SolutionDir)libs\extensions\GUI;$(SolutionDir)libs\extensions;$(SolutionDir)libs\cocos2dx\support\tinyxml2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader />
       <WarningLevel>Level3</WarningLevel>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -151,7 +151,6 @@
     <ClInclude Include="..\Classes\Common\Common.h" />
     <ClInclude Include="..\Classes\Helper\CommonHelpers.h" />
     <ClInclude Include="..\Classes\Helper\SpriteHelpers.h" />
-    <ClInclude Include="..\Classes\libs\tinyxml2.h" />
     <ClInclude Include="..\Classes\Managers\AllyManager.h" />
     <ClInclude Include="..\Classes\Managers\EnemyManager.h" />
     <ClInclude Include="..\Classes\Managers\EntityManager.h" />
@@ -176,7 +175,6 @@
   <ItemGroup>
     <ClCompile Include="..\Classes\App\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\App\HelloWorldScene.cpp" />
-    <ClCompile Include="..\Classes\libs\tinyxml2.cpp" />
     <ClCompile Include="..\Classes\Managers\AllyManager.cpp" />
     <ClCompile Include="..\Classes\Managers\EnemyManager.cpp" />
     <ClCompile Include="..\Classes\Managers\EntityManager.cpp" />

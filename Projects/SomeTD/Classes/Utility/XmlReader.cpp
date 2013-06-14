@@ -1,5 +1,5 @@
 #include "XmlReader.h"
-#include "../libs/tinyxml2.h"
+#include "tinyxml2.h"
 #include "../Model/Enumeration.h"
 #include "../Helper/SpriteHelpers.h"
 
