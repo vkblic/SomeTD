@@ -1,4 +1,4 @@
-#ifndef __HELLOWORLD_SCENE_H__
+﻿#ifndef __HELLOWORLD_SCENE_H__
 #define __HELLOWORLD_SCENE_H__
 
 #include "cocos2d.h"
@@ -48,8 +48,8 @@ public:
 
 	//cocos2d::CCSprite *_player;
 private:
-	cocos2d::CCTMXTiledMap* _tileMap;
-	cocos2d::CCTMXLayer*	_background;
+	cocos2d::CCTMXTiledMap* mTileMap;
+	cocos2d::CCTMXLayer*	mBackgroudLayer;
 	std::queue<CCSprite*>* _bulletsInUse;
 	std::queue<CCSprite*>* _bulletsCanUse;
 	//bool canFire;

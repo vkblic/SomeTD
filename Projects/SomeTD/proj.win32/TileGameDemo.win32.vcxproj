@@ -168,6 +168,8 @@
     <ClInclude Include="..\Classes\Sprites\Entity.h" />
     <ClInclude Include="..\Classes\Sprites\Tower.h" />
     <ClInclude Include="..\Classes\Sprites\TowerMenu.h" />
+    <ClInclude Include="..\Classes\StateMachine\State.h" />
+    <ClInclude Include="..\Classes\StateMachine\StateMachine.h" />
     <ClInclude Include="..\Classes\Utility\XmlReader.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="resource.h" />
@@ -190,6 +192,8 @@
     <ClCompile Include="..\Classes\Sprites\Entity.cpp" />
     <ClCompile Include="..\Classes\Sprites\Tower.cpp" />
     <ClCompile Include="..\Classes\Sprites\TowerMenu.cpp" />
+    <ClCompile Include="..\Classes\StateMachine\State.cpp" />
+    <ClCompile Include="..\Classes\StateMachine\StateMachine.cpp" />
     <ClCompile Include="..\Classes\Utility\XmlReader.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>

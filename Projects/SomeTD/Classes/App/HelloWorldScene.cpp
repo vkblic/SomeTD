@@ -1,4 +1,4 @@
-#include "HelloWorldScene.h"
+ï»¿#include "HelloWorldScene.h"
 #include "../Sprites/TowerMenu.h"
 #include "../Helper/SpriteHelpers.h"
 #include "../Helper/CommonHelpers.h"
@@ -65,12 +65,12 @@ bool HelloWorld::init()
 		// 		player->setPosition(CCPoint(x, y));
 		// 		this->addChild(player);
 		// 		
-		this->_tileMap = CCTMXTiledMap::create("KingdomRush_960_720.tmx");
-		this->_background = _tileMap->layerNamed("Background");
+		this->mTileMap = CCTMXTiledMap::create("KingdomRush_960_720.tmx");
+		this->mBackgroudLayer = mTileMap->layerNamed("Background");
 
-		this->addChild(this->_tileMap, -1);
+		this->addChild(this->mTileMap, -1);
 
-		CCTMXObjectGroup *objects = this->_tileMap->objectGroupNamed("Objects");
+		CCTMXObjectGroup *objects = this->mTileMap->objectGroupNamed("Objects");
 		//CCDictionary *spawnPoint = objects->objectNamed("Player");
 		//int x = spawnPoint->valueForKey("x")->intValue();
 		//int y = spawnPoint->valueForKey("y")->intValue();
@@ -81,6 +81,7 @@ bool HelloWorld::init()
 
 
 
+		//åŠ è½½èµ„æº
 		CCSpriteFrameCache* cache = CCSpriteFrameCache::sharedSpriteFrameCache(); 
 		cache->addSpriteFramesWithFile("enemies.plist");
 		cache->addSpriteFramesWithFile("soldier.plist");
@@ -130,7 +131,7 @@ bool HelloWorld::init()
 		TowerMenu::sharedTowerMenu()->setVisible(false);
 
 		// add animation
-		//½ÅÉ«¶¯»­
+		//è„šè‰²åŠ¨ç”»
 		// 
 		//addAnimationWithFramesToCache("yeti","move", 1, 25, 2, true);
 		addAnimationWithFramesToCache("magebolt","boom", 3, 10, 1, false, 1);
@@ -243,8 +244,8 @@ void HelloWorld::registerWithTouchDispatcher()
 void HelloWorld::setViewPointCenter(CCPoint pos)
 {
 	CCSize winSize = CCDirector::sharedDirector()->getWinSize();
-	CCSize tileSize = CCSize(this->_tileMap->getTileSize().width * this->_tileMap->getMapSize().width,
-		this->_tileMap->getTileSize().height * this->_tileMap->getMapSize().height);
+	CCSize tileSize = CCSize(this->mTileMap->getTileSize().width * this->mTileMap->getMapSize().width,
+		this->mTileMap->getTileSize().height * this->mTileMap->getMapSize().height);
 
 
 
@@ -307,7 +308,7 @@ void HelloWorld::ccTouchEnded(CCTouch *pTouch, CCEvent *pEvent)
 
 	//this->canFire = true;
 
-	//¶¯×÷, ÔİÊ±²»ÓÃ
+	//åŠ¨ä½œ, æš‚æ—¶ä¸ç”¨
 	return ;
 // 	do
 // 	{

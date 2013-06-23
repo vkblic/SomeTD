@@ -35,6 +35,9 @@
     <Filter Include="Common">
       <UniqueIdentifier>{091eb598-79b7-4322-89d4-c756514b11b0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="StateMachine">
+      <UniqueIdentifier>{35d9c63d-b8bd-4265-8447-113b1082de32}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\TileGameDemo.ico">
@@ -148,6 +151,12 @@
     <ClInclude Include="..\Classes\Managers\AllyManager.h">
       <Filter>Managers</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\StateMachine\StateMachine.h">
+      <Filter>StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\StateMachine\State.h">
+      <Filter>StateMachine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\App\AppDelegate.cpp">
@@ -204,6 +213,12 @@
     </ClCompile>
     <ClCompile Include="..\Classes\Managers\AllyManager.cpp">
       <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\StateMachine\StateMachine.cpp">
+      <Filter>StateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\StateMachine\State.cpp">
+      <Filter>StateMachine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
