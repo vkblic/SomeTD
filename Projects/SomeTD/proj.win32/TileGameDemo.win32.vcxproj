@@ -149,6 +149,8 @@
     <ClInclude Include="..\Classes\App\AppDelegate.h" />
     <ClInclude Include="..\Classes\App\HelloWorldScene.h" />
     <ClInclude Include="..\Classes\Common\Common.h" />
+    <ClInclude Include="..\Classes\Entity\ActiveEntity.h" />
+    <ClInclude Include="..\Classes\Entity\Entity.h" />
     <ClInclude Include="..\Classes\Helper\CommonHelpers.h" />
     <ClInclude Include="..\Classes\Helper\SpriteHelpers.h" />
     <ClInclude Include="..\Classes\Managers\AllyManager.h" />
@@ -177,6 +179,7 @@
   <ItemGroup>
     <ClCompile Include="..\Classes\App\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\App\HelloWorldScene.cpp" />
+    <ClCompile Include="..\Classes\Entity\ActiveEntity.cpp" />
     <ClCompile Include="..\Classes\Managers\AllyManager.cpp" />
     <ClCompile Include="..\Classes\Managers\EnemyManager.cpp" />
     <ClCompile Include="..\Classes\Managers\EntityManager.cpp" />

@@ -1,7 +1,8 @@
 ﻿#pragma once
-#include "..\MessagePump\MsgObject.h"
 
 #pragma region Base
+
+struct MsgObject;
 
 template<typename entity_type>
 class State
@@ -36,6 +37,9 @@ public:
 private:
 	std::string mType;
 };
+
+
+
 
 
 #pragma endregion

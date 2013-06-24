@@ -5,9 +5,6 @@
       <UniqueIdentifier>{fda9d6a2-675d-4240-a4f0-eeadc4daf1d6}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;jpg;jpeg;jpe;png;manifest</Extensions>
     </Filter>
-    <Filter Include="Sprites">
-      <UniqueIdentifier>{8c14d31e-7e23-4ecb-974f-5349da562972}</UniqueIdentifier>
-    </Filter>
     <Filter Include="App">
       <UniqueIdentifier>{f46d4bc2-77bb-4ab0-b0c0-45892ec4593b}</UniqueIdentifier>
     </Filter>
@@ -37,6 +34,12 @@
     </Filter>
     <Filter Include="StateMachine">
       <UniqueIdentifier>{35d9c63d-b8bd-4265-8447-113b1082de32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sprites">
+      <UniqueIdentifier>{8c14d31e-7e23-4ecb-974f-5349da562972}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entity">
+      <UniqueIdentifier>{c53c23b4-f204-4001-aebb-06f1c5fba3a9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -157,6 +160,12 @@
     <ClInclude Include="..\Classes\StateMachine\State.h">
       <Filter>StateMachine</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\Entity\ActiveEntity.h">
+      <Filter>Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Entity\Entity.h">
+      <Filter>Entity</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\App\AppDelegate.cpp">
@@ -219,6 +228,9 @@
     </ClCompile>
     <ClCompile Include="..\Classes\StateMachine\State.cpp">
       <Filter>StateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Entity\ActiveEntity.cpp">
+      <Filter>Entity</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
