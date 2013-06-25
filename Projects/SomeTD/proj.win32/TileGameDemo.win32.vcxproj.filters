@@ -160,10 +160,13 @@
     <ClInclude Include="..\Classes\StateMachine\State.h">
       <Filter>StateMachine</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Entity\ActiveEntity.h">
+    <ClInclude Include="..\Classes\Entity\Entity.h">
       <Filter>Entity</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Entity\Entity.h">
+    <ClInclude Include="..\Classes\Entity\StaticEntity.h">
+      <Filter>Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Entity\HeroEntity.h">
       <Filter>Entity</Filter>
     </ClInclude>
   </ItemGroup>
@@ -229,7 +232,10 @@
     <ClCompile Include="..\Classes\StateMachine\State.cpp">
       <Filter>StateMachine</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Entity\ActiveEntity.cpp">
+    <ClCompile Include="..\Classes\Entity\StaticEntity.cpp">
+      <Filter>Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Entity\HeroEntity.cpp">
       <Filter>Entity</Filter>
     </ClCompile>
   </ItemGroup>
