@@ -69,3 +69,8 @@ cocos2d-x_SomeTD.xcworkspace/xcuserdata/kelyad.xcuserdatad/xcdebugger/Breakpoint
 /Tools/KKGUI/KKGUI.v11.suo
 /Tools/KKGUI/KKGUI.vcxproj.user
 /Tools/build-KKGUI-Desktop_Qt_5_0_2_MSVC2012_64bit-Debug/vc110.pdb
+
+/Tools/MapDesigner/*.sdf
+
+*.sdf
+*.opensdf
