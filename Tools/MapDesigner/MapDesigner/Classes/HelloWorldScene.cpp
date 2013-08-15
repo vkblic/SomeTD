@@ -35,10 +35,13 @@ bool HelloWorld::init()
 		if (!CCLayer::init())
 			break;
 
-		
 
+		CCSpriteFrameCache* cache = CCSpriteFrameCache::sharedSpriteFrameCache(); 
 
+		cache->addSpriteFramesWithFile("InGameUI.plist");
 
+		auto sprite = CCSprite::create("tower.png");
+		this->addChild(sprite);
 		// 		this->_tileMap = CCTMXTiledMap::create("TileMap.tmx");
 		// 		this->_background = _tileMap->layerNamed("Background");
 		//  

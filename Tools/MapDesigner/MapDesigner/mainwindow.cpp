@@ -12,3 +12,8 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
+
+HWND MainWindow::GetGLViweHandler()
+{
+	return (HWND)ui->graphicsView->winId() ;
+}

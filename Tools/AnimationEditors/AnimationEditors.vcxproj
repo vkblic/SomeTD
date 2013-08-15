@@ -11,8 +11,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{2104BAF8-840B-3D23-B497-672CC23E5D8F}</ProjectGuid>
-    <RootNamespace>MapDesigner</RootNamespace>
+    <ProjectGuid>{95B70B7F-1FA8-3EAA-A98E-E62F309DDE44}</ProjectGuid>
+    <RootNamespace>AnimationEditors</RootNamespace>
     <Keyword>Qt4VSv1.0</Keyword>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -23,7 +23,7 @@
     <CharacterSet>NotSet</CharacterSet>
     <ConfigurationType>Application</ConfigurationType>
     <IntermediateDirectory>release\</IntermediateDirectory>
-    <PrimaryOutput>MapDesigner</PrimaryOutput>
+    <PrimaryOutput>AnimationEditors</PrimaryOutput>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <PlatformToolSet>v110</PlatformToolSet>
@@ -32,7 +32,7 @@
     <CharacterSet>NotSet</CharacterSet>
     <ConfigurationType>Application</ConfigurationType>
     <IntermediateDirectory>debug\</IntermediateDirectory>
-    <PrimaryOutput>MapDesigner</PrimaryOutput>
+    <PrimaryOutput>AnimationEditors</PrimaryOutput>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings" />
@@ -46,12 +46,12 @@
   <PropertyGroup>
     <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">release\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Platform)\$(Configuration)</IntDir>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MapDesigner</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">AnimationEditors</TargetName>
     <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</IgnoreImportLibrary>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)$(Configuration).win32\</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Configuration).win32\</IntDir>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MapDesigner</TargetName>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Platform)\$(Configuration)</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">AnimationEditors</TargetName>
     <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</IgnoreImportLibrary>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -80,7 +80,7 @@
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <IgnoreImportLibrary>true</IgnoreImportLibrary>
       <LinkIncremental>false</LinkIncremental>
-      <OutputFile>$(OutDir)\MapDesigner.exe</OutputFile>
+      <OutputFile>$(OutDir)\AnimationEditors.exe</OutputFile>
       <RandomizedBaseAddress>true</RandomizedBaseAddress>
       <SubSystem>Windows</SubSystem>
       <SuppressStartupBanner>true</SuppressStartupBanner>
@@ -96,7 +96,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(QTDIR)\include;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtCore;debug;.;..\..\..\Qt\Qt5.1.0.x86\5.1.0\msvc2012\mkspecs\win32-msvc2012;.\GeneratedFiles;$(IDS_COCOS2DX_LIB)cocos2dx;$(IDS_COCOS2DX_LIB)cocos2dx\include;$(IDS_COCOS2DX_LIB)cocos2dx\kazmath\include;$(IDS_COCOS2DX_LIB)cocos2dx\platform\win32;$(IDS_COCOS2DX_LIB)cocos2dx\platform\third_party\win32;$(IDS_COCOS2DX_LIB)cocos2dx\platform\third_party\win32\OGLES;$(IDS_COCOS2DX_LIB)external;$(IDS_COCOS2DX_LIB)CocosDenshion\include;$(IDS_COCOS2DX_LIB)extensions\GUI;$(IDS_COCOS2DX_LIB)extensions;$(IDS_COCOS2DX_LIB)cocos2dx\support\tinyxml2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\Qt\Qt5.1.0.x86\5.1.0\msvc2012\include;..\..\..\Qt\Qt5.1.0.x86\5.1.0\msvc2012\include\QtWidgets;..\..\..\Qt\Qt5.1.0.x86\5.1.0\msvc2012\include\QtGui;..\..\..\Qt\Qt5.1.0.x86\5.1.0\msvc2012\include\QtANGLE;..\..\..\Qt\Qt5.1.0.x86\5.1.0\msvc2012\include\QtCore;debug;.;..\..\..\Qt\Qt5.1.0.x86\5.1.0\msvc2012\mkspecs\win32-msvc2012;.\GeneratedFiles;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>-Zm200 -w34100 -w34189 %(AdditionalOptions)</AdditionalOptions>
       <AssemblerListingLocation>debug\</AssemblerListingLocation>
       <BrowseInformation>false</BrowseInformation>
@@ -104,7 +104,7 @@
       <ExceptionHandling>Sync</ExceptionHandling>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;QT_WIDGETS_LIB;QT_GUI_LIB;QT_CORE_LIB;QT_OPENGL_ES_2;QT_OPENGL_ES_2_ANGLE;_ST_TOOLS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;QT_WIDGETS_LIB;QT_GUI_LIB;QT_CORE_LIB;QT_OPENGL_ES_2;QT_OPENGL_ES_2_ANGLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessToFile>false</PreprocessToFile>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
@@ -120,7 +120,7 @@
       <DataExecutionPrevention>true</DataExecutionPrevention>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <IgnoreImportLibrary>true</IgnoreImportLibrary>
-      <OutputFile>$(OutDir)\MapDesigner.exe</OutputFile>
+      <OutputFile>$(OutDir)\AnimationEditors.exe</OutputFile>
       <RandomizedBaseAddress>true</RandomizedBaseAddress>
       <SubSystem>Windows</SubSystem>
       <SuppressStartupBanner>true</SuppressStartupBanner>
@@ -135,8 +135,6 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Classes\AppDelegate.cpp" />
-    <ClCompile Include="Classes\HelloWorldScene.cpp" />
     <ClCompile Include="GeneratedFiles\Debug\moc_mainwindow.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -148,9 +146,9 @@
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="mainwindow.h">
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -DNDEBUG  "-I.\..\..\..\Qt\Qt5.1.0.x86\5.1.0\msvc2012\include" "-I.\..\..\..\Qt\Qt5.1.0.x86\5.1.0\msvc2012\include\QtWidgets" "-I.\..\..\..\Qt\Qt5.1.0.x86\5.1.0\msvc2012\include\QtGui" "-I.\..\..\..\Qt\Qt5.1.0.x86\5.1.0\msvc2012\include\QtANGLE" "-I.\..\..\..\Qt\Qt5.1.0.x86\5.1.0\msvc2012\include\QtCore" "-I.\release" "-I." "-I.\..\..\..\Qt\Qt5.1.0.x86\5.1.0\msvc2012\mkspecs\win32-msvc2012" "-I.\GeneratedFiles"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -DNDEBUG  "-I.\..\..\..\Qt\Qt5.1.0.x86\5.1.0\msvc2012\include" "-I.\..\..\..\Qt\Qt5.1.0.x86\5.1.0\msvc2012\include\QtWidgets" "-I.\..\..\..\Qt\Qt5.1.0.x86\5.1.0\msvc2012\include\QtGui" "-I.\..\..\..\Qt\Qt5.1.0.x86\5.1.0\msvc2012\include\QtANGLE" "-I.\..\..\..\Qt\Qt5.1.0.x86\5.1.0\msvc2012\include\QtCore" "-I.\release" "-I." "-I.\..\..\..\Qt\Qt5.1.0.x86\5.1.0\msvc2012\mkspecs\win32-msvc2012" "-I.\GeneratedFiles" "-IE:\Developer\[GameProgramming]\Sword9\Dependencies\Loki\include" "-IE:\Developer\[GameProgramming]\Sword9\Dependencies\boost_1_43_0" "-IC:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include"</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing mainwindow.h...</Message>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_ST_TOOLS  "-I$(QTDIR)\include" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtANGLE" "-I$(QTDIR)\include\QtCore" "-I.\debug" "-I." "-I.\..\..\..\Qt\Qt5.1.0.x86\5.1.0\msvc2012\mkspecs\win32-msvc2012" "-I.\GeneratedFiles" "-I$(IDS_COCOS2DX_LIB)cocos2dx" "-I$(IDS_COCOS2DX_LIB)cocos2dx\include" "-I$(IDS_COCOS2DX_LIB)cocos2dx\kazmath\include" "-I$(IDS_COCOS2DX_LIB)cocos2dx\platform\win32" "-I$(IDS_COCOS2DX_LIB)cocos2dx\platform\third_party\win32" "-I$(IDS_COCOS2DX_LIB)cocos2dx\platform\third_party\win32\OGLES" "-I$(IDS_COCOS2DX_LIB)external" "-I$(IDS_COCOS2DX_LIB)CocosDenshion\include" "-I$(IDS_COCOS2DX_LIB)extensions\GUI" "-I$(IDS_COCOS2DX_LIB)extensions" "-I$(IDS_COCOS2DX_LIB)cocos2dx\support\tinyxml2"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE  "-I.\..\..\..\Qt\Qt5.1.0.x86\5.1.0\msvc2012\include" "-I.\..\..\..\Qt\Qt5.1.0.x86\5.1.0\msvc2012\include\QtWidgets" "-I.\..\..\..\Qt\Qt5.1.0.x86\5.1.0\msvc2012\include\QtGui" "-I.\..\..\..\Qt\Qt5.1.0.x86\5.1.0\msvc2012\include\QtANGLE" "-I.\..\..\..\Qt\Qt5.1.0.x86\5.1.0\msvc2012\include\QtCore" "-I.\debug" "-I." "-I.\..\..\..\Qt\Qt5.1.0.x86\5.1.0\msvc2012\mkspecs\win32-msvc2012" "-I.\GeneratedFiles" "-IE:\Developer\[GameProgramming]\Sword9\Dependencies\Loki\include" "-IE:\Developer\[GameProgramming]\Sword9\Dependencies\boost_1_43_0" "-IC:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include"</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing mainwindow.h...</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
@@ -172,14 +170,7 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Classes\AppDelegate.h" />
-    <ClInclude Include="Classes\HelloWorldScene.h" />
     <ClInclude Include="GeneratedFiles\ui_mainwindow.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\libs\cocos2dx\proj.win32\cocos2d.vcxproj">
-      <Project>{98a51ba8-fc3a-415b-ac8f-8c7bd464e93e}</Project>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />
