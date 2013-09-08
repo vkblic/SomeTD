@@ -1,7 +1,7 @@
 ﻿#include "StateMachine.h"
 
-template <class entity_type>
-StateMachine<entity_type>::StateMachine(entity_type* owner)
+template <class ENTITY_TYPE>
+StateMachine<ENTITY_TYPE>::StateMachine(ENTITY_TYPE* owner)
 	: m_pOwner(owner)
 	, m_pCurrentState(nullptr)
 	, m_pPreviousState(nullptr)
@@ -10,8 +10,8 @@ StateMachine<entity_type>::StateMachine(entity_type* owner)
 
 }
 
-template <class entity_type>
-StateMachine<entity_type>::~StateMachine(void)
+template <class ENTITY_TYPE>
+StateMachine<ENTITY_TYPE>::~StateMachine(void)
 {
 
 }

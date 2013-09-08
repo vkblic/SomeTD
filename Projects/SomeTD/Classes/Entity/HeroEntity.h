@@ -3,6 +3,7 @@
 
 #include "cocos2d.h"
 #include "StaticEntity.h"
+#include <memory>
 using namespace cocos2d;
 
 namespace SomeTD
@@ -10,7 +11,6 @@ namespace SomeTD
 
 	class HeroEntity : public StaticEntity
 	{
-
 
 	};
 

@@ -1,22 +1,22 @@
 ﻿#pragma once
 #include "State.h"
-template <class entity_type>
+template <class ENTITY_TYPE>
 class StateMachine
 {
 public:
-	StateMachine(entity_type* owner);
+	StateMachine(ENTITY_TYPE* owner);
 	virtual ~StateMachine(void);
 
 public:
 
 	// use to initialize the FSM
-	void SetCurrentState(State<entity_type>* state)	 { m_pCurrentState = state; }
-	void SetPreviousState(State<entity_type>* state) { m_pPreviousState = state; }
-	void SetGlobalState(State<entity_type>* state)	 { m_pGlobalState = state; }
+	void SetCurrentState(State<ENTITY_TYPE>* state)	 { m_pCurrentState = state; }
+	void SetPreviousState(State<ENTITY_TYPE>* state) { m_pPreviousState = state; }
+	void SetGlobalState(State<ENTITY_TYPE>* state)	 { m_pGlobalState = state; }
 
-	State<entity_type>*  GetCurrentState()  const { return m_pCurrentState; }
-	State<entity_type>*  GetGlobalState()   const { return m_pGlobalState; }
-	State<entity_type>*  GetPreviousState() const { return m_pPreviousState; }
+	State<ENTITY_TYPE>*  GetCurrentState()  const { return m_pCurrentState; }
+	State<ENTITY_TYPE>*  GetGlobalState()   const { return m_pGlobalState; }
+	State<ENTITY_TYPE>*  GetPreviousState() const { return m_pPreviousState; }
 
 	void Update(float dt)
 	{
@@ -43,7 +43,7 @@ public:
 		return false;
 	}
 
-	void ChangeState(State<entity_type>* newState)
+	void ChangeState(State<ENTITY_TYPE>* newState)
 	{
 		CC_ASSERT(newState != nullptr && "[StateMachine: {HandleMessage}]: Trying to assign null state to current!");
 
@@ -68,7 +68,7 @@ public:
 
 	//returns true if the current state's type is equal to the type of the
 	//class passed as a parameter. 
-	bool  isInState(const State<entity_type>& st)const
+	bool  isInState(const State<ENTITY_TYPE>& st)const
 	{
 		if (typeid(*m_pCurrentState) == typeid(st)) return true;
 		return false;
@@ -77,12 +77,12 @@ public:
 
 private:
 
-	entity_type*			m_pOwner;
-	State<entity_type>*		m_pCurrentState;
+	ENTITY_TYPE*			m_pOwner;
+	State<ENTITY_TYPE>*		m_pCurrentState;
 
 	// a record of the last state, use for global state
-	State<entity_type>*		m_pPreviousState;
-	State<entity_type>*		m_pGlobalState;
+	State<ENTITY_TYPE>*		m_pPreviousState;
+	State<ENTITY_TYPE>*		m_pGlobalState;
 
 	
 };
