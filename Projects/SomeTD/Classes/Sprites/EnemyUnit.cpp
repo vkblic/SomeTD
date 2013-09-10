@@ -375,14 +375,14 @@ void EnemyUnit::sendMovingmsg()
 }
 
 
-bool EnemyUnit::isTargetNoAvailable(entity_id attackerId)
+bool EnemyUnit::isTargetNoAvailable(ENTITY_ID attackerId)
 {
 	if (mTargetID == attackerId)
 		return true;
 	return false;
 }
 
-void EnemyUnit::removeAttacker(entity_id attackerID)
+void EnemyUnit::removeAttacker(ENTITY_ID attackerID)
 {
 	auto iter = mAttackers.find(attackerID);
 	if ( iter == mAttackers.end() )
@@ -399,17 +399,17 @@ void EnemyUnit::removeTarget()
 	mTargetID = non_entity;
 }
 
-void EnemyUnit::addAttacker(entity_id attackerID, CCRect rect)
+void EnemyUnit::addAttacker(ENTITY_ID attackerID, CCRect rect)
 {
 	//CCLog("[ EnemyUnit::addAttacker]: attacker: %d before: %d", attackerID, mAttackers.size());
-	mAttackers.insert(std::pair<entity_id, CCRect>(attackerID, rect));
+	mAttackers.insert(std::pair<ENTITY_ID, CCRect>(attackerID, rect));
 	//CCLog("[ EnemyUnit::addAttacker]: attacker: %d after: %d", attackerID, mAttackers.size());
 	CCLog("Enemy: [%d] add attacker: [%d]", mEntityID, attackerID);
 }
 
 
 
-void EnemyUnit::underAttack(int damage, entity_id attackerID, CCRect rect)
+void EnemyUnit::underAttack(int damage, ENTITY_ID attackerID, CCRect rect)
 {
 	addAttacker(attackerID, rect);
 	this->underAttack(damage);

@@ -67,7 +67,7 @@ void EnemyManager::readEnemyInfo(const char* fileName)
 
 #pragma region Range checker
 
-entity_id EnemyManager::getEnemyInRange(CCPoint pos, int rangeRadius)
+ENTITY_ID EnemyManager::getEnemyInRange(CCPoint pos, int rangeRadius)
 {
 
 	for(auto it = this->mEnemies.begin();it != this->mEnemies.end(); ++it)
@@ -88,7 +88,7 @@ entity_id EnemyManager::getEnemyInRange(CCPoint pos, int rangeRadius)
 	return non_entity;
 }
 
-bool EnemyManager::isEnemyInRange(CCPoint pos, int rangeRadius,  entity_id enemyID)
+bool EnemyManager::isEnemyInRange(CCPoint pos, int rangeRadius,  ENTITY_ID enemyID)
 {
 	if (enemyID == -1)
 		return false;
@@ -107,7 +107,7 @@ bool EnemyManager::isEnemyInRange(CCPoint pos, int rangeRadius,  entity_id enemy
 	//CCLog("tower: pos(%f, %f)", pos.x, pos.y );
 	return false;
 }
-bool EnemyManager::isEnemyInRangeAndInTowerRange(CCPoint pos, int rangeRadius, CCPoint towerPos, int towerRangeRadius, entity_id enemyID)
+bool EnemyManager::isEnemyInRangeAndInTowerRange(CCPoint pos, int rangeRadius, CCPoint towerPos, int towerRangeRadius, ENTITY_ID enemyID)
 {
 
 	if (enemyID == -1)
@@ -180,7 +180,7 @@ EnemyUnit* EnemyManager::addEnemy(const char* enemyName, CCPoint entry)
 
 	auto entityID = EntityManager::sharedEntityManager()->generateID();
 	//CCLog("EnemyManager::addEnemy: retainCount: %d", enemy->retainCount());
-	this->mEnemies.insert(std::pair< entity_id, EnemyUnit*>(entityID, enemy));
+	this->mEnemies.insert(std::pair< ENTITY_ID, EnemyUnit*>(entityID, enemy));
 	batch->addChild(enemy);
 	enemy->setEntityID(entityID);
 	enemy->setFSM_Machine(FSM_Enemy);
@@ -197,19 +197,19 @@ void EnemyManager::addEnemyAndRush(const char* name, CCPoint entry, const std::v
 }
 
 
-void EnemyManager::removeEnemy( entity_id enemyID)
+void EnemyManager::removeEnemy( ENTITY_ID enemyID)
 {
 	auto it = this->mEnemies.find(enemyID);
 	if(it == this->mEnemies.end())
 		kkAssertMsg(false, "must find id in map! there must be some error some where!");
 
-	this->mRemovedEnemies.insert(std::map< entity_id, EnemyUnit*>::value_type(enemyID, it->second));
+	this->mRemovedEnemies.insert(std::map< ENTITY_ID, EnemyUnit*>::value_type(enemyID, it->second));
 
 	this->mEnemies.erase(it);
 	EntityManager::sharedEntityManager()->removeEntity(enemyID);
 }
 
-void EnemyManager::eraseEnemy( entity_id enemyID)
+void EnemyManager::eraseEnemy( ENTITY_ID enemyID)
 {
 	auto it = this->mRemovedEnemies.find(enemyID);
 	if(it == this->mRemovedEnemies.end())
@@ -234,7 +234,7 @@ void EnemyManager::clearUnusedEnemise()
 	this->mUnusedEnemy.clear();
 }
 
-EnemyUnit* EnemyManager::getAvailableEnemy( entity_id enemyID)
+EnemyUnit* EnemyManager::getAvailableEnemy( ENTITY_ID enemyID)
 {
 	auto it = this->mEnemies.find(enemyID);
 	if (it == this->mEnemies.end())
@@ -268,17 +268,17 @@ void EnemyManager::changeState( EnemyUnit* entity, ActiveObj_States state )
 	msgRount->sendMsg(MSG_RESERVED_Enter, entity->getEntityID(), entity->getEntityID());
 }
 
-void EnemyManager::sendMsg( MsgName name, entity_id senderID, entity_id receiverID )
+void EnemyManager::sendMsg( MsgName name, ENTITY_ID senderID, ENTITY_ID receiverID )
 {
 	MsgRoute::sharedMsgRount()->sendMsg(name, senderID, receiverID);
 }
 
-void EnemyManager::sendDelayedMsg(MsgName name, int delay, entity_id senderID, entity_id receiverID )
+void EnemyManager::sendDelayedMsg(MsgName name, int delay, ENTITY_ID senderID, ENTITY_ID receiverID )
 {
 	MsgRoute::sharedMsgRount()->sendDelayedMsg(name, delay, senderID, receiverID);
 }
 
-void EnemyManager::sendCollisionRecMsg(entity_id senderID, entity_id receiverID, CCRect rect)
+void EnemyManager::sendCollisionRecMsg(ENTITY_ID senderID, ENTITY_ID receiverID, CCRect rect)
 {
 	CollisionRectMsg msg;
 	msg.name = MSG_ReceivePosition;
@@ -289,7 +289,7 @@ void EnemyManager::sendCollisionRecMsg(entity_id senderID, entity_id receiverID,
 	MsgRoute::sharedMsgRount()->sendMsg(msg);
 }
 
-void EnemyManager::sendDamageMsg(entity_id senderID, entity_id receiverID, int damage)
+void EnemyManager::sendDamageMsg(ENTITY_ID senderID, ENTITY_ID receiverID, int damage)
 {
 	MsgDamage msg;
 	msg.name = MSG_Damage;

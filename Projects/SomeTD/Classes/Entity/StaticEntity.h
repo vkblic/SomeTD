@@ -2,9 +2,12 @@
 #ifndef _STATIC_ENTITY_
 #define _STATIC_ENTITY_
 
-#include "cocos2d.h"
 #include "Entity.h"
+
+#include "cocos2d.h"
+
 #include "../Model/Models.h"
+
 using namespace cocos2d;
 
 namespace SomeTD
@@ -20,9 +23,9 @@ namespace SomeTD
 
 	protected:
 
-		virtual bool myInit(CCSpriteFrame* defaultFrame);
+		virtual bool __MyInit(CCSpriteFrame* _defual_frame);
 
-		CCSpriteFrame* mDefaultFrame;
+		CCSpriteFrame* default_frame_;
 
 	};
 

@@ -25,8 +25,8 @@ typedef unsigned short uint16;
 typedef unsigned char uint8;
 
 // id seed
-typedef uint64 entity_id;
-const entity_id nonEntity = -1;
+typedef uint64 ENTITY_ID;
+const ENTITY_ID nonEntity = -1;
 #define non_entity nonEntity
 
 inline void kkAssertMsg(bool cond, const char* msg)

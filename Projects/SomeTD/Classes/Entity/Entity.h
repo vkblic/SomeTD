@@ -9,17 +9,17 @@ using namespace cocos2d;
 
 namespace SomeTD
 {
-	struct MsgObject;
+	struct MsgBase;
 
 	class BaseEntity : public CCSprite
 	{
 	protected:
-		entity_id mEntityID;
+		ENTITY_ID entity_id;
 	public: 
-		entity_id getEntityID() { return mEntityID; }
-		void setEntityID( entity_id id ) { mEntityID = id; }
+		ENTITY_ID entity_id() { return entity_id; }
+		void set_entity_id( ENTITY_ID id ) { entity_id = id; }
 
-		virtual bool HandleMessage(const MsgObject& msg) = 0;
+		virtual bool HandleMessage(const MsgBase& msg) = 0;
 	};
 }
 

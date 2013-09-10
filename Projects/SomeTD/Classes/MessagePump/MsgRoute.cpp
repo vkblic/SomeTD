@@ -52,7 +52,7 @@ MsgRoute::~MsgRoute()
 
 }
 
-void MsgRoute::sendMsg( MsgName name, entity_id senderID, entity_id receiverID )
+void MsgRoute::sendMsg( MsgName name, ENTITY_ID senderID, ENTITY_ID receiverID )
 {
 	MsgObject msg;
 	msg.name = name;
@@ -67,7 +67,7 @@ void MsgRoute::sendMsg(const MsgObject& msg)
 	this->routeMessage(msg);
 }
 
-void MsgRoute::sendDelayedMsg( MsgName name, int delay, entity_id senderID, entity_id receiverID )
+void MsgRoute::sendDelayedMsg( MsgName name, int delay, ENTITY_ID senderID, ENTITY_ID receiverID )
 {
 	MsgObject msg;
 	msg.name = name;

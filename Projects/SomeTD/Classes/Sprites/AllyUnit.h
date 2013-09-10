@@ -36,7 +36,7 @@ public:
 public:
 	void frameListener(float dt); // execute every frame
 
-	void removeAttacker(entity_id attackerID);
+	void removeAttacker(ENTITY_ID attackerID);
 	//void run(std::vector<WayPointEx>& wayPoints);
 	void removeTarget();
 
@@ -45,7 +45,7 @@ public:
 	void myInit();
 
 
-	bool targetIs(entity_id targetID) { return mTargetID == targetID; }
+	bool targetIs(ENTITY_ID targetID) { return mTargetID == targetID; }
 	/*
 	*
 	*
@@ -72,7 +72,7 @@ public:
 public: 
 	// idle
 	bool findTarget();
-	bool targetCheck( entity_id targetID );
+	bool targetCheck( ENTITY_ID targetID );
 	void onEnterIdle()
 	{
 		mTargetID = non_entity;
@@ -98,7 +98,7 @@ public:
 	void exitAttacing();
 
 	//be injured
-	void underAttack( int damage, entity_id attackerID, CCRect rect );
+	void underAttack( int damage, ENTITY_ID attackerID, CCRect rect );
 
 	//dead
 	void destory();
@@ -112,11 +112,11 @@ private:
 
 
 	//int mMaxHP;
-	entity_id mTargetID;
+	ENTITY_ID mTargetID;
 	CCRect mTargetCollisionRect;
 	CCRect mPreTargetCollisionRect;
 	CCPoint mDestinationPos;
-	std::map<entity_id, CCRect> mAttackers;
+	std::map<ENTITY_ID, CCRect> mAttackers;
 
 	// other
 	int mTargetSearchInterval;

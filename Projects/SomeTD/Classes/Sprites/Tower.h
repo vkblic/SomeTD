@@ -106,7 +106,7 @@ private:
 	*/
 	CCSprite* mShooter;
 	CCSprite* mTerrain;
-	entity_id mTargetID;
+	ENTITY_ID mTargetID;
 	CCSprite* mRangeSprite;
 	int mAttackRange;
 private:

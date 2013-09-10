@@ -46,8 +46,8 @@ enum FSM_Machine
 struct MsgObject
 {
 	MsgName name;				//name of message (an enumerated type works well)
-	entity_id sender_id;		//unique id of sender
-	entity_id receiver_id;	//unique id of receiver
+	ENTITY_ID sender_id;		//unique id of sender
+	ENTITY_ID receiver_id;	//unique id of receiver
 	float delivery_time;		//deliver message at this time
 
 	//Note that the sender_id and receiver_id are not pointers to game objects.

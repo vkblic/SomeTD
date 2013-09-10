@@ -70,7 +70,7 @@ void AllyManager::readAlliesInfo(const char* fileName)
 
 #pragma region Range checker
 
-entity_id AllyManager::getObjInRange(const CCPoint& pos, int rangeRadius)
+ENTITY_ID AllyManager::getObjInRange(const CCPoint& pos, int rangeRadius)
 {
 
 	for(auto it = this->mAllies.begin();it != this->mAllies.end(); ++it)
@@ -91,7 +91,7 @@ entity_id AllyManager::getObjInRange(const CCPoint& pos, int rangeRadius)
 	return -1;
 }
 
-bool AllyManager::isOjbectInRange(const CCPoint& pos, int rangeRadius,  entity_id id)
+bool AllyManager::isOjbectInRange(const CCPoint& pos, int rangeRadius,  ENTITY_ID id)
 {
 	auto it = this->mAllies.find(id);
 
@@ -128,7 +128,7 @@ AllyUnit* AllyManager::addAlly(const char* enemyName, const CCPoint& pos, const 
 	//CCLog("EnemyManager::addEnemy: retainCount: %d", enemy->retainCount());
 	auto entityID = EntityManager::sharedEntityManager()->generateID();
 	// for debug		entityID += 10000;
-	this->mAllies.insert(std::pair< entity_id, AllyUnit*>(entityID, ally));
+	this->mAllies.insert(std::pair< ENTITY_ID, AllyUnit*>(entityID, ally));
 	batch->addChild(ally);
 	ally->setEntityID(entityID);
 	ally->setPosition(pos);
@@ -166,20 +166,20 @@ CCSpriteBatchNode* AllyManager::getBatchNode( const char* textureSetName )
 
 
 
-void AllyManager::removeAllyByID( entity_id id)
+void AllyManager::removeAllyByID( ENTITY_ID id)
 {
 	auto it = this->mAllies.find(id);
 	if(it == this->mAllies.end())
 		kkAssertMsg(false, "[AllyManager::removeAllyByID], can't find ally in mAllies map!");
 
-	this->mRemovedAllies.insert(std::map< entity_id, AllyUnit*>::value_type(id, it->second));
+	this->mRemovedAllies.insert(std::map< ENTITY_ID, AllyUnit*>::value_type(id, it->second));
 
 	this->mAllies.erase(it);
 
 	EntityManager::sharedEntityManager()->removeEntity(id);
 }
 
-void AllyManager::eraseAllyByID( entity_id id)
+void AllyManager::eraseAllyByID( ENTITY_ID id)
 {
 	auto it = this->mRemovedAllies.find(id);
 	if(it == this->mRemovedAllies.end())
@@ -204,7 +204,7 @@ void AllyManager::clearUnusedAllies()
 	this->mUnusedAllies.clear();
 }
 
-AllyUnit* AllyManager::getAvailableObject( entity_id id)
+AllyUnit* AllyManager::getAvailableObject( ENTITY_ID id)
 {
 	auto it = this->mAllies.find(id);
 	if (it == this->mAllies.end())
@@ -225,12 +225,12 @@ void AllyManager::changeState( AllyUnit* entity, ActiveObj_States state )
 	msgRount->sendMsg(MSG_RESERVED_Enter, entity->getEntityID(), entity->getEntityID());
 }
 
-void AllyManager::sendMsg( MsgName name, entity_id senderID, entity_id receiverID )
+void AllyManager::sendMsg( MsgName name, ENTITY_ID senderID, ENTITY_ID receiverID )
 {
 	MsgRoute::sharedMsgRount()->sendMsg(name, senderID, receiverID);
 }
 
-void AllyManager::sendCollisionRecMsg(entity_id senderID, entity_id receiverID, CCRect rect)
+void AllyManager::sendCollisionRecMsg(ENTITY_ID senderID, ENTITY_ID receiverID, CCRect rect)
 {
 	CollisionRectMsg msg;
 	msg.name = MSG_ReceivePosition;
@@ -241,7 +241,7 @@ void AllyManager::sendCollisionRecMsg(entity_id senderID, entity_id receiverID, 
 	MsgRoute::sharedMsgRount()->sendMsg(msg);
 }
 
-void AllyManager::sendDamageMsg(entity_id senderID, entity_id receiverID, int damage)
+void AllyManager::sendDamageMsg(ENTITY_ID senderID, ENTITY_ID receiverID, int damage)
 {
 	MsgDamage msg;
 	msg.name = MSG_Damage;

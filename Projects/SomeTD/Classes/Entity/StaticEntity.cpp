@@ -16,14 +16,14 @@ using namespace cocos2d;
 namespace SomeTD
 {
 
-	bool StaticEntity::myInit(CCSpriteFrame* defaultFrame)
+	bool StaticEntity::__MyInit(CCSpriteFrame* _default_frame)
 	{
-		kkAssertMsg(defaultFrame != nullptr, "[StaticEntity:{myInit}]: defaultFrame is null!");
-		mDefaultFrame = defaultFrame;
+		kkAssertMsg(_default_frame != nullptr, "[StaticEntity:{myInit}]: defaultFrame is null!");
+		default_frame_ = _default_frame;
 	}
 
 
-	CCRect StaticEntity::getCollisionRect()
+	CCRect StaticEntity::GetCollisionRect()
 	{
 		//auto colorRect = this->getColorRect();
 		CCPoint pos = this->getPosition();

@@ -12,13 +12,13 @@ class Entity : public CCSprite
 {
 
 protected:
-	entity_id mEntityID;
+	ENTITY_ID mEntityID;
 	FSM_Machine mFSM_Machine;
 public: 
-	entity_id getEntityID() { return mEntityID; }
-	void setEntityID( entity_id id ) { mEntityID = id; }
+	ENTITY_ID getEntityID() { return mEntityID; }
+	void setEntityID( ENTITY_ID id ) { mEntityID = id; }
 
-	entity_id getFSM_Machine() { return mFSM_Machine; }
+	ENTITY_ID getFSM_Machine() { return mFSM_Machine; }
 	void setFSM_Machine( FSM_Machine machine ) { mFSM_Machine = machine; }
 };
 

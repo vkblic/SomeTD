@@ -543,7 +543,7 @@ void Tower::update(float dt)
 			// if no target, we get one 
 			if (this->mTargetID == -1)
 			{
-				entity_id target = EnemyManager::sharedEnemyManager()->getEnemyInRange(this->getPosition(), mAttackRange);
+				ENTITY_ID target = EnemyManager::sharedEnemyManager()->getEnemyInRange(this->getPosition(), mAttackRange);
 				if(target != -1)
 					this->mTargetID = target;
 			}
@@ -552,7 +552,7 @@ void Tower::update(float dt)
 				// if there's a target, available check 
 				if(!EnemyManager::sharedEnemyManager()->isEnemyInRange(this->getPosition(), mAttackRange, mTargetID))
 				{
-					entity_id target = EnemyManager::sharedEnemyManager()->getEnemyInRange(this->getPosition(), mAttackRange);
+					ENTITY_ID target = EnemyManager::sharedEnemyManager()->getEnemyInRange(this->getPosition(), mAttackRange);
 					//CCLog("tower get new target: %d", target);
 					this->mTargetID = target;
 				}
@@ -684,7 +684,7 @@ void Tower::onShoot()
 	// check if target is still available, if not, get one.
 	if(!EnemyManager::sharedEnemyManager()->isEnemyInRange(this->getPosition(), mAttackRange, mTargetID))
 	{
-		entity_id target = EnemyManager::sharedEnemyManager()->getEnemyInRange(this->getPosition(), mAttackRange);
+		ENTITY_ID target = EnemyManager::sharedEnemyManager()->getEnemyInRange(this->getPosition(), mAttackRange);
 		//CCLog("tower get new target: %d when shooting", target);
 		mTargetID = target;
 	}

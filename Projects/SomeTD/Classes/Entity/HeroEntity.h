@@ -1,8 +1,8 @@
 #ifndef _HERO_ENTITY_
 #define _HERO_ENTITY_
 
-#include "cocos2d.h"
 #include "StaticEntity.h"
+#include "./StateMachine/StateMachine.h"
 #include <memory>
 using namespace cocos2d;
 
@@ -11,6 +11,8 @@ namespace SomeTD
 
 	class HeroEntity : public StaticEntity
 	{
+	private:
+		StateMachine<HeroEntity>* state_machine;
 
 	};
 

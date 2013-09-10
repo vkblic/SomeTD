@@ -28,7 +28,7 @@ public:
 
 	
 
-	void removeEntity( entity_id entityID);
+	void removeEntity( ENTITY_ID entityID);
 
 	/*
 	 *get the nearness enemy unit in range 
@@ -38,17 +38,17 @@ public:
 	 *@return	a valid enemy object pointer, if it's available
 	 *@			if not(destroyed of out of screen), the value NULL
 	 */
-	Entity* getEntity( entity_id entityID);
+	Entity* getEntity( ENTITY_ID entityID);
 
-	entity_id generateID()
+	ENTITY_ID generateID()
 	{
 		id_seed++;
 		return id_seed;
 	}
 
 private:
-	entity_id id_seed;
-	std::map<entity_id, Entity*> mEntityMap;
+	ENTITY_ID id_seed;
+	std::map<ENTITY_ID, Entity*> mEntityMap;
 };
 
 #endif

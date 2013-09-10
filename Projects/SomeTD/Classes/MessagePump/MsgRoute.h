@@ -18,9 +18,9 @@ private:
 	static MsgRoute* mInstance;
 
 public:
-	void sendMsg( MsgName name, entity_id senderID, entity_id receiverID );
+	void sendMsg( MsgName name, ENTITY_ID senderID, ENTITY_ID receiverID );
 	void sendMsg(const MsgObject& msg);
-	void sendDelayedMsg( MsgName name, int delay, entity_id senderID, entity_id receiverID );
+	void sendDelayedMsg( MsgName name, int delay, ENTITY_ID senderID, ENTITY_ID receiverID );
 	//void broadcaseMsg(const MsgObject& msg);
 	void routeMessage(const MsgObject& msg );
 	void routeDelayedMessages();

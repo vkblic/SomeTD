@@ -45,18 +45,18 @@ public:
 
 public:
 	void myInit();//自定义初始化函数
-	void underAttack(int damage, entity_id attackerID, CCRect rect);
+	void underAttack(int damage, ENTITY_ID attackerID, CCRect rect);
 	void underAttack(int damage);
 	void destory();
 	void onDestoryed();
 	void onArriveEndPoint();
 
 
-	void addAttacker(entity_id attackerID, CCRect rect);
-	void removeAttacker(entity_id attackerID);
+	void addAttacker(ENTITY_ID attackerID, CCRect rect);
+	void removeAttacker(ENTITY_ID attackerID);
 	void removeTarget();
-	void setTarget(entity_id targetID) {mTargetID = targetID;}
-	entity_id getTarget(){return mTargetID;}
+	void setTarget(ENTITY_ID targetID) {mTargetID = targetID;}
+	ENTITY_ID getTarget(){return mTargetID;}
 	void setTargetCollisionRect( const CCRect& rect ) 
 	{
 		this->mTargetCollisionRect = rect;
@@ -87,7 +87,7 @@ public:
 
 
 	//stoped
-	bool isTargetNoAvailable(entity_id attackerId);
+	bool isTargetNoAvailable(ENTITY_ID attackerId);
 
 protected:
 	int mCurWayPointIndex;
@@ -97,9 +97,9 @@ protected:
 protected:
 
 	//eEnemyStatus mCurStatus;
-	entity_id mTargetID;
+	ENTITY_ID mTargetID;
 	CCRect mTargetCollisionRect;
-	std::map<entity_id, CCRect> mAttackers;
+	std::map<ENTITY_ID, CCRect> mAttackers;
 };
 
 

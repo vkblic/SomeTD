@@ -28,10 +28,10 @@ EntityManager* EntityManager::sharedEntityManager()
 
 void EntityManager::addEntity(Entity* entity)
 {
-	this->mEntityMap.insert(std::pair<entity_id, Entity*>(entity->getEntityID(), entity));
+	this->mEntityMap.insert(std::pair<ENTITY_ID, Entity*>(entity->getEntityID(), entity));
 }
 
-Entity* EntityManager::getEntity(entity_id entityID)
+Entity* EntityManager::getEntity(ENTITY_ID entityID)
 {
 	auto iter = mEntityMap.find(entityID);
 	if(iter != mEntityMap.end())
@@ -39,7 +39,7 @@ Entity* EntityManager::getEntity(entity_id entityID)
 	return nullptr;
 }
 
-void EntityManager::removeEntity(entity_id entityID)
+void EntityManager::removeEntity(ENTITY_ID entityID)
 {
 	auto iter = mEntityMap.find(entityID);
 	if(iter == mEntityMap.end())

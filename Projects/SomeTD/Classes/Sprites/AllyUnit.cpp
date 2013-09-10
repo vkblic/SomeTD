@@ -69,7 +69,7 @@ void AllyUnit::onExit()
 }
 bool AllyUnit::findTarget()
 {
-	entity_id id = EnemyManager::sharedEnemyManager()->getEnemyInRange(this->getPosition(), mEntityInfo->alertRange);
+	ENTITY_ID id = EnemyManager::sharedEnemyManager()->getEnemyInRange(this->getPosition(), mEntityInfo->alertRange);
 	if (id == non_entity)
 		return false;
 
@@ -80,7 +80,7 @@ bool AllyUnit::findTarget()
 	return true;
 }
 
-bool AllyUnit::targetCheck(entity_id targetID)
+bool AllyUnit::targetCheck(ENTITY_ID targetID)
 {
 	if (EnemyManager::sharedEnemyManager()->isEnemyInRangeAndInTowerRange(this->getPosition(), mEntityInfo->alertRange, mTowerPos, mTowerAlertRange, targetID))
 	{
@@ -89,7 +89,7 @@ bool AllyUnit::targetCheck(entity_id targetID)
 	return false;
 }
 
-void AllyUnit::removeAttacker(entity_id attackerID)
+void AllyUnit::removeAttacker(ENTITY_ID attackerID)
 {
 	auto iter = mAttackers.find(attackerID);
 	if ( iter == mAttackers.end() )
@@ -330,9 +330,9 @@ void AllyUnit::onExitMoving()
 	this->setDisplayFrame(mEntityInfo->defaultFrame);
 }
 
-void AllyUnit::underAttack(int damage, entity_id attackerID, CCRect rect)
+void AllyUnit::underAttack(int damage, ENTITY_ID attackerID, CCRect rect)
 {
-	mAttackers.insert(std::pair<entity_id, CCRect>(attackerID, rect));
+	mAttackers.insert(std::pair<ENTITY_ID, CCRect>(attackerID, rect));
 	this->mCurHP -= damage;
 	this->updateHpSpriteSize();
 	if(this->mCurHP <= 0)
