@@ -29,7 +29,7 @@ void StateMachine::Update(float dt)
 }
 
 template <class Entity_Type>
-bool StateMachine::HandleMessage(const MsgObject& _msg) const
+bool StateMachine::HandleMessage(const MsgBase& _msg) const
 {
 	// first check if current state is valid 
 	if (current_state_ != nullptr)

@@ -264,7 +264,7 @@ void AllyManager::frameTrigger(float dt)
 
 
 
-void AllyManager::fsmTranslater(const MsgObject& msg, AllyUnit* ally)
+void AllyManager::fsmTranslater(const MsgBase& msg, AllyUnit* ally)
 {
 	//MsgRoute* msgRoute = MsgRoute::sharedMsgRount();
 	//AllyUnit* ally = this->getAvailableObject(msg.receiver_id);

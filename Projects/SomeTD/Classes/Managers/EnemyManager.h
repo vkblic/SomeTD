@@ -88,7 +88,7 @@ public:
 	// fsm
 public:
 
-	void fsmTranslater( const MsgObject& msg, EnemyUnit* enemy);
+	void fsmTranslater( const MsgBase& msg, EnemyUnit* enemy);
 	void changeState( EnemyUnit* unit, ActiveObj_States state );
 	void sendMsg( MsgName name, ENTITY_ID senderID, ENTITY_ID receiverID );
 	void sendDelayedMsg(MsgName name, int delay, ENTITY_ID senderID, ENTITY_ID receiverID );

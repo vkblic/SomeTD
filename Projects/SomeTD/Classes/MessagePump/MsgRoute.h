@@ -19,23 +19,23 @@ private:
 
 public:
 	void sendMsg( MsgName name, ENTITY_ID senderID, ENTITY_ID receiverID );
-	void sendMsg(const MsgObject& msg);
+	void sendMsg(const MsgBase& msg);
 	void sendDelayedMsg( MsgName name, int delay, ENTITY_ID senderID, ENTITY_ID receiverID );
 	//void broadcaseMsg(const MsgObject& msg);
-	void routeMessage(const MsgObject& msg );
+	void routeMessage(const MsgBase& msg );
 	void routeDelayedMessages();
-	void restoreDelayedMsg(const MsgObject& msg);
+	void restoreDelayedMsg(const MsgBase& msg);
 	const unsigned long& getTick() {return mCurTick;}
 	void TickRun(){ mCurTick++; }
 private:
 	struct msgCompare
 	{
-		bool operator() (const MsgObject& first, const MsgObject& second)
+		bool operator() (const MsgBase& first, const MsgBase& second)
 		{
 			return first.delivery_time > second.delivery_time;
 		}
 	};
-	std::priority_queue<MsgObject, std::vector<MsgObject>, msgCompare> mMsgQueue;
+	std::priority_queue<MsgBase, std::vector<MsgBase>, msgCompare> mMsgQueue;
 	unsigned long mCurTick;
 
 

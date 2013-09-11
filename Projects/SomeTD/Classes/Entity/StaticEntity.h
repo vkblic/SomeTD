@@ -17,7 +17,7 @@ namespace SomeTD
 	{
 
 	public:
-		CCRect getCollisionRect();
+		CCRect GetCollisionRect();
 
 
 
