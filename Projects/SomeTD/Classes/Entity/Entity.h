@@ -14,10 +14,10 @@ namespace SomeTD
 	class BaseEntity : public CCSprite
 	{
 	protected:
-		ENTITY_ID entity_id;
+		ENTITY_ID entity_id_;
 	public: 
-		ENTITY_ID entity_id() { return entity_id; }
-		void set_entity_id( ENTITY_ID id ) { entity_id = id; }
+		ENTITY_ID entity_id() { return entity_id_; }
+		void set_entity_id( ENTITY_ID id ) { entity_id_ = id; }
 
 		virtual bool HandleMessage(const MsgBase& msg) = 0;
 	};

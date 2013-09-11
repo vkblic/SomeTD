@@ -18,7 +18,7 @@ StateMachine<Entity_Type>::~StateMachine(void)
 }
 
 template <class Entity_Type>
-void StateMachine::Update(float dt)
+void StateMachine<Entity_Type>::Update(float dt)
 {
 	if(global_state_ != nullptr)
 		global_state_->Update(owner_, dt);
@@ -29,7 +29,7 @@ void StateMachine::Update(float dt)
 }
 
 template <class Entity_Type>
-bool StateMachine::HandleMessage(const MsgObject& _msg) const
+bool StateMachine<Entity_Type>::HandleMessage(const MsgBase& _msg) const
 {
 	// first check if current state is valid 
 	if (current_state_ != nullptr)
@@ -44,7 +44,7 @@ bool StateMachine::HandleMessage(const MsgObject& _msg) const
 }
 
 template <class Entity_Type>
-void StateMachine::ChangeState(State<Entity_Type>* _new_state)
+void StateMachine<Entity_Type>::ChangeState(State<Entity_Type>* _new_state)
 {
 	kkAssertMsg( _new_state != nullptr && "[StateMachine: {HandleMessage}]: Trying to assign null state to current!" );
 
@@ -63,13 +63,13 @@ void StateMachine::ChangeState(State<Entity_Type>* _new_state)
 
 
 template <class Entity_Type>
-void StateMachine::RevertToPreviousState()
+void StateMachine<Entity_Type>::RevertToPreviousState()
 {
 	ChangeState(previous_state_);
 }
 
 template <class Entity_Type>
-bool StateMachine::IsInState( const State<Entity_Type>& _state )const
+bool StateMachine<Entity_Type>::IsInState( const State<Entity_Type>& _state )const
 {
 	if (strcmp(_state.state_name(), current_state()) == 0 )
 		return true;

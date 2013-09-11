@@ -2,9 +2,9 @@
 
 #pragma region Base
 
-struct MsgObject;
+struct MsgBase;
 
-template<typename Entity_Type>
+template<class Entity_Type>
 class State
 {
 protected:
@@ -24,14 +24,13 @@ public:
 	virtual void Exit(Entity_Type* entity) = 0;
 
 	// this call by message dispatcher, when these has a message to entity.
-	virtual bool OnMessage(Entity_Type* entity, const MsgObject& msg) = 0;
+	virtual bool OnMessage(Entity_Type* entity, const MsgBase& msg) = 0;
 
 	
 	virtual const char* state_name() = 0;
 
 };
 
-template< typename 
 
 
 

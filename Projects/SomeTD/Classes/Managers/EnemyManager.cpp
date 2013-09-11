@@ -301,7 +301,7 @@ void EnemyManager::sendDamageMsg(ENTITY_ID senderID, ENTITY_ID receiverID, int d
 }
 
 
-void EnemyManager::fsmTranslater(const MsgObject& msg, EnemyUnit* enemy)
+void EnemyManager::fsmTranslater(const MsgBase& msg, EnemyUnit* enemy)
 {
 	//MsgRoute* msgRoute = MsgRoute::sharedMsgRount();
 	//EnemyUnit* enemy = this->getAvailableEnemy(msg.receiver_id);

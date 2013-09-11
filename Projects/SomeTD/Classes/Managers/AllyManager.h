@@ -85,7 +85,7 @@ public:
 // fsm
 public:
 
-	void fsmTranslater( const MsgObject& msg, AllyUnit* ally);
+	void fsmTranslater( const MsgBase& msg, AllyUnit* ally);
 	void changeState( AllyUnit* unit, ActiveObj_States state );
 	void sendMsg( MsgName name, ENTITY_ID senderID, ENTITY_ID receiverID );
 	void sendDamageMsg( ENTITY_ID senderID, ENTITY_ID receiverID, int damage );

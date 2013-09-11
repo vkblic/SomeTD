@@ -43,7 +43,7 @@ enum FSM_Machine
 	FSM_Tower
 };
 
-struct MsgObject
+struct MsgBase
 {
 	MsgName name;				//name of message (an enumerated type works well)
 	ENTITY_ID sender_id;		//unique id of sender
@@ -60,12 +60,12 @@ struct MsgObject
 
 } ;
 
-struct CollisionRectMsg : public MsgObject
+struct CollisionRectMsg : public MsgBase
 {
 	CCRect rect;
 };
 
-struct MsgDamage : public MsgObject
+struct MsgDamage : public MsgBase
 {
 	CCRect senderCollisionRect;
 	int damage;

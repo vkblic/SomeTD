@@ -54,7 +54,7 @@ MsgRoute::~MsgRoute()
 
 void MsgRoute::sendMsg( MsgName name, ENTITY_ID senderID, ENTITY_ID receiverID )
 {
-	MsgObject msg;
+	MsgBase msg;
 	msg.name = name;
 	msg.sender_id = senderID;
 	msg.receiver_id = receiverID;
@@ -62,14 +62,14 @@ void MsgRoute::sendMsg( MsgName name, ENTITY_ID senderID, ENTITY_ID receiverID )
 	this->routeMessage(msg);
 }
 
-void MsgRoute::sendMsg(const MsgObject& msg)
+void MsgRoute::sendMsg(const MsgBase& msg)
 {
 	this->routeMessage(msg);
 }
 
 void MsgRoute::sendDelayedMsg( MsgName name, int delay, ENTITY_ID senderID, ENTITY_ID receiverID )
 {
-	MsgObject msg;
+	MsgBase msg;
 	msg.name = name;
 	msg.sender_id = senderID;
 	msg.receiver_id = receiverID;
@@ -78,7 +78,7 @@ void MsgRoute::sendDelayedMsg( MsgName name, int delay, ENTITY_ID senderID, ENTI
 	this->routeMessage(msg);
 }
 
-void MsgRoute::routeMessage(const MsgObject& msg )
+void MsgRoute::routeMessage(const MsgBase& msg )
 {
 	if (msg.delivery_time > mCurTick)
 	{
@@ -117,7 +117,7 @@ void MsgRoute::routeMessage(const MsgObject& msg )
 	}
 
 }
-void MsgRoute::restoreDelayedMsg(const MsgObject& msg)
+void MsgRoute::restoreDelayedMsg(const MsgBase& msg)
 {
 	mMsgQueue.push(msg);
 }
