@@ -29,7 +29,11 @@ void StateMachine<Entity_Type>::Update(float dt)
 }
 
 template <class Entity_Type>
+<<<<<<< HEAD
+bool StateMachine::HandleMessage(const MsgBase& _msg) const
+=======
 bool StateMachine<Entity_Type>::HandleMessage(const MsgBase& _msg) const
+>>>>>>> ids_server/ST_Dev
 {
 	// first check if current state is valid 
 	if (current_state_ != nullptr)

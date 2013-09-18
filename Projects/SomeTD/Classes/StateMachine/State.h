@@ -4,7 +4,7 @@
 
 struct MsgBase;
 
-template<typename Entity_Type>
+template<class Entity_Type>
 class State
 {
 protected:
@@ -31,7 +31,6 @@ public:
 
 };
 
-template< typename 
 
 
 

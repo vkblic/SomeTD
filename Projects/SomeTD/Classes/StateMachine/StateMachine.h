@@ -1,6 +1,10 @@
-﻿#pragma once
+﻿
+#ifndef _STATE_MACHINE_H_
+#define _STATE_MACHINE_H_  
 #include "State.h"
-template <class Entity_Type>
+
+struct MsgBase;
+template <typename Entity_Type>
 class StateMachine
 {
 public:
@@ -41,3 +45,4 @@ private:
 	State<Entity_Type>*		global_state_;
 
 };
+#endif
