@@ -7,22 +7,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageClip", "ImageClip\Imag
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageClipConsole", "ImageClipConsole\ImageClipConsole.csproj", "{0D4E2C73-14C0-4FEB-B9AE-FE9BE904A0F5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IDS_Helper", "IDS_Helper\IDS_Helper.csproj", "{DD21E3A0-A08F-4D5E-BE19-437D3AAD871C}"
+EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 4
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://idreamstudio.visualstudio.com/defaultcollection
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = ResouceTool\\ResouceTool.csproj
-		SccProjectName1 = ResouceTool
-		SccLocalPath1 = ResouceTool
-		SccProjectUniqueName2 = ImageClip\\ImageClip.csproj
-		SccProjectName2 = ImageClip
-		SccLocalPath2 = ImageClip
-		SccProjectUniqueName3 = ImageClipConsole\\ImageClipConsole.csproj
-		SccProjectName3 = ImageClipConsole
-		SccLocalPath3 = ImageClipConsole
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|Mixed Platforms = Debug|Mixed Platforms
@@ -62,6 +49,16 @@ Global
 		{0D4E2C73-14C0-4FEB-B9AE-FE9BE904A0F5}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{0D4E2C73-14C0-4FEB-B9AE-FE9BE904A0F5}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{0D4E2C73-14C0-4FEB-B9AE-FE9BE904A0F5}.Release|x86.ActiveCfg = Release|Any CPU
+		{DD21E3A0-A08F-4D5E-BE19-437D3AAD871C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD21E3A0-A08F-4D5E-BE19-437D3AAD871C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD21E3A0-A08F-4D5E-BE19-437D3AAD871C}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{DD21E3A0-A08F-4D5E-BE19-437D3AAD871C}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{DD21E3A0-A08F-4D5E-BE19-437D3AAD871C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{DD21E3A0-A08F-4D5E-BE19-437D3AAD871C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD21E3A0-A08F-4D5E-BE19-437D3AAD871C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD21E3A0-A08F-4D5E-BE19-437D3AAD871C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{DD21E3A0-A08F-4D5E-BE19-437D3AAD871C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{DD21E3A0-A08F-4D5E-BE19-437D3AAD871C}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

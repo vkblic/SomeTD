@@ -48,6 +48,9 @@ namespace ImageClip
 
 			//int width2 = this.pictureBox1.Width;
 			//int height2 = this.pictureBox1.Height;
+
+
+			// theres a bug when read hero_selected.png from herose_viking-ipadhad.png
 			Bitmap oldBitmap = new System.Drawing.Bitmap(fileName);
 			foreach (TextureInfo texInfo in texInfoList)
 			{
