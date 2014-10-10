@@ -8,7 +8,7 @@ namespace ImageClip
 {
 	class ImageClip
 	{
-		public static void Clip(IList<TextureInfo> texInfoList, string fileName, string outputDir)
+		public static void Clip( IList<TextureInfo> texInfoList, string fileName, string outputDir )
 		{
 			// 			try
 			// 			{
@@ -51,21 +51,38 @@ namespace ImageClip
 
 
 			// theres a bug when read hero_selected.png from herose_viking-ipadhad.png
-			Bitmap oldBitmap = new System.Drawing.Bitmap(fileName);
-			foreach (TextureInfo texInfo in texInfoList)
+			Bitmap oldBitmap = new System.Drawing.Bitmap( fileName );
+			foreach ( TextureInfo texInfo in texInfoList )
 			{
-				Bitmap newBitmap = new System.Drawing.Bitmap(texInfo.sourceSize.Width, texInfo.sourceSize.Height);
+				Bitmap newBitmap = new System.Drawing.Bitmap( texInfo.sourceSize.Width, texInfo.sourceSize.Height );
 				Color pixel;
-				for (int i = 0; i < texInfo.texRect.Width; i++)
+				if ( texInfo.isRotated )
 				{
-					for (int j = 0; j < texInfo.texRect.Height; j++)
+					for ( int i = 0; i < texInfo.innerRect.Width; i++ )
 					{
-						pixel = oldBitmap.GetPixel(texInfo.texRect.X + i, texInfo.texRect.Y + j);
-						newBitmap.SetPixel(i + texInfo.innerRect.X, j + texInfo.innerRect.Y, pixel);
+						for ( int j = 0; j < texInfo.innerRect.Height; j++ )
+						{
+							//pixel = oldBitmap.GetPixel( texInfo.texRect.X + i, texInfo.texRect.Y + j );
+							pixel = oldBitmap.GetPixel( texInfo.texRect.X + texInfo.innerRect.Height - j - 1, texInfo.texRect.Y + i );
+							newBitmap.SetPixel( i + texInfo.innerRect.X, j + texInfo.innerRect.Y, pixel );
 
+						}
 					}
 				}
-				newBitmap.Save(string.Format(@"{0}\{1}", outputDir, texInfo.fileName), System.Drawing.Imaging.ImageFormat.Png);
+				else
+				{
+					for ( int i = 0; i < texInfo.texRect.Width; i++ )
+					{
+						for ( int j = 0; j < texInfo.texRect.Height; j++ )
+						{
+							pixel = oldBitmap.GetPixel( texInfo.texRect.X + i, texInfo.texRect.Y + j );
+							newBitmap.SetPixel( i + texInfo.innerRect.X, j + texInfo.innerRect.Y, pixel );
+
+						}
+					}
+				}
+
+				newBitmap.Save( string.Format( @"{0}\{1}", outputDir, texInfo.fileName ), System.Drawing.Imaging.ImageFormat.Png );
 				newBitmap.Dispose();
 			}
 
